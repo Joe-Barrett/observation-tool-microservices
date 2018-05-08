@@ -8,6 +8,10 @@ services:
     image: spectral-service
     depends_on:
       - eureka-service
+  project-service:
+    image: project-service
+    depends_on:
+      - eureka-service
   zuul-service:
     image: zuul-service
     depends_on:
