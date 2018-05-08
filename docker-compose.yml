@@ -4,3 +4,9 @@ services:
     image: eureka-service
     ports:
       - '8761:8761'
+  zuul-service:
+    image: zuul-service
+    depends_on:
+      - eureka-service
+    ports:
+      - '8080:8080'
