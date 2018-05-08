@@ -12,7 +12,9 @@ zuul:
 #  ignoredServices: '*'
 
   routes:
-
+    spectral-service:
+      path: /spectral/**
+      url: http://spectral-service:8081
 spring:
   application:
     name: zuul-service
