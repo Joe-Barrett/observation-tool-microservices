@@ -1,0 +1,20 @@
+version: '3'
+services:
+  eureka-service:
+    image: eureka-service
+    ports:
+      - '8761:8761'
+  spectral-service:
+    image: spectral-service
+    depends_on:
+      - eureka-service
+  project-service:
+    image: project-service
+    depends_on:
+      - eureka-service
+  zuul-service:
+    image: zuul-service
+    depends_on:
+      - eureka-service
+    ports:
+      - '8080:8080'
