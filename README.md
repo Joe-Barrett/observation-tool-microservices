@@ -41,6 +41,7 @@ Route     | Params                 | Result
 ## Usage
 ### Prerequisites
 To run the microservices the following are required:
+
 - [Maven](https://maven.apache.org/)
 - [Docker](https://www.docker.com/)
 - [Docker-compose](https://docs.docker.com/compose/)
