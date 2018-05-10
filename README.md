@@ -5,7 +5,7 @@ This prototype backend uses a microservice architecture to supply clients with r
 been used to apply modularity, improving stability, scalability, and ease of development. The services are managed using 
 Netflix OSS utilities and built using Java Spring.
 ## Architecture
-![Architecture Diagram](architecture-structure.png)
+![Architecture Diagram](https://bitbucket.org/almaobservationtoolstudy/microservices/raw/a1e0e10bf6e28c996b8cfcb3b859243b5b97b937/architecture-structure.png)
 
 The current structure of the services is described above. Netflix Eureka is used as a discovery service to identify 
 services and for reference by the edge service. The edge service uses Netflix Zuul to provide access to the services 
