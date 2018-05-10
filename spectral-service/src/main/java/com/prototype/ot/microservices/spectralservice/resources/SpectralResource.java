@@ -20,7 +20,7 @@ public class SpectralResource {
         return ResponseEntity.ok(this.spectralService.getSplatalogue());
     }
 
-    @GetMapping(path = "/{octile}")
+    @GetMapping(path = "/spectrum/{octile}")
     public ResponseEntity getSpectrum(@PathVariable int octile) {
         return ResponseEntity.ok(this.spectralService.getSpectrum(octile));
     }
