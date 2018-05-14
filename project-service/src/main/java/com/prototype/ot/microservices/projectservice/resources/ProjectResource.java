@@ -6,7 +6,6 @@ import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -26,6 +25,16 @@ public class ProjectResource {
         try {
             List<ObsProject> projects = this.projectService.getAllProjects();
             return ResponseEntity.ok(projects);
+        } catch (IOException ex) {
+            return ResponseEntity.status(404).body(ex.getMessage());
+        }
+    }
+
+    @GetMapping(path = "/project")
+    public ResponseEntity getProject(@RequestParam(value = "projectRef") String projectRef) {
+        try {
+            ObsProject foundProject = this.projectService.getProject(projectRef);
+            return ResponseEntity.ok(foundProject);
         } catch (IOException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
         }
