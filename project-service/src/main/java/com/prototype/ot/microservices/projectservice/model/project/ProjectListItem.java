@@ -3,12 +3,12 @@ package com.prototype.ot.microservices.projectservice.model.project;
 public class ProjectListItem {
 
     private String
-    prj_projectName,
-    prj_pI,
-    prj_code,
-    prj_timeOfCreation,
-    projectId,
-    proposalId;
+            prj_projectName,
+            prj_pI,
+            prj_code,
+            prj_timeOfCreation,
+            projectRef,
+            proposalRef;
 
     public ProjectListItem() {
 
@@ -24,8 +24,8 @@ public class ProjectListItem {
         this.prj_pI = prj_pI;
         this.prj_code = prj_code;
         this.prj_timeOfCreation = prj_timeOfCreation;
-        this.projectId = projectId;
-        this.proposalId = proposalId;
+        this.projectRef = projectId;
+        this.proposalRef = proposalId;
     }
 
     public String getPrj_projectName() {
@@ -60,19 +60,19 @@ public class ProjectListItem {
         this.prj_timeOfCreation = prj_timeOfCreation;
     }
 
-    public String getProjectId() {
-        return projectId;
+    public String getProjectRef() {
+        return projectRef;
     }
 
-    public void setProjectId(String projectId) {
-        this.projectId = projectId;
+    public void setProjectRef(String projectRef) {
+        this.projectRef = projectRef;
     }
 
-    public String getProposalId() {
-        return proposalId;
+    public String getProposalRef() {
+        return proposalRef;
     }
 
-    public void setProposalId(String proposalId) {
-        this.proposalId = proposalId;
+    public void setProposalRef(String proposalRef) {
+        this.proposalRef = proposalRef;
     }
 }
