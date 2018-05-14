@@ -2,6 +2,7 @@ package com.prototype.ot.microservices.projectservice.resources;
 
 import com.prototype.ot.microservices.projectservice.model.project.ObsProject;
 import com.prototype.ot.microservices.projectservice.model.project.ObsProposal;
+import com.prototype.ot.microservices.projectservice.model.project.ProjectListItem;
 import com.prototype.ot.microservices.projectservice.services.ProjectService;
 import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,16 @@ public class ProjectResource {
         try {
             List<ObsProject> projects = this.projectService.getAllProjects();
             return ResponseEntity.ok(projects);
+        } catch (IOException ex) {
+            return ResponseEntity.status(404).body(ex.getMessage());
+        }
+    }
+
+    @GetMapping(path = "/list")
+    public ResponseEntity getProjectList() {
+        try {
+            List<ProjectListItem> projectList = this.projectService.getProjectList();
+            return ResponseEntity.ok(projectList);
         } catch (IOException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
         }

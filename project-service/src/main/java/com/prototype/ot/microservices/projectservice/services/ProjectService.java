@@ -3,6 +3,7 @@ package com.prototype.ot.microservices.projectservice.services;
 import com.google.gson.Gson;
 import com.prototype.ot.microservices.projectservice.model.project.ObsProject;
 import com.prototype.ot.microservices.projectservice.model.project.ObsProposal;
+import com.prototype.ot.microservices.projectservice.model.project.ProjectListItem;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
@@ -47,6 +48,22 @@ public class ProjectService {
             projects.add(gson.fromJson(json.getJSONObject("prj_ObsProject").toString(), ObsProject.class));
         }
         return projects;
+    }
+
+    public List<ProjectListItem> getProjectList() throws IOException {
+        List<ObsProject> projects = this.getAllProjects();
+        List<ProjectListItem> projectList = new ArrayList<>();
+        ProjectListItem projectListItem;
+        for (ObsProject project : projects) {
+            projectListItem = new ProjectListItem(project.getPrj_projectName(),
+                                                  project.getPrj_pI(),
+                                                  project.getPrj_code(),
+                                                  project.getPrj_timeOfCreation(),
+                                                  project.getPrj_ObsProjectEntity().getEntityId(),
+                                                  project.getPrj_ObsProposalRef().getEntityId());
+            projectList.add(projectListItem);
+        }
+        return projectList;
     }
 
     public ObsProject getProject(String projectRef) throws IOException {
