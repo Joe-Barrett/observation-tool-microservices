@@ -62,10 +62,4 @@ public class ProjectResource {
         }
     }
 
-    @GetMapping(path = "/science-goal")
-    public ResponseEntity getScienceGoal(@RequestParam(value = "proposalRef") String proposalRef,
-                                         @RequestParam(value = "goalIndex") int goalIndex) {
-        
-    }
-
 }
