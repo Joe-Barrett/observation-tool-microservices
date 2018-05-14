@@ -46,6 +46,16 @@ public class ProjectService {
         return projects;
     }
 
+    public ObsProject getProject(String projectRef) throws IOException {
+        List<ObsProject> projects = this.getAllProjects();
+        for (ObsProject project: projects) {
+            if (project.getPrj_ObsProjectEntity().getEntityId().equals(projectRef)) {
+                return project;
+            }
+        }
+        return null;
+    }
+
     public List<JSONObject> getAllProposals() throws IOException {
         List<JSONObject> proposals = new ArrayList<>();
         ClassLoader cl = this.getClass().getClassLoader();
