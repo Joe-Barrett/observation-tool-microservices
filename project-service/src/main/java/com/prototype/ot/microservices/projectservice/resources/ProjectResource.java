@@ -1,6 +1,7 @@
 package com.prototype.ot.microservices.projectservice.resources;
 
 import com.prototype.ot.microservices.projectservice.model.project.ObsProject;
+import com.prototype.ot.microservices.projectservice.model.project.ObsProposal;
 import com.prototype.ot.microservices.projectservice.services.ProjectService;
 import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
@@ -43,8 +44,8 @@ public class ProjectResource {
     @GetMapping(path = "/proposal")
     public ResponseEntity getProposal(@RequestParam(value = "proposalRef", required = false) String proposalRef) {
         try {
-            JSONObject foundProposal = this.projectService.getProposal(proposalRef);
-            return ResponseEntity.ok(foundProposal.toString());
+            ObsProposal foundProposal = this.projectService.getProposal(proposalRef);
+            return ResponseEntity.ok(foundProposal);
         } catch (IOException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
         }

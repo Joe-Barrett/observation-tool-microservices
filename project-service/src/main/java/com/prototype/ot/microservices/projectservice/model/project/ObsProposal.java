@@ -24,7 +24,7 @@ public class ObsProposal {
             prp_studentProject,
             prp_continuation,
             prp_isResubmission;
-    private String
+    private String[]
             prp_keyword,
             prp_keywordCode;
     private AlmaInvestigator prp_PrincipalInvestigator;
@@ -160,19 +160,19 @@ public class ObsProposal {
         this.prp_isResubmission = prp_isResubmission;
     }
 
-    public String getPrp_keyword() {
+    public String[] getPrp_keyword() {
         return prp_keyword;
     }
 
-    public void setPrp_keyword(String prp_keyword) {
+    public void setPrp_keyword(String[] prp_keyword) {
         this.prp_keyword = prp_keyword;
     }
 
-    public String getPrp_keywordCode() {
+    public String[] getPrp_keywordCode() {
         return prp_keywordCode;
     }
 
-    public void setPrp_keywordCode(String prp_keywordCode) {
+    public void setPrp_keywordCode(String[] prp_keywordCode) {
         this.prp_keywordCode = prp_keywordCode;
     }
 
