@@ -3,6 +3,7 @@ package com.prototype.ot.microservices.projectservice.services;
 import com.google.gson.Gson;
 import com.prototype.ot.microservices.projectservice.model.project.ObsProject;
 import com.prototype.ot.microservices.projectservice.model.project.ObsProposal;
+import com.prototype.ot.microservices.projectservice.model.project.ProjectListItem;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
@@ -18,6 +19,12 @@ import java.util.List;
 
 public class ProjectService {
 
+    private Gson gson;
+
+    public ProjectService() {
+        this.gson = new Gson();
+    }
+
     public List<ObsProject> getAllProjects() throws IOException {
         ClassLoader cl = this.getClass().getClassLoader();
         ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver(cl);
@@ -25,8 +32,6 @@ public class ProjectService {
         List<ObsProject> projects = new ArrayList<>();
         ZipUtils.ZipReader zipReader = null;
         JSONObject json;
-        Gson gson = new Gson();
-        ObsProject project;
         String xml;
         ZipUtils.ZipNtry entry;
         byte[] data;
@@ -40,14 +45,39 @@ public class ProjectService {
             xml = new String(data, StandardCharsets.UTF_8);
             json = XML.toJSONObject(xml);
             json = switchColons(json);
-            project = gson.fromJson(json.getJSONObject("prj_ObsProject").toString(), ObsProject.class);
-            projects.add(project);
+            projects.add(gson.fromJson(json.getJSONObject("prj_ObsProject").toString(), ObsProject.class));
         }
         return projects;
     }
 
-    public List<JSONObject> getAllProposals() throws IOException {
-        List<JSONObject> proposals = new ArrayList<>();
+    public List<ProjectListItem> getProjectList() throws IOException {
+        List<ObsProject> projects = this.getAllProjects();
+        List<ProjectListItem> projectList = new ArrayList<>();
+        ProjectListItem projectListItem;
+        for (ObsProject project : projects) {
+            projectListItem = new ProjectListItem(project.getPrj_projectName(),
+                                                  project.getPrj_pI(),
+                                                  project.getPrj_code(),
+                                                  project.getPrj_timeOfCreation(),
+                                                  project.getPrj_ObsProjectEntity().getEntityId(),
+                                                  project.getPrj_ObsProposalRef().getEntityId());
+            projectList.add(projectListItem);
+        }
+        return projectList;
+    }
+
+    public ObsProject getProject(String projectRef) throws IOException {
+        List<ObsProject> projects = this.getAllProjects();
+        for (ObsProject project : projects) {
+            if (project.getPrj_ObsProjectEntity().getEntityId().equals(projectRef)) {
+                return project;
+            }
+        }
+        return null;
+    }
+
+    public List<ObsProposal> getAllProposals() throws IOException {
+        List<ObsProposal> proposals = new ArrayList<>();
         ClassLoader cl = this.getClass().getClassLoader();
         ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver(cl);
         Resource[] resources = resourcePatternResolver.getResources("classpath*:/projects/real-projects/*.aot");
@@ -66,15 +96,15 @@ public class ProjectService {
             xml = new String(data, StandardCharsets.UTF_8);
             json = XML.toJSONObject(xml);
             json = switchColons(json);
-            proposals.add(json.getJSONObject("prp_ObsProposal"));
+            proposals.add(gson.fromJson(json.getJSONObject("prp_ObsProposal").toString(), ObsProposal.class));
         }
         return proposals;
     }
 
-    public JSONObject getProposal(String proposalRef) throws IOException {
-        List<JSONObject> proposals = this.getAllProposals();
-        for (JSONObject obsProposal : proposals) {
-            if (obsProposal.getJSONObject("prp_ObsProposalEntity").get("entityId").equals(proposalRef)) {
+    public ObsProposal getProposal(String proposalRef) throws IOException {
+        List<ObsProposal> proposals = this.getAllProposals();
+        for (ObsProposal obsProposal : proposals) {
+            if (obsProposal.getPrp_ObsProposalEntity().getEntityId().equals(proposalRef)) {
                 return obsProposal;
             }
         }
