@@ -25,28 +25,28 @@ public class ProjectResource {
     @GetMapping
     public ResponseEntity getAllProjects() {
         try {
-            List<ObsProject> projects = this.projectService.getAllProjects();
-            return ResponseEntity.ok(projects);
+            List<JSONObject> projects = this.projectService.getAllProjects();
+            return ResponseEntity.ok(projects.toString());
         } catch (IOException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
         }
     }
 
-    @GetMapping(path = "/list")
-    public ResponseEntity getProjectList() {
-        try {
-            List<ProjectListItem> projectList = this.projectService.getProjectList();
-            return ResponseEntity.ok(projectList);
-        } catch (IOException ex) {
-            return ResponseEntity.status(404).body(ex.getMessage());
-        }
-    }
+//    @GetMapping(path = "/list")
+//    public ResponseEntity getProjectList() {
+//        try {
+//            List<JSONObject> projectList = this.projectService.getProjectList();
+//            return ResponseEntity.ok(projectList);
+//        } catch (IOException ex) {
+//            return ResponseEntity.status(404).body(ex.getMessage());
+//        }
+//    }
 
     @GetMapping(path = "/project")
     public ResponseEntity getProject(@RequestParam(value = "projectRef") String projectRef) {
         try {
-            ObsProject foundProject = this.projectService.getProject(projectRef);
-            return ResponseEntity.ok(foundProject);
+            JSONObject foundProject = this.projectService.getProject(projectRef);
+            return ResponseEntity.ok(foundProject.toString());
         } catch (IOException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
         }
@@ -55,8 +55,8 @@ public class ProjectResource {
     @GetMapping(path = "/proposal")
     public ResponseEntity getProposal(@RequestParam(value = "proposalRef", required = false) String proposalRef) {
         try {
-            ObsProposal foundProposal = this.projectService.getProposal(proposalRef);
-            return ResponseEntity.ok(foundProposal);
+            JSONObject foundProposal = this.projectService.getProposal(proposalRef);
+            return ResponseEntity.ok(foundProposal.toString());
         } catch (IOException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
         }
