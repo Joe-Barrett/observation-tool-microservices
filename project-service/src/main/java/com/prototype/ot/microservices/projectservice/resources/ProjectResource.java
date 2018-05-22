@@ -32,15 +32,15 @@ public class ProjectResource {
         }
     }
 
-//    @GetMapping(path = "/list")
-//    public ResponseEntity getProjectList() {
-//        try {
-//            List<JSONObject> projectList = this.projectService.getProjectList();
-//            return ResponseEntity.ok(projectList);
-//        } catch (IOException ex) {
-//            return ResponseEntity.status(404).body(ex.getMessage());
-//        }
-//    }
+    @GetMapping(path = "/list")
+    public ResponseEntity getProjectList() {
+        try {
+            List<ProjectListItem> projectList = this.projectService.getProjectList();
+            return ResponseEntity.ok(projectList);
+        } catch (IOException ex) {
+            return ResponseEntity.status(404).body(ex.getMessage());
+        }
+    }
 
     @GetMapping(path = "/project")
     public ResponseEntity getProject(@RequestParam(value = "projectRef") String projectRef) {

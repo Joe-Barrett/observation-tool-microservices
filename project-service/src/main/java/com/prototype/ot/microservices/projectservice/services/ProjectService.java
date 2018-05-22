@@ -50,21 +50,21 @@ public class ProjectService {
         return projects;
     }
 
-//    public List<ProjectListItem> getProjectList() throws IOException {
-//        List<JSONObject> projects = this.getAllProjects();
-//        List<ProjectListItem> projectList = new ArrayList<>();
-//        ProjectListItem projectListItem;
-//        for (JSONObject project : projects) {
-//            projectListItem = new ProjectListItem(project.get("prj_projectName"),
-//                                                  project.get("prj_pI"),
-//                                                  project.get("prj_code"),
-//                                                  project.get("prj_timeOfCreation"),
-//                                                  project.getJSONObject("prj_ObsProjectEntity").get("entityId"),
-//                                                  project.getJSONObject("prj_ObsProposalRef").get("entityId"));
-//            projectList.add(projectListItem);
-//        }
-//        return projectList;
-//    }
+    public List<ProjectListItem> getProjectList() throws IOException {
+        List<JSONObject> projects = this.getAllProjects();
+        List<ProjectListItem> projectList = new ArrayList<>();
+        ProjectListItem projectListItem;
+        for (JSONObject project : projects) {
+            projectListItem = new ProjectListItem(project.getString("prj_projectName"),
+                                                  project.getString("prj_pI"),
+                                                  project.getString("prj_code"),
+                                                  project.getString("prj_timeOfCreation"),
+                                                  project.getJSONObject("prj_ObsProjectEntity").getString("entityId"),
+                                                  project.getJSONObject("prj_ObsProposalRef").getString("entityId"));
+            projectList.add(projectListItem);
+        }
+        return projectList;
+    }
 
     public JSONObject getProject(String projectRef) throws IOException {
         List<JSONObject> projects = this.getAllProjects();
