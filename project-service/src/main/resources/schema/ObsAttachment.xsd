@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:val="Alma/ValueTypes" xmlns:oat="Alma/Obsprep/ObsAttachment" xmlns:ent="Alma/CommonEntity" xmlns:prj="Alma/ObsPrep/ObsProject" xmlns:sbl="Alma/ObsPrep/SchedBlock" xmlns:ps="Alma/Scheduling/ProjectStatus" xmlns:sbs="Alma/Scheduling/SBStatus" xmlns:ouss="Alma/Scheduling/OUSStatus" xmlns:orv="Alma/ObsPrep/ObsReview" xmlns:prp="Alma/ObsPrep/ObsProposal" elementFormDefault="qualified" attributeFormDefault="unqualified" version="13 24" targetNamespace="Alma/Obsprep/ObsAttachment">  
+  <xsd:import namespace="Alma/CommonEntity" schemaLocation="CommonEntity.xsd"/>  
+  <xsd:import namespace="Alma/ValueTypes" schemaLocation="ValueTypes.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/ObsProject" schemaLocation="ObsProject.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/SchedBlock" schemaLocation="SchedBlock.xsd"/>  
+  <xsd:import namespace="Alma/Scheduling/ProjectStatus" schemaLocation="ProjectStatus.xsd"/>  
+  <xsd:import namespace="Alma/Scheduling/SBStatus" schemaLocation="SBStatus.xsd"/>  
+  <xsd:import namespace="Alma/Scheduling/OUSStatus" schemaLocation="OUSStatus.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/ObsReview" schemaLocation="ObsReview.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/ObsProposal" schemaLocation="ObsProposal.xsd"/>  
+
+  <!-- generated from UML entity class 'alma/obsprep/obsattachment/ObsAttachment' -->  
+  <xsd:element name="ObsAttachment" type="oat:ObsAttachment"> 
+    <xsd:annotation> 
+      <xsd:documentation>A "container" entity for holding the link descriptions to binary attachments.</xsd:documentation> 
+    </xsd:annotation> 
+  </xsd:element>  
+  <xsd:complexType name="ObsAttachment"> 
+    <xsd:sequence> 
+      <xsd:element name="ObsAttachmentEntity" type="oat:ObsAttachmentEntityT"/>  
+      <xsd:element name="associatedBulkStoreUid" type="xsd:string"/>  
+      <xsd:element name="DocumentLink" type="oat:DocumentLinkT" maxOccurs="unbounded"/> 
+    </xsd:sequence>  
+    <xsd:attribute name="schemaVersion" type="xsd:string" use="required" fixed="13"/>  
+    <xsd:attribute name="revision" type="xsd:string" default="24"/>  
+    <xsd:attribute name="almatype" type="xsd:string" use="required" fixed="APDM::ObsAttachment"/> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'DocumentLink' -->  
+  <xsd:complexType name="DocumentLinkT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Describes a binary document. This will get stored in the bulkstore as a multi-part mime document.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="fileName" type="xsd:string"/>  
+      <xsd:element name="href" type="xsd:string"/>  
+      <xsd:element name="fileSize" type="val:StorageVolumeT"/> 
+    </xsd:sequence>  
+    <xsd:attribute name="fileType"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="application/pdf"/>  
+          <xsd:enumeration value="text/xml"/>  
+          <xsd:enumeration value="application/fits"/>  
+          <xsd:enumeration value="application/jpg"/>  
+          <xsd:enumeration value="application/png"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute>  
+    <xsd:attribute name="documentClass"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="SCIENCE_CASE"/>  
+          <xsd:enumeration value="FIGURES"/>  
+          <xsd:enumeration value="TECHNICAL_CASE"/>  
+          <xsd:enumeration value="DATAPLANS"/>  
+          <xsd:enumeration value="OTHER"/>  
+          <xsd:enumeration value="TA_COVERPAGE"/>  
+          <xsd:enumeration value="TA_SCIENCEGOALS"/>  
+          <xsd:enumeration value="TABLES"/>  
+          <xsd:enumeration value="TA_FLAGSHEET"/>  
+          <xsd:enumeration value="FITSFILE"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute> 
+  </xsd:complexType>  
+
+  <!-- 'ObsAttachmentEntityT' contains administration info for ObsAttachment -->  
+  <xsd:complexType name="ObsAttachmentEntityT"> 
+    <xsd:complexContent> 
+      <xsd:restriction base="ent:EntityT"> 
+        <xsd:attribute name="entityTypeName" type="ent:EntityTypeNameT" use="required" fixed="ObsAttachment"/>  
+        <xsd:attribute name="schemaVersion" type="xsd:string" use="required" fixed="13"/> 
+      </xsd:restriction> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- other classes use 'ObsAttachmentRefT' to reference an entity of type ObsAttachment -->  
+  <xsd:complexType name="ObsAttachmentRefT"> 
+    <xsd:complexContent> 
+      <xsd:restriction base="ent:EntityRefT"> 
+        <xsd:attribute name="entityTypeName" type="ent:EntityTypeNameT" use="required" fixed="ObsAttachment"/> 
+      </xsd:restriction> 
+    </xsd:complexContent> 
+  </xsd:complexType> 
+</xsd:schema>

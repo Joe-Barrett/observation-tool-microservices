@@ -1,8 +1,5 @@
 package com.prototype.ot.microservices.projectservice.resources;
 
-import com.prototype.ot.microservices.projectservice.model.project.ObsProject;
-import com.prototype.ot.microservices.projectservice.model.project.ObsProposal;
-import com.prototype.ot.microservices.projectservice.model.project.ProjectListItem;
 import com.prototype.ot.microservices.projectservice.services.ProjectService;
 import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;

@@ -1,9 +1,8 @@
 package com.prototype.ot.microservices.projectservice.services;
 
 import com.google.gson.Gson;
-import com.prototype.ot.microservices.projectservice.model.project.ObsProject;
-import com.prototype.ot.microservices.projectservice.model.project.ObsProposal;
-import com.prototype.ot.microservices.projectservice.model.project.ProjectListItem;
+import com.prototype.ot.microservices.projectservice.model.ObsProject;
+import com.prototype.ot.microservices.projectservice.model.ObsProposal;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
@@ -11,7 +10,12 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import java.io.IOException;
+import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -43,6 +47,18 @@ public class ProjectService {
             }
             data = entry.getData();
             xml = new String(data, StandardCharsets.UTF_8);
+            try {
+                JAXBContext jaxbContext = JAXBContext.newInstance("com.prototype.ot.microservices.projectservice" +
+                                                                          ".model");
+                Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+                StringReader stringReader = new StringReader(xml);
+                JAXBElement<ObsProject> obsProjectElement = (JAXBElement<ObsProject>) unmarshaller.unmarshal
+                        (stringReader);
+                ObsProject obsProject = obsProjectElement.getValue();
+                System.out.println(obsProject.getCode());
+            } catch (JAXBException e) {
+                e.printStackTrace();
+            }
             json = XML.toJSONObject(xml);
             json = switchColons(json);
             projects.add(json.getJSONObject("prj_ObsProject"));

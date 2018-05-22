@@ -1,0 +1,1213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:val="Alma/ValueTypes" xmlns:prj="Alma/ObsPrep/ObsProject" xmlns:ent="Alma/CommonEntity" xmlns:oat="Alma/Obsprep/ObsAttachment" xmlns:sbl="Alma/ObsPrep/SchedBlock" xmlns:ps="Alma/Scheduling/ProjectStatus" xmlns:sbs="Alma/Scheduling/SBStatus" xmlns:ouss="Alma/Scheduling/OUSStatus" xmlns:orv="Alma/ObsPrep/ObsReview" xmlns:prp="Alma/ObsPrep/ObsProposal" elementFormDefault="qualified" attributeFormDefault="unqualified" version="13 24" targetNamespace="Alma/ObsPrep/ObsProject">  
+  <xsd:import namespace="Alma/CommonEntity" schemaLocation="CommonEntity.xsd"/>  
+  <xsd:import namespace="Alma/ValueTypes" schemaLocation="ValueTypes.xsd"/>  
+  <xsd:import namespace="Alma/Obsprep/ObsAttachment" schemaLocation="ObsAttachment.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/SchedBlock" schemaLocation="SchedBlock.xsd"/>  
+  <xsd:import namespace="Alma/Scheduling/ProjectStatus" schemaLocation="ProjectStatus.xsd"/>  
+  <xsd:import namespace="Alma/Scheduling/SBStatus" schemaLocation="SBStatus.xsd"/>  
+  <xsd:import namespace="Alma/Scheduling/OUSStatus" schemaLocation="OUSStatus.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/ObsReview" schemaLocation="ObsReview.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/ObsProposal" schemaLocation="ObsProposal.xsd"/>  
+
+  <!-- generated from UML entity class 'alma/obsprep/obsproject/ObsProject' -->  
+  <xsd:element name="ObsProject" type="prj:ObsProject"> 
+    <xsd:annotation> 
+      <xsd:documentation>The top level container class for an Observing Project. No part of an Observing Project Definition may exist without an Observing Project. As soon as an astronomer decides to create a (Phase I) Observing Proposal using the ALMA Observing Tool an ObsProject will get created to act as the container for everything associated with it. ObsProject is an entity class.</xsd:documentation> 
+    </xsd:annotation> 
+  </xsd:element>  
+  <xsd:complexType name="ObsProject"> 
+    <xsd:sequence> 
+      <xsd:element name="ObsProjectEntity" type="prj:ObsProjectEntityT"/>  
+      <xsd:element name="ObsProposalRef" type="prp:ObsProposalRefT"/>  
+      <xsd:element name="ObsReviewRef" type="orv:ObsReviewRefT" minOccurs="0"/>  
+      <xsd:element name="ProjectStatusRef" type="ps:ProjectStatusRefT"/>  
+      <xsd:element name="projectName" type="xsd:string"/>  
+      <xsd:element name="pI" type="xsd:string"/>  
+      <xsd:element name="version" type="xsd:string" default="0"/>  
+      <xsd:element name="code" type="xsd:string" default="None Assigned"/>  
+      <xsd:element name="assignedPriority" type="xsd:int" default="0"/>  
+      <xsd:element name="timeOfCreation" type="xsd:string" default="0000-00-00"/>  
+      <xsd:element name="manualMode" type="xsd:boolean" default="false"/>  
+      <xsd:element name="simulationMode" type="xsd:boolean" default="false"/>  
+      <xsd:element name="isCommissioning" type="xsd:boolean" default="false"/>  
+      <xsd:element name="isCalibration" type="xsd:boolean" default="false"/>  
+      <xsd:element name="letterGrade" type="xsd:string" default="D"/>  
+      <xsd:element name="scientificRank" type="xsd:int" default="1"/>  
+      <xsd:element name="scientificScore" type="xsd:double" default="1.0"/>  
+      <xsd:element name="staffProjectNote" type="xsd:string"/>  
+      <xsd:element name="taPhase2Comments" type="xsd:string"/>  
+      <xsd:element name="taMainComments" type="xsd:string"/>  
+      <xsd:element name="consensusReport" type="xsd:string"/>  
+      <xsd:element name="isDDT" type="xsd:boolean" minOccurs="0" default="false"/>  
+      <xsd:element name="p2gAttention" type="xsd:boolean" minOccurs="0" default="false"/>  
+      <xsd:element name="p2gAttentionReasons" type="xsd:string" minOccurs="0"/>  
+      <xsd:element name="ObsProgram" type="prj:ObsProgramT"/>  
+      <xsd:element name="SubmissionRecord" type="prj:SubmissionRecordT" minOccurs="0" maxOccurs="unbounded"/> 
+    </xsd:sequence>  
+    <xsd:attribute name="schemaVersion" type="xsd:string" use="required" fixed="13"/>  
+    <xsd:attribute name="revision" type="xsd:string" default="24"/>  
+    <xsd:attribute name="almatype" type="xsd:string" use="required" fixed="APDM::ObsProject"/>  
+    <xsd:attribute name="status" default="NewPhase1"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="Approved"/>  
+          <xsd:enumeration value="Broken"/>  
+          <xsd:enumeration value="Canceled"/>  
+          <xsd:enumeration value="Deleted"/>  
+          <xsd:enumeration value="FullyObserved"/>  
+          <xsd:enumeration value="PartiallyObserved"/>  
+          <xsd:enumeration value="Phase2Submitted"/>  
+          <xsd:enumeration value="PipelineError"/>  
+          <xsd:enumeration value="Processed"/>  
+          <xsd:enumeration value="Ready"/>  
+          <xsd:enumeration value="Repaired"/>  
+          <xsd:enumeration value="Running"/>  
+          <xsd:enumeration value="ObservingTimedOut"/>  
+          <xsd:enumeration value="ToBeRepaired"/>  
+          <xsd:enumeration value="Verified"/>  
+          <xsd:enumeration value="AnyState"/>  
+          <xsd:enumeration value="Phase1Submitted"/>  
+          <xsd:enumeration value="NewPhase1"/>  
+          <xsd:enumeration value="NewPhase2"/>  
+          <xsd:enumeration value="ObservingTerminated"/>  
+          <xsd:enumeration value="ObservingAborted"/>  
+          <xsd:enumeration value="ObservingFailed"/>  
+          <xsd:enumeration value="VerificationFailure"/>  
+          <xsd:enumeration value="Suspended"/>  
+          <xsd:enumeration value="Rejected"/>  
+          <xsd:enumeration value="CSVReady"/>  
+          <xsd:enumeration value="CSVRunning"/>  
+          <xsd:enumeration value="CSVSuspended"/>  
+          <xsd:enumeration value="Completed"/>  
+          <xsd:enumeration value="Delivered"/>  
+          <xsd:enumeration value="InProgress"/>  
+          <xsd:enumeration value="PipelineProcessing"/>  
+          <xsd:enumeration value="ReadyForProcessing"/>  
+          <xsd:enumeration value="ReadyToDeliver"/>  
+          <xsd:enumeration value="CalibratorCheck"/>  
+          <xsd:enumeration value="QA2InProgress"/>  
+          <xsd:enumeration value="ManualProcessing"/>  
+          <xsd:enumeration value="ReprocessingRequired"/>  
+          <xsd:enumeration value="Waiting"/>  
+          <xsd:enumeration value="QA3InProgress"/>  
+          <xsd:enumeration value="PartiallyCompleted"/>  
+          <xsd:enumeration value="NotObserved"/>  
+          <xsd:enumeration value="ProcessingProblem"/>  
+          <xsd:enumeration value="Processing"/>  
+          <xsd:enumeration value="ReadyForReview"/>  
+          <xsd:enumeration value="Reviewing"/>  
+          <xsd:enumeration value="DeliveryInProgress"/>  
+          <xsd:enumeration value="DoNotObserve"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'AbstractScienceGoal' -->  
+  <xsd:complexType name="AbstractScienceGoalT" abstract="true"> 
+    <xsd:annotation> 
+      <xsd:documentation>Base class for Science Goals. Holds the name and a reference to the ObsUnitSet containing the program implementation of the goal.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="name" type="xsd:string"/>  
+      <xsd:element name="note" type="xsd:string" minOccurs="0"/>  
+      <xsd:element name="ObsUnitSetRef" type="prj:ObsProjectRefT" minOccurs="0"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'AbstractScienceSpectralWindow' -->  
+  <xsd:complexType name="AbstractScienceSpectralWindowT" abstract="true"> 
+    <xsd:annotation> 
+      <xsd:documentation>A base, abstract, spectral window for science use. A concrete instance will define one spectral window, and many are allowed to fully define a rx/corr setup.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="index" type="xsd:int" default="0"/>  
+      <xsd:element name="AdvancedWindowSetup" type="prj:AdvancedWindowSetupT" minOccurs="0"/>  
+      <xsd:element name="ExpectedSpectralLine" type="prj:ExpectedSpectralLineT" minOccurs="0" maxOccurs="unbounded"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'AbstractSpectralLine' -->  
+  <xsd:complexType name="AbstractSpectralLineT" abstract="true"> 
+    <xsd:annotation> 
+      <xsd:documentation>Brief description of a spectral line. Used by SpectralWindow to indicate which line(s) are expected in that window.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="restFrequency" type="val:FrequencyT"/>  
+      <xsd:element name="transition" type="xsd:string"/>  
+      <xsd:element name="spatalogId" type="xsd:string"/>  
+      <xsd:element name="description" type="xsd:string"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'AbstractTargetParameters' -->  
+  <xsd:complexType name="AbstractTargetParametersT" abstract="true"> 
+    <xsd:annotation> 
+      <xsd:documentation>The basic science oriented target setup for (probably) most observing.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="sourceName" type="xsd:string"/>  
+      <xsd:element name="sourceCoordinates" type="val:SkyCoordinatesT"/>  
+      <xsd:element name="pmRA" type="val:AngularVelocityT"/>  
+      <xsd:element name="pmDec" type="val:AngularVelocityT"/>  
+      <xsd:element name="parallax" type="val:AngleT"/>  
+      <xsd:element name="nonSiderealMotion" type="xsd:boolean" default="false"/>  
+      <xsd:element name="sourceEphemeris" type="xsd:string" minOccurs="0"/>  
+      <xsd:element name="sourceVelocity" type="val:VelocityT"/>  
+      <xsd:element name="ephemerisFileName" type="xsd:string" minOccurs="0"/>  
+      <xsd:element name="index" type="xsd:int" default="0"/>  
+      <xsd:element name="sdReferencePosition" type="val:SkyCoordinatesT" minOccurs="0" maxOccurs="2"/>  
+      <xsd:element name="ExpectedProperties" type="prj:ExpectedPropertiesT"/>  
+      <xsd:element name="ImageRef" type="oat:ObsAttachmentRefT" minOccurs="0"/> 
+    </xsd:sequence>  
+    <xsd:attribute name="solarSystemObject"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="Mercury"/>  
+          <xsd:enumeration value="Venus"/>  
+          <xsd:enumeration value="Moon"/>  
+          <xsd:enumeration value="Mars"/>  
+          <xsd:enumeration value="Jupiter"/>  
+          <xsd:enumeration value="Saturn"/>  
+          <xsd:enumeration value="Uranus"/>  
+          <xsd:enumeration value="Neptune"/>  
+          <xsd:enumeration value="Pluto"/>  
+          <xsd:enumeration value="Sun"/>  
+          <xsd:enumeration value="Ganymede"/>  
+          <xsd:enumeration value="Europa"/>  
+          <xsd:enumeration value="Callisto"/>  
+          <xsd:enumeration value="Io"/>  
+          <xsd:enumeration value="Titan"/>  
+          <xsd:enumeration value="Ceres"/>  
+          <xsd:enumeration value="Pallas"/>  
+          <xsd:enumeration value="Juno"/>  
+          <xsd:enumeration value="Vesta"/>  
+          <xsd:enumeration value="Ephemeris"/>  
+          <xsd:enumeration value="Unspecified"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'AbstractTimingConstraints' -->  
+  <xsd:complexType name="AbstractTimingConstraintsT" abstract="true"> 
+    <xsd:annotation> 
+      <xsd:documentation>Any specific timing requirements for the observing</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="startTime" type="xsd:string" minOccurs="0"/>  
+      <xsd:element name="endTime" type="xsd:string" minOccurs="0"/>  
+      <xsd:element name="allowedMargin" type="val:TimeT" minOccurs="0"/>  
+      <xsd:element name="repeats" type="xsd:int" minOccurs="0"/>  
+      <xsd:element name="lSTMin" type="xsd:string" minOccurs="0"/>  
+      <xsd:element name="lSTMax" type="xsd:string" minOccurs="0"/>  
+      <xsd:element name="note" type="xsd:string" minOccurs="0"/>  
+      <xsd:element name="isAvoidConstraint" type="xsd:boolean" minOccurs="0" default="false"/>  
+      <xsd:element name="priority" type="xsd:int" minOccurs="0" default="0"/>  
+      <xsd:element name="isFixedStart" type="xsd:boolean" minOccurs="0" default="false"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'AdvancedSpectralSetup' -->  
+  <xsd:complexType name="AdvancedSpectralSetupT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Advanced spectral setup options, not normally displayed.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="sideBandSeparation" type="xsd:boolean" default="false"/>  
+      <xsd:element name="fastMode" type="xsd:boolean" default="false"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'AdvancedWindowSetup' -->  
+  <xsd:complexType name="AdvancedWindowSetupT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Advanced spectral window setup. These properties will be used to set some details in the correlator and spectral setups in the SB, but are not displayed in the Science Goal by default, being classified as "advanced". Many are not yet available.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="smoothingFactor" type="xsd:int" default="1"/>  
+      <xsd:element name="oversampling" type="xsd:boolean" default="false"/>  
+      <xsd:element name="addedSensitivity" type="xsd:boolean" default="false"/>  
+      <xsd:element name="useImage" type="xsd:boolean" default="false"/>  
+      <xsd:element name="useThis" type="xsd:boolean" default="true"/> 
+    </xsd:sequence>  
+    <xsd:attribute name="smoothingFunction" default="HANNING"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="UNIFORM"/>  
+          <xsd:enumeration value="HANNING"/>  
+          <xsd:enumeration value="HAMMING"/>  
+          <xsd:enumeration value="BARTLETT"/>  
+          <xsd:enumeration value="BLACKMANN"/>  
+          <xsd:enumeration value="BLACKMANN_HARRIS"/>  
+          <xsd:enumeration value="WELCH"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'CalibrationRequirements' -->  
+  <xsd:complexType name="CalibrationRequirementsT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Outlines the calibration requirements of any given ObsUnit (ObsUnitSet or SB). Details are still a little fuzzy. This information may be used by the Scheduler in order to determine whether existing calibrations can be used for this SB, and by the observing script to set parameters for the various calibration scans.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="pointingAccuracy" type="val:AngleT"/>  
+      <xsd:element name="bandpassAccuracy" type="xsd:double"/>  
+      <xsd:element name="polarizationAccuracy" type="xsd:double"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'CalibrationSetupParameters' -->  
+  <xsd:complexType name="CalibrationSetupParametersT"> 
+    <xsd:annotation> 
+      <xsd:documentation>The, science oriented, calibration setup parameters required. For the moment this is a placeholder until we get a better understanding of what is needed.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="CalibrationTargetParameters" type="prj:CalibrationTargetParametersT" minOccurs="0" maxOccurs="unbounded"/>  
+      <!--<xsd:element name="QuerySource" type="prj:QuerySourceT" minOccurs="0" maxOccurs="unbounded"/> -->
+    </xsd:sequence>  
+    <xsd:attribute name="selection"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="user"/>  
+          <xsd:enumeration value="system"/>  
+          <xsd:enumeration value="systemAlternate"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'CalibrationTargetParameters' -->  
+  <xsd:complexType name="CalibrationTargetParametersT"> 
+    <xsd:annotation> 
+      <xsd:documentation>The parameters of a single observatory goal target</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="sourceName" type="xsd:string"/>  
+      <xsd:element name="sourceCoordinates" type="val:SkyCoordinatesT"/>  
+      <xsd:element name="sourceVelocity" type="val:VelocityT"/>  
+      <xsd:element name="index" type="xsd:int" default="0"/>  
+      <xsd:element name="nonSiderealMotion" type="xsd:boolean" default="false"/>  
+      <xsd:element name="CalibrationTargetProperties" type="prj:CalibrationTargetPropertiesT" minOccurs="0" maxOccurs="unbounded"/> 
+    </xsd:sequence>  
+    <xsd:attribute name="intendedUse"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="Amplitude"/>  
+          <xsd:enumeration value="Atmospheric"/>  
+          <xsd:enumeration value="Bandpass"/>  
+          <xsd:enumeration value="Phase"/>  
+          <xsd:enumeration value="Pointing"/>  
+          <xsd:enumeration value="Focus"/>  
+          <xsd:enumeration value="Polarization"/>  
+          <xsd:enumeration value="Delay"/>  
+          <xsd:enumeration value="SidebandRatio"/>  
+          <xsd:enumeration value="CheckSource"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute>  
+    <xsd:attribute name="solarSystemObject"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="Mercury"/>  
+          <xsd:enumeration value="Venus"/>  
+          <xsd:enumeration value="Moon"/>  
+          <xsd:enumeration value="Mars"/>  
+          <xsd:enumeration value="Jupiter"/>  
+          <xsd:enumeration value="Saturn"/>  
+          <xsd:enumeration value="Uranus"/>  
+          <xsd:enumeration value="Neptune"/>  
+          <xsd:enumeration value="Pluto"/>  
+          <xsd:enumeration value="Sun"/>  
+          <xsd:enumeration value="Ganymede"/>  
+          <xsd:enumeration value="Europa"/>  
+          <xsd:enumeration value="Callisto"/>  
+          <xsd:enumeration value="Io"/>  
+          <xsd:enumeration value="Titan"/>  
+          <xsd:enumeration value="Ceres"/>  
+          <xsd:enumeration value="Pallas"/>  
+          <xsd:enumeration value="Juno"/>  
+          <xsd:enumeration value="Vesta"/>  
+          <xsd:enumeration value="Ephemeris"/>  
+          <xsd:enumeration value="Unspecified"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'CalibrationTargetProperties' -->  
+  <xsd:complexType name="CalibrationTargetPropertiesT"> 
+    <xsd:sequence> 
+      <xsd:element name="frequency" type="val:FrequencyT"/>  
+      <xsd:element name="flux" type="val:FluxT"/>  
+      <xsd:element name="dateOfMeasurement" type="xsd:string" minOccurs="0"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'Circle' -->  
+  <xsd:complexType name="CircleT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Specialisation of FIeld for a circular map. Not yet implemented.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:complexContent> 
+      <xsd:extension base="prj:FieldT"> 
+        <xsd:sequence> 
+          <xsd:element name="radius" type="val:AngleT"/>  
+          <xsd:element name="spacing" type="val:UserAngleT"/> 
+        </xsd:sequence> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ControlBlock' -->  
+  <xsd:complexType name="ControlBlockT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Provides the execution control limits on any given ObsUnit (ObsUnitSet or SB), in terms of items like the maximum time allowed, the user and tac priorities etc.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="maximumTime" type="val:TimeT"/>  
+      <xsd:element name="userPriority" type="xsd:int"/>  
+      <xsd:element name="estimatedExecutionTime" type="val:TimeT"/>  
+      <xsd:element name="tacPriority" type="xsd:int"/>  
+      <xsd:element name="aggregatedExecutionCount" type="xsd:int" default="1"/> 
+    </xsd:sequence>  
+    <xsd:attribute name="arrayRequested" default="TWELVE-M"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="ACA"/>  
+          <xsd:enumeration value="SEVEN-M"/>  
+          <xsd:enumeration value="TP-Array"/>  
+          <xsd:enumeration value="TWELVE-M"/>  
+          <xsd:enumeration value="ALMA"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'DataProcessingParameters' -->  
+  <xsd:complexType name="DataProcessingParametersT"> 
+    <xsd:annotation> 
+      <xsd:documentation>This contains user-specified parameters that are to be used by the data processing pipeline to guide its execution. It should contain attributes that are not easily found in, or derived from, other elements in either the APDM or the ASDM. The items will typically be defaulted when the system view is determined from a science view, or may be user-input from the system view. The present version is a place holder!</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="angularResolution" type="val:AngleT"/>  
+      <xsd:element name="velocityResolution" type="val:VelocityT"/>  
+      <xsd:element name="tBSensitivityGoal" type="val:TemperatureT"/>  
+      <xsd:element name="rMSGoal" type="val:SensitivityT"/> 
+    </xsd:sequence>  
+    <xsd:attribute name="projectType"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="Continuum"/>  
+          <xsd:enumeration value="Polarization"/>  
+          <xsd:enumeration value="Other"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'Ellipse' -->  
+  <xsd:complexType name="EllipseT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Sppecialization of a Field for an elliptical map. Not yet implemented</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:complexContent> 
+      <xsd:extension base="prj:FieldT"> 
+        <xsd:sequence> 
+          <xsd:element name="semiMajor" type="val:AngleT"/>  
+          <xsd:element name="semiMinor" type="val:AngleT"/>  
+          <xsd:element name="pAMajor" type="val:AngleT"/>  
+          <xsd:element name="spacing" type="val:UserAngleT"/> 
+        </xsd:sequence> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ExpectedProperties' -->  
+  <xsd:complexType name="ExpectedPropertiesT"> 
+    <xsd:annotation> 
+      <xsd:documentation>The properties of this source that are expected to be measured. Mostly for technical assessment and validation of the observing requested.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="expectedPeakFluxDensity" type="val:FluxT"/>  
+      <xsd:element name="desiredPolarizationPercentage" type="xsd:double"/>  
+      <xsd:element name="expectedLineWidth" type="val:UserFrequencyT"/>  
+      <xsd:element name="referenceFrequency" type="val:FrequencyT"/>  
+      <xsd:element name="expectedPeakLineFluxDensity" type="val:FluxT"/>  
+      <xsd:element name="expectedSpectralDynamicRange" type="xsd:double" default="0.0"/>  
+      <xsd:element name="expectedImageDynamicRange" type="xsd:double" default="0.0"/>  
+      <xsd:element name="desiredLinePolarizationPercentage" type="xsd:double" minOccurs="0" default="0.0"/>  
+      <xsd:element name="desiredLineCircularPolarizationPercentage" type="xsd:double" minOccurs="0" default="0.0"/>  
+      <xsd:element name="desiredCircularPolarizationPercentage" type="xsd:double" minOccurs="0" default="0.0"/> 
+    </xsd:sequence>  
+    <xsd:attribute name="solarActivityLevel" default="None"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="None"/>  
+          <xsd:enumeration value="QuietSun"/>  
+          <xsd:enumeration value="ActiveSun"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ExpectedSpectralLine' -->  
+  <xsd:complexType name="ExpectedSpectralLineT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Brief description (rest frequency, name, splatalog ID) of a spectral line that is expected within a spectral window.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:complexContent> 
+      <xsd:extension base="prj:AbstractSpectralLineT"> 
+        <xsd:sequence></xsd:sequence> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'Field' -->  
+  <xsd:complexType name="FieldT" abstract="true"> 
+    <xsd:annotation> 
+      <xsd:documentation>Abstract field class. Holds common information</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="name" type="xsd:string"/>  
+      <xsd:element name="centre" type="val:SkyCoordinatesT"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'FlowControl' -->  
+  <xsd:complexType name="FlowControlT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Describes the flow of ObsUnits (sets and SBs). Basically this will define an ordered sequence of these, complete with conditions to determine flow ("if either SB1 or SB2 has completed..."), or time patterns that define the flow ("SB2 2 hours +/- 30min after SB1", or regular measurements over some period). The details of how these are expressed are TBD, so the controlScript attribute is a placeholder for the moment.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="controlScript" type="xsd:string"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ImagingProcedure' -->  
+  <xsd:complexType name="ImagingProcedureT"> 
+    <xsd:annotation> 
+      <xsd:documentation>PLACEHOLDER for possible DR scripts at the science goal level.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="imageScript" type="xsd:string"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'MonitoringConstraint' -->  
+  <xsd:complexType name="MonitoringConstraintT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Describes the setup for a monitoring-type observation, i.e. observing a target over a few hours at a regular cadance.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:complexContent> 
+      <xsd:extension base="prj:AbstractTimingConstraintsT"> 
+        <xsd:sequence> 
+          <xsd:element name="monitoringLength" type="val:TimeT"/>  
+          <xsd:element name="cycleTime" type="val:TimeT"/>  
+          <xsd:element name="requiredDelay" type="val:TimeT" minOccurs="0"/> 
+        </xsd:sequence> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ObservatoryGoal' -->  
+  <xsd:complexType name="ObservatoryGoalT"> 
+    <xsd:annotation> 
+      <xsd:documentation>This aggregates the parameters necessary for creating an Observatory Goal - a specialized type of observing goal for many observatory calibration type modes, for instance interferometric pointing.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:complexContent> 
+      <xsd:extension base="prj:AbstractScienceGoalT"> 
+        <xsd:sequence> 
+          <xsd:element name="purpose" type="xsd:string"/>  
+          <xsd:element name="integrationTime" type="val:TimeT"/>  
+          <xsd:element name="useQuery" type="xsd:boolean" default="false"/>  
+          <xsd:element name="CalibrationSetupParameters" type="prj:CalibrationSetupParametersT"/>  
+          <xsd:element name="ObservatoryGoalControlParameters" type="prj:ObservatoryGoalControlParametersT"/>  
+          <xsd:element name="ObservatoryGoalTargetParameters" type="prj:ObservatoryGoalTargetParametersT" minOccurs="0" maxOccurs="unbounded"/>  
+          <!--<xsd:element name="ObservatoryGoalQueryParameters" type="prj:QuerySourceT"/>  -->
+          <xsd:element name="SpectralSetupParameters" type="prj:SpectralSetupParametersT"/> 
+        </xsd:sequence> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ObservatoryGoalControlParameters' -->  
+  <xsd:complexType name="ObservatoryGoalControlParametersT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Parameters intended to place exection control on an Observatory Goal SB.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="elevationLimit" type="val:AngleT"/>  
+      <xsd:element name="antennaPositionTolerance" type="val:AngleT"/>  
+      <xsd:element name="sBMaximumTime" type="val:TimeT"/>  
+      <xsd:element name="randomizeOrder" type="xsd:boolean" default="true"/>  
+      <xsd:element name="minFlux" type="val:FluxT"/>  
+      <xsd:element name="maxFlux" type="val:FluxT"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ObservatoryGoalTargetParameters' -->  
+  <xsd:complexType name="ObservatoryGoalTargetParametersT"> 
+    <xsd:annotation> 
+      <xsd:documentation>The parameters of a single observatory goal target</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="sourceName" type="xsd:string"/>  
+      <xsd:element name="sourceCoordinates" type="val:SkyCoordinatesT"/>  
+      <xsd:element name="flux" type="val:FluxT"/>  
+      <xsd:element name="sourceVelocity" type="val:VelocityT"/>  
+      <xsd:element name="index" type="xsd:int" default="0"/>  
+      <xsd:element name="frequency" type="val:FrequencyT"/>  
+      <xsd:element name="CalibrationTargetProperties" type="prj:CalibrationTargetPropertiesT" minOccurs="0" maxOccurs="unbounded"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ObsPhase' -->  
+  <xsd:complexType name="ObsPhaseT" abstract="true"> 
+    <xsd:annotation> 
+      <xsd:documentation>The abstract concept of a "Phase". An ObsProject will accumulate data pertaining to different "Phases" of the Project, Phase I (Proposal preparation) and Phase II (Observing Program Preparation) are the most obvious, but other phases may be identified. In particular the reviewing comments and decisions are captured in a "Phase". The characteristic common to all Phases is that they contain an ObsPlan. For Phase I this is the planned program at that time. For Phase II this is the approved part of the program and represents what will actually be observed. The full concept for other phases is not defined, but could be developed.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:choice minOccurs="0" maxOccurs="unbounded"> 
+        <xsd:element name="ObservatoryGoal" type="prj:ObservatoryGoalT"/>  
+        <xsd:element name="OpticalPointingScienceGoal" type="prj:OpticalPointingScienceGoalT"/>  
+        <xsd:element name="ScienceGoal" type="prj:ScienceGoalT"/> 
+      </xsd:choice>  
+      <xsd:element name="ObsPlan" type="prj:ObsUnitSetT"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ObsProgram' -->  
+  <xsd:complexType name="ObsProgramT"> 
+    <xsd:annotation> 
+      <xsd:documentation>The ObsProgram (specialisation of an ObsPhase) holds all of the input data that is specific to Phase II (observing definition) of an Observing Project. This information is created by the Observer during "Phase II", following a successful review phase. The information contained with the ObsProgram defines what will really happen at the Observatory. The ObsProgram may contain a Science Plan where science oriented goals are entered and must contain an Observing Plan (ObsPlan) where the control commands for observing are entered.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:complexContent> 
+      <xsd:extension base="prj:ObsPhaseT"> 
+        <xsd:sequence></xsd:sequence> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ObsUnit' -->  
+  <xsd:complexType name="ObsUnitT" abstract="true"> 
+    <xsd:annotation> 
+      <xsd:documentation>The base class supporting the system side (i.e. executable at the observatory) of the project data model. With its specialisations ObsUnitSet and SchedBlock the pattern supports arbitrary hierarchical structures. The status attribute allows a lifecycle to be tracked for all types of ObsUnit.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="name" type="xsd:string"/>  
+      <xsd:element name="note" type="xsd:string" minOccurs="0"/>  
+      <xsd:element name="ObsUnitControl" type="prj:ObsUnitControlT"/>  
+      <xsd:element name="UnitDependencies" type="prj:UnitDependenciesT"/>  
+      <xsd:element name="ObsProjectRef" type="prj:ObsProjectRefT"/> 
+    </xsd:sequence>  
+    <xsd:attribute name="status" default="NewPhase2"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="Approved"/>  
+          <xsd:enumeration value="Broken"/>  
+          <xsd:enumeration value="Canceled"/>  
+          <xsd:enumeration value="Deleted"/>  
+          <xsd:enumeration value="FullyObserved"/>  
+          <xsd:enumeration value="PartiallyObserved"/>  
+          <xsd:enumeration value="Phase2Submitted"/>  
+          <xsd:enumeration value="PipelineError"/>  
+          <xsd:enumeration value="Processed"/>  
+          <xsd:enumeration value="Ready"/>  
+          <xsd:enumeration value="Repaired"/>  
+          <xsd:enumeration value="Running"/>  
+          <xsd:enumeration value="ObservingTimedOut"/>  
+          <xsd:enumeration value="ToBeRepaired"/>  
+          <xsd:enumeration value="Verified"/>  
+          <xsd:enumeration value="AnyState"/>  
+          <xsd:enumeration value="Phase1Submitted"/>  
+          <xsd:enumeration value="NewPhase1"/>  
+          <xsd:enumeration value="NewPhase2"/>  
+          <xsd:enumeration value="ObservingTerminated"/>  
+          <xsd:enumeration value="ObservingAborted"/>  
+          <xsd:enumeration value="ObservingFailed"/>  
+          <xsd:enumeration value="VerificationFailure"/>  
+          <xsd:enumeration value="Suspended"/>  
+          <xsd:enumeration value="Rejected"/>  
+          <xsd:enumeration value="CSVReady"/>  
+          <xsd:enumeration value="CSVRunning"/>  
+          <xsd:enumeration value="CSVSuspended"/>  
+          <xsd:enumeration value="Completed"/>  
+          <xsd:enumeration value="Delivered"/>  
+          <xsd:enumeration value="InProgress"/>  
+          <xsd:enumeration value="PipelineProcessing"/>  
+          <xsd:enumeration value="ReadyForProcessing"/>  
+          <xsd:enumeration value="ReadyToDeliver"/>  
+          <xsd:enumeration value="CalibratorCheck"/>  
+          <xsd:enumeration value="QA2InProgress"/>  
+          <xsd:enumeration value="ManualProcessing"/>  
+          <xsd:enumeration value="ReprocessingRequired"/>  
+          <xsd:enumeration value="Waiting"/>  
+          <xsd:enumeration value="QA3InProgress"/>  
+          <xsd:enumeration value="PartiallyCompleted"/>  
+          <xsd:enumeration value="NotObserved"/>  
+          <xsd:enumeration value="ProcessingProblem"/>  
+          <xsd:enumeration value="Processing"/>  
+          <xsd:enumeration value="ReadyForReview"/>  
+          <xsd:enumeration value="Reviewing"/>  
+          <xsd:enumeration value="DeliveryInProgress"/>  
+          <xsd:enumeration value="DoNotObserve"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ObsUnitControl' -->  
+  <xsd:complexType name="ObsUnitControlT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Specifies controls on an ObsUnit, which are a combination of controls provided by the user and the PRC. Since they are on ObsUnits they can be applied with very small granularity.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:complexContent> 
+      <xsd:extension base="prj:ControlBlockT"> 
+        <xsd:sequence> 
+          <xsd:element name="CalibrationRequirements" type="prj:CalibrationRequirementsT"/> 
+        </xsd:sequence> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ObsUnitSet' -->  
+  <xsd:complexType name="ObsUnitSetT"> 
+    <xsd:annotation> 
+      <xsd:documentation>A specialisation of ObsUnit that holds a collection of ObsUnits, This allows the creation of arbitrary structures, and also forms the container for SchedBlocks. Attributes allow the definition of data processing scripts that will occur at specific levels in the hierarchy. Note that the "top level" ObsUnitSet within an Observing Phase has a role name of "ObsPlan". This is to indicate that it describes the actual observing plan, described in the ALMA "system view" intended executed at the observatory. (For PhaseI this ObsPlan, if it is detailed, is still to be confirmed and will never get executed. For Phase II it is what was approved and must be detailed and valid as it contains what will be executed).</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:complexContent> 
+      <xsd:extension base="prj:ObsUnitT"> 
+        <xsd:sequence> 
+          <xsd:element name="scienceProcessingScript" type="xsd:string"/>  
+          <xsd:element name="runSciencePipeline" type="xsd:boolean" default="false"/>  
+          <xsd:element name="DataProcessingParameters" type="prj:DataProcessingParametersT"/>  
+          <xsd:element name="FlowControl" type="prj:FlowControlT"/>  
+          <xsd:choice> 
+            <xsd:element name="ObsUnitSet" type="prj:ObsUnitSetT" minOccurs="0" maxOccurs="unbounded"/>  
+            <xsd:element name="SchedBlockRef" type="sbl:SchedBlockRefT" minOccurs="0" maxOccurs="unbounded"/> 
+          </xsd:choice>  
+          <xsd:element name="OUSStatusRef" type="ouss:OUSStatusRefT"/> 
+        </xsd:sequence>  
+        <xsd:attribute name="entityPartId" type="ent:EntityPartIdT"/>  
+        <xsd:attribute name="almatype" type="xsd:string" use="required" fixed="APDM::ObsUnitSet"/> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'OpticalCameraControlParameters' -->  
+  <xsd:complexType name="OpticalCameraControlParametersT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Parameters intended to place exection control on an Optical POinting SB.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="elevationLimit" type="val:AngleT"/>  
+      <xsd:element name="antennaPositionTolerance" type="val:AngleT"/>  
+      <xsd:element name="minMagnitude" type="val:MagnitudeT"/>  
+      <xsd:element name="maxMagnitude" type="val:MagnitudeT"/>  
+      <xsd:element name="sBMaximumTime" type="val:TimeT"/>  
+      <xsd:element name="randomizeOrder" type="xsd:boolean" default="true"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'OpticalCameraSpecParameters' -->  
+  <xsd:complexType name="OpticalCameraSpecParametersT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Specification parameters for the visible light camera</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="minIntegrationTime" type="val:TimeT"/> 
+    </xsd:sequence>  
+    <xsd:attribute name="filter" default="night"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="day"/>  
+          <xsd:enumeration value="night"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'OpticalPointingScienceGoal' -->  
+  <xsd:complexType name="OpticalPointingScienceGoalT"> 
+    <xsd:annotation> 
+      <xsd:documentation>A specialised "Science Goal" designed to capture the information necessary to construct an Optical Pointing run SB</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:complexContent> 
+      <xsd:extension base="prj:AbstractScienceGoalT"> 
+        <xsd:sequence> 
+          <xsd:element name="filename" type="xsd:string"/>  
+          <xsd:element name="schedBlockName" type="xsd:string"/>  
+          <xsd:element name="opticalCameraControl" type="prj:OpticalCameraControlParametersT"/>  
+          <xsd:element name="opticalCameraSpec" type="prj:OpticalCameraSpecParametersT"/>  
+          <xsd:element name="OpticalPointingTargetParameters" type="prj:OpticalPointingTargetParametersT" minOccurs="0" maxOccurs="unbounded"/>  
+          <xsd:element name="OpticalPointingTargetQueryParameters" type="prj:OpticalPointingTargetQueryParametersT"/> 
+        </xsd:sequence> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'OpticalPointingTargetParameters' -->  
+  <xsd:complexType name="OpticalPointingTargetParametersT"> 
+    <xsd:annotation> 
+      <xsd:documentation>The parameters of a single optical pointing target</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="sourceName" type="xsd:string"/>  
+      <xsd:element name="sourceCoordinates" type="val:SkyCoordinatesT"/>  
+      <xsd:element name="pmRA" type="val:AngularVelocityT"/>  
+      <xsd:element name="pmDec" type="val:AngularVelocityT"/>  
+      <xsd:element name="parallax" type="val:AngleT"/>  
+      <xsd:element name="visibleMagnitude" type="xsd:double"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'OpticalPointingTargetQueryParameters' -->  
+  <xsd:complexType name="OpticalPointingTargetQueryParametersT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Query parameters used to query a catalog of potential optical pointing sources</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="minCoordinates" type="val:SkyCoordinatesT"/>  
+      <xsd:element name="maxCoordinates" type="val:SkyCoordinatesT"/>  
+      <xsd:element name="minMagnitude" type="val:MagnitudeT"/>  
+      <xsd:element name="maxMagnitude" type="val:MagnitudeT"/>  
+      <xsd:element name="minElevation" type="val:AngleT"/>  
+      <xsd:element name="maxElevation" type="val:AngleT"/>  
+      <xsd:element name="minAzimuth" type="val:AngleT"/>  
+      <xsd:element name="maxAzimuth" type="val:AngleT"/>  
+      <xsd:element name="lst" type="xsd:string"/>  
+      <xsd:element name="fieldMinSeparation" type="val:AngleT"/>  
+      <xsd:element name="listMinSeparation" type="val:AngleT"/>  
+      <xsd:element name="selectionFactor" type="xsd:int"/>  
+      <xsd:element name="maxTargets" type="xsd:int"/>  
+      <xsd:element name="catalogLocation" type="xsd:string"/>  
+      <xsd:element name="localFileName" type="xsd:string"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'OverlaidSpectralLine' -->  
+  <xsd:complexType name="OverlaidSpectralLineT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Brief description (rest frequency, name, splatalog ID) of a spectral line that is visually overlaid in the spectral setup.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:complexContent> 
+      <xsd:extension base="prj:AbstractSpectralLineT"> 
+        <xsd:sequence></xsd:sequence> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'PerformanceParameters' -->  
+  <xsd:complexType name="PerformanceParametersT"> 
+    <xsd:annotation> 
+      <xsd:documentation>The parameters that define the science performance required for this science goal.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="desiredAngularResolution" type="val:UserAngleT"/>  
+      <xsd:element name="desiredLargestScale" type="val:AngleT"/>  
+      <xsd:element name="desiredSensitivity" type="val:UserSensitivityT"/>  
+      <xsd:element name="desiredDynamicRange" type="xsd:double"/>  
+      <xsd:element name="representativeFrequency" type="val:FrequencyT" minOccurs="0"/>  
+      <xsd:element name="useACA" type="xsd:boolean" default="false"/>  
+      <xsd:element name="isTimeConstrained" type="xsd:boolean" default="false"/>  
+      <xsd:element name="useTP" type="xsd:boolean" default="false"/>  
+      <xsd:element name="desiredSDSensitivity" type="val:UserSensitivityT" minOccurs="0"/>  
+      <xsd:element name="isPointSource" type="xsd:boolean" default="false"/>  
+      <xsd:element name="desiredSensitivityReferenceFrequencyWidth" type="val:UserFrequencyT"/>  
+      <xsd:element name="needsMoreTime" type="xsd:boolean" default="false"/>  
+      <xsd:element name="desiredACASensitivity" type="val:UserSensitivityT" minOccurs="0"/>  
+      <xsd:element name="desiredTPSensitivity" type="val:UserSensitivityT" minOccurs="0"/>  
+      <xsd:element name="isScheduleConstrained" type="xsd:boolean" minOccurs="0" default="false"/>  
+      <xsd:element name="desiredTime" type="val:TimeT" minOccurs="0"/>  
+      <xsd:element name="acceptableAngularResolution" type="val:UserAngleT" minOccurs="0"/>  
+      <xsd:element name="isSimultaneous12and7" type="xsd:boolean" minOccurs="0" default="false"/>  
+      <xsd:choice> 
+        <xsd:element name="MonitoringConstraint" type="prj:MonitoringConstraintT" minOccurs="0" maxOccurs="unbounded"/>  
+        <xsd:element name="TemporalParameters" type="prj:TemporalParametersT" minOccurs="0" maxOccurs="unbounded"/>  
+        <xsd:element name="VisitConstraint" type="prj:VisitConstraintT" minOccurs="0" maxOccurs="unbounded"/> 
+      </xsd:choice> 
+    </xsd:sequence>  
+    <xsd:attribute name="desiredSensitivityFrequencyMeasure" default="RepresentativeWindowResolution"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="RepresentativeWindowBandWidth"/>  
+          <xsd:enumeration value="RepresentativeWindowResolution"/>  
+          <xsd:enumeration value="AggregateBandWidth"/>  
+          <xsd:enumeration value="LargestWindowBandWidth"/>  
+          <xsd:enumeration value="FinestResolution"/>  
+          <xsd:enumeration value="User"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute>  
+    <xsd:attribute name="timingConstraintsType"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="None"/>  
+          <xsd:enumeration value="SpecificDates"/>  
+          <xsd:enumeration value="MultipleVisits"/>  
+          <xsd:enumeration value="ContinuousMonitoring"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute>  
+    <xsd:attribute name="resolutionOption"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="Single"/>  
+          <xsd:enumeration value="Range"/>  
+          <xsd:enumeration value="Any"/>  
+          <xsd:enumeration value="StandaloneACA"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'Point' -->  
+  <xsd:complexType name="PointT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Intended as a single pointing position. Believe it may now be obsolete.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="rA" type="val:LongitudeT"/>  
+      <xsd:element name="dec" type="val:LatitudeT"/>  
+      <xsd:element name="name" type="xsd:string"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'Polygon' -->  
+  <xsd:complexType name="PolygonT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Placeholder for building a polygonal map. Not yet properly implemented</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:complexContent> 
+      <xsd:extension base="prj:FieldT"> 
+        <xsd:sequence> 
+          <xsd:element name="points" type="val:SkyCoordinatesT" minOccurs="0" maxOccurs="unbounded"/> 
+        </xsd:sequence> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'Preconditions' -->  
+  <xsd:complexType name="PreconditionsT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Specifies the conditions that must be met before this SchedBlock can be executed.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="baselineCalValid" type="xsd:boolean" default="false"/>  
+      <xsd:element name="polarizationCalValid" type="xsd:boolean" default="false"/>  
+      <xsd:element name="minAllowedHA" type="val:UserAngleT"/>  
+      <xsd:element name="maxAllowedHA" type="val:UserAngleT"/>  
+      <xsd:element name="WeatherConstraints" type="prj:WeatherConstraintsT"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'QuerySource' -->  
+  <!--<xsd:complexType name="QuerySourceT"> -->
+    <!--<xsd:annotation> -->
+      <!--<xsd:documentation>A QuerySource is a special type of FieldSource which does does specify directly a single source to point at. Instead it specifies a query that should be executed by the Control system to obtain a set of results matching that query. These results are turned into FieldSources, up to the maximum number desired.</xsd:documentation> -->
+    <!--</xsd:annotation>  -->
+    <!--<xsd:sequence> -->
+      <!--<xsd:element name="queryCenter" type="val:SkyCoordinatesT"/>  -->
+      <!--<xsd:element name="searchRadius" type="val:AngleT"/>  -->
+      <!--<xsd:element name="minFrequency" type="val:FrequencyT"/>  -->
+      <!--<xsd:element name="maxFrequency" type="val:FrequencyT"/>  -->
+      <!--<xsd:element name="minFlux" type="val:FluxT"/>  -->
+      <!--<xsd:element name="maxFlux" type="val:FluxT"/>  -->
+      <!--<xsd:element name="minTimeSinceObserved" type="val:TimeT"/>  -->
+      <!--<xsd:element name="maxTimeSinceObserved" type="val:TimeT"/>  -->
+      <!--<xsd:element name="use" type="xsd:string"/>  -->
+      <!--<xsd:element name="maxSources" type="xsd:int" default="1"/>  -->
+      <!--<xsd:element name="index" type="xsd:int" default="0"/> -->
+    <!--</xsd:sequence>  -->
+    <!--<xsd:attribute name="intendedUse"> -->
+      <!--<xsd:simpleType> -->
+        <!--<xsd:restriction base="xsd:string"> -->
+          <!--<xsd:enumeration value="Amplitude"/>  -->
+          <!--<xsd:enumeration value="Atmospheric"/>  -->
+          <!--<xsd:enumeration value="Bandpass"/>  -->
+          <!--<xsd:enumeration value="Phase"/>  -->
+          <!--<xsd:enumeration value="Pointing"/>  -->
+          <!--<xsd:enumeration value="Focus"/>  -->
+          <!--<xsd:enumeration value="Polarization"/>  -->
+          <!--<xsd:enumeration value="Delay"/>  -->
+          <!--<xsd:enumeration value="SidebandRatio"/>  -->
+          <!--<xsd:enumeration value="CheckSource"/> -->
+        <!--</xsd:restriction> -->
+      <!--</xsd:simpleType> -->
+    <!--</xsd:attribute> -->
+  <!--</xsd:complexType>  -->
+
+  <!-- generated from dependent class 'Rectangle' -->  
+  <xsd:complexType name="RectangleT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Definition of a rectangular mapping area for a science goal. Not yet used.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:complexContent> 
+      <xsd:extension base="prj:FieldT"> 
+        <xsd:sequence> 
+          <xsd:element name="pALong" type="val:AngleT"/>  
+          <xsd:element name="long" type="val:AngleT"/>  
+          <xsd:element name="short" type="val:AngleT"/>  
+          <xsd:element name="spacing" type="val:UserAngleT"/>  
+          <xsd:element name="referenceFrequency" type="val:FrequencyT"/> 
+        </xsd:sequence> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ScienceGoal' -->  
+  <xsd:complexType name="ScienceGoalT"> 
+    <xsd:annotation> 
+      <xsd:documentation>This aggregates the science oriented parameters necessary for creating a science observation.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:complexContent> 
+      <xsd:extension base="prj:AbstractScienceGoalT"> 
+        <xsd:sequence> 
+          <xsd:element name="estimatedTotalTime" type="val:TimeT"/>  
+          <xsd:element name="userPriority" type="xsd:int" default="0"/>  
+          <xsd:element name="requiredReceiverBands" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>  
+          <xsd:element name="estimated12mTime" type="val:TimeT" minOccurs="0"/>  
+          <xsd:element name="estimated7mTime" type="val:TimeT" minOccurs="0"/>  
+          <xsd:element name="estimatedTPTime" type="val:TimeT" minOccurs="0"/>  
+          <xsd:element name="estimatedACATime" type="val:TimeT" minOccurs="0"/>  
+          <xsd:element name="isDescoped" type="xsd:boolean" minOccurs="0" default="false"/>  
+          <xsd:element name="isResubmission" type="xsd:boolean" minOccurs="0" default="false"/>  
+          <xsd:element name="resubmissionOfOusStatusUid" type="xsd:string" minOccurs="0"/>  
+          <xsd:element name="resubmissionOfName" type="xsd:string" minOccurs="0"/>  
+          <xsd:element name="CalibrationSetupParameters" type="prj:CalibrationSetupParametersT"/>  
+          <xsd:element name="PerformanceParameters" type="prj:PerformanceParametersT"/>  
+          <xsd:element name="SpectralSetupParameters" type="prj:SpectralSetupParametersT"/>  
+          <xsd:element name="TargetParameters" type="prj:TargetParametersT" maxOccurs="unbounded"/>  
+          <xsd:element name="TechnicalJustification" type="prj:TechnicalJustificationT" minOccurs="0" maxOccurs="unbounded"/> 
+        </xsd:sequence>  
+        <xsd:attribute name="mode" default="Standard"> 
+          <xsd:simpleType> 
+            <xsd:restriction base="xsd:string"> 
+              <xsd:enumeration value="Standard"/>  
+              <xsd:enumeration value="Other"/> 
+            </xsd:restriction> 
+          </xsd:simpleType> 
+        </xsd:attribute> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ScienceSpectralWindow' -->  
+  <xsd:complexType name="ScienceSpectralWindowT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Science oriented definition of a spectral window.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:complexContent> 
+      <xsd:extension base="prj:AbstractScienceSpectralWindowT"> 
+        <xsd:sequence> 
+          <xsd:element name="transitionName" type="xsd:string"/>  
+          <xsd:element name="centerFrequency" type="val:FrequencyT"/>  
+          <xsd:element name="bandWidth" type="val:UserFrequencyT"/>  
+          <xsd:element name="spectralResolution" type="val:UserFrequencyT"/>  
+          <xsd:element name="groupIndex" type="xsd:int"/>  
+          <xsd:element name="isSkyFrequency" type="xsd:boolean" default="false"/>  
+          <xsd:element name="splatalogId" type="xsd:int" minOccurs="0"/>  
+          <xsd:element name="representativeWindow" type="xsd:boolean" default="false"/> 
+        </xsd:sequence>  
+        <xsd:attribute name="groupResourceUse"> 
+          <xsd:simpleType> 
+            <xsd:restriction base="xsd:string"> 
+              <xsd:enumeration value="FULL"/>  
+              <xsd:enumeration value="HALF"/>  
+              <xsd:enumeration value="QUARTER"/>  
+              <xsd:enumeration value="EIGHTH"/>  
+              <xsd:enumeration value="SIXTEENTH"/>  
+              <xsd:enumeration value="THIRTYSECOND"/> 
+            </xsd:restriction> 
+          </xsd:simpleType> 
+        </xsd:attribute> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'SinglePoint' -->  
+  <xsd:complexType name="SinglePointT"> 
+    <xsd:annotation> 
+      <xsd:documentation>The Single point (for SFI) specialisation of a Field. No Attributes because the position in the base class is all there is.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:complexContent> 
+      <xsd:extension base="prj:FieldT"></xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'SpectralScan' -->  
+  <xsd:complexType name="SpectralScanT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Not yet implemented</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:complexContent> 
+      <xsd:extension base="prj:AbstractScienceSpectralWindowT"> 
+        <xsd:sequence> 
+          <xsd:element name="startFrequency" type="val:FrequencyT"/>  
+          <xsd:element name="endFrequency" type="val:FrequencyT"/>  
+          <xsd:element name="bandWidth" type="val:UserFrequencyT"/>  
+          <xsd:element name="spectralResolution" type="val:FrequencyT"/>  
+          <xsd:element name="isSkyFrequency" type="xsd:boolean" default="true"/> 
+        </xsd:sequence> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'SpectralSetupParameters' -->  
+  <xsd:complexType name="SpectralSetupParametersT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Setup for the receiver and correlator from a science goal point of view. Allows selection of type of setup: continuum, spectral scan or a full setup. In all cases this is implemented by defining one or more spectral windows.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="representativeFrequency" type="val:FrequencyT"/>  
+      <xsd:element name="userRepresentativeFrequency" type="xsd:boolean" default="false"/>  
+      <xsd:element name="singleContinuumFrequency" type="val:FrequencyT" minOccurs="0"/>  
+      <xsd:choice maxOccurs="unbounded"> 
+        <xsd:element name="ScienceSpectralWindow" type="prj:ScienceSpectralWindowT"/>  
+        <xsd:element name="SpectralScan" type="prj:SpectralScanT"/> 
+      </xsd:choice>  
+      <xsd:element name="AdvancedSpectralSetup" type="prj:AdvancedSpectralSetupT" minOccurs="0"/>  
+      <xsd:element name="OverlaidSpectralLine" type="prj:OverlaidSpectralLineT" minOccurs="0" maxOccurs="unbounded"/> 
+    </xsd:sequence>  
+    <xsd:attribute name="polarisation"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="SINGLE_X"/>  
+          <xsd:enumeration value="SINGLE_Y"/>  
+          <xsd:enumeration value="DOUBLE"/>  
+          <xsd:enumeration value="FULL"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute>  
+    <xsd:attribute name="type"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="continuum"/>  
+          <xsd:enumeration value="scan"/>  
+          <xsd:enumeration value="full"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'SubmissionRecord' -->  
+  <xsd:complexType name="SubmissionRecordT"> 
+    <xsd:annotation> 
+      <xsd:documentation>The submission record keeps track of who submitted the project and when.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="submitter" type="xsd:string"/>  
+      <xsd:element name="submissionTime" type="xsd:string"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'TargetParameters' -->  
+  <xsd:complexType name="TargetParametersT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Specialises the basic target setup by defining the type of mapping.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:complexContent> 
+      <xsd:extension base="prj:AbstractTargetParametersT"> 
+        <xsd:sequence> 
+          <xsd:element name="isMosaic" type="xsd:boolean" minOccurs="0" default="false"/>  
+          <xsd:choice maxOccurs="unbounded"> 
+            <xsd:element name="Circle" type="prj:CircleT"/>  
+            <xsd:element name="Ellipse" type="prj:EllipseT"/>  
+            <xsd:element name="Polygon" type="prj:PolygonT"/>  
+            <xsd:element name="Rectangle" type="prj:RectangleT"/>  
+            <xsd:element name="SinglePoint" type="prj:SinglePointT"/> 
+          </xsd:choice> 
+        </xsd:sequence>  
+        <xsd:attribute name="type"> 
+          <xsd:simpleType> 
+            <xsd:restriction base="xsd:string"> 
+              <xsd:enumeration value="F_MultiplePoints"/>  
+              <xsd:enumeration value="F_SingleRectangle"/> 
+            </xsd:restriction> 
+          </xsd:simpleType> 
+        </xsd:attribute> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'TechnicalJustification' -->  
+  <xsd:complexType name="TechnicalJustificationT"> 
+    <xsd:sequence> 
+      <xsd:element name="justificationText" type="xsd:string"/>  
+      <xsd:element name="justificationKey" type="xsd:string" minOccurs="0"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'TemporalParameters' -->  
+  <xsd:complexType name="TemporalParametersT"> 
+    <xsd:complexContent> 
+      <xsd:extension base="prj:AbstractTimingConstraintsT"></xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'UnitDependencies' -->  
+  <xsd:complexType name="UnitDependenciesT"> 
+    <xsd:annotation> 
+      <xsd:documentation>This class implements the description of the unit dependencies described in the Scheduling Design document (section 4.2.2.2 in 2005-08). It is still very much in development, and presently is only expected to provide for a very simple dependency on the completion of one other unit. Actual implementation still in debate.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="executionCount" type="xsd:int" default="1"/>  
+      <xsd:element name="delay" type="val:TimeT"/>  
+      <xsd:element name="expression" type="xsd:string"/>  
+      <xsd:element name="dependencyList" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>  
+      <xsd:element name="margin" type="val:TimeT" minOccurs="0"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'VisitConstraint' -->  
+  <xsd:complexType name="VisitConstraintT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Describes the setup for a long term monitoring type observation, i.e. returning to observe a target on a medium term cadance, e.g. every month.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:complexContent> 
+      <xsd:extension base="prj:AbstractTimingConstraintsT"> 
+        <xsd:sequence> 
+          <xsd:element name="visitId" type="xsd:int" default="0"/>  
+          <xsd:element name="previousVisitId" type="xsd:int" minOccurs="0" default="0"/>  
+          <xsd:element name="requiredDelay" type="val:TimeT" minOccurs="0"/> 
+        </xsd:sequence> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'WeatherConstraints' -->  
+  <xsd:complexType name="WeatherConstraintsT"> 
+    <xsd:annotation> 
+      <xsd:documentation>As part of the Preconditions, outlines the weather constraints that must be satisfied before execution can begin.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="maxPWVC" type="val:LengthT"/>  
+      <xsd:element name="seeing" type="val:AngleT"/>  
+      <xsd:element name="phaseStability" type="val:AngleT"/>  
+      <xsd:element name="maxWindVelocity" type="val:SpeedT"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- 'ObsProjectEntityT' contains administration info for ObsProject -->  
+  <xsd:complexType name="ObsProjectEntityT"> 
+    <xsd:complexContent> 
+      <xsd:restriction base="ent:EntityT"> 
+        <xsd:attribute name="entityTypeName" type="ent:EntityTypeNameT" use="required" fixed="ObsProject"/>  
+        <xsd:attribute name="schemaVersion" type="xsd:string" use="required" fixed="13"/> 
+      </xsd:restriction> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- other classes use 'ObsProjectRefT' to reference an entity of type ObsProject -->  
+  <xsd:complexType name="ObsProjectRefT"> 
+    <xsd:complexContent> 
+      <xsd:restriction base="ent:EntityRefT"> 
+        <xsd:attribute name="entityTypeName" type="ent:EntityTypeNameT" use="required" fixed="ObsProject"/> 
+      </xsd:restriction> 
+    </xsd:complexContent> 
+  </xsd:complexType> 
+</xsd:schema>

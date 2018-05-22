@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:val="Alma/ValueTypes" xmlns:ouss="Alma/Scheduling/OUSStatus" xmlns:ent="Alma/CommonEntity" xmlns:prj="Alma/ObsPrep/ObsProject" xmlns:oat="Alma/Obsprep/ObsAttachment" xmlns:sbl="Alma/ObsPrep/SchedBlock" xmlns:ps="Alma/Scheduling/ProjectStatus" xmlns:sbs="Alma/Scheduling/SBStatus" xmlns:orv="Alma/ObsPrep/ObsReview" xmlns:prp="Alma/ObsPrep/ObsProposal" elementFormDefault="qualified" attributeFormDefault="unqualified" version="13 24" targetNamespace="Alma/Scheduling/OUSStatus">  
+  <xsd:import namespace="Alma/CommonEntity" schemaLocation="CommonEntity.xsd"/>  
+  <xsd:import namespace="Alma/ValueTypes" schemaLocation="ValueTypes.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/ObsProject" schemaLocation="ObsProject.xsd"/>  
+  <xsd:import namespace="Alma/Obsprep/ObsAttachment" schemaLocation="ObsAttachment.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/SchedBlock" schemaLocation="SchedBlock.xsd"/>  
+  <xsd:import namespace="Alma/Scheduling/ProjectStatus" schemaLocation="ProjectStatus.xsd"/>  
+  <xsd:import namespace="Alma/Scheduling/SBStatus" schemaLocation="SBStatus.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/ObsReview" schemaLocation="ObsReview.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/ObsProposal" schemaLocation="ObsProposal.xsd"/>  
+
+  <!-- generated from UML entity class 'alma/scheduling/ousstatus/OUSStatus' -->  
+  <xsd:element name="OUSStatus" type="ouss:OUSStatus"></xsd:element>  
+  <xsd:complexType name="OUSStatus"> 
+    <xsd:complexContent> 
+      <xsd:extension base="ps:ObsUnitStatusT"> 
+        <xsd:sequence> 
+          <xsd:element name="OUSStatusEntity" type="ouss:OUSStatusEntityT"/>  
+          <xsd:element name="ObsUnitSetRef" type="prj:ObsProjectRefT"/>  
+          <xsd:element name="NumberSBsFailed" type="xsd:int"/>  
+          <xsd:element name="TotalObsUnitSets" type="xsd:int"/>  
+          <xsd:element name="NumberObsUnitSetsCompleted" type="xsd:int"/>  
+          <xsd:element name="NumberObsUnitSetsFailed" type="xsd:int"/>  
+          <xsd:element name="TotalSBs" type="xsd:int"/>  
+          <xsd:element name="NumberSBsCompleted" type="xsd:int"/>  
+          <xsd:choice> 
+            <xsd:element name="OUSStatusRef" type="ouss:OUSStatusRefT" maxOccurs="unbounded"/>  
+            <xsd:element name="SBStatusRef" type="sbs:SBStatusRefT" maxOccurs="unbounded"/> 
+          </xsd:choice>  
+          <xsd:element name="PipelineProcessingRequest" type="ouss:PipelineProcessingRequestT" minOccurs="0"/>  
+          <xsd:element name="Session" type="ouss:SessionT" minOccurs="0" maxOccurs="unbounded"/> 
+        </xsd:sequence>  
+        <xsd:attribute name="schemaVersion" type="xsd:string" use="required" fixed="13"/>  
+        <xsd:attribute name="revision" type="xsd:string" default="24"/>  
+        <xsd:attribute name="almatype" type="xsd:string" use="required" fixed="APDM::OUSStatus"/> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'PipelineParameter' -->  
+  <xsd:complexType name="PipelineParameterT"> 
+    <xsd:sequence> 
+      <xsd:element name="Name" type="xsd:string"/>  
+      <xsd:element name="Value" type="xsd:string"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'PipelineProcessingRequest' -->  
+  <xsd:complexType name="PipelineProcessingRequestT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Initate a request to run the science data reduction pipeline.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="TimeOfCreation" type="xsd:string"/>  
+      <xsd:element name="TimeOfUpdate" type="xsd:string"/>  
+      <xsd:element name="Comment" type="xsd:string"/>  
+      <xsd:element name="ImagingProcedureName" type="xsd:string"/>  
+      <xsd:element name="PipelineParameter" type="ouss:PipelineParameterT" minOccurs="0" maxOccurs="unbounded"/>  
+      <xsd:element name="OUSStatusRef" type="ouss:OUSStatusRefT"/> 
+    </xsd:sequence>  
+    <xsd:attribute name="entityPartId" type="ent:EntityPartIdT"/>  
+    <xsd:attribute name="almatype" type="xsd:string" use="required" fixed="APDM::PipelineProcessingRequest"/>  
+    <xsd:attribute name="RequestStatus"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="queued"/>  
+          <xsd:enumeration value="running"/>  
+          <xsd:enumeration value="completed"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute>  
+    <xsd:attribute name="CompletionStatus"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="submitted"/>  
+          <xsd:enumeration value="incomplete"/>  
+          <xsd:enumeration value="complete_failed"/>  
+          <xsd:enumeration value="complete_succeeded"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'Session' -->  
+  <xsd:complexType name="SessionT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Capture data related to the contents of an observed session.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="StartTime" type="xsd:string"/>  
+      <xsd:element name="EndTime" type="xsd:string"/>  
+      <xsd:element name="ExecBlockRef" type="val:ExecBlockRefT" minOccurs="0" maxOccurs="unbounded"/>  
+      <xsd:element name="SBStatusRef" type="sbs:SBStatusRefT" minOccurs="0"/> 
+    </xsd:sequence>  
+    <xsd:attribute name="entityPartId" type="ent:EntityPartIdT"/>  
+    <xsd:attribute name="almatype" type="xsd:string" use="required" fixed="APDM::Session"/> 
+  </xsd:complexType>  
+
+  <!-- 'OUSStatusEntityT' contains administration info for OUSStatus -->  
+  <xsd:complexType name="OUSStatusEntityT"> 
+    <xsd:complexContent> 
+      <xsd:restriction base="ent:EntityT"> 
+        <xsd:attribute name="entityTypeName" type="ent:EntityTypeNameT" use="required" fixed="OUSStatus"/>  
+        <xsd:attribute name="schemaVersion" type="xsd:string" use="required" fixed="13"/> 
+      </xsd:restriction> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- other classes use 'OUSStatusRefT' to reference an entity of type OUSStatus -->  
+  <xsd:complexType name="OUSStatusRefT"> 
+    <xsd:complexContent> 
+      <xsd:restriction base="ent:EntityRefT"> 
+        <xsd:attribute name="entityTypeName" type="ent:EntityTypeNameT" use="required" fixed="OUSStatus"/> 
+      </xsd:restriction> 
+    </xsd:complexContent> 
+  </xsd:complexType> 
+</xsd:schema>
