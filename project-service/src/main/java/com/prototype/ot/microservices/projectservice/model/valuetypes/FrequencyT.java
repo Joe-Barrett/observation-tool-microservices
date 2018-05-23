@@ -6,7 +6,7 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model;
+package com.prototype.ot.microservices.projectservice.model.valuetypes;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -15,19 +15,21 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for SensitivityT complex type.
+ * <p>Java class for FrequencyT complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="SensitivityT">
+ * &lt;complexType name="FrequencyT">
  *   &lt;simpleContent>
  *     &lt;restriction base="&lt;Alma/ValueTypes>DoubleWithUnitT">
  *       &lt;attribute name="unit" use="required">
  *         &lt;simpleType>
  *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *             &lt;enumeration value="Jy"/>
- *             &lt;enumeration value="mJy"/>
+ *             &lt;enumeration value="MHz"/>
+ *             &lt;enumeration value="GHz"/>
+ *             &lt;enumeration value="kHz"/>
+ *             &lt;enumeration value="Hz"/>
  *           &lt;/restriction>
  *         &lt;/simpleType>
  *       &lt;/attribute>
@@ -39,11 +41,11 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "SensitivityT", namespace = "Alma/ValueTypes")
+@XmlType(name = "FrequencyT", namespace = "Alma/ValueTypes")
 @XmlSeeAlso({
-    UserSensitivityT.class
+    UserFrequencyT.class
 })
-public class SensitivityT
+public class FrequencyT
     extends DoubleWithUnitT
 {
 

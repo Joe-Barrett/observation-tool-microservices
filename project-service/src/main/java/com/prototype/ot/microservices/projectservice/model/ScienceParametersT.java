@@ -8,6 +8,11 @@
 
 package com.prototype.ot.microservices.projectservice.model;
 
+import com.prototype.ot.microservices.projectservice.model.valuetypes.FrequencyT;
+import com.prototype.ot.microservices.projectservice.model.valuetypes.IntTimeSourceT;
+import com.prototype.ot.microservices.projectservice.model.valuetypes.SensitivityT;
+import com.prototype.ot.microservices.projectservice.model.valuetypes.TimeT;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;

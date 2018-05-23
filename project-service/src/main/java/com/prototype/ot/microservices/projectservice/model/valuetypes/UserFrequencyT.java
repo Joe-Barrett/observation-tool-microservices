@@ -6,34 +6,36 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model;
+package com.prototype.ot.microservices.projectservice.model.valuetypes;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for FrequencyT complex type.
+ * <p>Java class for UserFrequencyT complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="FrequencyT">
+ * &lt;complexType name="UserFrequencyT">
  *   &lt;simpleContent>
- *     &lt;restriction base="&lt;Alma/ValueTypes>DoubleWithUnitT">
- *       &lt;attribute name="unit" use="required">
+ *     &lt;extension base="&lt;Alma/ValueTypes>FrequencyT">
+ *       &lt;attribute name="userUnit">
  *         &lt;simpleType>
  *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
  *             &lt;enumeration value="MHz"/>
  *             &lt;enumeration value="GHz"/>
  *             &lt;enumeration value="kHz"/>
  *             &lt;enumeration value="Hz"/>
+ *             &lt;enumeration value="m/s"/>
+ *             &lt;enumeration value="km/s"/>
  *           &lt;/restriction>
  *         &lt;/simpleType>
  *       &lt;/attribute>
- *     &lt;/restriction>
+ *     &lt;/extension>
  *   &lt;/simpleContent>
  * &lt;/complexType>
  * </pre>
@@ -41,13 +43,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FrequencyT", namespace = "Alma/ValueTypes")
-@XmlSeeAlso({
-    UserFrequencyT.class
-})
-public class FrequencyT
-    extends DoubleWithUnitT
+@XmlType(name = "UserFrequencyT", namespace = "Alma/ValueTypes")
+public class UserFrequencyT
+    extends FrequencyT
 {
 
+    @XmlAttribute(name = "userUnit")
+    protected String userUnit;
+
+    /**
+     * Gets the value of the userUnit property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getUserUnit() {
+        return userUnit;
+    }
+
+    /**
+     * Sets the value of the userUnit property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setUserUnit(String value) {
+        this.userUnit = value;
+    }
 
 }

@@ -8,6 +8,9 @@
 
 package com.prototype.ot.microservices.projectservice.model;
 
+import com.prototype.ot.microservices.projectservice.model.valuetypes.FrequencyT;
+import com.prototype.ot.microservices.projectservice.model.valuetypes.UserFrequencyT;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;

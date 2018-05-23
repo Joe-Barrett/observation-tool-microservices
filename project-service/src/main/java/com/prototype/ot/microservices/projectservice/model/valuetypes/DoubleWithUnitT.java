@@ -6,7 +6,7 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model;
+package com.prototype.ot.microservices.projectservice.model.valuetypes;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

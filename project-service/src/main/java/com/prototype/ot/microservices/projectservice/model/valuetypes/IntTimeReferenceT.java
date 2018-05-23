@@ -6,7 +6,7 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model;
+package com.prototype.ot.microservices.projectservice.model.valuetypes;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -14,19 +14,24 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for TemperatureT complex type.
+ * <p>Java class for IntTimeReferenceT complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="TemperatureT">
+ * &lt;complexType name="IntTimeReferenceT">
  *   &lt;simpleContent>
  *     &lt;restriction base="&lt;Alma/ValueTypes>DoubleWithUnitT">
  *       &lt;attribute name="unit" use="required">
  *         &lt;simpleType>
  *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *             &lt;enumeration value="K"/>
- *             &lt;enumeration value="mK"/>
+ *             &lt;enumeration value="ns"/>
+ *             &lt;enumeration value="us"/>
+ *             &lt;enumeration value="ms"/>
+ *             &lt;enumeration value="s"/>
+ *             &lt;enumeration value="min"/>
+ *             &lt;enumeration value="h"/>
+ *             &lt;enumeration value="d"/>
  *           &lt;/restriction>
  *         &lt;/simpleType>
  *       &lt;/attribute>
@@ -38,8 +43,8 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TemperatureT", namespace = "Alma/ValueTypes")
-public class TemperatureT
+@XmlType(name = "IntTimeReferenceT", namespace = "Alma/ValueTypes")
+public class IntTimeReferenceT
     extends DoubleWithUnitT
 {
 

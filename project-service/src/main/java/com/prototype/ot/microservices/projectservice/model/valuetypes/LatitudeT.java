@@ -6,7 +6,7 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model;
+package com.prototype.ot.microservices.projectservice.model.valuetypes;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -14,22 +14,22 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for StorageVolumeT complex type.
+ * <p>Java class for LatitudeT complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="StorageVolumeT">
+ * &lt;complexType name="LatitudeT">
  *   &lt;simpleContent>
  *     &lt;restriction base="&lt;Alma/ValueTypes>DoubleWithUnitT">
  *       &lt;attribute name="unit" use="required">
  *         &lt;simpleType>
  *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *             &lt;enumeration value="B"/>
- *             &lt;enumeration value="KB"/>
- *             &lt;enumeration value="MB"/>
- *             &lt;enumeration value="GB"/>
- *             &lt;enumeration value="TB"/>
+ *             &lt;enumeration value="deg"/>
+ *             &lt;enumeration value="rad"/>
+ *             &lt;enumeration value="arcmin"/>
+ *             &lt;enumeration value="arcsec"/>
+ *             &lt;enumeration value="mas"/>
  *           &lt;/restriction>
  *         &lt;/simpleType>
  *       &lt;/attribute>
@@ -41,8 +41,8 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "StorageVolumeT", namespace = "Alma/ValueTypes")
-public class StorageVolumeT
+@XmlType(name = "LatitudeT", namespace = "Alma/ValueTypes")
+public class LatitudeT
     extends DoubleWithUnitT
 {
 

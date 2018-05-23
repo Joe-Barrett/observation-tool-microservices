@@ -6,7 +6,7 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model;
+package com.prototype.ot.microservices.projectservice.model.valuetypes;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -14,21 +14,22 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for AngularVelocityT complex type.
+ * <p>Java class for DataRateT complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="AngularVelocityT">
+ * &lt;complexType name="DataRateT">
  *   &lt;simpleContent>
  *     &lt;restriction base="&lt;Alma/ValueTypes>DoubleWithUnitT">
  *       &lt;attribute name="unit" use="required">
  *         &lt;simpleType>
  *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *             &lt;enumeration value="arcsec/s"/>
- *             &lt;enumeration value="arcmin/s"/>
- *             &lt;enumeration value="deg/s"/>
- *             &lt;enumeration value="mas/yr"/>
+ *             &lt;enumeration value="B/s"/>
+ *             &lt;enumeration value="KB/s"/>
+ *             &lt;enumeration value="MB/s"/>
+ *             &lt;enumeration value="GB/s"/>
+ *             &lt;enumeration value="TB/s"/>
  *           &lt;/restriction>
  *         &lt;/simpleType>
  *       &lt;/attribute>
@@ -40,8 +41,8 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "AngularVelocityT", namespace = "Alma/ValueTypes")
-public class AngularVelocityT
+@XmlType(name = "DataRateT", namespace = "Alma/ValueTypes")
+public class DataRateT
     extends DoubleWithUnitT
 {
 

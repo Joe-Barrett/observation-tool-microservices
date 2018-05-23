@@ -6,20 +6,21 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model;
+package com.prototype.ot.microservices.projectservice.model.valuetypes;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for LongitudeT complex type.
+ * <p>Java class for AngleT complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="LongitudeT">
+ * &lt;complexType name="AngleT">
  *   &lt;simpleContent>
  *     &lt;restriction base="&lt;Alma/ValueTypes>DoubleWithUnitT">
  *       &lt;attribute name="unit" use="required">
@@ -41,8 +42,11 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "LongitudeT", namespace = "Alma/ValueTypes")
-public class LongitudeT
+@XmlType(name = "AngleT", namespace = "Alma/ValueTypes")
+@XmlSeeAlso({
+    UserAngleT.class
+})
+public class AngleT
     extends DoubleWithUnitT
 {
 

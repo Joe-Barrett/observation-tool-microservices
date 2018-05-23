@@ -6,31 +6,32 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model;
+package com.prototype.ot.microservices.projectservice.model.valuetypes;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for AngleT complex type.
+ * <p>Java class for TimeT complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="AngleT">
+ * &lt;complexType name="TimeT">
  *   &lt;simpleContent>
  *     &lt;restriction base="&lt;Alma/ValueTypes>DoubleWithUnitT">
  *       &lt;attribute name="unit" use="required">
  *         &lt;simpleType>
  *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *             &lt;enumeration value="deg"/>
- *             &lt;enumeration value="rad"/>
- *             &lt;enumeration value="arcmin"/>
- *             &lt;enumeration value="arcsec"/>
- *             &lt;enumeration value="mas"/>
+ *             &lt;enumeration value="ns"/>
+ *             &lt;enumeration value="us"/>
+ *             &lt;enumeration value="ms"/>
+ *             &lt;enumeration value="s"/>
+ *             &lt;enumeration value="min"/>
+ *             &lt;enumeration value="h"/>
+ *             &lt;enumeration value="d"/>
  *           &lt;/restriction>
  *         &lt;/simpleType>
  *       &lt;/attribute>
@@ -42,11 +43,8 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "AngleT", namespace = "Alma/ValueTypes")
-@XmlSeeAlso({
-    UserAngleT.class
-})
-public class AngleT
+@XmlType(name = "TimeT", namespace = "Alma/ValueTypes")
+public class TimeT
     extends DoubleWithUnitT
 {
 

@@ -8,6 +8,10 @@
 
 package com.prototype.ot.microservices.projectservice.model;
 
+import com.prototype.ot.microservices.projectservice.model.valuetypes.AngleT;
+import com.prototype.ot.microservices.projectservice.model.valuetypes.SensitivityT;
+import com.prototype.ot.microservices.projectservice.model.valuetypes.TemperatureT;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;

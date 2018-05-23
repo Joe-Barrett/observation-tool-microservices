@@ -6,7 +6,7 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model;
+package com.prototype.ot.microservices.projectservice.model.valuetypes;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -15,23 +15,22 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for UserFrequencyT complex type.
+ * <p>Java class for UserSensitivityT complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="UserFrequencyT">
+ * &lt;complexType name="UserSensitivityT">
  *   &lt;simpleContent>
- *     &lt;extension base="&lt;Alma/ValueTypes>FrequencyT">
+ *     &lt;extension base="&lt;Alma/ValueTypes>SensitivityT">
  *       &lt;attribute name="userUnit">
  *         &lt;simpleType>
  *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *             &lt;enumeration value="MHz"/>
- *             &lt;enumeration value="GHz"/>
- *             &lt;enumeration value="kHz"/>
- *             &lt;enumeration value="Hz"/>
- *             &lt;enumeration value="m/s"/>
- *             &lt;enumeration value="km/s"/>
+ *             &lt;enumeration value="Jy"/>
+ *             &lt;enumeration value="mJy"/>
+ *             &lt;enumeration value="K"/>
+ *             &lt;enumeration value="mK"/>
+ *             &lt;enumeration value="uJy"/>
  *           &lt;/restriction>
  *         &lt;/simpleType>
  *       &lt;/attribute>
@@ -43,9 +42,9 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "UserFrequencyT", namespace = "Alma/ValueTypes")
-public class UserFrequencyT
-    extends FrequencyT
+@XmlType(name = "UserSensitivityT", namespace = "Alma/ValueTypes")
+public class UserSensitivityT
+    extends SensitivityT
 {
 
     @XmlAttribute(name = "userUnit")
