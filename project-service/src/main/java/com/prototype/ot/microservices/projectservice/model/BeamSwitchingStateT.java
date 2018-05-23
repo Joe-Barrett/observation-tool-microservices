@@ -15,19 +15,19 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for OnSourceTimeT complex type.
+ * <p>Java class for BeamSwitchingStateT complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="OnSourceTimeT">
+ * &lt;complexType name="BeamSwitchingStateT">
  *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *     &lt;extension base="{Alma/ObsPrep/SchedBlock}AbstractSwitchingStateT">
  *       &lt;sequence>
- *         &lt;element name="intent" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="time" type="{Alma/ValueTypes}TimeT"/>
+ *         &lt;element name="position" type="{Alma/ValueTypes}AngleT"/>
+ *         &lt;element name="transition" type="{Alma/ValueTypes}TimeT"/>
  *       &lt;/sequence>
- *     &lt;/restriction>
+ *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -35,63 +35,65 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "OnSourceTimeT", namespace = "Alma/Scheduling/SBStatus", propOrder = {
-    "intent",
-    "time"
+@XmlType(name = "BeamSwitchingStateT", propOrder = {
+    "position",
+    "transition"
 })
-public class OnSourceTimeT {
+public class BeamSwitchingStateT
+    extends AbstractSwitchingStateT
+{
 
     @XmlElement(required = true)
-    protected String intent;
+    protected AngleT position;
     @XmlElement(required = true)
-    protected TimeT time;
+    protected TimeT transition;
 
     /**
-     * Gets the value of the intent property.
+     * Gets the value of the position property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link AngleT }
      *     
      */
-    public String getIntent() {
-        return intent;
+    public AngleT getPosition() {
+        return position;
     }
 
     /**
-     * Sets the value of the intent property.
+     * Sets the value of the position property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link AngleT }
      *     
      */
-    public void setIntent(String value) {
-        this.intent = value;
+    public void setPosition(AngleT value) {
+        this.position = value;
     }
 
     /**
-     * Gets the value of the time property.
+     * Gets the value of the transition property.
      * 
      * @return
      *     possible object is
      *     {@link TimeT }
      *     
      */
-    public TimeT getTime() {
-        return time;
+    public TimeT getTransition() {
+        return transition;
     }
 
     /**
-     * Sets the value of the time property.
+     * Sets the value of the transition property.
      * 
      * @param value
      *     allowed object is
      *     {@link TimeT }
      *     
      */
-    public void setTime(TimeT value) {
-        this.time = value;
+    public void setTransition(TimeT value) {
+        this.transition = value;
     }
 
 }

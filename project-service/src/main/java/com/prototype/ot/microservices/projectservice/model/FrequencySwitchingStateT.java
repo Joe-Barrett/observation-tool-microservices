@@ -15,20 +15,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * Setup for the Square Law total power detectors
- * 
- * <p>Java class for SquareLawSetupT complex type.
+ * <p>Java class for FrequencySwitchingStateT complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="SquareLawSetupT">
+ * &lt;complexType name="FrequencySwitchingStateT">
  *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *     &lt;extension base="{Alma/ObsPrep/SchedBlock}AbstractSwitchingStateT">
  *       &lt;sequence>
- *         &lt;element name="integrationDuration" type="{Alma/ValueTypes}TimeT"/>
+ *         &lt;element name="offset" type="{Alma/ValueTypes}FrequencyT"/>
  *       &lt;/sequence>
- *     &lt;/restriction>
+ *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -36,36 +34,38 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "SquareLawSetupT", propOrder = {
-    "integrationDuration"
+@XmlType(name = "FrequencySwitchingStateT", propOrder = {
+    "offset"
 })
-public class SquareLawSetupT {
+public class FrequencySwitchingStateT
+    extends AbstractSwitchingStateT
+{
 
     @XmlElement(required = true)
-    protected TimeT integrationDuration;
+    protected FrequencyT offset;
 
     /**
-     * Gets the value of the integrationDuration property.
+     * Gets the value of the offset property.
      * 
      * @return
      *     possible object is
-     *     {@link TimeT }
+     *     {@link FrequencyT }
      *     
      */
-    public TimeT getIntegrationDuration() {
-        return integrationDuration;
+    public FrequencyT getOffset() {
+        return offset;
     }
 
     /**
-     * Sets the value of the integrationDuration property.
+     * Sets the value of the offset property.
      * 
      * @param value
      *     allowed object is
-     *     {@link TimeT }
+     *     {@link FrequencyT }
      *     
      */
-    public void setIntegrationDuration(TimeT value) {
-        this.integrationDuration = value;
+    public void setOffset(FrequencyT value) {
+        this.offset = value;
     }
 
 }

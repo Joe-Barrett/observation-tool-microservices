@@ -11,21 +11,24 @@ package com.prototype.ot.microservices.projectservice.model;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for OnSourceTimeT complex type.
+ * Abstract base class for defining switching cycles.
+ * 
+ * <p>Java class for AbstractSwitchingCycleT complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="OnSourceTimeT">
+ * &lt;complexType name="AbstractSwitchingCycleT">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="intent" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="time" type="{Alma/ValueTypes}TimeT"/>
+ *         &lt;element name="numberOfPositions" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="dwellTime" type="{Alma/ValueTypes}TimeT"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,63 +38,58 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "OnSourceTimeT", namespace = "Alma/Scheduling/SBStatus", propOrder = {
-    "intent",
-    "time"
+@XmlType(name = "AbstractSwitchingCycleT", propOrder = {
+    "numberOfPositions",
+    "dwellTime"
 })
-public class OnSourceTimeT {
+@XmlSeeAlso({
+    FrequencySwitchingCycleT.class,
+    BeamSwitchingCycleT.class
+})
+public abstract class AbstractSwitchingCycleT {
 
+    protected int numberOfPositions;
     @XmlElement(required = true)
-    protected String intent;
-    @XmlElement(required = true)
-    protected TimeT time;
+    protected TimeT dwellTime;
 
     /**
-     * Gets the value of the intent property.
+     * Gets the value of the numberOfPositions property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
      */
-    public String getIntent() {
-        return intent;
+    public int getNumberOfPositions() {
+        return numberOfPositions;
     }
 
     /**
-     * Sets the value of the intent property.
+     * Sets the value of the numberOfPositions property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
      */
-    public void setIntent(String value) {
-        this.intent = value;
+    public void setNumberOfPositions(int value) {
+        this.numberOfPositions = value;
     }
 
     /**
-     * Gets the value of the time property.
+     * Gets the value of the dwellTime property.
      * 
      * @return
      *     possible object is
      *     {@link TimeT }
      *     
      */
-    public TimeT getTime() {
-        return time;
+    public TimeT getDwellTime() {
+        return dwellTime;
     }
 
     /**
-     * Sets the value of the time property.
+     * Sets the value of the dwellTime property.
      * 
      * @param value
      *     allowed object is
      *     {@link TimeT }
      *     
      */
-    public void setTime(TimeT value) {
-        this.time = value;
+    public void setDwellTime(TimeT value) {
+        this.dwellTime = value;
     }
 
 }

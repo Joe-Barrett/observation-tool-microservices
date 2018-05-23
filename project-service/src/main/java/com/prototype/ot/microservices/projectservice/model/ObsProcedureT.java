@@ -15,17 +15,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for OnSourceTimeT complex type.
+ * Contains an attribute holding the actual observing procedure to be used, in the form of a python script name or a complete python script. For standard modes this will be pre-selected as the name of the standard script.
+ * 
+ * <p>Java class for ObsProcedureT complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="OnSourceTimeT">
+ * &lt;complexType name="ObsProcedureT">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="intent" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="time" type="{Alma/ValueTypes}TimeT"/>
+ *         &lt;element name="obsProcScript" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,63 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "OnSourceTimeT", namespace = "Alma/Scheduling/SBStatus", propOrder = {
-    "intent",
-    "time"
+@XmlType(name = "ObsProcedureT", propOrder = {
+    "obsProcScript"
 })
-public class OnSourceTimeT {
+public class ObsProcedureT {
 
     @XmlElement(required = true)
-    protected String intent;
-    @XmlElement(required = true)
-    protected TimeT time;
+    protected String obsProcScript;
 
     /**
-     * Gets the value of the intent property.
+     * Gets the value of the obsProcScript property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getIntent() {
-        return intent;
+    public String getObsProcScript() {
+        return obsProcScript;
     }
 
     /**
-     * Sets the value of the intent property.
+     * Sets the value of the obsProcScript property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setIntent(String value) {
-        this.intent = value;
-    }
-
-    /**
-     * Gets the value of the time property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TimeT }
-     *     
-     */
-    public TimeT getTime() {
-        return time;
-    }
-
-    /**
-     * Sets the value of the time property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TimeT }
-     *     
-     */
-    public void setTime(TimeT value) {
-        this.time = value;
+    public void setObsProcScript(String value) {
+        this.obsProcScript = value;
     }
 
 }

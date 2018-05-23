@@ -15,17 +15,19 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for OnSourceTimeT complex type.
+ * Creates the concept of an "Ordered" target by wrapping a target and adding an index.
+ * 
+ * <p>Java class for OrderedTargetT complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="OnSourceTimeT">
+ * &lt;complexType name="OrderedTargetT">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="intent" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="time" type="{Alma/ValueTypes}TimeT"/>
+ *         &lt;element name="index" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="TargetRef" type="{Alma/ObsPrep/SchedBlock}SchedBlockRefT"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,63 +37,54 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "OnSourceTimeT", namespace = "Alma/Scheduling/SBStatus", propOrder = {
-    "intent",
-    "time"
+@XmlType(name = "OrderedTargetT", propOrder = {
+    "index",
+    "targetRef"
 })
-public class OnSourceTimeT {
+public class OrderedTargetT {
 
-    @XmlElement(required = true)
-    protected String intent;
-    @XmlElement(required = true)
-    protected TimeT time;
+    protected int index;
+    @XmlElement(name = "TargetRef", required = true)
+    protected SchedBlockRefT targetRef;
 
     /**
-     * Gets the value of the intent property.
+     * Gets the value of the index property.
+     * 
+     */
+    public int getIndex() {
+        return index;
+    }
+
+    /**
+     * Sets the value of the index property.
+     * 
+     */
+    public void setIndex(int value) {
+        this.index = value;
+    }
+
+    /**
+     * Gets the value of the targetRef property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link SchedBlockRefT }
      *     
      */
-    public String getIntent() {
-        return intent;
+    public SchedBlockRefT getTargetRef() {
+        return targetRef;
     }
 
     /**
-     * Sets the value of the intent property.
+     * Sets the value of the targetRef property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link SchedBlockRefT }
      *     
      */
-    public void setIntent(String value) {
-        this.intent = value;
-    }
-
-    /**
-     * Gets the value of the time property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TimeT }
-     *     
-     */
-    public TimeT getTime() {
-        return time;
-    }
-
-    /**
-     * Sets the value of the time property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TimeT }
-     *     
-     */
-    public void setTime(TimeT value) {
-        this.time = value;
+    public void setTargetRef(SchedBlockRefT value) {
+        this.targetRef = value;
     }
 
 }

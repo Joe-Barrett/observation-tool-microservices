@@ -11,21 +11,22 @@ package com.prototype.ot.microservices.projectservice.model;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for OnSourceTimeT complex type.
+ * <p>Java class for AbstractSwitchingStateT complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="OnSourceTimeT">
+ * &lt;complexType name="AbstractSwitchingStateT">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="intent" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="time" type="{Alma/ValueTypes}TimeT"/>
+ *         &lt;element name="dwellTime" type="{Alma/ValueTypes}TimeT"/>
+ *         &lt;element name="bin" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,63 +36,58 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "OnSourceTimeT", namespace = "Alma/Scheduling/SBStatus", propOrder = {
-    "intent",
-    "time"
+@XmlType(name = "AbstractSwitchingStateT", propOrder = {
+    "dwellTime",
+    "bin"
 })
-public class OnSourceTimeT {
+@XmlSeeAlso({
+    BeamSwitchingStateT.class,
+    FrequencySwitchingStateT.class
+})
+public class AbstractSwitchingStateT {
 
     @XmlElement(required = true)
-    protected String intent;
-    @XmlElement(required = true)
-    protected TimeT time;
+    protected TimeT dwellTime;
+    protected int bin;
 
     /**
-     * Gets the value of the intent property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getIntent() {
-        return intent;
-    }
-
-    /**
-     * Sets the value of the intent property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setIntent(String value) {
-        this.intent = value;
-    }
-
-    /**
-     * Gets the value of the time property.
+     * Gets the value of the dwellTime property.
      * 
      * @return
      *     possible object is
      *     {@link TimeT }
      *     
      */
-    public TimeT getTime() {
-        return time;
+    public TimeT getDwellTime() {
+        return dwellTime;
     }
 
     /**
-     * Sets the value of the time property.
+     * Sets the value of the dwellTime property.
      * 
      * @param value
      *     allowed object is
      *     {@link TimeT }
      *     
      */
-    public void setTime(TimeT value) {
-        this.time = value;
+    public void setDwellTime(TimeT value) {
+        this.dwellTime = value;
+    }
+
+    /**
+     * Gets the value of the bin property.
+     * 
+     */
+    public int getBin() {
+        return bin;
+    }
+
+    /**
+     * Sets the value of the bin property.
+     * 
+     */
+    public void setBin(int value) {
+        this.bin = value;
     }
 
 }

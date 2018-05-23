@@ -8,9 +8,6 @@
 
 package com.prototype.ot.microservices.projectservice.model;
 
-import com.prototype.ot.microservices.projectservice.model.valuetypes.LatitudeT;
-import com.prototype.ot.microservices.projectservice.model.valuetypes.LongitudeT;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;

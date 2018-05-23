@@ -15,20 +15,20 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * Any temporal constraints placed on the execution of this SB. Used by "special" SBs, but also for some science cases. Currently allows specification of start/end time, but should be extended to other timing patterns, eg. regular repeats.
+ * Brief description of a spectral line. Used by SpectralWindow to indicate which line(s) are expected in that window.
  * 
- * <p>Java class for TemporalConstraintsT complex type.
+ * <p>Java class for SpectralLineT complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="TemporalConstraintsT">
+ * &lt;complexType name="SpectralLineT">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="startTime" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="endTime" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="allowedMargin" type="{Alma/ValueTypes}TimeT"/>
+ *         &lt;element name="restFrequency" type="{Alma/ValueTypes}FrequencyT"/>
+ *         &lt;element name="transition" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="spatalogId" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,90 +38,90 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TemporalConstraintsT", propOrder = {
-    "startTime",
-    "endTime",
-    "allowedMargin"
+@XmlType(name = "SpectralLineT", propOrder = {
+    "restFrequency",
+    "transition",
+    "spatalogId"
 })
-public class TemporalConstraintsT {
+public class SpectralLineT {
 
     @XmlElement(required = true)
-    protected String startTime;
+    protected FrequencyT restFrequency;
     @XmlElement(required = true)
-    protected String endTime;
+    protected String transition;
     @XmlElement(required = true)
-    protected TimeT allowedMargin;
+    protected String spatalogId;
 
     /**
-     * Gets the value of the startTime property.
+     * Gets the value of the restFrequency property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link FrequencyT }
+     *     
+     */
+    public FrequencyT getRestFrequency() {
+        return restFrequency;
+    }
+
+    /**
+     * Sets the value of the restFrequency property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link FrequencyT }
+     *     
+     */
+    public void setRestFrequency(FrequencyT value) {
+        this.restFrequency = value;
+    }
+
+    /**
+     * Gets the value of the transition property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getStartTime() {
-        return startTime;
+    public String getTransition() {
+        return transition;
     }
 
     /**
-     * Sets the value of the startTime property.
+     * Sets the value of the transition property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setStartTime(String value) {
-        this.startTime = value;
+    public void setTransition(String value) {
+        this.transition = value;
     }
 
     /**
-     * Gets the value of the endTime property.
+     * Gets the value of the spatalogId property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getEndTime() {
-        return endTime;
+    public String getSpatalogId() {
+        return spatalogId;
     }
 
     /**
-     * Sets the value of the endTime property.
+     * Sets the value of the spatalogId property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setEndTime(String value) {
-        this.endTime = value;
-    }
-
-    /**
-     * Gets the value of the allowedMargin property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TimeT }
-     *     
-     */
-    public TimeT getAllowedMargin() {
-        return allowedMargin;
-    }
-
-    /**
-     * Sets the value of the allowedMargin property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TimeT }
-     *     
-     */
-    public void setAllowedMargin(TimeT value) {
-        this.allowedMargin = value;
+    public void setSpatalogId(String value) {
+        this.spatalogId = value;
     }
 
 }
