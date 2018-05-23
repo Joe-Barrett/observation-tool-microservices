@@ -6,12 +6,7 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model.obsproject;
-
-import com.prototype.ot.microservices.projectservice.model.VelocityT;
-import com.prototype.ot.microservices.projectservice.model.AngleT;
-import com.prototype.ot.microservices.projectservice.model.SensitivityT;
-import com.prototype.ot.microservices.projectservice.model.TemperatureT;
+package com.prototype.ot.microservices.projectservice.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

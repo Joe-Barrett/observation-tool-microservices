@@ -6,9 +6,7 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model.obsattachment;
-
-import com.prototype.ot.microservices.projectservice.model.ObsAttachmentEntityT;
+package com.prototype.ot.microservices.projectservice.model;
 
 import java.util.ArrayList;
 import java.util.List;

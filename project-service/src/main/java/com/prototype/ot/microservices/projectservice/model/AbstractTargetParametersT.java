@@ -6,11 +6,7 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model.obsproject;
-
-import com.prototype.ot.microservices.projectservice.model.*;
-import com.prototype.ot.microservices.projectservice.model.AngleT;
-import com.prototype.ot.microservices.projectservice.model.AngularVelocityT;
+package com.prototype.ot.microservices.projectservice.model;
 
 import java.util.ArrayList;
 import java.util.List;

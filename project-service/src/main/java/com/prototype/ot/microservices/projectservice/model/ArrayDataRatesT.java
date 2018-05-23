@@ -6,10 +6,7 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model.obsproposal;
-
-import com.prototype.ot.microservices.projectservice.model.DataRateT;
-import com.prototype.ot.microservices.projectservice.model.StorageVolumeT;
+package com.prototype.ot.microservices.projectservice.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

@@ -6,21 +6,11 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model.obsproposal;
-
-import com.prototype.ot.microservices.projectservice.model.ObsAttachmentRefT;
-import com.prototype.ot.microservices.projectservice.model.ObsProjectRefT;
-import com.prototype.ot.microservices.projectservice.model.ObsProposalEntityT;
-import com.prototype.ot.microservices.projectservice.model.obsproject.ObsPhaseT;
+package com.prototype.ot.microservices.projectservice.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
@@ -100,6 +90,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "coPrincipalInvestigator",
     "proposalFeedback"
 })
+@XmlRootElement
 public class ObsProposal
     extends ObsPhaseT
 {

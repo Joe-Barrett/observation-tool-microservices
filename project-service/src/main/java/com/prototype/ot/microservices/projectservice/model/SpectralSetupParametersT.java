@@ -6,9 +6,7 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model.obsproject;
-
-import com.prototype.ot.microservices.projectservice.model.FrequencyT;
+package com.prototype.ot.microservices.projectservice.model;
 
 import java.util.ArrayList;
 import java.util.List;

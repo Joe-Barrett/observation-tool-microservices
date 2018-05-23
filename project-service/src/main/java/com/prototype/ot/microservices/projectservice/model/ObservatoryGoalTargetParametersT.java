@@ -6,12 +6,7 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model.obsproject;
-
-import com.prototype.ot.microservices.projectservice.model.SkyCoordinatesT;
-import com.prototype.ot.microservices.projectservice.model.VelocityT;
-import com.prototype.ot.microservices.projectservice.model.FluxT;
-import com.prototype.ot.microservices.projectservice.model.FrequencyT;
+package com.prototype.ot.microservices.projectservice.model;
 
 import java.util.ArrayList;
 import java.util.List;

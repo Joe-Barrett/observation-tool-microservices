@@ -6,11 +6,7 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model.obsproject;
-
-import com.prototype.ot.microservices.projectservice.model.FluxT;
-import com.prototype.ot.microservices.projectservice.model.FrequencyT;
-import com.prototype.ot.microservices.projectservice.model.UserFrequencyT;
+package com.prototype.ot.microservices.projectservice.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

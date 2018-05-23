@@ -6,11 +6,7 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model.obsreview;
-
-import com.prototype.ot.microservices.projectservice.model.ObsProjectRefT;
-import com.prototype.ot.microservices.projectservice.model.ObsReviewEntityT;
-import com.prototype.ot.microservices.projectservice.model.obsproject.ObsPhaseT;
+package com.prototype.ot.microservices.projectservice.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
