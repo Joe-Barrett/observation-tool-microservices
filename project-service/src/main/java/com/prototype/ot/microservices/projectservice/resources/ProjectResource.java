@@ -1,5 +1,6 @@
 package com.prototype.ot.microservices.projectservice.resources;
 
+import com.prototype.ot.microservices.projectservice.model.ObsProject;
 import com.prototype.ot.microservices.projectservice.services.ProjectService;
 import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.List;
 
@@ -22,9 +24,9 @@ public class ProjectResource {
     @GetMapping
     public ResponseEntity getAllProjects() {
         try {
-            List<JSONObject> projects = this.projectService.getAllProjects();
-            return ResponseEntity.ok(projects.toString());
-        } catch (IOException ex) {
+            List<ObsProject> projects = this.projectService.getAllProjects();
+            return ResponseEntity.ok(projects);
+        } catch (IOException | JAXBException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
         }
     }
@@ -42,9 +44,9 @@ public class ProjectResource {
     @GetMapping(path = "/project")
     public ResponseEntity getProject(@RequestParam(value = "projectRef") String projectRef) {
         try {
-            JSONObject foundProject = this.projectService.getProject(projectRef);
+            ObsProject foundProject = this.projectService.getProject(projectRef);
             return ResponseEntity.ok(foundProject.toString());
-        } catch (IOException ex) {
+        } catch (IOException | JAXBException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
         }
     }

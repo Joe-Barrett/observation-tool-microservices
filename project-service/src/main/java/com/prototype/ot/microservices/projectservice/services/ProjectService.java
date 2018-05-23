@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public class ProjectService {
 
     private Gson gson;
@@ -29,13 +30,12 @@ public class ProjectService {
         this.gson = new Gson();
     }
 
-    public List<JSONObject> getAllProjects() throws IOException {
+    public List<ObsProject> getAllProjects() throws IOException, JAXBException {
         ClassLoader cl = this.getClass().getClassLoader();
         ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver(cl);
         Resource[] resources = resourcePatternResolver.getResources("classpath*:/projects/real-projects/*.aot");
-        List<JSONObject> projects = new ArrayList<>();
+        List<ObsProject> projects = new ArrayList<>();
         ZipUtils.ZipReader zipReader = null;
-        JSONObject json;
         String xml;
         ZipUtils.ZipNtry entry;
         byte[] data;
@@ -47,21 +47,12 @@ public class ProjectService {
             }
             data = entry.getData();
             xml = new String(data, StandardCharsets.UTF_8);
-            try {
-                JAXBContext jaxbContext = JAXBContext.newInstance("com.prototype.ot.microservices.projectservice" +
-                                                                          ".model");
-                Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-                StringReader stringReader = new StringReader(xml);
-                JAXBElement<ObsProject> obsProjectElement = (JAXBElement<ObsProject>) unmarshaller.unmarshal
-                        (stringReader);
-                ObsProject obsProject = obsProjectElement.getValue();
-                System.out.println(obsProject.getCode());
-            } catch (JAXBException e) {
-                e.printStackTrace();
-            }
-            json = XML.toJSONObject(xml);
-            json = switchColons(json);
-            projects.add(json.getJSONObject("prj_ObsProject"));
+            JAXBContext jaxbContext = JAXBContext.newInstance("com.prototype.ot.microservices.projectservice.model");
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            StringReader stringReader = new StringReader(xml);
+            JAXBElement<ObsProject> obsProjectElement = (JAXBElement<ObsProject>) unmarshaller.unmarshal(stringReader);
+            ObsProject obsProject = obsProjectElement.getValue();
+            projects.add(obsProject);
         }
         return projects;
     }
@@ -82,10 +73,10 @@ public class ProjectService {
 //        return projectList;
 //    }
 
-    public JSONObject getProject(String projectRef) throws IOException {
-        List<JSONObject> projects = this.getAllProjects();
-        for (JSONObject project : projects) {
-            if (project.getJSONObject("prj_ObsProjectEntity").get("entityId").equals(projectRef)) {
+    public ObsProject getProject(String projectRef) throws IOException, JAXBException {
+        List<ObsProject> projects = this.getAllProjects();
+        for (ObsProject project : projects) {
+            if (project.getObsProjectEntity().getEntityId().equals(projectRef)) {
                 return project;
             }
         }
