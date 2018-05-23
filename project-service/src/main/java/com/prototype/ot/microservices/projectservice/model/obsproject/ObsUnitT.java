@@ -9,7 +9,7 @@
 package com.prototype.ot.microservices.projectservice.model.obsproject;
 
 import com.prototype.ot.microservices.projectservice.model.ObsProjectRefT;
-import com.prototype.ot.microservices.projectservice.model.SchedBlock;
+import com.prototype.ot.microservices.projectservice.model.schedblock.SchedBlock;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

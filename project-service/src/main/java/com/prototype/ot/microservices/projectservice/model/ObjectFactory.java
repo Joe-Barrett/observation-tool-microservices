@@ -12,6 +12,8 @@ import com.prototype.ot.microservices.projectservice.model.obsattachment.Documen
 import com.prototype.ot.microservices.projectservice.model.obsattachment.ObsAttachment;
 import com.prototype.ot.microservices.projectservice.model.obsproject.*;
 import com.prototype.ot.microservices.projectservice.model.obsproposal.*;
+import com.prototype.ot.microservices.projectservice.model.obsreview.ObsReview;
+import com.prototype.ot.microservices.projectservice.model.schedblock.*;
 import com.prototype.ot.microservices.projectservice.model.valuetypes.*;
 
 import javax.xml.bind.JAXBElement;

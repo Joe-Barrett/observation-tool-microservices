@@ -9,7 +9,7 @@
 package com.prototype.ot.microservices.projectservice.model.obsproject;
 
 import com.prototype.ot.microservices.projectservice.model.obsproposal.ObsProposal;
-import com.prototype.ot.microservices.projectservice.model.ObsReview;
+import com.prototype.ot.microservices.projectservice.model.obsreview.ObsReview;
 
 import java.util.ArrayList;
 import java.util.List;
