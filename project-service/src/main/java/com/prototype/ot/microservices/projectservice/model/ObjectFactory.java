@@ -8,6 +8,8 @@
 
 package com.prototype.ot.microservices.projectservice.model;
 
+import com.prototype.ot.microservices.projectservice.model.obsattachment.DocumentLinkT;
+import com.prototype.ot.microservices.projectservice.model.obsattachment.ObsAttachment;
 import com.prototype.ot.microservices.projectservice.model.obsproject.*;
 import com.prototype.ot.microservices.projectservice.model.obsproposal.*;
 import com.prototype.ot.microservices.projectservice.model.valuetypes.*;

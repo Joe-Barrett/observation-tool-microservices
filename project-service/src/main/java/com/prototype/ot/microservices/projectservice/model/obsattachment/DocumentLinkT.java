@@ -6,7 +6,7 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model;
+package com.prototype.ot.microservices.projectservice.model.obsattachment;
 
 import com.prototype.ot.microservices.projectservice.model.valuetypes.StorageVolumeT;
 
