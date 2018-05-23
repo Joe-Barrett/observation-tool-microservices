@@ -8,6 +8,7 @@
 
 package com.prototype.ot.microservices.projectservice.model;
 
+import com.prototype.ot.microservices.projectservice.model.obsproject.QuerySourceT;
 import com.prototype.ot.microservices.projectservice.model.valuetypes.AngleT;
 import com.prototype.ot.microservices.projectservice.model.valuetypes.AngularVelocityT;
 

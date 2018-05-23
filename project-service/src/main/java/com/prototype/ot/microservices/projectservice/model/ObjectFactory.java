@@ -8,6 +8,7 @@
 
 package com.prototype.ot.microservices.projectservice.model;
 
+import com.prototype.ot.microservices.projectservice.model.obsproject.*;
 import com.prototype.ot.microservices.projectservice.model.valuetypes.*;
 
 import javax.xml.bind.JAXBElement;
