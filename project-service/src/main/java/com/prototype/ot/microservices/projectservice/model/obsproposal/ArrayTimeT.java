@@ -6,7 +6,7 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model;
+package com.prototype.ot.microservices.projectservice.model.obsproposal;
 
 import com.prototype.ot.microservices.projectservice.model.valuetypes.TimeT;
 
@@ -18,33 +18,25 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * The time required in the proposal for a given receiver band.
- * 
- * <p>Java class for ReceiverTimeT complex type.
+ * <p>Java class for ArrayTimeT complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="ReceiverTimeT">
+ * &lt;complexType name="ArrayTimeT">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="time" type="{Alma/ValueTypes}TimeT"/>
+ *         &lt;element name="estimatedTime" type="{Alma/ValueTypes}TimeT"/>
  *       &lt;/sequence>
- *       &lt;attribute name="receiverBand">
+ *       &lt;attribute name="arrayName">
  *         &lt;simpleType>
  *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *             &lt;enumeration value="ALMA_RB_01"/>
- *             &lt;enumeration value="ALMA_RB_02"/>
- *             &lt;enumeration value="ALMA_RB_03"/>
- *             &lt;enumeration value="ALMA_RB_04"/>
- *             &lt;enumeration value="ALMA_RB_05"/>
- *             &lt;enumeration value="ALMA_RB_06"/>
- *             &lt;enumeration value="ALMA_RB_07"/>
- *             &lt;enumeration value="ALMA_RB_08"/>
- *             &lt;enumeration value="ALMA_RB_09"/>
- *             &lt;enumeration value="ALMA_RB_10"/>
- *             &lt;enumeration value="UNDEFINED"/>
+ *             &lt;enumeration value="ACA"/>
+ *             &lt;enumeration value="SEVEN-M"/>
+ *             &lt;enumeration value="TP-Array"/>
+ *             &lt;enumeration value="TWELVE-M"/>
+ *             &lt;enumeration value="ALMA"/>
  *           &lt;/restriction>
  *         &lt;/simpleType>
  *       &lt;/attribute>
@@ -56,62 +48,62 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ReceiverTimeT", namespace = "Alma/ObsPrep/ObsProposal", propOrder = {
-    "time"
+@XmlType(name = "ArrayTimeT", namespace = "Alma/ObsPrep/ObsProposal", propOrder = {
+    "estimatedTime"
 })
-public class ReceiverTimeT {
+public class ArrayTimeT {
 
     @XmlElement(required = true)
-    protected TimeT time;
-    @XmlAttribute(name = "receiverBand")
-    protected String receiverBand;
+    protected TimeT estimatedTime;
+    @XmlAttribute(name = "arrayName")
+    protected String arrayName;
 
     /**
-     * Gets the value of the time property.
+     * Gets the value of the estimatedTime property.
      * 
      * @return
      *     possible object is
      *     {@link TimeT }
      *     
      */
-    public TimeT getTime() {
-        return time;
+    public TimeT getEstimatedTime() {
+        return estimatedTime;
     }
 
     /**
-     * Sets the value of the time property.
+     * Sets the value of the estimatedTime property.
      * 
      * @param value
      *     allowed object is
      *     {@link TimeT }
      *     
      */
-    public void setTime(TimeT value) {
-        this.time = value;
+    public void setEstimatedTime(TimeT value) {
+        this.estimatedTime = value;
     }
 
     /**
-     * Gets the value of the receiverBand property.
+     * Gets the value of the arrayName property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getReceiverBand() {
-        return receiverBand;
+    public String getArrayName() {
+        return arrayName;
     }
 
     /**
-     * Sets the value of the receiverBand property.
+     * Sets the value of the arrayName property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setReceiverBand(String value) {
-        this.receiverBand = value;
+    public void setArrayName(String value) {
+        this.arrayName = value;
     }
 
 }

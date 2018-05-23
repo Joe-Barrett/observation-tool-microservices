@@ -6,7 +6,7 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model;
+package com.prototype.ot.microservices.projectservice.model.obsproposal;
 
 import com.prototype.ot.microservices.projectservice.model.valuetypes.TimeT;
 

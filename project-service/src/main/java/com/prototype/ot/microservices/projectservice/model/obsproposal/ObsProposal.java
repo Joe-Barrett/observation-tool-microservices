@@ -6,8 +6,11 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model;
+package com.prototype.ot.microservices.projectservice.model.obsproposal;
 
+import com.prototype.ot.microservices.projectservice.model.ObsAttachmentRefT;
+import com.prototype.ot.microservices.projectservice.model.ObsProjectRefT;
+import com.prototype.ot.microservices.projectservice.model.ObsProposalEntityT;
 import com.prototype.ot.microservices.projectservice.model.obsproject.ObsPhaseT;
 
 import java.util.ArrayList;

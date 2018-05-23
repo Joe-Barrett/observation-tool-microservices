@@ -6,7 +6,7 @@
 //
 
 
-package com.prototype.ot.microservices.projectservice.model;
+package com.prototype.ot.microservices.projectservice.model.obsproposal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,18 +17,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * Container for the collection of Receiver Times.
+ * Container for the data rate estiamtes for each array used in the project
  * 
- * <p>Java class for ReceiverTimeBreakdownT complex type.
+ * <p>Java class for DataRateBreakdownT complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="ReceiverTimeBreakdownT">
+ * &lt;complexType name="DataRateBreakdownT">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="ReceiverTime" type="{Alma/ObsPrep/ObsProposal}ReceiverTimeT" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="ArrayDataRates" type="{Alma/ObsPrep/ObsProposal}ArrayDataRatesT" maxOccurs="5" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,41 +38,41 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ReceiverTimeBreakdownT", namespace = "Alma/ObsPrep/ObsProposal", propOrder = {
-    "receiverTime"
+@XmlType(name = "DataRateBreakdownT", namespace = "Alma/ObsPrep/ObsProposal", propOrder = {
+    "arrayDataRates"
 })
-public class ReceiverTimeBreakdownT {
+public class DataRateBreakdownT {
 
-    @XmlElement(name = "ReceiverTime")
-    protected List<ReceiverTimeT> receiverTime;
+    @XmlElement(name = "ArrayDataRates")
+    protected List<ArrayDataRatesT> arrayDataRates;
 
     /**
-     * Gets the value of the receiverTime property.
+     * Gets the value of the arrayDataRates property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the receiverTime property.
+     * This is why there is not a <CODE>set</CODE> method for the arrayDataRates property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getReceiverTime().add(newItem);
+     *    getArrayDataRates().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ReceiverTimeT }
+     * {@link ArrayDataRatesT }
      * 
      * 
      */
-    public List<ReceiverTimeT> getReceiverTime() {
-        if (receiverTime == null) {
-            receiverTime = new ArrayList<ReceiverTimeT>();
+    public List<ArrayDataRatesT> getArrayDataRates() {
+        if (arrayDataRates == null) {
+            arrayDataRates = new ArrayList<ArrayDataRatesT>();
         }
-        return this.receiverTime;
+        return this.arrayDataRates;
     }
 
 }

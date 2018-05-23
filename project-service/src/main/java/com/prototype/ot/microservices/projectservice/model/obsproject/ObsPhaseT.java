@@ -8,7 +8,7 @@
 
 package com.prototype.ot.microservices.projectservice.model.obsproject;
 
-import com.prototype.ot.microservices.projectservice.model.ObsProposal;
+import com.prototype.ot.microservices.projectservice.model.obsproposal.ObsProposal;
 import com.prototype.ot.microservices.projectservice.model.ObsReview;
 
 import java.util.ArrayList;

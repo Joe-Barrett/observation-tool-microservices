@@ -10,6 +10,7 @@ package com.prototype.ot.microservices.projectservice.model;
 
 import com.prototype.ot.microservices.projectservice.model.obsproject.ObsUnitT;
 import com.prototype.ot.microservices.projectservice.model.obsproject.PreconditionsT;
+import com.prototype.ot.microservices.projectservice.model.obsproposal.TimeAllocationBreakdownT;
 
 import java.util.ArrayList;
 import java.util.List;
