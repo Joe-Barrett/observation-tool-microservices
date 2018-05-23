@@ -48,7 +48,7 @@ public class ProjectService {
 //    }
 
     public ObsProject getProject(String projectRef) throws IOException, JAXBException {
-        List<ObsProject> projects = this.getAllProjects();
+        List<ObsProject> projects = this.loadResourceList("ObsProject.xml", ObsProject.class);
         for (ObsProject project : projects) {
             if (project.getObsProjectEntity().getEntityId().equals(projectRef)) {
                 return project;
@@ -62,7 +62,7 @@ public class ProjectService {
     }
 
     public ObsProposal getProposal(String proposalRef) throws IOException, JAXBException {
-        List<ObsProposal> proposals = this.getAllProposals();
+        List<ObsProposal> proposals = this.loadResourceList("ObsProposal.xml", ObsProposal.class);
         for (ObsProposal obsProposal : proposals) {
             if (obsProposal.getObsProposalEntity().getEntityId().equals(proposalRef)) {
                 return obsProposal;
@@ -144,11 +144,8 @@ public class ProjectService {
             JAXBContext jaxbContext = JAXBContext.newInstance("com.prototype.ot.microservices.projectservice.model");
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             StringReader stringReader = new StringReader(xml);
-            if (cls == ObsProject.class) {
-                JAXBElement<ObsProject> obsProjectElement = (JAXBElement<ObsProject>) unmarshaller.unmarshal(stringReader);
-                ObsProject obsProject = obsProjectElement.getValue();
-                returnList.add(cls.cast(obsProject));
-            }
+            JAXBElement<T> element = (JAXBElement<T>) unmarshaller.unmarshal(stringReader);
+            returnList.add(cls.cast(element.getValue()));
         }
         return returnList;
     }
