@@ -1,8 +1,8 @@
 package com.prototype.ot.microservices.projectservice.services;
 
 import com.google.gson.Gson;
-import com.prototype.ot.microservices.projectservice.model.ObsProject;
-import com.prototype.ot.microservices.projectservice.model.ObsProposal;
+import com.prototype.ot.microservices.projectservice.model.obsproject.ObsProject;
+import com.prototype.ot.microservices.projectservice.model.obsproposal.ObsProposal;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
