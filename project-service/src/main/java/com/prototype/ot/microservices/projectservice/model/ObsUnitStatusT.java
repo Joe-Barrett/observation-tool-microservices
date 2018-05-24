@@ -55,15 +55,15 @@ public abstract class ObsUnitStatusT
 {
 
     @XmlElement(name = "ObsUnitSetMemberType", required = true)
-    protected String obsUnitSetMemberType;
+    private String obsUnitSetMemberType;
     @XmlElement(name = "TotalRequiredTimeInSec")
-    protected int totalRequiredTimeInSec;
+    private int totalRequiredTimeInSec;
     @XmlElement(name = "TotalUsedTimeInSec")
-    protected int totalUsedTimeInSec;
+    private int totalUsedTimeInSec;
     @XmlElement(name = "ContainingObsUnitSetRef", required = true)
-    protected OUSStatusRefT containingObsUnitSetRef;
+    private OUSStatusRefT containingObsUnitSetRef;
     @XmlElement(name = "ProjectStatusRef", required = true)
-    protected ProjectStatusRefT projectStatusRef;
+    private ProjectStatusRefT projectStatusRef;
 
     /**
      * Gets the value of the obsUnitSetMemberType property.

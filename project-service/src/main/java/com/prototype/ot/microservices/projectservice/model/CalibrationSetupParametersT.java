@@ -54,9 +54,9 @@ import javax.xml.bind.annotation.XmlType;
 public class CalibrationSetupParametersT {
 
     @XmlElement(name = "CalibrationTargetParameters")
-    protected List<CalibrationTargetParametersT> calibrationTargetParameters;
+    private List<CalibrationTargetParametersT> calibrationTargetParameters;
     @XmlAttribute(name = "selection")
-    protected String selection;
+    private String selection;
 
     /**
      * Gets the value of the calibrationTargetParameters property.
@@ -82,7 +82,7 @@ public class CalibrationSetupParametersT {
      */
     public List<CalibrationTargetParametersT> getCalibrationTargetParameters() {
         if (calibrationTargetParameters == null) {
-            calibrationTargetParameters = new ArrayList<CalibrationTargetParametersT>();
+            calibrationTargetParameters = new ArrayList<>();
         }
         return this.calibrationTargetParameters;
     }

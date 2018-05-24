@@ -50,7 +50,7 @@ public class UserAngleT
 {
 
     @XmlAttribute(name = "userUnit")
-    protected String userUnit;
+    private String userUnit;
 
     /**
      * Gets the value of the userUnit property.

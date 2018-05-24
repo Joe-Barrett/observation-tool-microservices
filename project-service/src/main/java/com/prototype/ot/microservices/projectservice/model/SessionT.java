@@ -56,19 +56,19 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class SessionT {
 
     @XmlElement(name = "StartTime", required = true)
-    protected String startTime;
+    private String startTime;
     @XmlElement(name = "EndTime", required = true)
-    protected String endTime;
+    private String endTime;
     @XmlElement(name = "ExecBlockRef")
-    protected List<ExecBlockRefT> execBlockRef;
+    private List<ExecBlockRefT> execBlockRef;
     @XmlElement(name = "SBStatusRef")
-    protected SBStatusRefT sbStatusRef;
+    private SBStatusRefT sbStatusRef;
     @XmlAttribute(name = "entityPartId")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
-    protected String entityPartId;
+    private String entityPartId;
     @XmlAttribute(name = "almatype", required = true)
-    protected String almatype;
+    private String almatype;
 
     /**
      * Gets the value of the startTime property.
@@ -142,7 +142,7 @@ public class SessionT {
      */
     public List<ExecBlockRefT> getExecBlockRef() {
         if (execBlockRef == null) {
-            execBlockRef = new ArrayList<ExecBlockRefT>();
+            execBlockRef = new ArrayList<>();
         }
         return this.execBlockRef;
     }

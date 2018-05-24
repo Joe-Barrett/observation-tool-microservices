@@ -48,9 +48,9 @@ public class ACACorrelatorConfigurationT
 {
 
     @XmlElement(name = "ACABaseBandConfig", required = true)
-    protected List<ACABaseBandConfigT> acaBaseBandConfig;
+    private List<ACABaseBandConfigT> acaBaseBandConfig;
     @XmlElement(name = "ACAPhaseSwitchingConfiguration", required = true)
-    protected ACAPhaseSwitchingConfigurationT acaPhaseSwitchingConfiguration;
+    private ACAPhaseSwitchingConfigurationT acaPhaseSwitchingConfiguration;
 
     /**
      * Gets the value of the acaBaseBandConfig property.
@@ -76,7 +76,7 @@ public class ACACorrelatorConfigurationT
      */
     public List<ACABaseBandConfigT> getACABaseBandConfig() {
         if (acaBaseBandConfig == null) {
-            acaBaseBandConfig = new ArrayList<ACABaseBandConfigT>();
+            acaBaseBandConfig = new ArrayList<>();
         }
         return this.acaBaseBandConfig;
     }

@@ -110,16 +110,16 @@ import javax.xml.bind.annotation.XmlType;
 public abstract class ObsUnitT {
 
     @XmlElement(required = true)
-    protected String name;
-    protected String note;
+    private String name;
+    private String note;
     @XmlElement(name = "ObsUnitControl", required = true)
-    protected ObsUnitControlT obsUnitControl;
+    private ObsUnitControlT obsUnitControl;
     @XmlElement(name = "UnitDependencies", required = true)
-    protected UnitDependenciesT unitDependencies;
+    private UnitDependenciesT unitDependencies;
     @XmlElement(name = "ObsProjectRef", required = true)
-    protected ObsProjectRefT obsProjectRef;
+    private ObsProjectRefT obsProjectRef;
     @XmlAttribute(name = "status")
-    protected String status;
+    private String status;
 
     /**
      * Gets the value of the name property.

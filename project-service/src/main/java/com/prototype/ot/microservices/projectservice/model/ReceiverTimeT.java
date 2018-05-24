@@ -60,9 +60,9 @@ import javax.xml.bind.annotation.XmlType;
 public class ReceiverTimeT {
 
     @XmlElement(required = true)
-    protected TimeT time;
+    private TimeT time;
     @XmlAttribute(name = "receiverBand")
-    protected String receiverBand;
+    private String receiverBand;
 
     /**
      * Gets the value of the time property.

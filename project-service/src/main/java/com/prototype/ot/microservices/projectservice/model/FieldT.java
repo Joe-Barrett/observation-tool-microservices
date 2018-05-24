@@ -52,9 +52,9 @@ import javax.xml.bind.annotation.XmlType;
 public abstract class FieldT {
 
     @XmlElement(required = true)
-    protected String name;
+    private String name;
     @XmlElement(required = true)
-    protected SkyCoordinatesT centre;
+    private SkyCoordinatesT centre;
 
     /**
      * Gets the value of the name property.

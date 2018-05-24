@@ -61,17 +61,17 @@ public class CrossPatternT
 {
 
     @XmlElement(required = true)
-    protected SkyCoordinatesT patternCenterCoordinates;
+    private SkyCoordinatesT patternCenterCoordinates;
     @XmlElement(required = true)
-    protected AngleT longitudeLength;
+    private AngleT longitudeLength;
     @XmlElement(required = true)
-    protected AngleT latitudeLength;
+    private AngleT latitudeLength;
     @XmlElement(required = true)
-    protected AngularVelocityT scanVelocity;
+    private AngularVelocityT scanVelocity;
     @XmlElement(required = true)
-    protected AngleT orientation;
+    private AngleT orientation;
     @XmlAttribute(name = "initialScanDirection")
-    protected String initialScanDirection;
+    private String initialScanDirection;
 
     /**
      * Gets the value of the patternCenterCoordinates property.

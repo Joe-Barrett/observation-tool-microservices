@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class MagnitudeT {
 
-    protected double value;
+    private double value;
 
     /**
      * Gets the value of the value property.

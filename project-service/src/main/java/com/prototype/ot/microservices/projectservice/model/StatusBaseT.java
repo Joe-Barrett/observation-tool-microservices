@@ -67,28 +67,28 @@ import javax.xml.bind.annotation.XmlType;
 public abstract class StatusBaseT {
 
     @XmlElement(name = "Status", required = true)
-    protected StatusT status;
+    private StatusT status;
     @XmlElement(name = "TimeOfUpdate", required = true)
-    protected String timeOfUpdate;
+    private String timeOfUpdate;
     @XmlElement(defaultValue = "0")
-    protected int executionsRemaining;
+    private int executionsRemaining;
     @XmlElement(defaultValue = "0")
-    protected int successfulExecutions;
+    private int successfulExecutions;
     @XmlElement(defaultValue = "0")
-    protected int failedExecutions;
+    private int failedExecutions;
     @XmlElement(defaultValue = "0")
-    protected int secondsRemaining;
+    private int secondsRemaining;
     @XmlElement(defaultValue = "0")
-    protected int successfulSeconds;
+    private int successfulSeconds;
     @XmlElement(defaultValue = "0")
-    protected int failedSeconds;
+    private int failedSeconds;
     @XmlElement(defaultValue = "false")
-    protected boolean hasExecutionCount;
+    private boolean hasExecutionCount;
     @XmlElement(defaultValue = "false")
-    protected boolean hasTimeLimit;
+    private boolean hasTimeLimit;
     @XmlElement(defaultValue = "false")
-    protected boolean bookkeepingInitialized;
-    protected String flags;
+    private boolean bookkeepingInitialized;
+    private String flags;
 
     /**
      * Gets the value of the status property.

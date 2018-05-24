@@ -49,12 +49,12 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class ObservingGroupT {
 
-    protected int index;
+    private int index;
     @XmlElement(required = true)
-    protected String name;
+    private String name;
     @XmlElement(name = "OrderedTarget", required = true)
-    protected List<OrderedTargetT> orderedTarget;
-    protected SchedBlockRefT mainTargetRef;
+    private List<OrderedTargetT> orderedTarget;
+    private SchedBlockRefT mainTargetRef;
 
     /**
      * Gets the value of the index property.
@@ -120,7 +120,7 @@ public class ObservingGroupT {
      */
     public List<OrderedTargetT> getOrderedTarget() {
         if (orderedTarget == null) {
-            orderedTarget = new ArrayList<OrderedTargetT>();
+            orderedTarget = new ArrayList<>();
         }
         return this.orderedTarget;
     }

@@ -42,9 +42,9 @@ import javax.xml.bind.annotation.XmlType;
 public class OnSourceTimeT {
 
     @XmlElement(required = true)
-    protected String intent;
+    private String intent;
     @XmlElement(required = true)
-    protected TimeT time;
+    private TimeT time;
 
     /**
      * Gets the value of the intent property.

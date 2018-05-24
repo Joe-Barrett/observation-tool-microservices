@@ -52,10 +52,10 @@ import javax.xml.bind.annotation.XmlType;
 public abstract class AbstractScienceGoalT {
 
     @XmlElement(required = true)
-    protected String name;
-    protected String note;
+    private String name;
+    private String note;
     @XmlElement(name = "ObsUnitSetRef")
-    protected ObsProjectRefT obsUnitSetRef;
+    private ObsProjectRefT obsUnitSetRef;
 
     /**
      * Gets the value of the name property.

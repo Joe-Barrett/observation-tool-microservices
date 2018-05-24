@@ -53,9 +53,9 @@ public class OpticalCameraSpecT
 {
 
     @XmlElement(required = true)
-    protected TimeT minIntegrationTime;
+    private TimeT minIntegrationTime;
     @XmlAttribute(name = "filter")
-    protected String filter;
+    private String filter;
 
     /**
      * Gets the value of the minIntegrationTime property.

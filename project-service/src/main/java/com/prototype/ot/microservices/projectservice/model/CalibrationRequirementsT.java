@@ -46,9 +46,9 @@ import javax.xml.bind.annotation.XmlType;
 public class CalibrationRequirementsT {
 
     @XmlElement(required = true)
-    protected AngleT pointingAccuracy;
-    protected double bandpassAccuracy;
-    protected double polarizationAccuracy;
+    private AngleT pointingAccuracy;
+    private double bandpassAccuracy;
+    private double polarizationAccuracy;
 
     /**
      * Gets the value of the pointingAccuracy property.

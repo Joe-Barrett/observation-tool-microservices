@@ -66,15 +66,15 @@ import javax.xml.bind.annotation.XmlType;
 public class ControlBlockT {
 
     @XmlElement(required = true)
-    protected TimeT maximumTime;
-    protected int userPriority;
+    private TimeT maximumTime;
+    private int userPriority;
     @XmlElement(required = true)
-    protected TimeT estimatedExecutionTime;
-    protected int tacPriority;
+    private TimeT estimatedExecutionTime;
+    private int tacPriority;
     @XmlElement(defaultValue = "1")
-    protected int aggregatedExecutionCount;
+    private int aggregatedExecutionCount;
     @XmlAttribute(name = "arrayRequested")
-    protected String arrayRequested;
+    private String arrayRequested;
 
     /**
      * Gets the value of the maximumTime property.

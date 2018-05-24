@@ -64,7 +64,7 @@ public class TargetParametersT
 {
 
     @XmlElement(defaultValue = "false")
-    protected Boolean isMosaic;
+    private Boolean isMosaic;
     @XmlElements({
         @XmlElement(name = "Circle", type = CircleT.class),
         @XmlElement(name = "Ellipse", type = EllipseT.class),
@@ -72,9 +72,9 @@ public class TargetParametersT
         @XmlElement(name = "Rectangle", type = RectangleT.class),
         @XmlElement(name = "SinglePoint", type = SinglePointT.class)
     })
-    protected List<FieldT> circleOrEllipseOrPolygon;
+    private List<FieldT> circleOrEllipseOrPolygon;
     @XmlAttribute(name = "type")
-    protected String type;
+    private String type;
 
     /**
      * Gets the value of the isMosaic property.
@@ -128,7 +128,7 @@ public class TargetParametersT
      */
     public List<FieldT> getCircleOrEllipseOrPolygon() {
         if (circleOrEllipseOrPolygon == null) {
-            circleOrEllipseOrPolygon = new ArrayList<FieldT>();
+            circleOrEllipseOrPolygon = new ArrayList<>();
         }
         return this.circleOrEllipseOrPolygon;
     }

@@ -85,34 +85,34 @@ public class ScienceGoalT
 {
 
     @XmlElement(required = true)
-    protected TimeT estimatedTotalTime;
+    private TimeT estimatedTotalTime;
     @XmlElement(defaultValue = "0")
-    protected int userPriority;
-    protected List<String> requiredReceiverBands;
+    private int userPriority;
+    private List<String> requiredReceiverBands;
     @XmlElement(name = "estimated12mTime")
-    protected TimeT estimated12MTime;
+    private TimeT estimated12MTime;
     @XmlElement(name = "estimated7mTime")
-    protected TimeT estimated7MTime;
-    protected TimeT estimatedTPTime;
-    protected TimeT estimatedACATime;
+    private TimeT estimated7MTime;
+    private TimeT estimatedTPTime;
+    private TimeT estimatedACATime;
     @XmlElement(defaultValue = "false")
-    protected Boolean isDescoped;
+    private Boolean isDescoped;
     @XmlElement(defaultValue = "false")
-    protected Boolean isResubmission;
-    protected String resubmissionOfOusStatusUid;
-    protected String resubmissionOfName;
+    private Boolean isResubmission;
+    private String resubmissionOfOusStatusUid;
+    private String resubmissionOfName;
     @XmlElement(name = "CalibrationSetupParameters", required = true)
-    protected CalibrationSetupParametersT calibrationSetupParameters;
+    private CalibrationSetupParametersT calibrationSetupParameters;
     @XmlElement(name = "PerformanceParameters", required = true)
-    protected PerformanceParametersT performanceParameters;
+    private PerformanceParametersT performanceParameters;
     @XmlElement(name = "SpectralSetupParameters", required = true)
-    protected SpectralSetupParametersT spectralSetupParameters;
+    private SpectralSetupParametersT spectralSetupParameters;
     @XmlElement(name = "TargetParameters", required = true)
-    protected List<TargetParametersT> targetParameters;
+    private List<TargetParametersT> targetParameters;
     @XmlElement(name = "TechnicalJustification")
-    protected List<TechnicalJustificationT> technicalJustification;
+    private List<TechnicalJustificationT> technicalJustification;
     @XmlAttribute(name = "mode")
-    protected String mode;
+    private String mode;
 
     /**
      * Gets the value of the estimatedTotalTime property.
@@ -178,7 +178,7 @@ public class ScienceGoalT
      */
     public List<String> getRequiredReceiverBands() {
         if (requiredReceiverBands == null) {
-            requiredReceiverBands = new ArrayList<String>();
+            requiredReceiverBands = new ArrayList<>();
         }
         return this.requiredReceiverBands;
     }
@@ -471,7 +471,7 @@ public class ScienceGoalT
      */
     public List<TargetParametersT> getTargetParameters() {
         if (targetParameters == null) {
-            targetParameters = new ArrayList<TargetParametersT>();
+            targetParameters = new ArrayList<>();
         }
         return this.targetParameters;
     }
@@ -500,7 +500,7 @@ public class ScienceGoalT
      */
     public List<TechnicalJustificationT> getTechnicalJustification() {
         if (technicalJustification == null) {
-            technicalJustification = new ArrayList<TechnicalJustificationT>();
+            technicalJustification = new ArrayList<>();
         }
         return this.technicalJustification;
     }

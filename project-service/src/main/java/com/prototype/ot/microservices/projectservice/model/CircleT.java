@@ -46,9 +46,9 @@ public class CircleT
 {
 
     @XmlElement(required = true)
-    protected AngleT radius;
+    private AngleT radius;
     @XmlElement(required = true)
-    protected UserAngleT spacing;
+    private UserAngleT spacing;
 
     /**
      * Gets the value of the radius property.

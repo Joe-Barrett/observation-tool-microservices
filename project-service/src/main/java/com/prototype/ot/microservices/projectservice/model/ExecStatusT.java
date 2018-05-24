@@ -66,28 +66,28 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class ExecStatusT {
 
     @XmlElement(name = "Status", required = true)
-    protected StatusT status;
+    private StatusT status;
     @XmlElement(name = "TimeOfCreation", required = true)
-    protected String timeOfCreation;
+    private String timeOfCreation;
     @XmlElement(name = "TimeOfUpdate", required = true)
-    protected String timeOfUpdate;
+    private String timeOfUpdate;
     @XmlElement(name = "ArrayName", required = true)
-    protected String arrayName;
+    private String arrayName;
     @XmlElement(name = "ExecBlockRef", required = true)
-    protected ExecBlockRefT execBlockRef;
-    protected String qa0Notes;
+    private ExecBlockRefT execBlockRef;
+    private String qa0Notes;
     @XmlElement(defaultValue = "-1.0")
-    protected double sensitivityAchievedJy;
+    private double sensitivityAchievedJy;
     @XmlElement(name = "BestSB", required = true)
-    protected BestSBT bestSB;
+    private BestSBT bestSB;
     @XmlElement(name = "OnSourceTime")
-    protected List<OnSourceTimeT> onSourceTime;
+    private List<OnSourceTimeT> onSourceTime;
     @XmlAttribute(name = "entityPartId")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
-    protected String entityPartId;
+    private String entityPartId;
     @XmlAttribute(name = "almatype", required = true)
-    protected String almatype;
+    private String almatype;
 
     /**
      * Gets the value of the status property.
@@ -297,7 +297,7 @@ public class ExecStatusT {
      */
     public List<OnSourceTimeT> getOnSourceTime() {
         if (onSourceTime == null) {
-            onSourceTime = new ArrayList<OnSourceTimeT>();
+            onSourceTime = new ArrayList<>();
         }
         return this.onSourceTime;
     }

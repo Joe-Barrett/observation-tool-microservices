@@ -44,7 +44,7 @@ public class PolygonT
     extends FieldT
 {
 
-    protected List<SkyCoordinatesT> points;
+    private List<SkyCoordinatesT> points;
 
     /**
      * Gets the value of the points property.
@@ -70,7 +70,7 @@ public class PolygonT
      */
     public List<SkyCoordinatesT> getPoints() {
         if (points == null) {
-            points = new ArrayList<SkyCoordinatesT>();
+            points = new ArrayList<>();
         }
         return this.points;
     }

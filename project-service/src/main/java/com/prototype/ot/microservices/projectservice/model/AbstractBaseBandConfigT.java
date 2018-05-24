@@ -57,9 +57,9 @@ import javax.xml.bind.annotation.XmlType;
 public abstract class AbstractBaseBandConfigT {
 
     @XmlElement(name = "BaseBandSpecificationRef", required = true)
-    protected SchedBlockRefT baseBandSpecificationRef;
+    private SchedBlockRefT baseBandSpecificationRef;
     @XmlAttribute(name = "dataProducts")
-    protected String dataProducts;
+    private String dataProducts;
 
     /**
      * Gets the value of the baseBandSpecificationRef property.

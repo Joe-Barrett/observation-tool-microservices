@@ -64,17 +64,17 @@ import javax.xml.bind.annotation.XmlType;
 public class AdvancedWindowSetupT {
 
     @XmlElement(defaultValue = "1")
-    protected int smoothingFactor;
+    private int smoothingFactor;
     @XmlElement(defaultValue = "false")
-    protected boolean oversampling;
+    private boolean oversampling;
     @XmlElement(defaultValue = "false")
-    protected boolean addedSensitivity;
+    private boolean addedSensitivity;
     @XmlElement(defaultValue = "false")
-    protected boolean useImage;
+    private boolean useImage;
     @XmlElement(defaultValue = "true")
-    protected boolean useThis;
+    private boolean useThis;
     @XmlAttribute(name = "smoothingFunction")
-    protected String smoothingFunction;
+    private String smoothingFunction;
 
     /**
      * Gets the value of the smoothingFactor property.

@@ -61,11 +61,11 @@ import javax.xml.bind.annotation.XmlType;
 public class VelocityT {
 
     @XmlElement(required = true)
-    protected SpeedT centerVelocity;
+    private SpeedT centerVelocity;
     @XmlAttribute(name = "referenceSystem")
-    protected String referenceSystem;
+    private String referenceSystem;
     @XmlAttribute(name = "dopplerCalcType")
-    protected String dopplerCalcType;
+    private String dopplerCalcType;
 
     /**
      * Gets the value of the centerVelocity property.

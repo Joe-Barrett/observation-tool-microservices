@@ -48,7 +48,7 @@ public class UserSensitivityT
 {
 
     @XmlAttribute(name = "userUnit")
-    protected String userUnit;
+    private String userUnit;
 
     /**
      * Gets the value of the userUnit property.

@@ -53,19 +53,19 @@ import javax.xml.bind.annotation.XmlType;
 public class EntityT {
 
     @XmlAttribute(name = "entityId", required = true)
-    protected String entityId;
+    private String entityId;
     @XmlAttribute(name = "entityIdEncrypted", required = true)
-    protected String entityIdEncrypted;
+    private String entityIdEncrypted;
     @XmlAttribute(name = "entityTypeName", required = true)
-    protected String entityTypeName;
+    private String entityTypeName;
     @XmlAttribute(name = "schemaVersion", required = true)
-    protected String schemaVersion;
+    private String schemaVersion;
     @XmlAttribute(name = "documentVersion")
-    protected String documentVersion;
+    private String documentVersion;
     @XmlAttribute(name = "timestamp")
-    protected String timestamp;
+    private String timestamp;
     @XmlAttribute(name = "datamodelVersion")
-    protected String datamodelVersion;
+    private String datamodelVersion;
 
     /**
      * Gets the value of the entityId property.

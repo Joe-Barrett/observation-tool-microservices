@@ -44,9 +44,9 @@ import javax.xml.bind.annotation.XmlType;
 public class ACAPhaseSwitchingConfigurationT {
 
     @XmlElement(name = "doD180modulation", defaultValue = "true")
-    protected boolean doD180Modulation;
+    private boolean doD180Modulation;
     @XmlElement(name = "doD180demodulation", defaultValue = "true")
-    protected boolean doD180Demodulation;
+    private boolean doD180Demodulation;
 
     /**
      * Gets the value of the doD180Modulation property.

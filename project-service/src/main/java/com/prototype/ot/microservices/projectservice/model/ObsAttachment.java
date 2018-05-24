@@ -50,17 +50,17 @@ import javax.xml.bind.annotation.XmlType;
 public class ObsAttachment {
 
     @XmlElement(name = "ObsAttachmentEntity", required = true)
-    protected ObsAttachmentEntityT obsAttachmentEntity;
+    private ObsAttachmentEntityT obsAttachmentEntity;
     @XmlElement(required = true)
-    protected String associatedBulkStoreUid;
+    private String associatedBulkStoreUid;
     @XmlElement(name = "DocumentLink", required = true)
-    protected List<DocumentLinkT> documentLink;
+    private List<DocumentLinkT> documentLink;
     @XmlAttribute(name = "schemaVersion", required = true)
-    protected String schemaVersion;
+    private String schemaVersion;
     @XmlAttribute(name = "revision")
-    protected String revision;
+    private String revision;
     @XmlAttribute(name = "almatype", required = true)
-    protected String almatype;
+    private String almatype;
 
     /**
      * Gets the value of the obsAttachmentEntity property.
@@ -134,7 +134,7 @@ public class ObsAttachment {
      */
     public List<DocumentLinkT> getDocumentLink() {
         if (documentLink == null) {
-            documentLink = new ArrayList<DocumentLinkT>();
+            documentLink = new ArrayList<>();
         }
         return this.documentLink;
     }

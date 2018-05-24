@@ -82,21 +82,21 @@ public class SpectralSpecT
 {
 
     @XmlElement(name = "ACACorrelatorConfiguration")
-    protected ACACorrelatorConfigurationT acaCorrelatorConfiguration;
+    private ACACorrelatorConfigurationT acaCorrelatorConfiguration;
     @XmlElement(name = "BLCorrelatorConfiguration")
-    protected BLCorrelatorConfigurationT blCorrelatorConfiguration;
+    private BLCorrelatorConfigurationT blCorrelatorConfiguration;
     @XmlElement(name = "BeamSwitchingCycle")
-    protected BeamSwitchingCycleT beamSwitchingCycle;
+    private BeamSwitchingCycleT beamSwitchingCycle;
     @XmlElement(name = "FrequencySwitchingCycle")
-    protected FrequencySwitchingCycleT frequencySwitchingCycle;
+    private FrequencySwitchingCycleT frequencySwitchingCycle;
     @XmlElement(name = "FrequencySetup", required = true)
-    protected FrequencySetupT frequencySetup;
+    private FrequencySetupT frequencySetup;
     @XmlElement(name = "SquareLawSetup")
-    protected SquareLawSetupT squareLawSetup;
+    private SquareLawSetupT squareLawSetup;
     @XmlAttribute(name = "switchingType")
-    protected String switchingType;
+    private String switchingType;
     @XmlAttribute(name = "receiverType")
-    protected String receiverType;
+    private String receiverType;
 
     /**
      * Gets the value of the acaCorrelatorConfiguration property.

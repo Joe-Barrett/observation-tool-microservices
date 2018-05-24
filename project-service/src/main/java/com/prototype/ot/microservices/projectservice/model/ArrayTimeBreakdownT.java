@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
 public class ArrayTimeBreakdownT {
 
     @XmlElement(name = "ArrayTime", required = true)
-    protected List<ArrayTimeT> arrayTime;
+    private List<ArrayTimeT> arrayTime;
 
     /**
      * Gets the value of the arrayTime property.
@@ -68,7 +68,7 @@ public class ArrayTimeBreakdownT {
      */
     public List<ArrayTimeT> getArrayTime() {
         if (arrayTime == null) {
-            arrayTime = new ArrayList<ArrayTimeT>();
+            arrayTime = new ArrayList<>();
         }
         return this.arrayTime;
     }

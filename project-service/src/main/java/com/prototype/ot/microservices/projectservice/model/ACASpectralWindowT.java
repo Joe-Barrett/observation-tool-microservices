@@ -58,11 +58,11 @@ public class ACASpectralWindowT
 {
 
     @XmlElement(defaultValue = "true")
-    protected boolean frqChProfReproduction;
+    private boolean frqChProfReproduction;
     @XmlElement(name = "ChannelAverageRegion", required = true)
-    protected List<ChannelAverageRegionT> channelAverageRegion;
+    private List<ChannelAverageRegionT> channelAverageRegion;
     @XmlAttribute(name = "synthProf")
-    protected String synthProf;
+    private String synthProf;
 
     /**
      * Gets the value of the frqChProfReproduction property.
@@ -104,7 +104,7 @@ public class ACASpectralWindowT
      */
     public List<ChannelAverageRegionT> getChannelAverageRegion() {
         if (channelAverageRegion == null) {
-            channelAverageRegion = new ArrayList<ChannelAverageRegionT>();
+            channelAverageRegion = new ArrayList<>();
         }
         return this.channelAverageRegion;
     }

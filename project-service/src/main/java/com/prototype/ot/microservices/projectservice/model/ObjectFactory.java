@@ -29,7 +29,7 @@ import javax.xml.namespace.QName;
  * 
  */
 @XmlRegistry
-public class ObjectFactory {
+class ObjectFactory {
 
     private final static QName _ProjectStatus_QNAME = new QName("Alma/Scheduling/ProjectStatus", "ProjectStatus");
     private final static QName _ObsAttachment_QNAME = new QName("Alma/Obsprep/ObsAttachment", "ObsAttachment");
@@ -1357,7 +1357,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "Alma/Scheduling/ProjectStatus", name = "ProjectStatus")
     public JAXBElement<ProjectStatus> createProjectStatus(ProjectStatus value) {
-        return new JAXBElement<ProjectStatus>(_ProjectStatus_QNAME, ProjectStatus.class, null, value);
+        return new JAXBElement<>(_ProjectStatus_QNAME, ProjectStatus.class, null, value);
     }
 
     /**
@@ -1366,7 +1366,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "Alma/Obsprep/ObsAttachment", name = "ObsAttachment")
     public JAXBElement<ObsAttachment> createObsAttachment(ObsAttachment value) {
-        return new JAXBElement<ObsAttachment>(_ObsAttachment_QNAME, ObsAttachment.class, null, value);
+        return new JAXBElement<>(_ObsAttachment_QNAME, ObsAttachment.class, null, value);
     }
 
     /**
@@ -1375,7 +1375,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "Alma/ObsPrep/ObsReview", name = "ObsReview")
     public JAXBElement<ObsReview> createObsReview(ObsReview value) {
-        return new JAXBElement<ObsReview>(_ObsReview_QNAME, ObsReview.class, null, value);
+        return new JAXBElement<>(_ObsReview_QNAME, ObsReview.class, null, value);
     }
 
     /**
@@ -1384,7 +1384,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "Alma/ObsPrep/ObsProposal", name = "ObsProposal")
     public JAXBElement<ObsProposal> createObsProposal(ObsProposal value) {
-        return new JAXBElement<ObsProposal>(_ObsProposal_QNAME, ObsProposal.class, null, value);
+        return new JAXBElement<>(_ObsProposal_QNAME, ObsProposal.class, null, value);
     }
 
     /**
@@ -1393,7 +1393,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "Alma/ObsPrep/ObsProject", name = "ObsProject")
     public JAXBElement<ObsProject> createObsProject(ObsProject value) {
-        return new JAXBElement<ObsProject>(_ObsProject_QNAME, ObsProject.class, null, value);
+        return new JAXBElement<>(_ObsProject_QNAME, ObsProject.class, null, value);
     }
 
     /**
@@ -1402,7 +1402,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "Alma/ObsPrep/SchedBlock", name = "SchedBlock")
     public JAXBElement<SchedBlock> createSchedBlock(SchedBlock value) {
-        return new JAXBElement<SchedBlock>(_SchedBlock_QNAME, SchedBlock.class, null, value);
+        return new JAXBElement<>(_SchedBlock_QNAME, SchedBlock.class, null, value);
     }
 
     /**
@@ -1411,7 +1411,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "Alma/Scheduling/SBStatus", name = "SBStatus")
     public JAXBElement<SBStatus> createSBStatus(SBStatus value) {
-        return new JAXBElement<SBStatus>(_SBStatus_QNAME, SBStatus.class, null, value);
+        return new JAXBElement<>(_SBStatus_QNAME, SBStatus.class, null, value);
     }
 
     /**
@@ -1420,7 +1420,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "Alma/Scheduling/OUSStatus", name = "OUSStatus")
     public JAXBElement<OUSStatus> createOUSStatus(OUSStatus value) {
-        return new JAXBElement<OUSStatus>(_OUSStatus_QNAME, OUSStatus.class, null, value);
+        return new JAXBElement<>(_OUSStatus_QNAME, OUSStatus.class, null, value);
     }
 
 }

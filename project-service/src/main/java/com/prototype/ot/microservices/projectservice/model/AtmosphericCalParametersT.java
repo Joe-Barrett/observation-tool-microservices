@@ -44,9 +44,9 @@ public class AtmosphericCalParametersT
 {
 
     @XmlElement(defaultValue = "false")
-    protected boolean useHotLoad;
+    private boolean useHotLoad;
     @XmlElement(required = true)
-    protected SkyCoordinatesT skyPosition;
+    private SkyCoordinatesT skyPosition;
 
     /**
      * Gets the value of the useHotLoad property.

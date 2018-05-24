@@ -60,24 +60,24 @@ public class SBStatus
 {
 
     @XmlElement(name = "SBStatusEntity", required = true)
-    protected SBStatusEntityT sbStatusEntity;
+    private SBStatusEntityT sbStatusEntity;
     @XmlElement(name = "SchedBlockRef", required = true)
-    protected SchedBlockRefT schedBlockRef;
+    private SchedBlockRefT schedBlockRef;
     @XmlElement(defaultValue = "0.0")
-    protected double sensitivityGoalJy;
+    private double sensitivityGoalJy;
     @XmlElement(defaultValue = "0.0")
-    protected double sensitivityAchievedJy;
+    private double sensitivityAchievedJy;
     @XmlElement(defaultValue = "false")
-    protected boolean hasSensitivityGoal;
-    protected String qa0Notes;
+    private boolean hasSensitivityGoal;
+    private String qa0Notes;
     @XmlElement(name = "ExecStatus")
-    protected List<ExecStatusT> execStatus;
+    private List<ExecStatusT> execStatus;
     @XmlAttribute(name = "schemaVersion", required = true)
-    protected String schemaVersion;
+    private String schemaVersion;
     @XmlAttribute(name = "revision")
-    protected String revision;
+    private String revision;
     @XmlAttribute(name = "almatype", required = true)
-    protected String almatype;
+    private String almatype;
 
     /**
      * Gets the value of the sbStatusEntity property.
@@ -223,7 +223,7 @@ public class SBStatus
      */
     public List<ExecStatusT> getExecStatus() {
         if (execStatus == null) {
-            execStatus = new ArrayList<ExecStatusT>();
+            execStatus = new ArrayList<>();
         }
         return this.execStatus;
     }

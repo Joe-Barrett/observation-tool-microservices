@@ -42,7 +42,7 @@ public class FrequencySwitchingStateT
 {
 
     @XmlElement(required = true)
-    protected FrequencyT offset;
+    private FrequencyT offset;
 
     /**
      * Gets the value of the offset property.

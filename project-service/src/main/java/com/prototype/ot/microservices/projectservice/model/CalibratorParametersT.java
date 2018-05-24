@@ -80,17 +80,17 @@ public abstract class CalibratorParametersT
 {
 
     @XmlElement(required = true)
-    protected TimeT cycleTime;
+    private TimeT cycleTime;
     @XmlElement(required = true)
-    protected TimeT defaultIntegrationTime;
+    private TimeT defaultIntegrationTime;
     @XmlElement(required = true)
-    protected TimeT subScanDuration;
+    private TimeT subScanDuration;
     @XmlElement(defaultValue = "false")
-    protected Boolean forceAtmCal;
+    private Boolean forceAtmCal;
     @XmlElement(defaultValue = "false")
-    protected Boolean forceExecution;
+    private Boolean forceExecution;
     @XmlAttribute(name = "dataOrigin")
-    protected String dataOrigin;
+    private String dataOrigin;
 
     /**
      * Gets the value of the cycleTime property.

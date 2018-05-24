@@ -54,17 +54,17 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class TargetT {
 
     @XmlElement(name = "AbstractInstrumentSpecRef")
-    protected SchedBlockRefT abstractInstrumentSpecRef;
+    private SchedBlockRefT abstractInstrumentSpecRef;
     @XmlElement(name = "FieldSourceRef", required = true)
-    protected SchedBlockRefT fieldSourceRef;
+    private SchedBlockRefT fieldSourceRef;
     @XmlElement(name = "ObservingParametersRef")
-    protected List<SchedBlockRefT> observingParametersRef;
+    private List<SchedBlockRefT> observingParametersRef;
     @XmlAttribute(name = "entityPartId")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
-    protected String entityPartId;
+    private String entityPartId;
     @XmlAttribute(name = "almatype", required = true)
-    protected String almatype;
+    private String almatype;
 
     /**
      * Gets the value of the abstractInstrumentSpecRef property.
@@ -138,7 +138,7 @@ public class TargetT {
      */
     public List<SchedBlockRefT> getObservingParametersRef() {
         if (observingParametersRef == null) {
-            observingParametersRef = new ArrayList<SchedBlockRefT>();
+            observingParametersRef = new ArrayList<>();
         }
         return this.observingParametersRef;
     }

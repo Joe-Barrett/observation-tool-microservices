@@ -49,7 +49,7 @@ public class UserFrequencyT
 {
 
     @XmlAttribute(name = "userUnit")
-    protected String userUnit;
+    private String userUnit;
 
     /**
      * Gets the value of the userUnit property.

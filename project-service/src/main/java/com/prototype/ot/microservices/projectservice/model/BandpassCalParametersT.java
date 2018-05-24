@@ -48,11 +48,11 @@ public class BandpassCalParametersT
 {
 
     @XmlElement(defaultValue = "5")
-    protected double desiredAmplitudeAccuracy;
+    private double desiredAmplitudeAccuracy;
     @XmlElement(required = true)
-    protected TimeT maximumElapsedTime;
+    private TimeT maximumElapsedTime;
     @XmlElement(required = true)
-    protected AngleT desiredPhaseAccuracy;
+    private AngleT desiredPhaseAccuracy;
 
     /**
      * Gets the value of the desiredAmplitudeAccuracy property.

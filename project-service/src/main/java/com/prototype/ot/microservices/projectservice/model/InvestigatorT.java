@@ -83,26 +83,26 @@ import javax.xml.bind.annotation.XmlType;
 public class InvestigatorT {
 
     @XmlElement(required = true)
-    protected String fullName;
+    private String fullName;
     @XmlElement(required = true)
-    protected String organisation;
+    private String organisation;
     @XmlElement(required = true)
-    protected String eMail;
+    private String eMail;
     @XmlElement(defaultValue = "false")
-    protected boolean verfiedUser;
+    private boolean verfiedUser;
     @XmlElement(required = true)
-    protected String userId;
+    private String userId;
     @XmlElement(required = true)
-    protected String telephone;
+    private String telephone;
     @XmlElement(required = true)
-    protected String mobile;
+    private String mobile;
     @XmlElement(defaultValue = "1")
-    protected int index;
-    protected String organisationId;
+    private int index;
+    private String organisationId;
     @XmlAttribute(name = "allowedExec")
-    protected String allowedExec;
+    private String allowedExec;
     @XmlAttribute(name = "associatedExec")
-    protected String associatedExec;
+    private String associatedExec;
 
     /**
      * Gets the value of the fullName property.

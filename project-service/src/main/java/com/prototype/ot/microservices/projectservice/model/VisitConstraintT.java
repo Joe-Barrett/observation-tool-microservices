@@ -48,10 +48,10 @@ public class VisitConstraintT
 {
 
     @XmlElement(defaultValue = "0")
-    protected int visitId;
+    private int visitId;
     @XmlElement(defaultValue = "0")
-    protected Integer previousVisitId;
-    protected TimeT requiredDelay;
+    private Integer previousVisitId;
+    private TimeT requiredDelay;
 
     /**
      * Gets the value of the visitId property.

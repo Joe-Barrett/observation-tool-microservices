@@ -48,10 +48,10 @@ public class MonitoringConstraintT
 {
 
     @XmlElement(required = true)
-    protected TimeT monitoringLength;
+    private TimeT monitoringLength;
     @XmlElement(required = true)
-    protected TimeT cycleTime;
-    protected TimeT requiredDelay;
+    private TimeT cycleTime;
+    private TimeT requiredDelay;
 
     /**
      * Gets the value of the monitoringLength property.

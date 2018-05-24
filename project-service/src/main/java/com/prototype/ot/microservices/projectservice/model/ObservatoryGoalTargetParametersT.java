@@ -56,19 +56,19 @@ import javax.xml.bind.annotation.XmlType;
 public class ObservatoryGoalTargetParametersT {
 
     @XmlElement(required = true)
-    protected String sourceName;
+    private String sourceName;
     @XmlElement(required = true)
-    protected SkyCoordinatesT sourceCoordinates;
+    private SkyCoordinatesT sourceCoordinates;
     @XmlElement(required = true)
-    protected FluxT flux;
+    private FluxT flux;
     @XmlElement(required = true)
-    protected VelocityT sourceVelocity;
+    private VelocityT sourceVelocity;
     @XmlElement(defaultValue = "0")
-    protected int index;
+    private int index;
     @XmlElement(required = true)
-    protected FrequencyT frequency;
+    private FrequencyT frequency;
     @XmlElement(name = "CalibrationTargetProperties")
-    protected List<CalibrationTargetPropertiesT> calibrationTargetProperties;
+    private List<CalibrationTargetPropertiesT> calibrationTargetProperties;
 
     /**
      * Gets the value of the sourceName property.
@@ -230,7 +230,7 @@ public class ObservatoryGoalTargetParametersT {
      */
     public List<CalibrationTargetPropertiesT> getCalibrationTargetProperties() {
         if (calibrationTargetProperties == null) {
-            calibrationTargetProperties = new ArrayList<CalibrationTargetPropertiesT>();
+            calibrationTargetProperties = new ArrayList<>();
         }
         return this.calibrationTargetProperties;
     }

@@ -42,8 +42,8 @@ import javax.xml.bind.annotation.XmlType;
 public class TechnicalJustificationT {
 
     @XmlElement(required = true)
-    protected String justificationText;
-    protected String justificationKey;
+    private String justificationText;
+    private String justificationKey;
 
     /**
      * Gets the value of the justificationText property.

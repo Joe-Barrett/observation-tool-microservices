@@ -48,9 +48,9 @@ public class ACABaseBandConfigT
 {
 
     @XmlElement(required = true)
-    protected FrequencyT centerFreqOfResidualDelay;
+    private FrequencyT centerFreqOfResidualDelay;
     @XmlElement(name = "ACASpectralWindow", required = true)
-    protected List<ACASpectralWindowT> acaSpectralWindow;
+    private List<ACASpectralWindowT> acaSpectralWindow;
 
     /**
      * Gets the value of the centerFreqOfResidualDelay property.
@@ -100,7 +100,7 @@ public class ACABaseBandConfigT
      */
     public List<ACASpectralWindowT> getACASpectralWindow() {
         if (acaSpectralWindow == null) {
-            acaSpectralWindow = new ArrayList<ACASpectralWindowT>();
+            acaSpectralWindow = new ArrayList<>();
         }
         return this.acaSpectralWindow;
     }

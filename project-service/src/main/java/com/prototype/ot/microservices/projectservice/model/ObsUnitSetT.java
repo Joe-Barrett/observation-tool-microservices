@@ -66,25 +66,25 @@ public class ObsUnitSetT
 {
 
     @XmlElement(required = true)
-    protected String scienceProcessingScript;
+    private String scienceProcessingScript;
     @XmlElement(defaultValue = "false")
-    protected boolean runSciencePipeline;
+    private boolean runSciencePipeline;
     @XmlElement(name = "DataProcessingParameters", required = true)
-    protected DataProcessingParametersT dataProcessingParameters;
+    private DataProcessingParametersT dataProcessingParameters;
     @XmlElement(name = "FlowControl", required = true)
-    protected FlowControlT flowControl;
+    private FlowControlT flowControl;
     @XmlElement(name = "ObsUnitSet")
-    protected List<ObsUnitSetT> obsUnitSet;
+    private List<ObsUnitSetT> obsUnitSet;
     @XmlElement(name = "SchedBlockRef")
-    protected List<SchedBlockRefT> schedBlockRef;
+    private List<SchedBlockRefT> schedBlockRef;
     @XmlElement(name = "OUSStatusRef", required = true)
-    protected OUSStatusRefT ousStatusRef;
+    private OUSStatusRefT ousStatusRef;
     @XmlAttribute(name = "entityPartId")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
-    protected String entityPartId;
+    private String entityPartId;
     @XmlAttribute(name = "almatype", required = true)
-    protected String almatype;
+    private String almatype;
 
     /**
      * Gets the value of the scienceProcessingScript property.
@@ -198,7 +198,7 @@ public class ObsUnitSetT
      */
     public List<ObsUnitSetT> getObsUnitSet() {
         if (obsUnitSet == null) {
-            obsUnitSet = new ArrayList<ObsUnitSetT>();
+            obsUnitSet = new ArrayList<>();
         }
         return this.obsUnitSet;
     }
@@ -227,7 +227,7 @@ public class ObsUnitSetT
      */
     public List<SchedBlockRefT> getSchedBlockRef() {
         if (schedBlockRef == null) {
-            schedBlockRef = new ArrayList<SchedBlockRefT>();
+            schedBlockRef = new ArrayList<>();
         }
         return this.schedBlockRef;
     }

@@ -50,13 +50,13 @@ public class EllipseT
 {
 
     @XmlElement(required = true)
-    protected AngleT semiMajor;
+    private AngleT semiMajor;
     @XmlElement(required = true)
-    protected AngleT semiMinor;
+    private AngleT semiMinor;
     @XmlElement(name = "pAMajor", required = true)
-    protected AngleT paMajor;
+    private AngleT paMajor;
     @XmlElement(required = true)
-    protected UserAngleT spacing;
+    private UserAngleT spacing;
 
     /**
      * Gets the value of the semiMajor property.

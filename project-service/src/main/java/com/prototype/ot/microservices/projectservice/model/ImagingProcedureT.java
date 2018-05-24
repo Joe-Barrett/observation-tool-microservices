@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
 public class ImagingProcedureT {
 
     @XmlElement(required = true)
-    protected String imageScript;
+    private String imageScript;
 
     /**
      * Gets the value of the imageScript property.

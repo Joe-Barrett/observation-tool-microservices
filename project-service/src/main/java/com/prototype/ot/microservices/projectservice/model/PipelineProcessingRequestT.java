@@ -79,27 +79,27 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class PipelineProcessingRequestT {
 
     @XmlElement(name = "TimeOfCreation", required = true)
-    protected String timeOfCreation;
+    private String timeOfCreation;
     @XmlElement(name = "TimeOfUpdate", required = true)
-    protected String timeOfUpdate;
+    private String timeOfUpdate;
     @XmlElement(name = "Comment", required = true)
-    protected String comment;
+    private String comment;
     @XmlElement(name = "ImagingProcedureName", required = true)
-    protected String imagingProcedureName;
+    private String imagingProcedureName;
     @XmlElement(name = "PipelineParameter")
-    protected List<PipelineParameterT> pipelineParameter;
+    private List<PipelineParameterT> pipelineParameter;
     @XmlElement(name = "OUSStatusRef", required = true)
-    protected OUSStatusRefT ousStatusRef;
+    private OUSStatusRefT ousStatusRef;
     @XmlAttribute(name = "entityPartId")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
-    protected String entityPartId;
+    private String entityPartId;
     @XmlAttribute(name = "almatype", required = true)
-    protected String almatype;
+    private String almatype;
     @XmlAttribute(name = "RequestStatus")
-    protected String requestStatus;
+    private String requestStatus;
     @XmlAttribute(name = "CompletionStatus")
-    protected String completionStatus;
+    private String completionStatus;
 
     /**
      * Gets the value of the timeOfCreation property.
@@ -221,7 +221,7 @@ public class PipelineProcessingRequestT {
      */
     public List<PipelineParameterT> getPipelineParameter() {
         if (pipelineParameter == null) {
-            pipelineParameter = new ArrayList<PipelineParameterT>();
+            pipelineParameter = new ArrayList<>();
         }
         return this.pipelineParameter;
     }

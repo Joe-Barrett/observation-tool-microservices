@@ -58,15 +58,15 @@ import javax.xml.bind.annotation.XmlType;
 public class DataProcessingParametersT {
 
     @XmlElement(required = true)
-    protected AngleT angularResolution;
+    private AngleT angularResolution;
     @XmlElement(required = true)
-    protected VelocityT velocityResolution;
+    private VelocityT velocityResolution;
     @XmlElement(name = "tBSensitivityGoal", required = true)
-    protected TemperatureT tbSensitivityGoal;
+    private TemperatureT tbSensitivityGoal;
     @XmlElement(name = "rMSGoal", required = true)
-    protected SensitivityT rmsGoal;
+    private SensitivityT rmsGoal;
     @XmlAttribute(name = "projectType")
-    protected String projectType;
+    private String projectType;
 
     /**
      * Gets the value of the angularResolution property.

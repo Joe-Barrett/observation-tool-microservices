@@ -96,60 +96,60 @@ public class ObsProposal
 {
 
     @XmlElement(name = "ObsProposalEntity", required = true)
-    protected ObsProposalEntityT obsProposalEntity;
+    private ObsProposalEntityT obsProposalEntity;
     @XmlElement(name = "DocumentsRef")
-    protected ObsAttachmentRefT documentsRef;
+    private ObsAttachmentRefT documentsRef;
     @XmlElement(name = "ObsProjectRef", required = true)
-    protected ObsProjectRefT obsProjectRef;
+    private ObsProjectRefT obsProjectRef;
     @XmlElement(required = true)
-    protected String title;
+    private String title;
     @XmlElement(required = true)
-    protected String code;
+    private String code;
     @XmlElement(name = "abstract", required = true)
-    protected String _abstract;
+    private String _abstract;
     @XmlElement(required = true)
-    protected String relatedProposals;
+    private String relatedProposals;
     @XmlElement(required = true)
-    protected String previousProposals;
+    private String previousProposals;
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar dateReceived;
+    private XMLGregorianCalendar dateReceived;
     @XmlElement(required = true)
-    protected String cycle;
+    private String cycle;
     @XmlElement(defaultValue = "false")
-    protected boolean studentProject;
+    private boolean studentProject;
     @XmlElement(defaultValue = "false")
-    protected boolean continuation;
+    private boolean continuation;
     @XmlElement(required = true)
-    protected String recentPublications;
+    private String recentPublications;
     @XmlElement(required = true, defaultValue = "10")
-    protected String scientificCategoryCode;
+    private String scientificCategoryCode;
     @XmlElement(required = true, defaultValue = "S")
-    protected String proposalTypeCode;
+    private String proposalTypeCode;
     @XmlElement(required = true)
-    protected String scientificCategoryString;
+    private String scientificCategoryString;
     @XmlElement(required = true)
-    protected String proposalTypeString;
-    protected List<String> keyword;
-    protected List<String> keywordCode;
-    protected String resubmittedProjectCode;
+    private String proposalTypeString;
+    private List<String> keyword;
+    private List<String> keywordCode;
+    private String resubmittedProjectCode;
     @XmlElement(defaultValue = "false")
-    protected Boolean isResubmission;
-    protected String duplicateObservationsJustification;
+    private Boolean isResubmission;
+    private String duplicateObservationsJustification;
     @XmlElement(name = "PrincipalInvestigator", required = true)
-    protected InvestigatorT principalInvestigator;
+    private InvestigatorT principalInvestigator;
     @XmlElement(name = "CoInvestigator")
-    protected List<InvestigatorT> coInvestigator;
+    private List<InvestigatorT> coInvestigator;
     @XmlElement(name = "CoPrincipalInvestigator")
-    protected List<InvestigatorT> coPrincipalInvestigator;
+    private List<InvestigatorT> coPrincipalInvestigator;
     @XmlElement(name = "ProposalFeedback", required = true)
-    protected ProposalFeedbackT proposalFeedback;
+    private ProposalFeedbackT proposalFeedback;
     @XmlAttribute(name = "schemaVersion", required = true)
-    protected String schemaVersion;
+    private String schemaVersion;
     @XmlAttribute(name = "revision")
-    protected String revision;
+    private String revision;
     @XmlAttribute(name = "almatype", required = true)
-    protected String almatype;
+    private String almatype;
 
     /**
      * Gets the value of the obsProposalEntity property.
@@ -567,7 +567,7 @@ public class ObsProposal
      */
     public List<String> getKeyword() {
         if (keyword == null) {
-            keyword = new ArrayList<String>();
+            keyword = new ArrayList<>();
         }
         return this.keyword;
     }
@@ -596,7 +596,7 @@ public class ObsProposal
      */
     public List<String> getKeywordCode() {
         if (keywordCode == null) {
-            keywordCode = new ArrayList<String>();
+            keywordCode = new ArrayList<>();
         }
         return this.keywordCode;
     }
@@ -721,7 +721,7 @@ public class ObsProposal
      */
     public List<InvestigatorT> getCoInvestigator() {
         if (coInvestigator == null) {
-            coInvestigator = new ArrayList<InvestigatorT>();
+            coInvestigator = new ArrayList<>();
         }
         return this.coInvestigator;
     }
@@ -750,7 +750,7 @@ public class ObsProposal
      */
     public List<InvestigatorT> getCoPrincipalInvestigator() {
         if (coPrincipalInvestigator == null) {
-            coPrincipalInvestigator = new ArrayList<InvestigatorT>();
+            coPrincipalInvestigator = new ArrayList<>();
         }
         return this.coPrincipalInvestigator;
     }

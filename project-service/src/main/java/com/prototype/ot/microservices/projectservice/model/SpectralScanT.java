@@ -52,15 +52,15 @@ public class SpectralScanT
 {
 
     @XmlElement(required = true)
-    protected FrequencyT startFrequency;
+    private FrequencyT startFrequency;
     @XmlElement(required = true)
-    protected FrequencyT endFrequency;
+    private FrequencyT endFrequency;
     @XmlElement(required = true)
-    protected UserFrequencyT bandWidth;
+    private UserFrequencyT bandWidth;
     @XmlElement(required = true)
-    protected FrequencyT spectralResolution;
+    private FrequencyT spectralResolution;
     @XmlElement(defaultValue = "true")
-    protected boolean isSkyFrequency;
+    private boolean isSkyFrequency;
 
     /**
      * Gets the value of the startFrequency property.

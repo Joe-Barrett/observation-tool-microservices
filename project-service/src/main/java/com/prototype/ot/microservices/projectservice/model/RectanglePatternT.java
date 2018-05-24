@@ -75,21 +75,21 @@ public class RectanglePatternT
 {
 
     @XmlElement(required = true)
-    protected SkyCoordinatesT patternCenterCoordinates;
+    private SkyCoordinatesT patternCenterCoordinates;
     @XmlElement(required = true)
-    protected AngleT longitudeLength;
+    private AngleT longitudeLength;
     @XmlElement(required = true)
-    protected AngleT latitudeLength;
+    private AngleT latitudeLength;
     @XmlElement(required = true)
-    protected AngleT orthogonalStep;
+    private AngleT orthogonalStep;
     @XmlElement(required = true)
-    protected AngleT orientation;
+    private AngleT orientation;
     @XmlElement(defaultValue = "false")
-    protected boolean uniDirectionalScan;
+    private boolean uniDirectionalScan;
     @XmlAttribute(name = "scanDirection")
-    protected String scanDirection;
+    private String scanDirection;
     @XmlAttribute(name = "scanningCoordinateSystem")
-    protected String scanningCoordinateSystem;
+    private String scanningCoordinateSystem;
 
     /**
      * Gets the value of the patternCenterCoordinates property.

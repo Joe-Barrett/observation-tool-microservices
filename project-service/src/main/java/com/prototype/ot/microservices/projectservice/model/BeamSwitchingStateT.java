@@ -44,9 +44,9 @@ public class BeamSwitchingStateT
 {
 
     @XmlElement(required = true)
-    protected AngleT position;
+    private AngleT position;
     @XmlElement(required = true)
-    protected TimeT transition;
+    private TimeT transition;
 
     /**
      * Gets the value of the position property.

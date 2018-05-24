@@ -52,15 +52,15 @@ public class RectangleT
 {
 
     @XmlElement(name = "pALong", required = true)
-    protected AngleT paLong;
+    private AngleT paLong;
     @XmlElement(name = "long", required = true)
-    protected AngleT _long;
+    private AngleT _long;
     @XmlElement(name = "short", required = true)
-    protected AngleT _short;
+    private AngleT _short;
     @XmlElement(required = true)
-    protected UserAngleT spacing;
+    private UserAngleT spacing;
     @XmlElement(required = true)
-    protected FrequencyT referenceFrequency;
+    private FrequencyT referenceFrequency;
 
     /**
      * Gets the value of the paLong property.

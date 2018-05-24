@@ -48,15 +48,15 @@ public class ObsReview
 {
 
     @XmlElement(name = "ObsReviewEntity", required = true)
-    protected ObsReviewEntityT obsReviewEntity;
+    private ObsReviewEntityT obsReviewEntity;
     @XmlElement(name = "ObsProjectRef", required = true)
-    protected ObsProjectRefT obsProjectRef;
+    private ObsProjectRefT obsProjectRef;
     @XmlAttribute(name = "schemaVersion", required = true)
-    protected String schemaVersion;
+    private String schemaVersion;
     @XmlAttribute(name = "revision")
-    protected String revision;
+    private String revision;
     @XmlAttribute(name = "almatype", required = true)
-    protected String almatype;
+    private String almatype;
 
     /**
      * Gets the value of the obsReviewEntity property.

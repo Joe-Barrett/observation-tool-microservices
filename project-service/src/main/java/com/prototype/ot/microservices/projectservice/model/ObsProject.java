@@ -147,65 +147,65 @@ import javax.xml.bind.annotation.*;
 public class ObsProject {
 
     @XmlElement(name = "ObsProjectEntity", required = true)
-    protected ObsProjectEntityT obsProjectEntity;
+    private ObsProjectEntityT obsProjectEntity;
     @XmlElement(name = "ObsProposalRef", required = true)
-    protected ObsProposalRefT obsProposalRef;
+    private ObsProposalRefT obsProposalRef;
     @XmlElement(name = "ObsReviewRef")
-    protected ObsReviewRefT obsReviewRef;
+    private ObsReviewRefT obsReviewRef;
     @XmlElement(name = "ProjectStatusRef", required = true)
-    protected ProjectStatusRefT projectStatusRef;
+    private ProjectStatusRefT projectStatusRef;
     @XmlElement(required = true)
-    protected String projectName;
+    private String projectName;
     @XmlElement(name = "pI", required = true)
-    protected String pi;
+    private String pi;
     @XmlElement(required = true, defaultValue = "0")
-    protected String version;
+    private String version;
     @XmlElement(required = true, defaultValue = "None Assigned")
-    protected String code;
+    private String code;
     @XmlElement(defaultValue = "0")
-    protected int assignedPriority;
+    private int assignedPriority;
     @XmlElement(required = true, defaultValue = "0000-00-00")
-    protected String timeOfCreation;
+    private String timeOfCreation;
     @XmlElement(defaultValue = "false")
-    protected boolean manualMode;
+    private boolean manualMode;
     @XmlElement(defaultValue = "false")
-    protected boolean simulationMode;
+    private boolean simulationMode;
     @XmlElement(defaultValue = "false")
-    protected boolean isCommissioning;
+    private boolean isCommissioning;
     @XmlElement(defaultValue = "false")
-    protected boolean isCalibration;
+    private boolean isCalibration;
     @XmlElement(required = true, defaultValue = "D")
-    protected String letterGrade;
+    private String letterGrade;
     @XmlElement(defaultValue = "1")
-    protected int scientificRank;
+    private int scientificRank;
     @XmlElement(defaultValue = "1.0")
-    protected double scientificScore;
+    private double scientificScore;
     @XmlElement(required = true)
-    protected String staffProjectNote;
+    private String staffProjectNote;
     @XmlElement(required = true)
-    protected String taPhase2Comments;
+    private String taPhase2Comments;
     @XmlElement(required = true)
-    protected String taMainComments;
+    private String taMainComments;
     @XmlElement(required = true)
-    protected String consensusReport;
+    private String consensusReport;
     @XmlElement(defaultValue = "false")
-    protected Boolean isDDT;
+    private Boolean isDDT;
     @XmlElement(name = "p2gAttention", defaultValue = "false")
-    protected Boolean p2GAttention;
+    private Boolean p2GAttention;
     @XmlElement(name = "p2gAttentionReasons")
-    protected String p2GAttentionReasons;
+    private String p2GAttentionReasons;
     @XmlElement(name = "ObsProgram", required = true)
-    protected ObsProgramT obsProgram;
+    private ObsProgramT obsProgram;
     @XmlElement(name = "SubmissionRecord")
-    protected List<SubmissionRecordT> submissionRecord;
+    private List<SubmissionRecordT> submissionRecord;
     @XmlAttribute(name = "schemaVersion", required = true)
-    protected String schemaVersion;
+    private String schemaVersion;
     @XmlAttribute(name = "revision")
-    protected String revision;
+    private String revision;
     @XmlAttribute(name = "almatype", required = true)
-    protected String almatype;
+    private String almatype;
     @XmlAttribute(name = "status")
-    protected String status;
+    private String status;
 
     /**
      * Gets the value of the obsProjectEntity property.
@@ -775,7 +775,7 @@ public class ObsProject {
      */
     public List<SubmissionRecordT> getSubmissionRecord() {
         if (submissionRecord == null) {
-            submissionRecord = new ArrayList<SubmissionRecordT>();
+            submissionRecord = new ArrayList<>();
         }
         return this.submissionRecord;
     }

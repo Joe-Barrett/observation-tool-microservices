@@ -76,21 +76,21 @@ public class FillPatternT
 {
 
     @XmlElement(required = true)
-    protected SkyCoordinatesT patternCenterCoordinates;
+    private SkyCoordinatesT patternCenterCoordinates;
     @XmlElement(required = true)
-    protected AngleT longitudeLength;
+    private AngleT longitudeLength;
     @XmlElement(required = true)
-    protected AngleT latitudeLength;
+    private AngleT latitudeLength;
     @XmlElement(required = true)
-    protected AngleT samplingLength;
+    private AngleT samplingLength;
     @XmlElement(required = true)
-    protected AngleT orientation;
+    private AngleT orientation;
     @XmlAttribute(name = "patternType")
-    protected String patternType;
+    private String patternType;
     @XmlAttribute(name = "patternSubtype")
-    protected String patternSubtype;
+    private String patternSubtype;
     @XmlAttribute(name = "scanningCoordinateSystem")
-    protected String scanningCoordinateSystem;
+    private String scanningCoordinateSystem;
 
     /**
      * Gets the value of the patternCenterCoordinates property.

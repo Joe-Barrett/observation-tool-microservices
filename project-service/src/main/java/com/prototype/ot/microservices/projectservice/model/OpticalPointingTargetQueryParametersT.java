@@ -70,33 +70,33 @@ import javax.xml.bind.annotation.XmlType;
 public class OpticalPointingTargetQueryParametersT {
 
     @XmlElement(required = true)
-    protected SkyCoordinatesT minCoordinates;
+    private SkyCoordinatesT minCoordinates;
     @XmlElement(required = true)
-    protected SkyCoordinatesT maxCoordinates;
+    private SkyCoordinatesT maxCoordinates;
     @XmlElement(required = true)
-    protected MagnitudeT minMagnitude;
+    private MagnitudeT minMagnitude;
     @XmlElement(required = true)
-    protected MagnitudeT maxMagnitude;
+    private MagnitudeT maxMagnitude;
     @XmlElement(required = true)
-    protected AngleT minElevation;
+    private AngleT minElevation;
     @XmlElement(required = true)
-    protected AngleT maxElevation;
+    private AngleT maxElevation;
     @XmlElement(required = true)
-    protected AngleT minAzimuth;
+    private AngleT minAzimuth;
     @XmlElement(required = true)
-    protected AngleT maxAzimuth;
+    private AngleT maxAzimuth;
     @XmlElement(required = true)
-    protected String lst;
+    private String lst;
     @XmlElement(required = true)
-    protected AngleT fieldMinSeparation;
+    private AngleT fieldMinSeparation;
     @XmlElement(required = true)
-    protected AngleT listMinSeparation;
-    protected int selectionFactor;
-    protected int maxTargets;
+    private AngleT listMinSeparation;
+    private int selectionFactor;
+    private int maxTargets;
     @XmlElement(required = true)
-    protected String catalogLocation;
+    private String catalogLocation;
     @XmlElement(required = true)
-    protected String localFileName;
+    private String localFileName;
 
     /**
      * Gets the value of the minCoordinates property.

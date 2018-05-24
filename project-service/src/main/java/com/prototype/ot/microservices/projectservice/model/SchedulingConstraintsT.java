@@ -84,24 +84,24 @@ import javax.xml.bind.annotation.XmlType;
 public class SchedulingConstraintsT {
 
     @XmlElement(required = true)
-    protected FrequencyT representativeFrequency;
+    private FrequencyT representativeFrequency;
     @XmlElement(required = true)
-    protected AngleT minAcceptableAngResolution;
+    private AngleT minAcceptableAngResolution;
     @XmlElement(required = true)
-    protected AngleT maxAcceptableAngResolution;
-    protected double dynamicRange;
+    private AngleT maxAcceptableAngResolution;
+    private double dynamicRange;
     @XmlElement(required = true)
-    protected SkyCoordinatesT representativeCoordinates;
-    protected List<String> requiredReceiverBands;
-    protected List<String> nominalConfiguration;
-    protected AngleT scienceGoalDesiredResolution;
-    protected AngleT scienceGoalLargestAngularScale;
+    private SkyCoordinatesT representativeCoordinates;
+    private List<String> requiredReceiverBands;
+    private List<String> nominalConfiguration;
+    private AngleT scienceGoalDesiredResolution;
+    private AngleT scienceGoalLargestAngularScale;
     @XmlElement(defaultValue = "false")
-    protected Boolean isSimultaneous;
-    protected List<String> simultaneousSbUid;
-    protected SchedBlockRefT representativeTargetRef;
+    private Boolean isSimultaneous;
+    private List<String> simultaneousSbUid;
+    private SchedBlockRefT representativeTargetRef;
     @XmlAttribute(name = "representativeReceiverBand")
-    protected String representativeReceiverBand;
+    private String representativeReceiverBand;
 
     /**
      * Gets the value of the representativeFrequency property.
@@ -239,7 +239,7 @@ public class SchedulingConstraintsT {
      */
     public List<String> getRequiredReceiverBands() {
         if (requiredReceiverBands == null) {
-            requiredReceiverBands = new ArrayList<String>();
+            requiredReceiverBands = new ArrayList<>();
         }
         return this.requiredReceiverBands;
     }
@@ -268,7 +268,7 @@ public class SchedulingConstraintsT {
      */
     public List<String> getNominalConfiguration() {
         if (nominalConfiguration == null) {
-            nominalConfiguration = new ArrayList<String>();
+            nominalConfiguration = new ArrayList<>();
         }
         return this.nominalConfiguration;
     }
@@ -369,7 +369,7 @@ public class SchedulingConstraintsT {
      */
     public List<String> getSimultaneousSbUid() {
         if (simultaneousSbUid == null) {
-            simultaneousSbUid = new ArrayList<String>();
+            simultaneousSbUid = new ArrayList<>();
         }
         return this.simultaneousSbUid;
     }

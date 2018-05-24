@@ -42,8 +42,8 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class ChannelAverageRegionT {
 
-    protected int startChannel;
-    protected int numberChannels;
+    private int startChannel;
+    private int numberChannels;
 
     /**
      * Gets the value of the startChannel property.

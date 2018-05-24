@@ -119,46 +119,46 @@ import javax.xml.bind.annotation.XmlType;
 public class PerformanceParametersT {
 
     @XmlElement(required = true)
-    protected UserAngleT desiredAngularResolution;
+    private UserAngleT desiredAngularResolution;
     @XmlElement(required = true)
-    protected AngleT desiredLargestScale;
+    private AngleT desiredLargestScale;
     @XmlElement(required = true)
-    protected UserSensitivityT desiredSensitivity;
-    protected double desiredDynamicRange;
-    protected FrequencyT representativeFrequency;
+    private UserSensitivityT desiredSensitivity;
+    private double desiredDynamicRange;
+    private FrequencyT representativeFrequency;
     @XmlElement(defaultValue = "false")
-    protected boolean useACA;
+    private boolean useACA;
     @XmlElement(defaultValue = "false")
-    protected boolean isTimeConstrained;
+    private boolean isTimeConstrained;
     @XmlElement(defaultValue = "false")
-    protected boolean useTP;
-    protected UserSensitivityT desiredSDSensitivity;
+    private boolean useTP;
+    private UserSensitivityT desiredSDSensitivity;
     @XmlElement(defaultValue = "false")
-    protected boolean isPointSource;
+    private boolean isPointSource;
     @XmlElement(required = true)
-    protected UserFrequencyT desiredSensitivityReferenceFrequencyWidth;
+    private UserFrequencyT desiredSensitivityReferenceFrequencyWidth;
     @XmlElement(defaultValue = "false")
-    protected boolean needsMoreTime;
-    protected UserSensitivityT desiredACASensitivity;
-    protected UserSensitivityT desiredTPSensitivity;
+    private boolean needsMoreTime;
+    private UserSensitivityT desiredACASensitivity;
+    private UserSensitivityT desiredTPSensitivity;
     @XmlElement(defaultValue = "false")
-    protected Boolean isScheduleConstrained;
-    protected TimeT desiredTime;
-    protected UserAngleT acceptableAngularResolution;
+    private Boolean isScheduleConstrained;
+    private TimeT desiredTime;
+    private UserAngleT acceptableAngularResolution;
     @XmlElement(name = "isSimultaneous12and7", defaultValue = "false")
-    protected Boolean isSimultaneous12And7;
+    private Boolean isSimultaneous12And7;
     @XmlElement(name = "MonitoringConstraint")
-    protected List<MonitoringConstraintT> monitoringConstraint;
+    private List<MonitoringConstraintT> monitoringConstraint;
     @XmlElement(name = "TemporalParameters")
-    protected List<TemporalParametersT> temporalParameters;
+    private List<TemporalParametersT> temporalParameters;
     @XmlElement(name = "VisitConstraint")
-    protected List<VisitConstraintT> visitConstraint;
+    private List<VisitConstraintT> visitConstraint;
     @XmlAttribute(name = "desiredSensitivityFrequencyMeasure")
-    protected String desiredSensitivityFrequencyMeasure;
+    private String desiredSensitivityFrequencyMeasure;
     @XmlAttribute(name = "timingConstraintsType")
-    protected String timingConstraintsType;
+    private String timingConstraintsType;
     @XmlAttribute(name = "resolutionOption")
-    protected String resolutionOption;
+    private String resolutionOption;
 
     /**
      * Gets the value of the desiredAngularResolution property.
@@ -568,7 +568,7 @@ public class PerformanceParametersT {
      */
     public List<MonitoringConstraintT> getMonitoringConstraint() {
         if (monitoringConstraint == null) {
-            monitoringConstraint = new ArrayList<MonitoringConstraintT>();
+            monitoringConstraint = new ArrayList<>();
         }
         return this.monitoringConstraint;
     }
@@ -597,7 +597,7 @@ public class PerformanceParametersT {
      */
     public List<TemporalParametersT> getTemporalParameters() {
         if (temporalParameters == null) {
-            temporalParameters = new ArrayList<TemporalParametersT>();
+            temporalParameters = new ArrayList<>();
         }
         return this.temporalParameters;
     }
@@ -626,7 +626,7 @@ public class PerformanceParametersT {
      */
     public List<VisitConstraintT> getVisitConstraint() {
         if (visitConstraint == null) {
-            visitConstraint = new ArrayList<VisitConstraintT>();
+            visitConstraint = new ArrayList<>();
         }
         return this.visitConstraint;
     }

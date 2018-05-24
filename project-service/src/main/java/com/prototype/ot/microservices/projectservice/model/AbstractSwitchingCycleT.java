@@ -48,9 +48,9 @@ import javax.xml.bind.annotation.XmlType;
 })
 public abstract class AbstractSwitchingCycleT {
 
-    protected int numberOfPositions;
+    private int numberOfPositions;
     @XmlElement(required = true)
-    protected TimeT dwellTime;
+    private TimeT dwellTime;
 
     /**
      * Gets the value of the numberOfPositions property.
