@@ -46,7 +46,7 @@ public class BLBaseBandConfigT
 {
 
     @XmlElement(name = "BLSpectralWindow", required = true)
-    protected List<BLSpectralWindowT> blSpectralWindow;
+    private List<BLSpectralWindowT> blSpectralWindow;
 
     /**
      * Gets the value of the blSpectralWindow property.
@@ -72,7 +72,7 @@ public class BLBaseBandConfigT
      */
     public List<BLSpectralWindowT> getBLSpectralWindow() {
         if (blSpectralWindow == null) {
-            blSpectralWindow = new ArrayList<BLSpectralWindowT>();
+            blSpectralWindow = new ArrayList<>();
         }
         return this.blSpectralWindow;
     }

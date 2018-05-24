@@ -51,9 +51,9 @@ import javax.xml.bind.annotation.XmlType;
 public class OpticalCameraSpecParametersT {
 
     @XmlElement(required = true)
-    protected TimeT minIntegrationTime;
+    private TimeT minIntegrationTime;
     @XmlAttribute(name = "filter")
-    protected String filter;
+    private String filter;
 
     /**
      * Gets the value of the minIntegrationTime property.

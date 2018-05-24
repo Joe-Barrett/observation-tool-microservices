@@ -50,15 +50,15 @@ import javax.xml.bind.annotation.XmlType;
 public class ProposalFeedbackT {
 
     @XmlElement(required = true)
-    protected TimeT estimatedTotalIntegrationTime;
+    private TimeT estimatedTotalIntegrationTime;
     @XmlElement(name = "ArrayTimeBreakdown")
-    protected ArrayTimeBreakdownT arrayTimeBreakdown;
+    private ArrayTimeBreakdownT arrayTimeBreakdown;
     @XmlElement(name = "DataRateBreakdown", required = true)
-    protected DataRateBreakdownT dataRateBreakdown;
+    private DataRateBreakdownT dataRateBreakdown;
     @XmlElement(name = "ReceiverTimeBreakdown", required = true)
-    protected ReceiverTimeBreakdownT receiverTimeBreakdown;
+    private ReceiverTimeBreakdownT receiverTimeBreakdown;
     @XmlElement(name = "TimeAllocationBreakdown", required = true)
-    protected TimeAllocationBreakdownT timeAllocationBreakdown;
+    private TimeAllocationBreakdownT timeAllocationBreakdown;
 
     /**
      * Gets the value of the estimatedTotalIntegrationTime property.

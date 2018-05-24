@@ -54,9 +54,9 @@ public class BeamSwitchingCycleT
 {
 
     @XmlElement(name = "BeamSwitchingState", required = true)
-    protected List<BeamSwitchingStateT> beamSwitchingState;
+    private List<BeamSwitchingStateT> beamSwitchingState;
     @XmlAttribute(name = "mode")
-    protected String mode;
+    private String mode;
 
     /**
      * Gets the value of the beamSwitchingState property.
@@ -82,7 +82,7 @@ public class BeamSwitchingCycleT
      */
     public List<BeamSwitchingStateT> getBeamSwitchingState() {
         if (beamSwitchingState == null) {
-            beamSwitchingState = new ArrayList<BeamSwitchingStateT>();
+            beamSwitchingState = new ArrayList<>();
         }
         return this.beamSwitchingState;
     }

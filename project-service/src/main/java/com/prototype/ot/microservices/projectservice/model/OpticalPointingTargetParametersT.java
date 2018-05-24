@@ -52,16 +52,16 @@ import javax.xml.bind.annotation.XmlType;
 public class OpticalPointingTargetParametersT {
 
     @XmlElement(required = true)
-    protected String sourceName;
+    private String sourceName;
     @XmlElement(required = true)
-    protected SkyCoordinatesT sourceCoordinates;
+    private SkyCoordinatesT sourceCoordinates;
     @XmlElement(required = true)
-    protected AngularVelocityT pmRA;
+    private AngularVelocityT pmRA;
     @XmlElement(required = true)
-    protected AngularVelocityT pmDec;
+    private AngularVelocityT pmDec;
     @XmlElement(required = true)
-    protected AngleT parallax;
-    protected double visibleMagnitude;
+    private AngleT parallax;
+    private double visibleMagnitude;
 
     /**
      * Gets the value of the sourceName property.

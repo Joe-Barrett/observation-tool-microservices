@@ -72,35 +72,35 @@ public class OUSStatus
 {
 
     @XmlElement(name = "OUSStatusEntity", required = true)
-    protected OUSStatusEntityT ousStatusEntity;
+    private OUSStatusEntityT ousStatusEntity;
     @XmlElement(name = "ObsUnitSetRef", required = true)
-    protected ObsProjectRefT obsUnitSetRef;
+    private ObsProjectRefT obsUnitSetRef;
     @XmlElement(name = "NumberSBsFailed")
-    protected int numberSBsFailed;
+    private int numberSBsFailed;
     @XmlElement(name = "TotalObsUnitSets")
-    protected int totalObsUnitSets;
+    private int totalObsUnitSets;
     @XmlElement(name = "NumberObsUnitSetsCompleted")
-    protected int numberObsUnitSetsCompleted;
+    private int numberObsUnitSetsCompleted;
     @XmlElement(name = "NumberObsUnitSetsFailed")
-    protected int numberObsUnitSetsFailed;
+    private int numberObsUnitSetsFailed;
     @XmlElement(name = "TotalSBs")
-    protected int totalSBs;
+    private int totalSBs;
     @XmlElement(name = "NumberSBsCompleted")
-    protected int numberSBsCompleted;
+    private int numberSBsCompleted;
     @XmlElement(name = "OUSStatusRef")
-    protected List<OUSStatusRefT> ousStatusRef;
+    private List<OUSStatusRefT> ousStatusRef;
     @XmlElement(name = "SBStatusRef")
-    protected List<SBStatusRefT> sbStatusRef;
+    private List<SBStatusRefT> sbStatusRef;
     @XmlElement(name = "PipelineProcessingRequest")
-    protected PipelineProcessingRequestT pipelineProcessingRequest;
+    private PipelineProcessingRequestT pipelineProcessingRequest;
     @XmlElement(name = "Session")
-    protected List<SessionT> session;
+    private List<SessionT> session;
     @XmlAttribute(name = "schemaVersion", required = true)
-    protected String schemaVersion;
+    private String schemaVersion;
     @XmlAttribute(name = "revision")
-    protected String revision;
+    private String revision;
     @XmlAttribute(name = "almatype", required = true)
-    protected String almatype;
+    private String almatype;
 
     /**
      * Gets the value of the ousStatusEntity property.
@@ -270,7 +270,7 @@ public class OUSStatus
      */
     public List<OUSStatusRefT> getOUSStatusRef() {
         if (ousStatusRef == null) {
-            ousStatusRef = new ArrayList<OUSStatusRefT>();
+            ousStatusRef = new ArrayList<>();
         }
         return this.ousStatusRef;
     }
@@ -299,7 +299,7 @@ public class OUSStatus
      */
     public List<SBStatusRefT> getSBStatusRef() {
         if (sbStatusRef == null) {
-            sbStatusRef = new ArrayList<SBStatusRefT>();
+            sbStatusRef = new ArrayList<>();
         }
         return this.sbStatusRef;
     }
@@ -352,7 +352,7 @@ public class OUSStatus
      */
     public List<SessionT> getSession() {
         if (session == null) {
-            session = new ArrayList<SessionT>();
+            session = new ArrayList<>();
         }
         return this.session;
     }

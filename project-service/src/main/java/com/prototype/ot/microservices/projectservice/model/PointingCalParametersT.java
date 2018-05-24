@@ -60,13 +60,13 @@ public class PointingCalParametersT
 {
 
     @XmlElement(required = true)
-    protected AngleT desiredAccuracy;
+    private AngleT desiredAccuracy;
     @XmlElement(required = true)
-    protected TimeT maximumElapsedTime;
+    private TimeT maximumElapsedTime;
     @XmlElement(required = true)
-    protected AngleT excursion;
+    private AngleT excursion;
     @XmlAttribute(name = "pointingMethod")
-    protected String pointingMethod;
+    private String pointingMethod;
 
     /**
      * Gets the value of the desiredAccuracy property.

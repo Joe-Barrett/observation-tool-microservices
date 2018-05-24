@@ -46,13 +46,13 @@ import javax.xml.bind.annotation.XmlType;
 public class BestSBItemT {
 
     @XmlElement(name = "Score", required = true)
-    protected String score;
+    private String score;
     @XmlElement(name = "Success", required = true)
-    protected String success;
+    private String success;
     @XmlElement(name = "Rank", required = true)
-    protected String rank;
+    private String rank;
     @XmlElement(name = "SchedBlockRef", required = true)
-    protected SchedBlockRefT schedBlockRef;
+    private SchedBlockRefT schedBlockRef;
 
     /**
      * Gets the value of the score property.

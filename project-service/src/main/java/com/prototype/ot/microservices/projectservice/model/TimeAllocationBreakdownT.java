@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.XmlType;
 public class TimeAllocationBreakdownT {
 
     @XmlElement(name = "ExecutiveFraction", required = true)
-    protected List<ExecutiveFractionT> executiveFraction;
+    private List<ExecutiveFractionT> executiveFraction;
 
     /**
      * Gets the value of the executiveFraction property.
@@ -70,7 +70,7 @@ public class TimeAllocationBreakdownT {
      */
     public List<ExecutiveFractionT> getExecutiveFraction() {
         if (executiveFraction == null) {
-            executiveFraction = new ArrayList<ExecutiveFractionT>();
+            executiveFraction = new ArrayList<>();
         }
         return this.executiveFraction;
     }

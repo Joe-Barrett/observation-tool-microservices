@@ -65,15 +65,15 @@ import javax.xml.bind.annotation.XmlType;
 public class SkyCoordinatesT {
 
     @XmlElement(required = true)
-    protected LongitudeT longitude;
+    private LongitudeT longitude;
     @XmlElement(required = true)
-    protected LatitudeT latitude;
+    private LatitudeT latitude;
     @XmlElement(required = true)
-    protected String fieldName;
+    private String fieldName;
     @XmlAttribute(name = "system")
-    protected String system;
+    private String system;
     @XmlAttribute(name = "type")
-    protected String type;
+    private String type;
 
     /**
      * Gets the value of the longitude property.

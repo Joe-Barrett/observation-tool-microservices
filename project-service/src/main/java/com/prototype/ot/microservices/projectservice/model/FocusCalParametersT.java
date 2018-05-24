@@ -50,7 +50,7 @@ public class FocusCalParametersT
 {
 
     @XmlAttribute(name = "AxisToAdjust")
-    protected String axisToAdjust;
+    private String axisToAdjust;
 
     /**
      * Gets the value of the axisToAdjust property.

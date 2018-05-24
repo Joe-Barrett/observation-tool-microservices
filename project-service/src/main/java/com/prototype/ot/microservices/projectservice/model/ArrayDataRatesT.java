@@ -56,13 +56,13 @@ import javax.xml.bind.annotation.XmlType;
 public class ArrayDataRatesT {
 
     @XmlElement(required = true)
-    protected DataRateT estimatedAverageDataRate;
+    private DataRateT estimatedAverageDataRate;
     @XmlElement(required = true)
-    protected DataRateT estimatedMaximumDataRate;
+    private DataRateT estimatedMaximumDataRate;
     @XmlElement(required = true)
-    protected StorageVolumeT estimatedDataVolume;
+    private StorageVolumeT estimatedDataVolume;
     @XmlAttribute(name = "arrayName")
-    protected String arrayName;
+    private String arrayName;
 
     /**
      * Gets the value of the estimatedAverageDataRate property.

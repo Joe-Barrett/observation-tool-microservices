@@ -44,9 +44,9 @@ import javax.xml.bind.annotation.XmlType;
 public class AdvancedSpectralSetupT {
 
     @XmlElement(defaultValue = "false")
-    protected boolean sideBandSeparation;
+    private boolean sideBandSeparation;
     @XmlElement(defaultValue = "false")
-    protected boolean fastMode;
+    private boolean fastMode;
 
     /**
      * Gets the value of the sideBandSeparation property.

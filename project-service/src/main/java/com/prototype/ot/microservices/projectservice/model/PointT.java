@@ -46,11 +46,11 @@ import javax.xml.bind.annotation.XmlType;
 public class PointT {
 
     @XmlElement(name = "rA", required = true)
-    protected LongitudeT ra;
+    private LongitudeT ra;
     @XmlElement(required = true)
-    protected LatitudeT dec;
+    private LatitudeT dec;
     @XmlElement(required = true)
-    protected String name;
+    private String name;
 
     /**
      * Gets the value of the ra property.

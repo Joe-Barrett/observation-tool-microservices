@@ -114,27 +114,27 @@ public class SchedBlock
 {
 
     @XmlElement(name = "SchedBlockEntity", required = true)
-    protected SchedBlockEntityT schedBlockEntity;
+    private SchedBlockEntityT schedBlockEntity;
     @XmlElement(name = "SBStatusRef", required = true)
-    protected SBStatusRefT sbStatusRef;
+    private SBStatusRefT sbStatusRef;
     @XmlElement(name = "ObsUnitSetRef")
-    protected ObsProjectRefT obsUnitSetRef;
+    private ObsProjectRefT obsUnitSetRef;
     @XmlElement(defaultValue = "false")
-    protected boolean standardMode;
+    private boolean standardMode;
     @XmlElement(required = true)
-    protected String modeName;
+    private String modeName;
     @XmlElement(name = "pIName", required = true, defaultValue = "Unknown")
-    protected String piName;
-    protected List<KeywordValueT> expertParameter;
-    protected String qa0Notes;
+    private String piName;
+    private List<KeywordValueT> expertParameter;
+    private String qa0Notes;
     @XmlElement(name = "OpticalCameraSpec")
-    protected List<OpticalCameraSpecT> opticalCameraSpec;
+    private List<OpticalCameraSpecT> opticalCameraSpec;
     @XmlElement(name = "SpectralSpec")
-    protected List<SpectralSpecT> spectralSpec;
+    private List<SpectralSpecT> spectralSpec;
     @XmlElement(name = "FieldSource")
-    protected List<FieldSourceT> fieldSource;
+    private List<FieldSourceT> fieldSource;
     @XmlElement(name = "ObservingGroup")
-    protected List<ObservingGroupT> observingGroup;
+    private List<ObservingGroupT> observingGroup;
     @XmlElements({
         @XmlElement(name = "AmplitudeCalParameters", type = AmplitudeCalParametersT.class),
         @XmlElement(name = "AtmosphericCalParameters", type = AtmosphericCalParametersT.class),
@@ -152,29 +152,29 @@ public class SchedBlock
         @XmlElement(name = "ScienceParameters", type = ScienceParametersT.class),
         @XmlElement(name = "SidebandRatioCalParameters", type = SidebandRatioCalParametersT.class)
     })
-    protected List<ObservingParametersT> amplitudeCalParametersOrAtmosphericCalParametersOrBandpassCalParameters;
+    private List<ObservingParametersT> amplitudeCalParametersOrAtmosphericCalParametersOrBandpassCalParameters;
     @XmlElement(name = "ObsProcedure", required = true)
-    protected ObsProcedureT obsProcedure;
+    private ObsProcedureT obsProcedure;
     @XmlElement(name = "Preconditions", required = true)
-    protected PreconditionsT preconditions;
+    private PreconditionsT preconditions;
     @XmlElement(name = "SchedBlockControl", required = true)
-    protected SchedBlockControlT schedBlockControl;
+    private SchedBlockControlT schedBlockControl;
     @XmlElement(name = "SchedulingConstraints", required = true)
-    protected SchedulingConstraintsT schedulingConstraints;
+    private SchedulingConstraintsT schedulingConstraints;
     @XmlElement(name = "Target")
-    protected List<TargetT> target;
+    private List<TargetT> target;
     @XmlElement(name = "TemporalConstraints")
-    protected List<TemporalConstraintsT> temporalConstraints;
+    private List<TemporalConstraintsT> temporalConstraints;
     @XmlElement(name = "TimeAllocationBreakdown")
-    protected TimeAllocationBreakdownT timeAllocationBreakdown;
+    private TimeAllocationBreakdownT timeAllocationBreakdown;
     @XmlAttribute(name = "schemaVersion", required = true)
-    protected String schemaVersion;
+    private String schemaVersion;
     @XmlAttribute(name = "revision")
-    protected String revision;
+    private String revision;
     @XmlAttribute(name = "almatype", required = true)
-    protected String almatype;
+    private String almatype;
     @XmlAttribute(name = "modeType")
-    protected String modeType;
+    private String modeType;
 
     /**
      * Gets the value of the schedBlockEntity property.
@@ -336,7 +336,7 @@ public class SchedBlock
      */
     public List<KeywordValueT> getExpertParameter() {
         if (expertParameter == null) {
-            expertParameter = new ArrayList<KeywordValueT>();
+            expertParameter = new ArrayList<>();
         }
         return this.expertParameter;
     }
@@ -389,7 +389,7 @@ public class SchedBlock
      */
     public List<OpticalCameraSpecT> getOpticalCameraSpec() {
         if (opticalCameraSpec == null) {
-            opticalCameraSpec = new ArrayList<OpticalCameraSpecT>();
+            opticalCameraSpec = new ArrayList<>();
         }
         return this.opticalCameraSpec;
     }
@@ -418,7 +418,7 @@ public class SchedBlock
      */
     public List<SpectralSpecT> getSpectralSpec() {
         if (spectralSpec == null) {
-            spectralSpec = new ArrayList<SpectralSpecT>();
+            spectralSpec = new ArrayList<>();
         }
         return this.spectralSpec;
     }
@@ -447,7 +447,7 @@ public class SchedBlock
      */
     public List<FieldSourceT> getFieldSource() {
         if (fieldSource == null) {
-            fieldSource = new ArrayList<FieldSourceT>();
+            fieldSource = new ArrayList<>();
         }
         return this.fieldSource;
     }
@@ -476,7 +476,7 @@ public class SchedBlock
      */
     public List<ObservingGroupT> getObservingGroup() {
         if (observingGroup == null) {
-            observingGroup = new ArrayList<ObservingGroupT>();
+            observingGroup = new ArrayList<>();
         }
         return this.observingGroup;
     }
@@ -519,7 +519,7 @@ public class SchedBlock
      */
     public List<ObservingParametersT> getAmplitudeCalParametersOrAtmosphericCalParametersOrBandpassCalParameters() {
         if (amplitudeCalParametersOrAtmosphericCalParametersOrBandpassCalParameters == null) {
-            amplitudeCalParametersOrAtmosphericCalParametersOrBandpassCalParameters = new ArrayList<ObservingParametersT>();
+            amplitudeCalParametersOrAtmosphericCalParametersOrBandpassCalParameters = new ArrayList<>();
         }
         return this.amplitudeCalParametersOrAtmosphericCalParametersOrBandpassCalParameters;
     }
@@ -644,7 +644,7 @@ public class SchedBlock
      */
     public List<TargetT> getTarget() {
         if (target == null) {
-            target = new ArrayList<TargetT>();
+            target = new ArrayList<>();
         }
         return this.target;
     }
@@ -673,7 +673,7 @@ public class SchedBlock
      */
     public List<TemporalConstraintsT> getTemporalConstraints() {
         if (temporalConstraints == null) {
-            temporalConstraints = new ArrayList<TemporalConstraintsT>();
+            temporalConstraints = new ArrayList<>();
         }
         return this.temporalConstraints;
     }

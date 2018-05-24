@@ -52,17 +52,17 @@ import javax.xml.bind.annotation.XmlType;
 public class ObservatoryGoalControlParametersT {
 
     @XmlElement(required = true)
-    protected AngleT elevationLimit;
+    private AngleT elevationLimit;
     @XmlElement(required = true)
-    protected AngleT antennaPositionTolerance;
+    private AngleT antennaPositionTolerance;
     @XmlElement(name = "sBMaximumTime", required = true)
-    protected TimeT sbMaximumTime;
+    private TimeT sbMaximumTime;
     @XmlElement(defaultValue = "true")
-    protected boolean randomizeOrder;
+    private boolean randomizeOrder;
     @XmlElement(required = true)
-    protected FluxT minFlux;
+    private FluxT minFlux;
     @XmlElement(required = true)
-    protected FluxT maxFlux;
+    private FluxT maxFlux;
 
     /**
      * Gets the value of the elevationLimit property.

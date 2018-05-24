@@ -83,27 +83,27 @@ public class HolographyParametersT
 {
 
     @XmlElement(required = true)
-    protected FrequencyT frequency;
+    private FrequencyT frequency;
     @XmlElement(defaultValue = "0.0")
-    protected double startFraction;
+    private double startFraction;
     @XmlElement(required = true)
-    protected AngularVelocityT speed;
+    private AngularVelocityT speed;
     @XmlElement(defaultValue = "5")
-    protected int rowsCal;
+    private int rowsCal;
     @XmlElement(required = true)
-    protected TimeT calTime;
+    private TimeT calTime;
     @XmlElement(defaultValue = "180")
-    protected int nRows;
+    private int nRows;
     @XmlElement(required = true)
-    protected AngleT rowSize;
+    private AngleT rowSize;
     @XmlElement(defaultValue = "false")
-    protected boolean uniDirectionalScan;
+    private boolean uniDirectionalScan;
     @XmlAttribute(name = "towerName")
-    protected String towerName;
+    private String towerName;
     @XmlAttribute(name = "scanDirection")
-    protected String scanDirection;
+    private String scanDirection;
     @XmlAttribute(name = "calMode")
-    protected String calMode;
+    private String calMode;
 
     /**
      * Gets the value of the frequency property.

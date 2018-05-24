@@ -53,13 +53,13 @@ import javax.xml.bind.annotation.XmlType;
 public abstract class AbstractSpectralLineT {
 
     @XmlElement(required = true)
-    protected FrequencyT restFrequency;
+    private FrequencyT restFrequency;
     @XmlElement(required = true)
-    protected String transition;
+    private String transition;
     @XmlElement(required = true)
-    protected String spatalogId;
+    private String spatalogId;
     @XmlElement(required = true)
-    protected String description;
+    private String description;
 
     /**
      * Gets the value of the restFrequency property.

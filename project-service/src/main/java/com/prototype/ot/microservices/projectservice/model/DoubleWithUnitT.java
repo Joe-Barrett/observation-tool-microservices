@@ -58,9 +58,9 @@ import javax.xml.bind.annotation.XmlValue;
 public class DoubleWithUnitT {
 
     @XmlValue
-    protected double value;
+    private double value;
     @XmlAttribute(name = "unit", required = true)
-    protected String unit;
+    private String unit;
 
     /**
      * Gets the value of the value property.

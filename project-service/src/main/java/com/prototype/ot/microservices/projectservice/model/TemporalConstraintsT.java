@@ -46,11 +46,11 @@ import javax.xml.bind.annotation.XmlType;
 public class TemporalConstraintsT {
 
     @XmlElement(required = true)
-    protected String startTime;
+    private String startTime;
     @XmlElement(required = true)
-    protected String endTime;
+    private String endTime;
     @XmlElement(required = true)
-    protected TimeT allowedMargin;
+    private TimeT allowedMargin;
 
     /**
      * Gets the value of the startTime property.

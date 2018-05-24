@@ -44,7 +44,7 @@ public class ObsUnitControlT
 {
 
     @XmlElement(name = "CalibrationRequirements", required = true)
-    protected CalibrationRequirementsT calibrationRequirements;
+    private CalibrationRequirementsT calibrationRequirements;
 
     /**
      * Gets the value of the calibrationRequirements property.

@@ -52,9 +52,9 @@ import javax.xml.bind.annotation.XmlType;
 public class ArrayTimeT {
 
     @XmlElement(required = true)
-    protected TimeT estimatedTime;
+    private TimeT estimatedTime;
     @XmlAttribute(name = "arrayName")
-    protected String arrayName;
+    private String arrayName;
 
     /**
      * Gets the value of the estimatedTime property.

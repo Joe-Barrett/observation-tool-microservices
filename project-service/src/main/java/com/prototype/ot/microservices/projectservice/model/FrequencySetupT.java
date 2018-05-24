@@ -85,24 +85,24 @@ import javax.xml.bind.annotation.XmlType;
 public class FrequencySetupT {
 
     @XmlElement(required = true)
-    protected FrequencyT restFrequency;
+    private FrequencyT restFrequency;
     @XmlElement(required = true)
-    protected String transitionName;
+    private String transitionName;
     @XmlElement(name = "lO1Frequency", required = true)
-    protected FrequencyT lo1Frequency;
+    private FrequencyT lo1Frequency;
     @XmlElement(defaultValue = "false")
-    protected boolean isUserSpecifiedLO1;
+    private boolean isUserSpecifiedLO1;
     @XmlElement(defaultValue = "false")
-    protected boolean hasHardwareSetup;
-    protected FrequencyT floog;
+    private boolean hasHardwareSetup;
+    private FrequencyT floog;
     @XmlElement(defaultValue = "false")
-    protected Boolean tuneHigh;
+    private Boolean tuneHigh;
     @XmlElement(name = "BaseBandSpecification", required = true)
-    protected List<BaseBandSpecificationT> baseBandSpecification;
+    private List<BaseBandSpecificationT> baseBandSpecification;
     @XmlAttribute(name = "receiverBand")
-    protected String receiverBand;
+    private String receiverBand;
     @XmlAttribute(name = "dopplerReference")
-    protected String dopplerReference;
+    private String dopplerReference;
 
     /**
      * Gets the value of the restFrequency property.
@@ -280,7 +280,7 @@ public class FrequencySetupT {
      */
     public List<BaseBandSpecificationT> getBaseBandSpecification() {
         if (baseBandSpecification == null) {
-            baseBandSpecification = new ArrayList<BaseBandSpecificationT>();
+            baseBandSpecification = new ArrayList<>();
         }
         return this.baseBandSpecification;
     }

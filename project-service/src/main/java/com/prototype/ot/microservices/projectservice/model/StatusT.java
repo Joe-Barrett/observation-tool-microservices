@@ -99,13 +99,13 @@ import javax.xml.bind.annotation.XmlType;
 public class StatusT {
 
     @XmlElement(name = "ReadyTime", required = true)
-    protected String readyTime;
+    private String readyTime;
     @XmlElement(name = "StartTime", required = true)
-    protected String startTime;
+    private String startTime;
     @XmlElement(name = "EndTime", required = true)
-    protected String endTime;
+    private String endTime;
     @XmlAttribute(name = "State")
-    protected String state;
+    private String state;
 
     /**
      * Gets the value of the readyTime property.

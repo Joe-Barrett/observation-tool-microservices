@@ -43,9 +43,9 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class OrderedTargetT {
 
-    protected int index;
+    private int index;
     @XmlElement(name = "TargetRef", required = true)
-    protected SchedBlockRefT targetRef;
+    private SchedBlockRefT targetRef;
 
     /**
      * Gets the value of the index property.

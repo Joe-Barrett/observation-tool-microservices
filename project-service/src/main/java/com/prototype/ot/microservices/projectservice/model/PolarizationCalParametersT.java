@@ -42,7 +42,7 @@ public class PolarizationCalParametersT
     extends CalibratorParametersT
 {
 
-    protected double desiredPolAccuracy;
+    private double desiredPolAccuracy;
 
     /**
      * Gets the value of the desiredPolAccuracy property.

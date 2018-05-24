@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
 public class ObsProcedureT {
 
     @XmlElement(required = true)
-    protected String obsProcScript;
+    private String obsProcScript;
 
     /**
      * Gets the value of the obsProcScript property.

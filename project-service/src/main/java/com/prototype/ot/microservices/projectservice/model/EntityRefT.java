@@ -52,14 +52,14 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class EntityRefT {
 
     @XmlAttribute(name = "entityId", required = true)
-    protected String entityId;
+    private String entityId;
     @XmlAttribute(name = "partId")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String partId;
+    private String partId;
     @XmlAttribute(name = "entityTypeName", required = true)
-    protected String entityTypeName;
+    private String entityTypeName;
     @XmlAttribute(name = "documentVersion", required = true)
-    protected String documentVersion;
+    private String documentVersion;
 
     /**
      * Gets the value of the entityId property.

@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.XmlType;
 public class ReceiverTimeBreakdownT {
 
     @XmlElement(name = "ReceiverTime")
-    protected List<ReceiverTimeT> receiverTime;
+    private List<ReceiverTimeT> receiverTime;
 
     /**
      * Gets the value of the receiverTime property.
@@ -70,7 +70,7 @@ public class ReceiverTimeBreakdownT {
      */
     public List<ReceiverTimeT> getReceiverTime() {
         if (receiverTime == null) {
-            receiverTime = new ArrayList<ReceiverTimeT>();
+            receiverTime = new ArrayList<>();
         }
         return this.receiverTime;
     }

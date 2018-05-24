@@ -81,29 +81,29 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class BaseBandSpecificationT {
 
     @XmlElement(required = true)
-    protected FrequencyT centerFrequency;
+    private FrequencyT centerFrequency;
     @XmlElement(defaultValue = "false")
-    protected boolean frequencySwitching;
+    private boolean frequencySwitching;
     @XmlElement(name = "lO2Frequency", required = true)
-    protected FrequencyT lo2Frequency;
+    private FrequencyT lo2Frequency;
     @XmlElement(defaultValue = "100")
-    protected double weighting;
+    private double weighting;
     @XmlElement(defaultValue = "true")
-    protected boolean useUSB;
+    private boolean useUSB;
     @XmlElement(defaultValue = "false")
-    protected boolean use12GHzFilter;
-    protected FrequencyT imageCenterFrequency;
-    protected Double imageWeighting;
+    private boolean use12GHzFilter;
+    private FrequencyT imageCenterFrequency;
+    private Double imageWeighting;
     @XmlAttribute(name = "entityPartId")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
-    protected String entityPartId;
+    private String entityPartId;
     @XmlAttribute(name = "almatype", required = true)
-    protected String almatype;
+    private String almatype;
     @XmlAttribute(name = "baseBandName")
-    protected String baseBandName;
+    private String baseBandName;
     @XmlAttribute(name = "sideBandPreference")
-    protected String sideBandPreference;
+    private String sideBandPreference;
 
     /**
      * Gets the value of the centerFrequency property.

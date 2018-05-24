@@ -50,15 +50,15 @@ import javax.xml.bind.annotation.XmlType;
 public class PreconditionsT {
 
     @XmlElement(defaultValue = "false")
-    protected boolean baselineCalValid;
+    private boolean baselineCalValid;
     @XmlElement(defaultValue = "false")
-    protected boolean polarizationCalValid;
+    private boolean polarizationCalValid;
     @XmlElement(required = true)
-    protected UserAngleT minAllowedHA;
+    private UserAngleT minAllowedHA;
     @XmlElement(required = true)
-    protected UserAngleT maxAllowedHA;
+    private UserAngleT maxAllowedHA;
     @XmlElement(name = "WeatherConstraints", required = true)
-    protected WeatherConstraintsT weatherConstraints;
+    private WeatherConstraintsT weatherConstraints;
 
     /**
      * Gets the value of the baselineCalValid property.

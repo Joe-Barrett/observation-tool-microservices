@@ -77,27 +77,27 @@ import javax.xml.bind.annotation.XmlType;
 public class QuerySourceT {
 
     @XmlElement(required = true)
-    protected SkyCoordinatesT queryCenter;
+    private SkyCoordinatesT queryCenter;
     @XmlElement(required = true)
-    protected AngleT searchRadius;
+    private AngleT searchRadius;
     @XmlElement(required = true)
-    protected FrequencyT minFrequency;
+    private FrequencyT minFrequency;
     @XmlElement(required = true)
-    protected FrequencyT maxFrequency;
+    private FrequencyT maxFrequency;
     @XmlElement(required = true)
-    protected FluxT minFlux;
+    private FluxT minFlux;
     @XmlElement(required = true)
-    protected FluxT maxFlux;
+    private FluxT maxFlux;
     @XmlElement(required = true)
-    protected TimeT minTimeSinceObserved;
+    private TimeT minTimeSinceObserved;
     @XmlElement(required = true)
-    protected TimeT maxTimeSinceObserved;
+    private TimeT maxTimeSinceObserved;
     @XmlElement(required = true)
-    protected String use;
+    private String use;
     @XmlElement(defaultValue = "1")
-    protected int maxSources;
+    private int maxSources;
     @XmlAttribute(name = "intendedUse")
-    protected String intendedUse;
+    private String intendedUse;
 
     /**
      * Gets the value of the queryCenter property.

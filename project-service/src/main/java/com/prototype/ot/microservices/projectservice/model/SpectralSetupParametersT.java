@@ -78,23 +78,23 @@ import javax.xml.bind.annotation.XmlType;
 public class SpectralSetupParametersT {
 
     @XmlElement(required = true)
-    protected FrequencyT representativeFrequency;
+    private FrequencyT representativeFrequency;
     @XmlElement(defaultValue = "false")
-    protected boolean userRepresentativeFrequency;
-    protected FrequencyT singleContinuumFrequency;
+    private boolean userRepresentativeFrequency;
+    private FrequencyT singleContinuumFrequency;
     @XmlElements({
         @XmlElement(name = "ScienceSpectralWindow", type = ScienceSpectralWindowT.class),
         @XmlElement(name = "SpectralScan", type = SpectralScanT.class)
     })
-    protected List<AbstractScienceSpectralWindowT> scienceSpectralWindowOrSpectralScan;
+    private List<AbstractScienceSpectralWindowT> scienceSpectralWindowOrSpectralScan;
     @XmlElement(name = "AdvancedSpectralSetup")
-    protected AdvancedSpectralSetupT advancedSpectralSetup;
+    private AdvancedSpectralSetupT advancedSpectralSetup;
     @XmlElement(name = "OverlaidSpectralLine")
-    protected List<OverlaidSpectralLineT> overlaidSpectralLine;
+    private List<OverlaidSpectralLineT> overlaidSpectralLine;
     @XmlAttribute(name = "polarisation")
-    protected String polarisation;
+    private String polarisation;
     @XmlAttribute(name = "type")
-    protected String type;
+    private String type;
 
     /**
      * Gets the value of the representativeFrequency property.
@@ -185,7 +185,7 @@ public class SpectralSetupParametersT {
      */
     public List<AbstractScienceSpectralWindowT> getScienceSpectralWindowOrSpectralScan() {
         if (scienceSpectralWindowOrSpectralScan == null) {
-            scienceSpectralWindowOrSpectralScan = new ArrayList<AbstractScienceSpectralWindowT>();
+            scienceSpectralWindowOrSpectralScan = new ArrayList<>();
         }
         return this.scienceSpectralWindowOrSpectralScan;
     }
@@ -238,7 +238,7 @@ public class SpectralSetupParametersT {
      */
     public List<OverlaidSpectralLineT> getOverlaidSpectralLine() {
         if (overlaidSpectralLine == null) {
-            overlaidSpectralLine = new ArrayList<OverlaidSpectralLineT>();
+            overlaidSpectralLine = new ArrayList<>();
         }
         return this.overlaidSpectralLine;
     }

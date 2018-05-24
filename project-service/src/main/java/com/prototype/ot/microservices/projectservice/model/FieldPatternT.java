@@ -58,7 +58,7 @@ import javax.xml.bind.annotation.XmlType;
 public abstract class FieldPatternT {
 
     @XmlAttribute(name = "type")
-    protected String type;
+    private String type;
 
     /**
      * Gets the value of the type property.

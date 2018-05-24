@@ -69,18 +69,18 @@ public class ReservationParametersT
 {
 
     @XmlElement(required = true)
-    protected String calendarId;
+    private String calendarId;
     @XmlElement(required = true)
-    protected String reqId;
+    private String reqId;
     @XmlElement(required = true)
-    protected String staffMember;
-    protected List<String> resourceList;
+    private String staffMember;
+    private List<String> resourceList;
     @XmlElement(required = true)
-    protected String description;
+    private String description;
     @XmlElement(required = true)
-    protected String summary;
+    private String summary;
     @XmlAttribute(name = "reason")
-    protected String reason;
+    private String reason;
 
     /**
      * Gets the value of the calendarId property.
@@ -178,7 +178,7 @@ public class ReservationParametersT
      */
     public List<String> getResourceList() {
         if (resourceList == null) {
-            resourceList = new ArrayList<String>();
+            resourceList = new ArrayList<>();
         }
         return this.resourceList;
     }

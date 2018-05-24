@@ -42,9 +42,9 @@ import javax.xml.bind.annotation.XmlType;
 public class PipelineParameterT {
 
     @XmlElement(name = "Name", required = true)
-    protected String name;
+    private String name;
     @XmlElement(name = "Value", required = true)
-    protected String value;
+    private String value;
 
     /**
      * Gets the value of the name property.

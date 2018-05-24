@@ -52,13 +52,13 @@ import javax.xml.bind.annotation.XmlType;
 public class UnitDependenciesT {
 
     @XmlElement(defaultValue = "1")
-    protected int executionCount;
+    private int executionCount;
     @XmlElement(required = true)
-    protected TimeT delay;
+    private TimeT delay;
     @XmlElement(required = true)
-    protected String expression;
-    protected List<String> dependencyList;
-    protected TimeT margin;
+    private String expression;
+    private List<String> dependencyList;
+    private TimeT margin;
 
     /**
      * Gets the value of the executionCount property.
@@ -148,7 +148,7 @@ public class UnitDependenciesT {
      */
     public List<String> getDependencyList() {
         if (dependencyList == null) {
-            dependencyList = new ArrayList<String>();
+            dependencyList = new ArrayList<>();
         }
         return this.dependencyList;
     }

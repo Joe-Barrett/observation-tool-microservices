@@ -98,21 +98,21 @@ import javax.xml.bind.annotation.XmlType;
 public class CalibrationTargetParametersT {
 
     @XmlElement(required = true)
-    protected String sourceName;
+    private String sourceName;
     @XmlElement(required = true)
-    protected SkyCoordinatesT sourceCoordinates;
+    private SkyCoordinatesT sourceCoordinates;
     @XmlElement(required = true)
-    protected VelocityT sourceVelocity;
+    private VelocityT sourceVelocity;
     @XmlElement(defaultValue = "0")
-    protected int index;
+    private int index;
     @XmlElement(defaultValue = "false")
-    protected boolean nonSiderealMotion;
+    private boolean nonSiderealMotion;
     @XmlElement(name = "CalibrationTargetProperties")
-    protected List<CalibrationTargetPropertiesT> calibrationTargetProperties;
+    private List<CalibrationTargetPropertiesT> calibrationTargetProperties;
     @XmlAttribute(name = "intendedUse")
-    protected String intendedUse;
+    private String intendedUse;
     @XmlAttribute(name = "solarSystemObject")
-    protected String solarSystemObject;
+    private String solarSystemObject;
 
     /**
      * Gets the value of the sourceName property.
@@ -242,7 +242,7 @@ public class CalibrationTargetParametersT {
      */
     public List<CalibrationTargetPropertiesT> getCalibrationTargetProperties() {
         if (calibrationTargetProperties == null) {
-            calibrationTargetProperties = new ArrayList<CalibrationTargetPropertiesT>();
+            calibrationTargetProperties = new ArrayList<>();
         }
         return this.calibrationTargetProperties;
     }

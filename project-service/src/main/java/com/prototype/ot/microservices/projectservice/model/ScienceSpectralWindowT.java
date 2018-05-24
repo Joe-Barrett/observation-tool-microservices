@@ -71,21 +71,21 @@ public class ScienceSpectralWindowT
 {
 
     @XmlElement(required = true)
-    protected String transitionName;
+    private String transitionName;
     @XmlElement(required = true)
-    protected FrequencyT centerFrequency;
+    private FrequencyT centerFrequency;
     @XmlElement(required = true)
-    protected UserFrequencyT bandWidth;
+    private UserFrequencyT bandWidth;
     @XmlElement(required = true)
-    protected UserFrequencyT spectralResolution;
-    protected int groupIndex;
+    private UserFrequencyT spectralResolution;
+    private int groupIndex;
     @XmlElement(defaultValue = "false")
-    protected boolean isSkyFrequency;
-    protected Integer splatalogId;
+    private boolean isSkyFrequency;
+    private Integer splatalogId;
     @XmlElement(defaultValue = "false")
-    protected boolean representativeWindow;
+    private boolean representativeWindow;
     @XmlAttribute(name = "groupResourceUse")
-    protected String groupResourceUse;
+    private String groupResourceUse;
 
     /**
      * Gets the value of the transitionName property.

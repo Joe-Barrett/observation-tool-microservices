@@ -54,17 +54,17 @@ public class ScienceParametersT
 {
 
     @XmlElement(required = true)
-    protected FrequencyT representativeBandwidth;
+    private FrequencyT representativeBandwidth;
     @XmlElement(required = true)
-    protected FrequencyT representativeFrequency;
+    private FrequencyT representativeFrequency;
     @XmlElement(required = true)
-    protected SensitivityT sensitivityGoal;
+    private SensitivityT sensitivityGoal;
     @XmlElement(required = true)
-    protected IntTimeSourceT integrationTime;
+    private IntTimeSourceT integrationTime;
     @XmlElement(required = true)
-    protected TimeT subScanDuration;
+    private TimeT subScanDuration;
     @XmlElement(defaultValue = "false")
-    protected Boolean forceAtmCal;
+    private Boolean forceAtmCal;
 
     /**
      * Gets the value of the representativeBandwidth property.

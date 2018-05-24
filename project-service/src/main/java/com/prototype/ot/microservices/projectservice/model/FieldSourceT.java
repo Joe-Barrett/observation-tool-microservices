@@ -115,49 +115,49 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class FieldSourceT {
 
     @XmlElement(required = true)
-    protected SkyCoordinatesT sourceCoordinates;
+    private SkyCoordinatesT sourceCoordinates;
     @XmlElement(required = true)
-    protected String sourceName;
+    private String sourceName;
     @XmlElement(required = true)
-    protected VelocityT sourceVelocity;
-    protected String sourceEphemeris;
+    private VelocityT sourceVelocity;
+    private String sourceEphemeris;
     @XmlElement(name = "pMRA", required = true)
-    protected AngularVelocityT pmra;
+    private AngularVelocityT pmra;
     @XmlElement(name = "pMDec", required = true)
-    protected AngularVelocityT pmDec;
+    private AngularVelocityT pmDec;
     @XmlElement(defaultValue = "false")
-    protected boolean nonSiderealMotion;
+    private boolean nonSiderealMotion;
     @XmlElement(required = true)
-    protected AngleT parallax;
+    private AngleT parallax;
     @XmlElement(required = true)
-    protected String name;
+    private String name;
     @XmlElement(defaultValue = "false")
-    protected boolean isQuery;
-    protected String ephemerisFileName;
+    private boolean isQuery;
+    private String ephemerisFileName;
     @XmlElement(name = "CrossPattern")
-    protected CrossPatternT crossPattern;
+    private CrossPatternT crossPattern;
     @XmlElement(name = "FillPattern")
-    protected FillPatternT fillPattern;
+    private FillPatternT fillPattern;
     @XmlElement(name = "PointingPattern")
-    protected PointingPatternT pointingPattern;
+    private PointingPatternT pointingPattern;
     @XmlElement(name = "RectanglePattern")
-    protected RectanglePatternT rectanglePattern;
+    private RectanglePatternT rectanglePattern;
     @XmlElement(name = "QuerySource")
-    protected QuerySourceT querySource;
+    private QuerySourceT querySource;
     @XmlElement(name = "Reference")
-    protected List<ReferenceT> reference;
+    private List<ReferenceT> reference;
     @XmlElement(name = "SourceProperty")
-    protected List<SourcePropertyT> sourceProperty;
+    private List<SourcePropertyT> sourceProperty;
     @XmlElement(name = "ImageRef")
-    protected ObsAttachmentRefT imageRef;
+    private ObsAttachmentRefT imageRef;
     @XmlAttribute(name = "entityPartId")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
-    protected String entityPartId;
+    private String entityPartId;
     @XmlAttribute(name = "almatype", required = true)
-    protected String almatype;
+    private String almatype;
     @XmlAttribute(name = "solarSystemObject")
-    protected String solarSystemObject;
+    private String solarSystemObject;
 
     /**
      * Gets the value of the sourceCoordinates property.
@@ -551,7 +551,7 @@ public class FieldSourceT {
      */
     public List<ReferenceT> getReference() {
         if (reference == null) {
-            reference = new ArrayList<ReferenceT>();
+            reference = new ArrayList<>();
         }
         return this.reference;
     }
@@ -580,7 +580,7 @@ public class FieldSourceT {
      */
     public List<SourcePropertyT> getSourceProperty() {
         if (sourceProperty == null) {
-            sourceProperty = new ArrayList<SourcePropertyT>();
+            sourceProperty = new ArrayList<>();
         }
         return this.sourceProperty;
     }

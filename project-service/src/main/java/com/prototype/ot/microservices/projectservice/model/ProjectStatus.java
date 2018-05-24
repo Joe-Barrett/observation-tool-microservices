@@ -60,27 +60,27 @@ public class ProjectStatus
 {
 
     @XmlElement(name = "ProjectStatusEntity", required = true)
-    protected ProjectStatusEntityT projectStatusEntity;
+    private ProjectStatusEntityT projectStatusEntity;
     @XmlElement(name = "ObsProjectRef", required = true)
-    protected ObsProjectRefT obsProjectRef;
+    private ObsProjectRefT obsProjectRef;
     @XmlElement(name = "ObsProposalRef", required = true)
-    protected ObsProposalRefT obsProposalRef;
+    private ObsProposalRefT obsProposalRef;
     @XmlElement(name = "ObsProgramStatusRef", required = true)
-    protected OUSStatusRefT obsProgramStatusRef;
+    private OUSStatusRefT obsProgramStatusRef;
     @XmlElement(name = "Name", required = true)
-    protected String name;
+    private String name;
     @XmlElement(name = "PI", required = true)
-    protected String pi;
+    private String pi;
     @XmlElement(name = "BreakpointTime", required = true)
-    protected String breakpointTime;
+    private String breakpointTime;
     @XmlElement(required = true)
-    protected String projectWasTimedOut;
+    private String projectWasTimedOut;
     @XmlAttribute(name = "schemaVersion", required = true)
-    protected String schemaVersion;
+    private String schemaVersion;
     @XmlAttribute(name = "revision")
-    protected String revision;
+    private String revision;
     @XmlAttribute(name = "almatype", required = true)
-    protected String almatype;
+    private String almatype;
 
     /**
      * Gets the value of the projectStatusEntity property.

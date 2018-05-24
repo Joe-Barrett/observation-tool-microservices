@@ -74,15 +74,15 @@ import javax.xml.bind.annotation.XmlType;
 public class DocumentLinkT {
 
     @XmlElement(required = true)
-    protected String fileName;
+    private String fileName;
     @XmlElement(required = true)
-    protected String href;
+    private String href;
     @XmlElement(required = true)
-    protected StorageVolumeT fileSize;
+    private StorageVolumeT fileSize;
     @XmlAttribute(name = "fileType")
-    protected String fileType;
+    private String fileType;
     @XmlAttribute(name = "documentClass")
-    protected String documentClass;
+    private String documentClass;
 
     /**
      * Gets the value of the fileName property.

@@ -44,9 +44,9 @@ import javax.xml.bind.annotation.XmlType;
 public class SubmissionRecordT {
 
     @XmlElement(required = true)
-    protected String submitter;
+    private String submitter;
     @XmlElement(required = true)
-    protected String submissionTime;
+    private String submissionTime;
 
     /**
      * Gets the value of the submitter property.

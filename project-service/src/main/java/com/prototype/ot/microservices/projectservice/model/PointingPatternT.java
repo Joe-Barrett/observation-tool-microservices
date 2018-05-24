@@ -48,9 +48,9 @@ public class PointingPatternT
 {
 
     @XmlElement(required = true)
-    protected List<SkyCoordinatesT> phaseCenterCoordinates;
+    private List<SkyCoordinatesT> phaseCenterCoordinates;
     @XmlElement(defaultValue = "false")
-    protected boolean isMosaic;
+    private boolean isMosaic;
 
     /**
      * Gets the value of the phaseCenterCoordinates property.
@@ -76,7 +76,7 @@ public class PointingPatternT
      */
     public List<SkyCoordinatesT> getPhaseCenterCoordinates() {
         if (phaseCenterCoordinates == null) {
-            phaseCenterCoordinates = new ArrayList<SkyCoordinatesT>();
+            phaseCenterCoordinates = new ArrayList<>();
         }
         return this.phaseCenterCoordinates;
     }

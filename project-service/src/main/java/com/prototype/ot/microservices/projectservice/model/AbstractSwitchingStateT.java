@@ -47,8 +47,8 @@ import javax.xml.bind.annotation.XmlType;
 public class AbstractSwitchingStateT {
 
     @XmlElement(required = true)
-    protected TimeT dwellTime;
-    protected int bin;
+    private TimeT dwellTime;
+    private int bin;
 
     /**
      * Gets the value of the dwellTime property.

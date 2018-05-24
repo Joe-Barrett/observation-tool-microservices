@@ -46,7 +46,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ObsPhaseT", namespace = "Alma/ObsPrep/ObsProject", propOrder = {
-    "observatoryGoalOrOpticalPointingScienceGoalOrScienceGoal",
+    "scienceGoals",
     "obsPlan"
 })
 @XmlSeeAlso({
@@ -61,23 +61,23 @@ public abstract class ObsPhaseT {
         @XmlElement(name = "OpticalPointingScienceGoal", type = OpticalPointingScienceGoalT.class),
         @XmlElement(name = "ScienceGoal", type = ScienceGoalT.class)
     })
-    protected List<AbstractScienceGoalT> observatoryGoalOrOpticalPointingScienceGoalOrScienceGoal;
+    private List<AbstractScienceGoalT> scienceGoals;
     @XmlElement(name = "ObsPlan", required = true)
-    protected ObsUnitSetT obsPlan;
+    private ObsUnitSetT obsPlan;
 
     /**
-     * Gets the value of the observatoryGoalOrOpticalPointingScienceGoalOrScienceGoal property.
+     * Gets the value of the scienceGoals property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the observatoryGoalOrOpticalPointingScienceGoalOrScienceGoal property.
+     * This is why there is not a <CODE>set</CODE> method for the scienceGoals property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getObservatoryGoalOrOpticalPointingScienceGoalOrScienceGoal().add(newItem);
+     *    getScienceGoals().add(newItem);
      * </pre>
      * 
      * 
@@ -89,11 +89,11 @@ public abstract class ObsPhaseT {
      * 
      * 
      */
-    public List<AbstractScienceGoalT> getObservatoryGoalOrOpticalPointingScienceGoalOrScienceGoal() {
-        if (observatoryGoalOrOpticalPointingScienceGoalOrScienceGoal == null) {
-            observatoryGoalOrOpticalPointingScienceGoalOrScienceGoal = new ArrayList<AbstractScienceGoalT>();
+    public List<AbstractScienceGoalT> getScienceGoals() {
+        if (scienceGoals == null) {
+            scienceGoals = new ArrayList<>();
         }
-        return this.observatoryGoalOrOpticalPointingScienceGoalOrScienceGoal;
+        return this.scienceGoals;
     }
 
     /**

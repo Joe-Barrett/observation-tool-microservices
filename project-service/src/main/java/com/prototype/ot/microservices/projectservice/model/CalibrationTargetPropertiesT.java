@@ -44,10 +44,10 @@ import javax.xml.bind.annotation.XmlType;
 public class CalibrationTargetPropertiesT {
 
     @XmlElement(required = true)
-    protected FrequencyT frequency;
+    private FrequencyT frequency;
     @XmlElement(required = true)
-    protected FluxT flux;
-    protected String dateOfMeasurement;
+    private FluxT flux;
+    private String dateOfMeasurement;
 
     /**
      * Gets the value of the frequency property.

@@ -65,21 +65,21 @@ import javax.xml.bind.annotation.XmlType;
 })
 public abstract class AbstractTimingConstraintsT {
 
-    protected String startTime;
-    protected String endTime;
-    protected TimeT allowedMargin;
-    protected Integer repeats;
+    private String startTime;
+    private String endTime;
+    private TimeT allowedMargin;
+    private Integer repeats;
     @XmlElement(name = "lSTMin")
-    protected String lstMin;
+    private String lstMin;
     @XmlElement(name = "lSTMax")
-    protected String lstMax;
-    protected String note;
+    private String lstMax;
+    private String note;
     @XmlElement(defaultValue = "false")
-    protected Boolean isAvoidConstraint;
+    private Boolean isAvoidConstraint;
     @XmlElement(defaultValue = "0")
-    protected Integer priority;
+    private Integer priority;
     @XmlElement(defaultValue = "false")
-    protected Boolean isFixedStart;
+    private Boolean isFixedStart;
 
     /**
      * Gets the value of the startTime property.

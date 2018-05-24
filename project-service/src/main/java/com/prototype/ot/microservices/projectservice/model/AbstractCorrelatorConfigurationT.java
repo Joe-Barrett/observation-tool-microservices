@@ -80,19 +80,19 @@ import javax.xml.bind.annotation.XmlType;
 public abstract class AbstractCorrelatorConfigurationT {
 
     @XmlElement(required = true)
-    protected TimeT integrationDuration;
+    private TimeT integrationDuration;
     @XmlElement(required = true)
-    protected TimeT channelAverageDuration;
+    private TimeT channelAverageDuration;
     @XmlElement(defaultValue = "false")
-    protected boolean enable180DegreeWalshFunction;
+    private boolean enable180DegreeWalshFunction;
     @XmlElement(defaultValue = "false")
-    protected boolean enable90DegreeWalshFunction;
+    private boolean enable90DegreeWalshFunction;
     @XmlAttribute(name = "aPCDataSets")
-    protected String apcDataSets;
+    private String apcDataSets;
     @XmlAttribute(name = "cAM")
-    protected String cam;
+    private String cam;
     @XmlAttribute(name = "lOOffsettingMode")
-    protected String loOffsettingMode;
+    private String loOffsettingMode;
 
     /**
      * Gets the value of the integrationDuration property.

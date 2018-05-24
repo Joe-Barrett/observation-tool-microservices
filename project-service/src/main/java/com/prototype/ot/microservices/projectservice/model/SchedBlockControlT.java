@@ -48,13 +48,13 @@ import javax.xml.bind.annotation.XmlType;
 public class SchedBlockControlT {
 
     @XmlElement(name = "sBMaximumTime", required = true)
-    protected TimeT sbMaximumTime;
+    private TimeT sbMaximumTime;
     @XmlElement(defaultValue = "false")
-    protected boolean indefiniteRepeat;
+    private boolean indefiniteRepeat;
     @XmlElement(defaultValue = "1")
-    protected int executionCount;
+    private int executionCount;
     @XmlElement(defaultValue = "true")
-    protected boolean runQuicklook;
+    private boolean runQuicklook;
 
     /**
      * Gets the value of the sbMaximumTime property.

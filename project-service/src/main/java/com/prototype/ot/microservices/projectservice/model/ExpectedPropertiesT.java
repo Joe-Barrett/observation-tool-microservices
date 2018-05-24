@@ -70,26 +70,26 @@ import javax.xml.bind.annotation.XmlType;
 public class ExpectedPropertiesT {
 
     @XmlElement(required = true)
-    protected FluxT expectedPeakFluxDensity;
-    protected double desiredPolarizationPercentage;
+    private FluxT expectedPeakFluxDensity;
+    private double desiredPolarizationPercentage;
     @XmlElement(required = true)
-    protected UserFrequencyT expectedLineWidth;
+    private UserFrequencyT expectedLineWidth;
     @XmlElement(required = true)
-    protected FrequencyT referenceFrequency;
+    private FrequencyT referenceFrequency;
     @XmlElement(required = true)
-    protected FluxT expectedPeakLineFluxDensity;
+    private FluxT expectedPeakLineFluxDensity;
     @XmlElement(defaultValue = "0.0")
-    protected double expectedSpectralDynamicRange;
+    private double expectedSpectralDynamicRange;
     @XmlElement(defaultValue = "0.0")
-    protected double expectedImageDynamicRange;
+    private double expectedImageDynamicRange;
     @XmlElement(defaultValue = "0.0")
-    protected Double desiredLinePolarizationPercentage;
+    private Double desiredLinePolarizationPercentage;
     @XmlElement(defaultValue = "0.0")
-    protected Double desiredLineCircularPolarizationPercentage;
+    private Double desiredLineCircularPolarizationPercentage;
     @XmlElement(defaultValue = "0.0")
-    protected Double desiredCircularPolarizationPercentage;
+    private Double desiredCircularPolarizationPercentage;
     @XmlAttribute(name = "solarActivityLevel")
-    protected String solarActivityLevel;
+    private String solarActivityLevel;
 
     /**
      * Gets the value of the expectedPeakFluxDensity property.

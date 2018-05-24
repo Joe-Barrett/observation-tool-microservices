@@ -48,13 +48,13 @@ import javax.xml.bind.annotation.XmlType;
 public class ReferenceT {
 
     @XmlElement(required = true)
-    protected SkyCoordinatesT referenceCoordinates;
+    private SkyCoordinatesT referenceCoordinates;
     @XmlElement(required = true)
-    protected TimeT integrationTime;
+    private TimeT integrationTime;
     @XmlElement(required = true)
-    protected TimeT cycleTime;
+    private TimeT cycleTime;
     @XmlElement(required = true)
-    protected TimeT subScanDuration;
+    private TimeT subScanDuration;
 
     /**
      * Gets the value of the referenceCoordinates property.

@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
 public class FlowControlT {
 
     @XmlElement(required = true)
-    protected String controlScript;
+    private String controlScript;
 
     /**
      * Gets the value of the controlScript property.

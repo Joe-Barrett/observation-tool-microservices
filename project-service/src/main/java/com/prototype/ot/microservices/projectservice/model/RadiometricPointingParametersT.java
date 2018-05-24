@@ -52,15 +52,15 @@ public class RadiometricPointingParametersT
 {
 
     @XmlElement(required = true)
-    protected AngleT antennaPositionTolerance;
+    private AngleT antennaPositionTolerance;
     @XmlElement(required = true)
-    protected AngleT elevationLimit;
+    private AngleT elevationLimit;
     @XmlElement(required = true)
-    protected FluxT maxFlux;
+    private FluxT maxFlux;
     @XmlElement(required = true)
-    protected FluxT minFlux;
+    private FluxT minFlux;
     @XmlElement(defaultValue = "true")
-    protected boolean randomizeOrder;
+    private boolean randomizeOrder;
 
     /**
      * Gets the value of the antennaPositionTolerance property.

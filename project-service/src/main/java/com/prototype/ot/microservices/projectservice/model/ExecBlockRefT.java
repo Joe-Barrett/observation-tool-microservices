@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
 public class ExecBlockRefT {
 
     @XmlElement(name = "ExecBlockId", required = true)
-    protected String execBlockId;
+    private String execBlockId;
 
     /**
      * Gets the value of the execBlockId property.

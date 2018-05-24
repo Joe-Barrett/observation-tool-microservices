@@ -53,11 +53,11 @@ import javax.xml.bind.annotation.XmlType;
 public abstract class AbstractScienceSpectralWindowT {
 
     @XmlElement(defaultValue = "0")
-    protected int index;
+    private int index;
     @XmlElement(name = "AdvancedWindowSetup")
-    protected AdvancedWindowSetupT advancedWindowSetup;
+    private AdvancedWindowSetupT advancedWindowSetup;
     @XmlElement(name = "ExpectedSpectralLine")
-    protected List<ExpectedSpectralLineT> expectedSpectralLine;
+    private List<ExpectedSpectralLineT> expectedSpectralLine;
 
     /**
      * Gets the value of the index property.
@@ -123,7 +123,7 @@ public abstract class AbstractScienceSpectralWindowT {
      */
     public List<ExpectedSpectralLineT> getExpectedSpectralLine() {
         if (expectedSpectralLine == null) {
-            expectedSpectralLine = new ArrayList<ExpectedSpectralLineT>();
+            expectedSpectralLine = new ArrayList<>();
         }
         return this.expectedSpectralLine;
     }

@@ -42,9 +42,9 @@ import javax.xml.bind.annotation.XmlType;
 public class KeywordValueT {
 
     @XmlElement(name = "Keyword", required = true)
-    protected String keyword;
+    private String keyword;
     @XmlElement(name = "Value", required = true)
-    protected String value;
+    private String value;
 
     /**
      * Gets the value of the keyword property.

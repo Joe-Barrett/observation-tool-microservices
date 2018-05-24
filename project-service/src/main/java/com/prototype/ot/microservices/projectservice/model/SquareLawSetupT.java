@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
 public class SquareLawSetupT {
 
     @XmlElement(required = true)
-    protected TimeT integrationDuration;
+    private TimeT integrationDuration;
 
     /**
      * Gets the value of the integrationDuration property.

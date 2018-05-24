@@ -48,9 +48,9 @@ public class BLCorrelatorConfigurationT
 {
 
     @XmlElement(required = true)
-    protected TimeT dumpDuration;
+    private TimeT dumpDuration;
     @XmlElement(name = "BLBaseBandConfig", required = true)
-    protected List<BLBaseBandConfigT> blBaseBandConfig;
+    private List<BLBaseBandConfigT> blBaseBandConfig;
 
     /**
      * Gets the value of the dumpDuration property.
@@ -100,7 +100,7 @@ public class BLCorrelatorConfigurationT
      */
     public List<BLBaseBandConfigT> getBLBaseBandConfig() {
         if (blBaseBandConfig == null) {
-            blBaseBandConfig = new ArrayList<BLBaseBandConfigT>();
+            blBaseBandConfig = new ArrayList<>();
         }
         return this.blBaseBandConfig;
     }

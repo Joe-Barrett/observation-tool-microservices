@@ -56,17 +56,17 @@ public class OpticalPointingScienceGoalT
 {
 
     @XmlElement(required = true)
-    protected String filename;
+    private String filename;
     @XmlElement(required = true)
-    protected String schedBlockName;
+    private String schedBlockName;
     @XmlElement(required = true)
-    protected OpticalCameraControlParametersT opticalCameraControl;
+    private OpticalCameraControlParametersT opticalCameraControl;
     @XmlElement(required = true)
-    protected OpticalCameraSpecParametersT opticalCameraSpec;
+    private OpticalCameraSpecParametersT opticalCameraSpec;
     @XmlElement(name = "OpticalPointingTargetParameters")
-    protected List<OpticalPointingTargetParametersT> opticalPointingTargetParameters;
+    private List<OpticalPointingTargetParametersT> opticalPointingTargetParameters;
     @XmlElement(name = "OpticalPointingTargetQueryParameters", required = true)
-    protected OpticalPointingTargetQueryParametersT opticalPointingTargetQueryParameters;
+    private OpticalPointingTargetQueryParametersT opticalPointingTargetQueryParameters;
 
     /**
      * Gets the value of the filename property.
@@ -188,7 +188,7 @@ public class OpticalPointingScienceGoalT
      */
     public List<OpticalPointingTargetParametersT> getOpticalPointingTargetParameters() {
         if (opticalPointingTargetParameters == null) {
-            opticalPointingTargetParameters = new ArrayList<OpticalPointingTargetParametersT>();
+            opticalPointingTargetParameters = new ArrayList<>();
         }
         return this.opticalPointingTargetParameters;
     }

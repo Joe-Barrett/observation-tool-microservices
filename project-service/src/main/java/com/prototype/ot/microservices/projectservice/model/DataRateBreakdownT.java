@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.XmlType;
 public class DataRateBreakdownT {
 
     @XmlElement(name = "ArrayDataRates")
-    protected List<ArrayDataRatesT> arrayDataRates;
+    private List<ArrayDataRatesT> arrayDataRates;
 
     /**
      * Gets the value of the arrayDataRates property.
@@ -70,7 +70,7 @@ public class DataRateBreakdownT {
      */
     public List<ArrayDataRatesT> getArrayDataRates() {
         if (arrayDataRates == null) {
-            arrayDataRates = new ArrayList<ArrayDataRatesT>();
+            arrayDataRates = new ArrayList<>();
         }
         return this.arrayDataRates;
     }

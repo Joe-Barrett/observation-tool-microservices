@@ -55,9 +55,9 @@ import javax.xml.bind.annotation.XmlType;
 public class ExecutiveFractionT {
 
     @XmlElement(defaultValue = "0.0")
-    protected double timeFraction;
+    private double timeFraction;
     @XmlAttribute(name = "name")
-    protected String name;
+    private String name;
 
     /**
      * Gets the value of the timeFraction property.

@@ -48,13 +48,13 @@ import javax.xml.bind.annotation.XmlType;
 public class WeatherConstraintsT {
 
     @XmlElement(required = true)
-    protected LengthT maxPWVC;
+    private LengthT maxPWVC;
     @XmlElement(required = true)
-    protected AngleT seeing;
+    private AngleT seeing;
     @XmlElement(required = true)
-    protected AngleT phaseStability;
+    private AngleT phaseStability;
     @XmlElement(required = true)
-    protected SpeedT maxWindVelocity;
+    private SpeedT maxWindVelocity;
 
     /**
      * Gets the value of the maxPWVC property.

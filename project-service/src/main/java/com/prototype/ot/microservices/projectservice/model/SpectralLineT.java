@@ -46,11 +46,11 @@ import javax.xml.bind.annotation.XmlType;
 public class SpectralLineT {
 
     @XmlElement(required = true)
-    protected FrequencyT restFrequency;
+    private FrequencyT restFrequency;
     @XmlElement(required = true)
-    protected String transition;
+    private String transition;
     @XmlElement(required = true)
-    protected String spatalogId;
+    private String spatalogId;
 
     /**
      * Gets the value of the restFrequency property.

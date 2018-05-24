@@ -58,19 +58,19 @@ public class ObservatoryGoalT
 {
 
     @XmlElement(required = true)
-    protected String purpose;
+    private String purpose;
     @XmlElement(required = true)
-    protected TimeT integrationTime;
+    private TimeT integrationTime;
     @XmlElement(defaultValue = "false")
-    protected boolean useQuery;
+    private boolean useQuery;
     @XmlElement(name = "CalibrationSetupParameters", required = true)
-    protected CalibrationSetupParametersT calibrationSetupParameters;
+    private CalibrationSetupParametersT calibrationSetupParameters;
     @XmlElement(name = "ObservatoryGoalControlParameters", required = true)
-    protected ObservatoryGoalControlParametersT observatoryGoalControlParameters;
+    private ObservatoryGoalControlParametersT observatoryGoalControlParameters;
     @XmlElement(name = "ObservatoryGoalTargetParameters")
-    protected List<ObservatoryGoalTargetParametersT> observatoryGoalTargetParameters;
+    private List<ObservatoryGoalTargetParametersT> observatoryGoalTargetParameters;
     @XmlElement(name = "SpectralSetupParameters", required = true)
-    protected SpectralSetupParametersT spectralSetupParameters;
+    private SpectralSetupParametersT spectralSetupParameters;
 
     /**
      * Gets the value of the purpose property.
@@ -208,7 +208,7 @@ public class ObservatoryGoalT
      */
     public List<ObservatoryGoalTargetParametersT> getObservatoryGoalTargetParameters() {
         if (observatoryGoalTargetParameters == null) {
-            observatoryGoalTargetParameters = new ArrayList<ObservatoryGoalTargetParametersT>();
+            observatoryGoalTargetParameters = new ArrayList<>();
         }
         return this.observatoryGoalTargetParameters;
     }

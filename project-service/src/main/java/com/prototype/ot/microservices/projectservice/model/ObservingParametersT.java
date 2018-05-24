@@ -61,14 +61,14 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public abstract class ObservingParametersT {
 
     @XmlElement(required = true)
-    protected String name;
-    protected List<KeywordValueT> expertParameter;
+    private String name;
+    private List<KeywordValueT> expertParameter;
     @XmlAttribute(name = "entityPartId")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
-    protected String entityPartId;
+    private String entityPartId;
     @XmlAttribute(name = "almatype", required = true)
-    protected String almatype;
+    private String almatype;
 
     /**
      * Gets the value of the name property.
@@ -118,7 +118,7 @@ public abstract class ObservingParametersT {
      */
     public List<KeywordValueT> getExpertParameter() {
         if (expertParameter == null) {
-            expertParameter = new ArrayList<KeywordValueT>();
+            expertParameter = new ArrayList<>();
         }
         return this.expertParameter;
     }

@@ -44,7 +44,7 @@ public class FrequencySwitchingCycleT
 {
 
     @XmlElement(name = "FrequencySwitchingState", required = true)
-    protected List<FrequencySwitchingStateT> frequencySwitchingState;
+    private List<FrequencySwitchingStateT> frequencySwitchingState;
 
     /**
      * Gets the value of the frequencySwitchingState property.
@@ -70,7 +70,7 @@ public class FrequencySwitchingCycleT
      */
     public List<FrequencySwitchingStateT> getFrequencySwitchingState() {
         if (frequencySwitchingState == null) {
-            frequencySwitchingState = new ArrayList<FrequencySwitchingStateT>();
+            frequencySwitchingState = new ArrayList<>();
         }
         return this.frequencySwitchingState;
     }

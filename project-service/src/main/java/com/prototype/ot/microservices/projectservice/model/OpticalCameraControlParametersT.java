@@ -52,17 +52,17 @@ import javax.xml.bind.annotation.XmlType;
 public class OpticalCameraControlParametersT {
 
     @XmlElement(required = true)
-    protected AngleT elevationLimit;
+    private AngleT elevationLimit;
     @XmlElement(required = true)
-    protected AngleT antennaPositionTolerance;
+    private AngleT antennaPositionTolerance;
     @XmlElement(required = true)
-    protected MagnitudeT minMagnitude;
+    private MagnitudeT minMagnitude;
     @XmlElement(required = true)
-    protected MagnitudeT maxMagnitude;
+    private MagnitudeT maxMagnitude;
     @XmlElement(name = "sBMaximumTime", required = true)
-    protected TimeT sbMaximumTime;
+    private TimeT sbMaximumTime;
     @XmlElement(defaultValue = "true")
-    protected boolean randomizeOrder;
+    private boolean randomizeOrder;
 
     /**
      * Gets the value of the elevationLimit property.

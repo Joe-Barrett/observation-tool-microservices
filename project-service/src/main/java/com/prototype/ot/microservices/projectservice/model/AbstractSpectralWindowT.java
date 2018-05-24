@@ -99,27 +99,27 @@ import javax.xml.bind.annotation.XmlType;
 public abstract class AbstractSpectralWindowT {
 
     @XmlElement(required = true)
-    protected FrequencyT centerFrequency;
+    private FrequencyT centerFrequency;
     @XmlElement(defaultValue = "1")
-    protected int spectralAveragingFactor;
+    private int spectralAveragingFactor;
     @XmlElement(required = true)
-    protected String name;
+    private String name;
     @XmlElement(required = true)
-    protected FrequencyT effectiveBandwidth;
-    protected int effectiveNumberOfChannels;
+    private FrequencyT effectiveBandwidth;
+    private int effectiveNumberOfChannels;
     @XmlElement(defaultValue = "0")
-    protected int associatedSpectralWindowNumberInPair;
+    private int associatedSpectralWindowNumberInPair;
     @XmlElement(defaultValue = "true")
-    protected boolean useThisSpectralWindow;
-    protected FrequencyT desiredCenterFrequency;
+    private boolean useThisSpectralWindow;
+    private FrequencyT desiredCenterFrequency;
     @XmlElement(name = "SpectralLine")
-    protected List<SpectralLineT> spectralLine;
+    private List<SpectralLineT> spectralLine;
     @XmlAttribute(name = "sideBand")
-    protected String sideBand;
+    private String sideBand;
     @XmlAttribute(name = "windowFunction")
-    protected String windowFunction;
+    private String windowFunction;
     @XmlAttribute(name = "polnProducts")
-    protected String polnProducts;
+    private String polnProducts;
 
     /**
      * Gets the value of the centerFrequency property.
@@ -305,7 +305,7 @@ public abstract class AbstractSpectralWindowT {
      */
     public List<SpectralLineT> getSpectralLine() {
         if (spectralLine == null) {
-            spectralLine = new ArrayList<SpectralLineT>();
+            spectralLine = new ArrayList<>();
         }
         return this.spectralLine;
     }

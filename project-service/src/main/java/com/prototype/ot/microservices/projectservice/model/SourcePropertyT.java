@@ -56,14 +56,14 @@ import javax.xml.bind.annotation.XmlType;
 public class SourcePropertyT {
 
     @XmlElement(required = true)
-    protected FrequencyT sourceFrequency;
-    protected FluxT sourceFluxI;
-    protected AngleT sourceDiameter;
-    protected FluxT sourceFluxQ;
-    protected FluxT sourceFluxU;
-    protected FluxT sourceFluxV;
-    protected MagnitudeT visibleMagnitude;
-    protected String dateOfMeasurement;
+    private FrequencyT sourceFrequency;
+    private FluxT sourceFluxI;
+    private AngleT sourceDiameter;
+    private FluxT sourceFluxQ;
+    private FluxT sourceFluxU;
+    private FluxT sourceFluxV;
+    private MagnitudeT visibleMagnitude;
+    private String dateOfMeasurement;
 
     /**
      * Gets the value of the sourceFrequency property.

@@ -100,30 +100,30 @@ import javax.xml.bind.annotation.XmlType;
 public abstract class AbstractTargetParametersT {
 
     @XmlElement(required = true)
-    protected String sourceName;
+    private String sourceName;
     @XmlElement(required = true)
-    protected SkyCoordinatesT sourceCoordinates;
+    private SkyCoordinatesT sourceCoordinates;
     @XmlElement(required = true)
-    protected AngularVelocityT pmRA;
+    private AngularVelocityT pmRA;
     @XmlElement(required = true)
-    protected AngularVelocityT pmDec;
+    private AngularVelocityT pmDec;
     @XmlElement(required = true)
-    protected AngleT parallax;
+    private AngleT parallax;
     @XmlElement(defaultValue = "false")
-    protected boolean nonSiderealMotion;
-    protected String sourceEphemeris;
+    private boolean nonSiderealMotion;
+    private String sourceEphemeris;
     @XmlElement(required = true)
-    protected VelocityT sourceVelocity;
-    protected String ephemerisFileName;
+    private VelocityT sourceVelocity;
+    private String ephemerisFileName;
     @XmlElement(defaultValue = "0")
-    protected int index;
-    protected List<SkyCoordinatesT> sdReferencePosition;
+    private int index;
+    private List<SkyCoordinatesT> sdReferencePosition;
     @XmlElement(name = "ExpectedProperties", required = true)
-    protected ExpectedPropertiesT expectedProperties;
+    private ExpectedPropertiesT expectedProperties;
     @XmlElement(name = "ImageRef")
-    protected ObsAttachmentRefT imageRef;
+    private ObsAttachmentRefT imageRef;
     @XmlAttribute(name = "solarSystemObject")
-    protected String solarSystemObject;
+    private String solarSystemObject;
 
     /**
      * Gets the value of the sourceName property.
@@ -373,7 +373,7 @@ public abstract class AbstractTargetParametersT {
      */
     public List<SkyCoordinatesT> getSdReferencePosition() {
         if (sdReferencePosition == null) {
-            sdReferencePosition = new ArrayList<SkyCoordinatesT>();
+            sdReferencePosition = new ArrayList<>();
         }
         return this.sdReferencePosition;
     }

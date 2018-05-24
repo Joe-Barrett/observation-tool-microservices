@@ -48,11 +48,11 @@ import javax.xml.bind.annotation.XmlType;
 public class BestSBT {
 
     @XmlElement(name = "Selection")
-    protected int selection;
+    private int selection;
     @XmlElement(name = "TimeOfSelection", required = true)
-    protected String timeOfSelection;
+    private String timeOfSelection;
     @XmlElement(name = "BestSBItem")
-    protected List<BestSBItemT> bestSBItem;
+    private List<BestSBItemT> bestSBItem;
 
     /**
      * Gets the value of the selection property.
@@ -118,7 +118,7 @@ public class BestSBT {
      */
     public List<BestSBItemT> getBestSBItem() {
         if (bestSBItem == null) {
-            bestSBItem = new ArrayList<BestSBItemT>();
+            bestSBItem = new ArrayList<>();
         }
         return this.bestSBItem;
     }

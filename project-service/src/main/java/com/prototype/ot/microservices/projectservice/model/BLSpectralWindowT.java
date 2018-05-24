@@ -60,13 +60,13 @@ public class BLSpectralWindowT
 {
 
     @XmlElement(defaultValue = "true")
-    protected boolean correlationNyquistOversampling;
+    private boolean correlationNyquistOversampling;
     @XmlElement(defaultValue = "true")
-    protected boolean quantizationCorrection;
+    private boolean quantizationCorrection;
     @XmlElement(name = "ChannelAverageRegion", required = true)
-    protected List<ChannelAverageRegionT> channelAverageRegion;
+    private List<ChannelAverageRegionT> channelAverageRegion;
     @XmlAttribute(name = "correlationBits")
-    protected String correlationBits;
+    private String correlationBits;
 
     /**
      * Gets the value of the correlationNyquistOversampling property.
@@ -124,7 +124,7 @@ public class BLSpectralWindowT
      */
     public List<ChannelAverageRegionT> getChannelAverageRegion() {
         if (channelAverageRegion == null) {
-            channelAverageRegion = new ArrayList<ChannelAverageRegionT>();
+            channelAverageRegion = new ArrayList<>();
         }
         return this.channelAverageRegion;
     }
