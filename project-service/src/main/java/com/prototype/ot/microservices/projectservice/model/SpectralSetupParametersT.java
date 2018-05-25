@@ -71,7 +71,7 @@ import javax.xml.bind.annotation.XmlType;
     "representativeFrequency",
     "userRepresentativeFrequency",
     "singleContinuumFrequency",
-    "scienceSpectralWindowOrSpectralScan",
+        "spectralWindows",
     "advancedSpectralSetup",
     "overlaidSpectralLine"
 })
@@ -86,7 +86,7 @@ public class SpectralSetupParametersT {
         @XmlElement(name = "ScienceSpectralWindow", type = ScienceSpectralWindowT.class),
         @XmlElement(name = "SpectralScan", type = SpectralScanT.class)
     })
-    private List<AbstractScienceSpectralWindowT> scienceSpectralWindowOrSpectralScan;
+    private List<AbstractScienceSpectralWindowT> spectralWindows;
     @XmlElement(name = "AdvancedSpectralSetup")
     private AdvancedSpectralSetupT advancedSpectralSetup;
     @XmlElement(name = "OverlaidSpectralLine")
@@ -161,18 +161,18 @@ public class SpectralSetupParametersT {
     }
 
     /**
-     * Gets the value of the scienceSpectralWindowOrSpectralScan property.
+     * Gets the value of the spectralWindows property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the scienceSpectralWindowOrSpectralScan property.
+     * This is why there is not a <CODE>set</CODE> method for the spectralWindows property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getScienceSpectralWindowOrSpectralScan().add(newItem);
+     *    getSpectralWindows().add(newItem);
      * </pre>
      * 
      * 
@@ -183,11 +183,11 @@ public class SpectralSetupParametersT {
      * 
      * 
      */
-    public List<AbstractScienceSpectralWindowT> getScienceSpectralWindowOrSpectralScan() {
-        if (scienceSpectralWindowOrSpectralScan == null) {
-            scienceSpectralWindowOrSpectralScan = new ArrayList<>();
+    public List<AbstractScienceSpectralWindowT> getSpectralWindows() {
+        if (spectralWindows == null) {
+            spectralWindows = new ArrayList<>();
         }
-        return this.scienceSpectralWindowOrSpectralScan;
+        return this.spectralWindows;
     }
 
     /**

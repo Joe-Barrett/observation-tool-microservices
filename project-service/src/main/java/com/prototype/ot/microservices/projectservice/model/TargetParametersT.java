@@ -57,7 +57,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TargetParametersT", namespace = "Alma/ObsPrep/ObsProject", propOrder = {
     "isMosaic",
-    "circleOrEllipseOrPolygon"
+        "fields"
 })
 public class TargetParametersT
     extends AbstractTargetParametersT
@@ -72,7 +72,7 @@ public class TargetParametersT
         @XmlElement(name = "Rectangle", type = RectangleT.class),
         @XmlElement(name = "SinglePoint", type = SinglePointT.class)
     })
-    private List<FieldT> circleOrEllipseOrPolygon;
+    private List<FieldT> fields;
     @XmlAttribute(name = "type")
     private String type;
 
@@ -101,18 +101,18 @@ public class TargetParametersT
     }
 
     /**
-     * Gets the value of the circleOrEllipseOrPolygon property.
+     * Gets the value of the fields property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the circleOrEllipseOrPolygon property.
+     * This is why there is not a <CODE>set</CODE> method for the fields property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCircleOrEllipseOrPolygon().add(newItem);
+     *    getFields().add(newItem);
      * </pre>
      * 
      * 
@@ -126,11 +126,11 @@ public class TargetParametersT
      * 
      * 
      */
-    public List<FieldT> getCircleOrEllipseOrPolygon() {
-        if (circleOrEllipseOrPolygon == null) {
-            circleOrEllipseOrPolygon = new ArrayList<>();
+    public List<FieldT> getFields() {
+        if (fields == null) {
+            fields = new ArrayList<>();
         }
-        return this.circleOrEllipseOrPolygon;
+        return this.fields;
     }
 
     /**
