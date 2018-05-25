@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlValue;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DoubleWithUnitT", namespace = "Alma/ValueTypes", propOrder = {
-    "value"
+        "content"
 })
 @XmlSeeAlso({
     DataRateT.class,
@@ -58,7 +58,7 @@ import javax.xml.bind.annotation.XmlValue;
 public class DoubleWithUnitT {
 
     @XmlValue
-    private double value;
+    private double content;
     @XmlAttribute(name = "unit", required = true)
     private String unit;
 
@@ -66,16 +66,16 @@ public class DoubleWithUnitT {
      * Gets the value of the value property.
      * 
      */
-    public double getValue() {
-        return value;
+    public double getContent() {
+        return content;
     }
 
     /**
      * Sets the value of the value property.
      * 
      */
-    public void setValue(double value) {
-        this.value = value;
+    public void setContent(double content) {
+        this.content = content;
     }
 
     /**
