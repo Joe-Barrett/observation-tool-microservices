@@ -2,6 +2,7 @@ package com.prototype.ot.microservices.projectservice.services;
 
 import com.prototype.ot.microservices.projectservice.model.ObsProject;
 import com.prototype.ot.microservices.projectservice.model.ObsProposal;
+import com.prototype.ot.microservices.projectservice.model.ProjectListItem;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
@@ -31,17 +32,17 @@ public class ProjectService {
         return this.loadResourceList("ObsProject.xml", ObsProject.class);
     }
 
-    public List<ProjectListItem> getProjectList() throws IOException {
-        List<JSONObject> projects = this.getAllProjects();
+    public List<ProjectListItem> getProjectList() throws IOException, JAXBException {
+        List<ObsProject> projects = this.getAllProjects();
         List<ProjectListItem> projectList = new ArrayList<>();
         ProjectListItem projectListItem;
-        for (JSONObject project : projects) {
-            projectListItem = new ProjectListItem(project.getString("prj_projectName"),
-                                                  project.getString("prj_pI"),
-                                                  project.getString("prj_code"),
-                                                  project.getString("prj_timeOfCreation"),
-                                                  project.getJSONObject("prj_ObsProjectEntity").getString("entityId"),
-                                                  project.getJSONObject("prj_ObsProposalRef").getString("entityId"));
+        for (ObsProject project : projects) {
+            projectListItem = new ProjectListItem(project.getProjectName(),
+                                                  project.getPI(),
+                                                  project.getCode(),
+                                                  project.getTimeOfCreation(),
+                                                  project.getObsProjectEntity().getEntityId(),
+                                                  project.getObsProposalRef().getEntityId());
             projectList.add(projectListItem);
         }
         return projectList;

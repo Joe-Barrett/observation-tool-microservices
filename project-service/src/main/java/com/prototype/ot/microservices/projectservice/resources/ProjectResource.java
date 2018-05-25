@@ -3,6 +3,7 @@ package com.prototype.ot.microservices.projectservice.resources;
 import com.google.gson.Gson;
 import com.prototype.ot.microservices.projectservice.model.ObsProject;
 import com.prototype.ot.microservices.projectservice.model.ObsProposal;
+import com.prototype.ot.microservices.projectservice.model.ProjectListItem;
 import com.prototype.ot.microservices.projectservice.services.ProjectService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,7 @@ public class ProjectResource {
         try {
             List<ProjectListItem> projectList = this.projectService.getProjectList();
             return ResponseEntity.ok(projectList);
-        } catch (IOException ex) {
+        } catch (IOException | JAXBException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
         }
     }
