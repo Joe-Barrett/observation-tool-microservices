@@ -1,9 +1,7 @@
 package com.prototype.ot.microservices.projectservice.services;
 
-import com.google.gson.Gson;
-import com.prototype.ot.microservices.projectservice.model.project.ObsProject;
-import com.prototype.ot.microservices.projectservice.model.project.ObsProposal;
-import com.prototype.ot.microservices.projectservice.model.project.ProjectListItem;
+import com.prototype.ot.microservices.projectservice.model.ObsProject;
+import com.prototype.ot.microservices.projectservice.model.ObsProposal;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
@@ -11,43 +9,26 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import java.io.IOException;
+import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public class ProjectService {
 
-    private Gson gson;
-
     public ProjectService() {
-        this.gson = new Gson();
+
     }
 
-    public List<JSONObject> getAllProjects() throws IOException {
-        ClassLoader cl = this.getClass().getClassLoader();
-        ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver(cl);
-        Resource[] resources = resourcePatternResolver.getResources("classpath*:/projects/real-projects/*.aot");
-        List<JSONObject> projects = new ArrayList<>();
-        ZipUtils.ZipReader zipReader = null;
-        JSONObject json;
-        String xml;
-        ZipUtils.ZipNtry entry;
-        byte[] data;
-        for (Resource f : resources) {
-            zipReader = new ZipUtils.ZipReader(f.getInputStream());
-            entry = zipReader.getZipEntry();
-            while (!entry.toString().equals("ObsProject.xml")) {
-                entry = zipReader.getZipEntry();
-            }
-            data = entry.getData();
-            xml = new String(data, StandardCharsets.UTF_8);
-            json = XML.toJSONObject(xml);
-            json = switchColons(json);
-            projects.add(json.getJSONObject("prj_ObsProject"));
-        }
-        return projects;
+    public List<ObsProject> getAllProjects() throws IOException, JAXBException {
+        return this.loadResourceList("ObsProject.xml", ObsProject.class);
     }
 
     public List<ProjectListItem> getProjectList() throws IOException {
@@ -66,45 +47,24 @@ public class ProjectService {
         return projectList;
     }
 
-    public JSONObject getProject(String projectRef) throws IOException {
-        List<JSONObject> projects = this.getAllProjects();
-        for (JSONObject project : projects) {
-            if (project.getJSONObject("prj_ObsProjectEntity").get("entityId").equals(projectRef)) {
+    public ObsProject getProject(String projectRef) throws IOException, JAXBException {
+        List<ObsProject> projects = this.loadResourceList("ObsProject.xml", ObsProject.class);
+        for (ObsProject project : projects) {
+            if (project.getObsProjectEntity().getEntityId().equals(projectRef)) {
                 return project;
             }
         }
         return null;
     }
 
-    public List<JSONObject> getAllProposals() throws IOException {
-        List<JSONObject> proposals = new ArrayList<>();
-        ClassLoader cl = this.getClass().getClassLoader();
-        ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver(cl);
-        Resource[] resources = resourcePatternResolver.getResources("classpath*:/projects/real-projects/*.aot");
-        ZipUtils.ZipReader zipReader = null;
-        JSONObject json;
-        String xml;
-        ZipUtils.ZipNtry entry;
-        byte[] data;
-        for (Resource f : resources) {
-            zipReader = new ZipUtils.ZipReader(f.getInputStream());
-            entry = zipReader.getZipEntry();
-            while (!entry.toString().equals("ObsProposal.xml")) {
-                entry = zipReader.getZipEntry();
-            }
-            data = entry.getData();
-            xml = new String(data, StandardCharsets.UTF_8);
-            json = XML.toJSONObject(xml);
-            json = switchColons(json);
-            proposals.add(json.getJSONObject("prp_ObsProposal"));
-        }
-        return proposals;
+    public List<ObsProposal> getAllProposals() throws IOException, JAXBException {
+        return this.loadResourceList("ObsProposal.xml", ObsProposal.class);
     }
 
-    public JSONObject getProposal(String proposalRef) throws IOException {
-        List<JSONObject> proposals = this.getAllProposals();
-        for (JSONObject obsProposal : proposals) {
-            if (obsProposal.getJSONObject("prp_ObsProposalEntity").get("entityId").equals(proposalRef)) {
+    public ObsProposal getProposal(String proposalRef) throws IOException, JAXBException {
+        List<ObsProposal> proposals = this.loadResourceList("ObsProposal.xml", ObsProposal.class);
+        for (ObsProposal obsProposal : proposals) {
+            if (obsProposal.getObsProposalEntity().getEntityId().equals(proposalRef)) {
                 return obsProposal;
             }
         }
@@ -164,6 +124,30 @@ public class ProjectService {
             }
         }
         return toReturn;
+    }
+
+    private <T> List<T> loadResourceList(String filename, Class<T> cls) throws IOException, JAXBException {
+        List<T> returnList = new ArrayList<>();
+        ClassLoader cl = this.getClass().getClassLoader();
+        ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver(cl);
+        Resource[] resources = resourcePatternResolver.getResources("classpath*:/projects/real-projects/*.aot");
+        ZipUtils.ZipReader zipReader;
+        ZipUtils.ZipNtry entry;
+        String xml;
+        for (Resource f : resources) {
+            zipReader = new ZipUtils.ZipReader(f.getInputStream());
+            entry = zipReader.getZipEntry();
+            while (!entry.toString().equals(filename)) {
+                entry = zipReader.getZipEntry();
+            }
+            xml = new String(entry.getData(), StandardCharsets.UTF_8);
+            JAXBContext jaxbContext = JAXBContext.newInstance("com.prototype.ot.microservices.projectservice.model");
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            StringReader stringReader = new StringReader(xml);
+            JAXBElement<T> element = (JAXBElement<T>) unmarshaller.unmarshal(stringReader);
+            returnList.add(cls.cast(element.getValue()));
+        }
+        return returnList;
     }
 
 }
