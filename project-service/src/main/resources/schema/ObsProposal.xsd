@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:val="Alma/ValueTypes" xmlns:prp="Alma/ObsPrep/ObsProposal" xmlns:ent="Alma/CommonEntity" xmlns:prj="Alma/ObsPrep/ObsProject" xmlns:oat="Alma/Obsprep/ObsAttachment" xmlns:sbl="Alma/ObsPrep/SchedBlock" xmlns:ps="Alma/Scheduling/ProjectStatus" xmlns:sbs="Alma/Scheduling/SBStatus" xmlns:ouss="Alma/Scheduling/OUSStatus" xmlns:orv="Alma/ObsPrep/ObsReview" elementFormDefault="qualified" attributeFormDefault="unqualified" version="13 24" targetNamespace="Alma/ObsPrep/ObsProposal">  
+  <xsd:import namespace="Alma/CommonEntity" schemaLocation="CommonEntity.xsd"/>  
+  <xsd:import namespace="Alma/ValueTypes" schemaLocation="ValueTypes.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/ObsProject" schemaLocation="ObsProject.xsd"/>  
+  <xsd:import namespace="Alma/Obsprep/ObsAttachment" schemaLocation="ObsAttachment.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/SchedBlock" schemaLocation="SchedBlock.xsd"/>  
+  <xsd:import namespace="Alma/Scheduling/ProjectStatus" schemaLocation="ProjectStatus.xsd"/>  
+  <xsd:import namespace="Alma/Scheduling/SBStatus" schemaLocation="SBStatus.xsd"/>  
+  <xsd:import namespace="Alma/Scheduling/OUSStatus" schemaLocation="OUSStatus.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/ObsReview" schemaLocation="ObsReview.xsd"/>  
+
+  <!-- generated from UML entity class 'alma/obsprep/obsproposal/ObsProposal' -->  
+  <xsd:element name="ObsProposal" type="prp:ObsProposal"> 
+    <xsd:annotation> 
+      <xsd:documentation>The ObsProposal contains data that are specific to Phase I of an Observing Project. This is not detailed at the moment, with most attributes being placeholders. Note that the ObsProposal (being a subclass of ObsPhase) also contains a SciencePlan and an ObsPlan. During Phase I the Science Plan must be used to enter science goals, and thus target and frequency details. The Observing Plan may be used to construct SBs that can be submitted to the ALMA simulator.</xsd:documentation> 
+    </xsd:annotation> 
+  </xsd:element>  
+  <xsd:complexType name="ObsProposal"> 
+    <xsd:complexContent> 
+      <xsd:extension base="prj:ObsPhaseT"> 
+        <xsd:sequence> 
+          <xsd:element name="ObsProposalEntity" type="prp:ObsProposalEntityT"/>  
+          <xsd:element name="DocumentsRef" type="oat:ObsAttachmentRefT" minOccurs="0"/>  
+          <xsd:element name="ObsProjectRef" type="prj:ObsProjectRefT"/>  
+          <xsd:element name="title" type="xsd:string"/>  
+          <xsd:element name="code" type="xsd:string"/>  
+          <xsd:element name="abstract" type="xsd:string"/>  
+          <xsd:element name="relatedProposals" type="xsd:string"/>  
+          <xsd:element name="previousProposals" type="xsd:string"/>  
+          <xsd:element name="dateReceived" type="xsd:dateTime"/>  
+          <xsd:element name="cycle" type="xsd:string"/>  
+          <xsd:element name="studentProject" type="xsd:boolean" default="false"/>  
+          <xsd:element name="continuation" type="xsd:boolean" default="false"/>  
+          <xsd:element name="recentPublications" type="xsd:string"/>  
+          <xsd:element name="scientificCategoryCode" type="xsd:string" default="10"/>  
+          <xsd:element name="proposalTypeCode" type="xsd:string" default="S"/>  
+          <xsd:element name="scientificCategoryString" type="xsd:string"/>  
+          <xsd:element name="proposalTypeString" type="xsd:string"/>  
+          <xsd:element name="keyword" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>  
+          <xsd:element name="keywordCode" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>  
+          <xsd:element name="resubmittedProjectCode" type="xsd:string" minOccurs="0"/>  
+          <xsd:element name="isResubmission" type="xsd:boolean" minOccurs="0" default="false"/>  
+          <xsd:element name="duplicateObservationsJustification" type="xsd:string" minOccurs="0"/>  
+          <xsd:element name="PrincipalInvestigator" type="prp:InvestigatorT"/>  
+          <xsd:element name="CoInvestigator" type="prp:InvestigatorT" minOccurs="0" maxOccurs="unbounded"/>  
+          <xsd:element name="CoPrincipalInvestigator" type="prp:InvestigatorT" minOccurs="0" maxOccurs="unbounded"/>  
+          <xsd:element name="ProposalFeedback" type="prp:ProposalFeedbackT"/> 
+        </xsd:sequence>  
+        <xsd:attribute name="schemaVersion" type="xsd:string" use="required" fixed="13"/>  
+        <xsd:attribute name="revision" type="xsd:string" default="24"/>  
+        <xsd:attribute name="almatype" type="xsd:string" use="required" fixed="APDM::ObsProposal"/> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ArrayDataRates' -->  
+  <xsd:complexType name="ArrayDataRatesT"> 
+    <xsd:sequence> 
+      <xsd:element name="estimatedAverageDataRate" type="val:DataRateT"/>  
+      <xsd:element name="estimatedMaximumDataRate" type="val:DataRateT"/>  
+      <xsd:element name="estimatedDataVolume" type="val:StorageVolumeT"/> 
+    </xsd:sequence>  
+    <xsd:attribute name="arrayName"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="ACA"/>  
+          <xsd:enumeration value="SEVEN-M"/>  
+          <xsd:enumeration value="TP-Array"/>  
+          <xsd:enumeration value="TWELVE-M"/>  
+          <xsd:enumeration value="ALMA"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ArrayTime' -->  
+  <xsd:complexType name="ArrayTimeT"> 
+    <xsd:sequence> 
+      <xsd:element name="estimatedTime" type="val:TimeT"/> 
+    </xsd:sequence>  
+    <xsd:attribute name="arrayName"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="ACA"/>  
+          <xsd:enumeration value="SEVEN-M"/>  
+          <xsd:enumeration value="TP-Array"/>  
+          <xsd:enumeration value="TWELVE-M"/>  
+          <xsd:enumeration value="ALMA"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ArrayTimeBreakdown' -->  
+  <xsd:complexType name="ArrayTimeBreakdownT"> 
+    <xsd:sequence> 
+      <xsd:element name="ArrayTime" type="prp:ArrayTimeT" maxOccurs="5"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'DataRateBreakdown' -->  
+  <xsd:complexType name="DataRateBreakdownT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Container for the data rate estiamtes for each array used in the project</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="ArrayDataRates" type="prp:ArrayDataRatesT" minOccurs="0" maxOccurs="5"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ExecutiveFraction' -->  
+  <xsd:complexType name="ExecutiveFractionT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Contains the time fraction of this project to be charged to a particular exectutive</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="timeFraction" type="xsd:double" default="0.0"/> 
+    </xsd:sequence>  
+    <xsd:attribute name="name"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="OTHER"/>  
+          <xsd:enumeration value="CL"/>  
+          <xsd:enumeration value="EA"/>  
+          <xsd:enumeration value="EU"/>  
+          <xsd:enumeration value="NA"/>  
+          <xsd:enumeration value="NA_EA"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'Investigator' -->  
+  <xsd:complexType name="InvestigatorT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Captures the essential information about an investigator on a project. This is stored with the project as a snapshot of the investigator status at proposal time.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="fullName" type="xsd:string"/>  
+      <xsd:element name="organisation" type="xsd:string"/>  
+      <xsd:element name="eMail" type="xsd:string"/>  
+      <xsd:element name="verfiedUser" type="xsd:boolean" default="false"/>  
+      <xsd:element name="userId" type="xsd:string"/>  
+      <xsd:element name="telephone" type="xsd:string"/>  
+      <xsd:element name="mobile" type="xsd:string"/>  
+      <xsd:element name="index" type="xsd:int" default="1"/>  
+      <xsd:element name="organisationId" type="xsd:string" minOccurs="0"/> 
+    </xsd:sequence>  
+    <xsd:attribute name="allowedExec"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="OTHER"/>  
+          <xsd:enumeration value="CL"/>  
+          <xsd:enumeration value="EA"/>  
+          <xsd:enumeration value="EU"/>  
+          <xsd:enumeration value="NA"/>  
+          <xsd:enumeration value="NA_EA"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute>  
+    <xsd:attribute name="associatedExec" default="OTHER"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="OTHER"/>  
+          <xsd:enumeration value="CL"/>  
+          <xsd:enumeration value="EA"/>  
+          <xsd:enumeration value="EU"/>  
+          <xsd:enumeration value="NA"/>  
+          <xsd:enumeration value="NA_EA"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ProposalFeedback' -->  
+  <xsd:complexType name="ProposalFeedbackT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Top level element for items to be calculated as part of the proposal feedback, used in the PhIM and for generating the summary documents of the proposal</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="estimatedTotalIntegrationTime" type="val:TimeT"/>  
+      <xsd:element name="ArrayTimeBreakdown" type="prp:ArrayTimeBreakdownT" minOccurs="0"/>  
+      <xsd:element name="DataRateBreakdown" type="prp:DataRateBreakdownT"/>  
+      <xsd:element name="ReceiverTimeBreakdown" type="prp:ReceiverTimeBreakdownT"/>  
+      <xsd:element name="TimeAllocationBreakdown" type="prp:TimeAllocationBreakdownT"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ReceiverTime' -->  
+  <xsd:complexType name="ReceiverTimeT"> 
+    <xsd:annotation> 
+      <xsd:documentation>The time required in the proposal for a given receiver band.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="time" type="val:TimeT"/> 
+    </xsd:sequence>  
+    <xsd:attribute name="receiverBand"> 
+      <xsd:simpleType> 
+        <xsd:restriction base="xsd:string"> 
+          <xsd:enumeration value="ALMA_RB_01"/>  
+          <xsd:enumeration value="ALMA_RB_02"/>  
+          <xsd:enumeration value="ALMA_RB_03"/>  
+          <xsd:enumeration value="ALMA_RB_04"/>  
+          <xsd:enumeration value="ALMA_RB_05"/>  
+          <xsd:enumeration value="ALMA_RB_06"/>  
+          <xsd:enumeration value="ALMA_RB_07"/>  
+          <xsd:enumeration value="ALMA_RB_08"/>  
+          <xsd:enumeration value="ALMA_RB_09"/>  
+          <xsd:enumeration value="ALMA_RB_10"/>  
+          <xsd:enumeration value="UNDEFINED"/> 
+        </xsd:restriction> 
+      </xsd:simpleType> 
+    </xsd:attribute> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ReceiverTimeBreakdown' -->  
+  <xsd:complexType name="ReceiverTimeBreakdownT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Container for the collection of Receiver Times.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="ReceiverTime" type="prp:ReceiverTimeT" minOccurs="0" maxOccurs="unbounded"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'TimeAllocationBreakdown' -->  
+  <xsd:complexType name="TimeAllocationBreakdownT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Container for the collections of Executive Fractions.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="ExecutiveFraction" type="prp:ExecutiveFractionT" minOccurs="6" maxOccurs="6"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- 'ObsProposalEntityT' contains administration info for ObsProposal -->  
+  <xsd:complexType name="ObsProposalEntityT"> 
+    <xsd:complexContent> 
+      <xsd:restriction base="ent:EntityT"> 
+        <xsd:attribute name="entityTypeName" type="ent:EntityTypeNameT" use="required" fixed="ObsProposal"/>  
+        <xsd:attribute name="schemaVersion" type="xsd:string" use="required" fixed="13"/> 
+      </xsd:restriction> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- other classes use 'ObsProposalRefT' to reference an entity of type ObsProposal -->  
+  <xsd:complexType name="ObsProposalRefT"> 
+    <xsd:complexContent> 
+      <xsd:restriction base="ent:EntityRefT"> 
+        <xsd:attribute name="entityTypeName" type="ent:EntityTypeNameT" use="required" fixed="ObsProposal"/> 
+      </xsd:restriction> 
+    </xsd:complexContent> 
+  </xsd:complexType> 
+</xsd:schema>

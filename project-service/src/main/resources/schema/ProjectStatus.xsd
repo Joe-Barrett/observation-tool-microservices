@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:val="Alma/ValueTypes" xmlns:ps="Alma/Scheduling/ProjectStatus" xmlns:ent="Alma/CommonEntity" xmlns:prj="Alma/ObsPrep/ObsProject" xmlns:oat="Alma/Obsprep/ObsAttachment" xmlns:sbl="Alma/ObsPrep/SchedBlock" xmlns:sbs="Alma/Scheduling/SBStatus" xmlns:ouss="Alma/Scheduling/OUSStatus" xmlns:orv="Alma/ObsPrep/ObsReview" xmlns:prp="Alma/ObsPrep/ObsProposal" elementFormDefault="qualified" attributeFormDefault="unqualified" version="13 24" targetNamespace="Alma/Scheduling/ProjectStatus">  
+  <xsd:import namespace="Alma/CommonEntity" schemaLocation="CommonEntity.xsd"/>  
+  <xsd:import namespace="Alma/ValueTypes" schemaLocation="ValueTypes.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/ObsProject" schemaLocation="ObsProject.xsd"/>  
+  <xsd:import namespace="Alma/Obsprep/ObsAttachment" schemaLocation="ObsAttachment.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/SchedBlock" schemaLocation="SchedBlock.xsd"/>  
+  <xsd:import namespace="Alma/Scheduling/SBStatus" schemaLocation="SBStatus.xsd"/>  
+  <xsd:import namespace="Alma/Scheduling/OUSStatus" schemaLocation="OUSStatus.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/ObsReview" schemaLocation="ObsReview.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/ObsProposal" schemaLocation="ObsProposal.xsd"/>  
+
+  <!-- generated from UML entity class 'alma/scheduling/projectstatus/ProjectStatus' -->  
+  <xsd:element name="ProjectStatus" type="ps:ProjectStatus"> 
+    <xsd:annotation> 
+      <xsd:documentation>ProjectStatus.... TODO: write something!!!</xsd:documentation> 
+    </xsd:annotation> 
+  </xsd:element>  
+  <xsd:complexType name="ProjectStatus"> 
+    <xsd:complexContent> 
+      <xsd:extension base="ps:StatusBaseT"> 
+        <xsd:sequence> 
+          <xsd:element name="ProjectStatusEntity" type="ps:ProjectStatusEntityT"/>  
+          <xsd:element name="ObsProjectRef" type="prj:ObsProjectRefT"/>  
+          <xsd:element name="ObsProposalRef" type="prp:ObsProposalRefT"/>  
+          <xsd:element name="ObsProgramStatusRef" type="ouss:OUSStatusRefT"/>  
+          <xsd:element name="Name" type="xsd:string"/>  
+          <xsd:element name="PI" type="xsd:string"/>  
+          <xsd:element name="BreakpointTime" type="xsd:string"/>  
+          <xsd:element name="projectWasTimedOut" type="xsd:string"/> 
+        </xsd:sequence>  
+        <xsd:attribute name="schemaVersion" type="xsd:string" use="required" fixed="13"/>  
+        <xsd:attribute name="revision" type="xsd:string" default="24"/>  
+        <xsd:attribute name="almatype" type="xsd:string" use="required" fixed="APDM::ProjectStatus"/> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ObsUnitStatus' -->  
+  <xsd:complexType name="ObsUnitStatusT" abstract="true"> 
+    <xsd:complexContent> 
+      <xsd:extension base="ps:StatusBaseT"> 
+        <xsd:sequence> 
+          <xsd:element name="ObsUnitSetMemberType" type="xsd:string"/>  
+          <xsd:element name="TotalRequiredTimeInSec" type="xsd:int"/>  
+          <xsd:element name="TotalUsedTimeInSec" type="xsd:int"/>  
+          <xsd:element name="ContainingObsUnitSetRef" type="ouss:OUSStatusRefT"/>  
+          <xsd:element name="ProjectStatusRef" type="ps:ProjectStatusRefT"/> 
+        </xsd:sequence> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'StatusBase' -->  
+  <xsd:complexType name="StatusBaseT" abstract="true"> 
+    <xsd:sequence> 
+      <xsd:element name="Status" type="val:StatusT"/>  
+      <xsd:element name="TimeOfUpdate" type="xsd:string"/>  
+      <xsd:element name="executionsRemaining" type="xsd:int" default="0"/>  
+      <xsd:element name="successfulExecutions" type="xsd:int" default="0"/>  
+      <xsd:element name="failedExecutions" type="xsd:int" default="0"/>  
+      <xsd:element name="secondsRemaining" type="xsd:int" default="0"/>  
+      <xsd:element name="successfulSeconds" type="xsd:int" default="0"/>  
+      <xsd:element name="failedSeconds" type="xsd:int" default="0"/>  
+      <xsd:element name="hasExecutionCount" type="xsd:boolean" default="false"/>  
+      <xsd:element name="hasTimeLimit" type="xsd:boolean" default="false"/>  
+      <xsd:element name="bookkeepingInitialized" type="xsd:boolean" default="false"/>  
+      <xsd:element name="flags" type="xsd:string" minOccurs="0"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- 'ProjectStatusEntityT' contains administration info for ProjectStatus -->  
+  <xsd:complexType name="ProjectStatusEntityT"> 
+    <xsd:complexContent> 
+      <xsd:restriction base="ent:EntityT"> 
+        <xsd:attribute name="entityTypeName" type="ent:EntityTypeNameT" use="required" fixed="ProjectStatus"/>  
+        <xsd:attribute name="schemaVersion" type="xsd:string" use="required" fixed="13"/> 
+      </xsd:restriction> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- other classes use 'ProjectStatusRefT' to reference an entity of type ProjectStatus -->  
+  <xsd:complexType name="ProjectStatusRefT"> 
+    <xsd:complexContent> 
+      <xsd:restriction base="ent:EntityRefT"> 
+        <xsd:attribute name="entityTypeName" type="ent:EntityTypeNameT" use="required" fixed="ProjectStatus"/> 
+      </xsd:restriction> 
+    </xsd:complexContent> 
+  </xsd:complexType> 
+</xsd:schema>

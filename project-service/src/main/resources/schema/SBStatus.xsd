@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:val="Alma/ValueTypes" xmlns:sbs="Alma/Scheduling/SBStatus" xmlns:ent="Alma/CommonEntity" xmlns:prj="Alma/ObsPrep/ObsProject" xmlns:oat="Alma/Obsprep/ObsAttachment" xmlns:sbl="Alma/ObsPrep/SchedBlock" xmlns:ps="Alma/Scheduling/ProjectStatus" xmlns:ouss="Alma/Scheduling/OUSStatus" xmlns:orv="Alma/ObsPrep/ObsReview" xmlns:prp="Alma/ObsPrep/ObsProposal" elementFormDefault="qualified" attributeFormDefault="unqualified" version="13 24" targetNamespace="Alma/Scheduling/SBStatus">  
+  <xsd:import namespace="Alma/CommonEntity" schemaLocation="CommonEntity.xsd"/>  
+  <xsd:import namespace="Alma/ValueTypes" schemaLocation="ValueTypes.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/ObsProject" schemaLocation="ObsProject.xsd"/>  
+  <xsd:import namespace="Alma/Obsprep/ObsAttachment" schemaLocation="ObsAttachment.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/SchedBlock" schemaLocation="SchedBlock.xsd"/>  
+  <xsd:import namespace="Alma/Scheduling/ProjectStatus" schemaLocation="ProjectStatus.xsd"/>  
+  <xsd:import namespace="Alma/Scheduling/OUSStatus" schemaLocation="OUSStatus.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/ObsReview" schemaLocation="ObsReview.xsd"/>  
+  <xsd:import namespace="Alma/ObsPrep/ObsProposal" schemaLocation="ObsProposal.xsd"/>  
+
+  <!-- generated from UML entity class 'alma/scheduling/sbstatus/SBStatus' -->  
+  <xsd:element name="SBStatus" type="sbs:SBStatus"></xsd:element>  
+  <xsd:complexType name="SBStatus"> 
+    <xsd:complexContent> 
+      <xsd:extension base="ps:ObsUnitStatusT"> 
+        <xsd:sequence> 
+          <xsd:element name="SBStatusEntity" type="sbs:SBStatusEntityT"/>  
+          <xsd:element name="SchedBlockRef" type="sbl:SchedBlockRefT"/>  
+          <xsd:element name="sensitivityGoalJy" type="xsd:double" default="0.0"/>  
+          <xsd:element name="sensitivityAchievedJy" type="xsd:double" default="0.0"/>  
+          <xsd:element name="hasSensitivityGoal" type="xsd:boolean" default="false"/>  
+          <xsd:element name="qa0Notes" type="xsd:string" minOccurs="0"/>  
+          <xsd:element name="ExecStatus" type="sbs:ExecStatusT" minOccurs="0" maxOccurs="unbounded"/> 
+        </xsd:sequence>  
+        <xsd:attribute name="schemaVersion" type="xsd:string" use="required" fixed="13"/>  
+        <xsd:attribute name="revision" type="xsd:string" default="24"/>  
+        <xsd:attribute name="almatype" type="xsd:string" use="required" fixed="APDM::SBStatus"/> 
+      </xsd:extension> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'BestSB' -->  
+  <xsd:complexType name="BestSBT"> 
+    <xsd:annotation> 
+      <xsd:documentation>The list of best scheduling blocks that were considered at this execution time.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="Selection" type="xsd:int"/>  
+      <xsd:element name="TimeOfSelection" type="xsd:string"/>  
+      <xsd:element name="BestSBItem" type="sbs:BestSBItemT" minOccurs="0" maxOccurs="unbounded"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'BestSBItem' -->  
+  <xsd:complexType name="BestSBItemT"> 
+    <xsd:sequence> 
+      <xsd:element name="Score" type="xsd:string"/>  
+      <xsd:element name="Success" type="xsd:string"/>  
+      <xsd:element name="Rank" type="xsd:string"/>  
+      <xsd:element name="SchedBlockRef" type="sbl:SchedBlockRefT"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'ExecStatus' -->  
+  <xsd:complexType name="ExecStatusT"> 
+    <xsd:annotation> 
+      <xsd:documentation>Current status of a execution block of a project.</xsd:documentation> 
+    </xsd:annotation>  
+    <xsd:sequence> 
+      <xsd:element name="Status" type="val:StatusT"/>  
+      <xsd:element name="TimeOfCreation" type="xsd:string"/>  
+      <xsd:element name="TimeOfUpdate" type="xsd:string"/>  
+      <xsd:element name="ArrayName" type="xsd:string"/>  
+      <xsd:element name="ExecBlockRef" type="val:ExecBlockRefT"/>  
+      <xsd:element name="qa0Notes" type="xsd:string" minOccurs="0"/>  
+      <xsd:element name="sensitivityAchievedJy" type="xsd:double" default="-1.0"/>  
+      <xsd:element name="BestSB" type="sbs:BestSBT"/>  
+      <xsd:element name="OnSourceTime" type="sbs:OnSourceTimeT" minOccurs="0" maxOccurs="unbounded"/> 
+    </xsd:sequence>  
+    <xsd:attribute name="entityPartId" type="ent:EntityPartIdT"/>  
+    <xsd:attribute name="almatype" type="xsd:string" use="required" fixed="APDM::ExecStatus"/> 
+  </xsd:complexType>  
+
+  <!-- generated from dependent class 'OnSourceTime' -->  
+  <xsd:complexType name="OnSourceTimeT"> 
+    <xsd:sequence> 
+      <xsd:element name="intent" type="xsd:string"/>  
+      <xsd:element name="time" type="val:TimeT"/> 
+    </xsd:sequence> 
+  </xsd:complexType>  
+
+  <!-- 'SBStatusEntityT' contains administration info for SBStatus -->  
+  <xsd:complexType name="SBStatusEntityT"> 
+    <xsd:complexContent> 
+      <xsd:restriction base="ent:EntityT"> 
+        <xsd:attribute name="entityTypeName" type="ent:EntityTypeNameT" use="required" fixed="SBStatus"/>  
+        <xsd:attribute name="schemaVersion" type="xsd:string" use="required" fixed="13"/> 
+      </xsd:restriction> 
+    </xsd:complexContent> 
+  </xsd:complexType>  
+
+  <!-- other classes use 'SBStatusRefT' to reference an entity of type SBStatus -->  
+  <xsd:complexType name="SBStatusRefT"> 
+    <xsd:complexContent> 
+      <xsd:restriction base="ent:EntityRefT"> 
+        <xsd:attribute name="entityTypeName" type="ent:EntityTypeNameT" use="required" fixed="SBStatus"/> 
+      </xsd:restriction> 
+    </xsd:complexContent> 
+  </xsd:complexType> 
+</xsd:schema>
