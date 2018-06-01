@@ -1,4 +1,4 @@
-package com.prototype.ot.microservices.spectralservice;
+package com.prototype.ot.microservices.projectservice.config;
 
 import com.netflix.appinfo.AmazonInfo;
 import org.springframework.beans.factory.annotation.Qualifier;
