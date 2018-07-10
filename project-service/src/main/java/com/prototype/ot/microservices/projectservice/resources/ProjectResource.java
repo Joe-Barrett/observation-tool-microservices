@@ -6,9 +6,7 @@ import com.prototype.ot.microservices.projectservice.model.ObsProposal;
 import com.prototype.ot.microservices.projectservice.model.ProjectListItem;
 import com.prototype.ot.microservices.projectservice.services.ProjectService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
@@ -61,6 +59,13 @@ public class ProjectResource {
         } catch (IOException | JAXBException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
         }
+    }
+
+    @PutMapping(path = "/proposal")
+    public ResponseEntity putProposal(@RequestBody ObsProposal proposal) {
+        System.out.println("Got Proposal!");
+        System.out.println(proposal.toString());
+        return ResponseEntity.ok().build();
     }
 
 }
