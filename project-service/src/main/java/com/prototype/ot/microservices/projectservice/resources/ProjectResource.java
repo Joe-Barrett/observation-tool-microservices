@@ -1,5 +1,8 @@
 package com.prototype.ot.microservices.projectservice.resources;
 
+import com.fasterxml.jackson.databind.AnnotationIntrospector;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import com.google.gson.Gson;
 import com.prototype.ot.microservices.projectservice.model.ObsProject;
 import com.prototype.ot.microservices.projectservice.model.ObsProposal;
@@ -55,16 +58,27 @@ public class ProjectResource {
     public ResponseEntity getProposal(@RequestParam(value = "proposalRef", required = false) String proposalRef) {
         try {
             ObsProposal foundProposal = this.projectService.getProposal(proposalRef);
-            return ResponseEntity.ok(new Gson().toJson(foundProposal));
+            ObjectMapper mapper = new ObjectMapper();
+            AnnotationIntrospector introspector = new JacksonAnnotationIntrospector();
+            mapper.setAnnotationIntrospector(introspector);
+//            System.out.println(mapper.writeValueAsString(foundProposal));
+            return ResponseEntity.ok(mapper.writeValueAsString(foundProposal));
+//            return ResponseEntity.ok(new Gson().toJson(foundProposal));
         } catch (IOException | JAXBException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
         }
     }
 
     @PutMapping(path = "/proposal")
-    public ResponseEntity putProposal(@RequestBody ObsProposal proposal) {
-        System.out.println("Got Proposal!");
-        System.out.println(proposal.toString());
+    public ResponseEntity putProposal(@RequestBody String proposal) {
+        ObjectMapper mapper = new ObjectMapper();
+        AnnotationIntrospector introspector = new JacksonAnnotationIntrospector();
+        try {
+            ObsProposal obsProposal = mapper.readValue(proposal, ObsProposal.class);
+            System.out.println(obsProposal.getCode());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return ResponseEntity.ok().build();
     }
 

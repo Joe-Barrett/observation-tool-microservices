@@ -8,6 +8,8 @@
 
 package com.prototype.ot.microservices.projectservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.*;
@@ -91,6 +93,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "proposalFeedback"
 })
 @XmlRootElement
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ObsProposal
     extends ObsPhaseT
 {
