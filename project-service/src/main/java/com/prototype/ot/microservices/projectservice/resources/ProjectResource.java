@@ -1,8 +1,13 @@
 package com.prototype.ot.microservices.projectservice.resources;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.AnnotationIntrospector;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
+import com.fasterxml.jackson.module.jsonSchema.JsonSchema;
+import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
+import com.fasterxml.jackson.module.jsonSchema.factories.SchemaFactoryWrapper;
 import com.google.gson.Gson;
 import com.prototype.ot.microservices.projectservice.model.ObsProject;
 import com.prototype.ot.microservices.projectservice.model.ObsProposal;
@@ -12,7 +17,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.JAXBException;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @RestController
@@ -61,11 +68,22 @@ public class ProjectResource {
             ObjectMapper mapper = new ObjectMapper();
             AnnotationIntrospector introspector = new JacksonAnnotationIntrospector();
             mapper.setAnnotationIntrospector(introspector);
-//            System.out.println(mapper.writeValueAsString(foundProposal));
             return ResponseEntity.ok(mapper.writeValueAsString(foundProposal));
-//            return ResponseEntity.ok(new Gson().toJson(foundProposal));
         } catch (IOException | JAXBException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
+        }
+    }
+
+    @GetMapping(path = "/schema")
+    public ResponseEntity makeSchema() {
+        final ObjectMapper mapper = new ObjectMapper();
+        try {
+            JsonSchemaGenerator schemaGenerator = new JsonSchemaGenerator(mapper);
+            JsonSchema schema = schemaGenerator.generateSchema(ObsProposal.class);
+            return ResponseEntity.ok(mapper.writeValueAsString(schema));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(404).body(e.getMessage());
         }
     }
 
