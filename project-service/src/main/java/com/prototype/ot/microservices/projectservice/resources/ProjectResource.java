@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchema;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
-import com.google.gson.Gson;
 import com.prototype.ot.microservices.projectservice.model.ObsProject;
 import com.prototype.ot.microservices.projectservice.model.ObsProposal;
 import com.prototype.ot.microservices.projectservice.model.ProjectListItem;
@@ -51,7 +50,8 @@ public class ProjectResource {
     public ResponseEntity getProject(@RequestParam(value = "projectRef") String projectRef) {
         try {
             ObsProject foundProject = this.projectService.getProject(projectRef);
-            return ResponseEntity.ok(new Gson().toJson(foundProject));
+            ObjectMapper mapper = new ObjectMapper();
+            return ResponseEntity.ok(mapper.writeValueAsString(foundProject));
         } catch (IOException | JAXBException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
         }

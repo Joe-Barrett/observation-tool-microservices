@@ -57,7 +57,7 @@ import javax.xml.bind.annotation.XmlType;
     ObsReview.class,
     ObsProposal.class
 })
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = ObsProgramT.class, name = "ObsProgramT"),
         @JsonSubTypes.Type(value = ObsReview.class, name = "ObsReview"),
