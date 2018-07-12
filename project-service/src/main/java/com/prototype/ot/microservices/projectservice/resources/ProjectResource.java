@@ -47,7 +47,7 @@ public class ProjectResource {
         }
     }
 
-    @GetMapping(path = "/project")
+    @GetMapping("/project")
     public ResponseEntity getProject(@RequestParam(value = "projectRef") String projectRef) {
         try {
             ObsProject foundProject = this.projectService.getProject(projectRef);
@@ -55,6 +55,12 @@ public class ProjectResource {
         } catch (IOException | JAXBException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
         }
+    }
+
+    @PutMapping(path = "/project")
+    public ResponseEntity putProject(@RequestBody ObsProject project) {
+        System.out.println(project.getObsProjectEntity().getEntityId());
+        return ResponseEntity.ok(project.getObsProjectEntity().getEntityId());
     }
 
     @GetMapping(path = "/proposal")
@@ -70,6 +76,12 @@ public class ProjectResource {
         }
     }
 
+    @PutMapping(path = "/proposal")
+    public ResponseEntity putProposal(@RequestBody ObsProposal proposal) {
+        System.out.println(proposal.getObsProposalEntity().getEntityId());
+        return ResponseEntity.ok(proposal.getObsProposalEntity().getEntityId());
+    }
+
     @GetMapping(path = "/schema")
     public ResponseEntity makeSchema() {
         final ObjectMapper mapper = new ObjectMapper();
@@ -80,20 +92,6 @@ public class ProjectResource {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             return ResponseEntity.status(404).body(e.getMessage());
-        }
-    }
-
-    @PutMapping(path = "/proposal")
-    public ResponseEntity putProposal(@RequestBody String proposal) {
-        ObjectMapper mapper = new ObjectMapper();
-        AnnotationIntrospector introspector = new JacksonAnnotationIntrospector();
-        try {
-            ObsProposal obsProposal = mapper.readValue(proposal, ObsProposal.class);
-            System.out.println(obsProposal.getCode());
-            return ResponseEntity.ok(obsProposal.getCode());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500).body(e.getMessage());
         }
     }
 
