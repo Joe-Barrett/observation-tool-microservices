@@ -1,9 +1,7 @@
 package com.prototype.ot.microservices.projectservice.resources;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.AnnotationIntrospector;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchema;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
 import com.prototype.ot.microservices.projectservice.model.ObsProject;
@@ -13,8 +11,13 @@ import com.prototype.ot.microservices.projectservice.services.ProjectService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 
 @RestController
@@ -68,8 +71,6 @@ public class ProjectResource {
         try {
             ObsProposal foundProposal = this.projectService.getProposal(proposalRef);
             ObjectMapper mapper = new ObjectMapper();
-            AnnotationIntrospector introspector = new JacksonAnnotationIntrospector();
-            mapper.setAnnotationIntrospector(introspector);
             return ResponseEntity.ok(mapper.writeValueAsString(foundProposal));
         } catch (IOException | JAXBException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
@@ -78,8 +79,22 @@ public class ProjectResource {
 
     @PutMapping(path = "/proposal")
     public ResponseEntity putProposal(@RequestBody ObsProposal proposal) {
-        System.out.println(proposal.getObsProposalEntity().getEntityId());
-        return ResponseEntity.ok(proposal.getObsProposalEntity().getEntityId());
+        try {
+            proposal.setTitle("Edited by server");
+            Marshaller marshaller;
+            JAXBContext context = JAXBContext.newInstance(ObsProposal.class);
+            marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            StringWriter writer = new StringWriter();
+            PrintWriter out = new PrintWriter("/data/test.xml");
+            marshaller.marshal(proposal, writer);
+            out.println(writer.toString());
+            out.close();
+            return ResponseEntity.ok(writer.toString());
+        } catch (JAXBException | FileNotFoundException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
     }
 
     @GetMapping(path = "/schema")
