@@ -8,6 +8,9 @@
 
 package com.prototype.ot.microservices.projectservice.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -106,6 +109,11 @@ import javax.xml.bind.annotation.XmlType;
 @XmlSeeAlso({
     ObsUnitSetT.class,
     SchedBlock.class
+})
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = ObsUnitSetT.class, name = "ObsUnitSetT"),
+        @JsonSubTypes.Type(value = SchedBlock.class, name = "SchedBlock")
 })
 public abstract class ObsUnitT {
 
