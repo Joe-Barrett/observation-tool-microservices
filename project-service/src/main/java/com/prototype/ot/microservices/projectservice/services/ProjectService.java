@@ -10,12 +10,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import java.io.IOException;
-import java.io.StringReader;
+import javax.xml.bind.*;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -72,8 +68,40 @@ public class ProjectService {
         return null;
     }
 
-    public void saveProposal(ObsProposal proposal) {
-
+    public void saveProposal(ObsProposal proposal) throws JAXBException, IOException {
+        // Find corresponding project
+        ObsProject project;
+        List<ObsProject> projects = this.getAllProjects();
+        for (ObsProject proj: projects) {
+            if (proj.getObsProposalRef().getEntityId().equals(proposal.getObsProposalEntity().getEntityId())) {
+                project = proj;
+                break;
+            }
+        }
+        // Convert both to xml strings
+        Marshaller marshaller;
+        JAXBContext context = JAXBContext.newInstance(ObsProject.class);
+        marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(proposal, writer);
+        String projectXml = writer.toString();
+        context = JAXBContext.newInstance(ObsProposal.class);
+        marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        writer = new StringWriter();
+        marshaller.marshal(proposal, writer);
+        String proposalXml = writer.toString();
+        // Convert to bytes
+        byte[] projBytes = projectXml.getBytes(StandardCharsets.UTF_8);
+        byte[] propBytes = proposalXml.getBytes(StandardCharsets.UTF_8);
+        // Put into zip entry
+        OutputStream out = new FileOutputStream("/data/test.aot");
+        final ZipSupport.ZipWriter zipWriter = new ZipSupport.ZipWriter(out);
+        zipWriter.putZipEntry("ObsProject.xml", projBytes);
+        zipWriter.putZipEntry("ObsProposal.xml", propBytes);
+        // Close entry
+        zipWriter.close();
     }
 
     public void updateProposal(ObsProposal proposal) {

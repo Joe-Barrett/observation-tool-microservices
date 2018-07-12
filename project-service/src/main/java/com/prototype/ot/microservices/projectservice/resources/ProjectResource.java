@@ -90,8 +90,9 @@ public class ProjectResource {
             marshaller.marshal(proposal, writer);
             out.println(writer.toString());
             out.close();
+            this.projectService.saveProposal(proposal);
             return ResponseEntity.ok(writer.toString());
-        } catch (JAXBException | FileNotFoundException e) {
+        } catch (JAXBException | IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body(e.getMessage());
         }
