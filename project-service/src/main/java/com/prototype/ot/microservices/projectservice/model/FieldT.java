@@ -8,6 +8,9 @@
 
 package com.prototype.ot.microservices.projectservice.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -48,6 +51,14 @@ import javax.xml.bind.annotation.XmlType;
     EllipseT.class,
     RectangleT.class,
     SinglePointT.class
+})
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = CircleT.class, name = "CircleT"),
+        @JsonSubTypes.Type(value = PolygonT.class, name = "PolygonT"),
+        @JsonSubTypes.Type(value = EllipseT.class, name = "EllipseT"),
+        @JsonSubTypes.Type(value = RectangleT.class, name = "RectangleT"),
+        @JsonSubTypes.Type(value = SinglePointT.class, name = "SinglePointT"),
 })
 public abstract class FieldT {
 

@@ -2,12 +2,10 @@ package com.prototype.ot.microservices.projectservice.resources;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.AnnotationIntrospector;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchema;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
-import com.fasterxml.jackson.module.jsonSchema.factories.SchemaFactoryWrapper;
 import com.google.gson.Gson;
 import com.prototype.ot.microservices.projectservice.model.ObsProject;
 import com.prototype.ot.microservices.projectservice.model.ObsProposal;
@@ -17,9 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.JAXBException;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 @RestController
@@ -94,10 +90,11 @@ public class ProjectResource {
         try {
             ObsProposal obsProposal = mapper.readValue(proposal, ObsProposal.class);
             System.out.println(obsProposal.getCode());
+            return ResponseEntity.ok(obsProposal.getCode());
         } catch (IOException e) {
             e.printStackTrace();
+            return ResponseEntity.status(500).body(e.getMessage());
         }
-        return ResponseEntity.ok().build();
     }
 
 }

@@ -8,6 +8,9 @@
 
 package com.prototype.ot.microservices.projectservice.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -49,6 +52,11 @@ import javax.xml.bind.annotation.XmlType;
 @XmlSeeAlso({
     SpectralScanT.class,
     ScienceSpectralWindowT.class
+})
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = SpectralScanT.class, name = "SpectralScanT"),
+        @JsonSubTypes.Type(value = ScienceSpectralWindowT.class, name = "ScienceSpectralWindowT")
 })
 public abstract class AbstractScienceSpectralWindowT {
 
