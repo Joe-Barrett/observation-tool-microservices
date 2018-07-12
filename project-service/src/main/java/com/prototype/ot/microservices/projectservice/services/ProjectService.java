@@ -72,6 +72,10 @@ public class ProjectService {
         return null;
     }
 
+    public void saveProposal(ObsProposal proposal) {
+
+    }
+
     public void updateProposal(ObsProposal proposal) {
         System.out.println("ProjectService, updateProposal");
         JSONObject object = new JSONObject(proposal);
@@ -132,11 +136,11 @@ public class ProjectService {
         ClassLoader cl = this.getClass().getClassLoader();
         ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver(cl);
         Resource[] resources = resourcePatternResolver.getResources("classpath*:/projects/real-projects/*.aot");
-        ZipUtils.ZipReader zipReader;
-        ZipUtils.ZipNtry entry;
+        ZipSupport.ZipReader zipReader;
+        ZipSupport.ZipNtry entry;
         String xml;
         for (Resource f : resources) {
-            zipReader = new ZipUtils.ZipReader(f.getInputStream());
+            zipReader = new ZipSupport.ZipReader(f.getInputStream());
             entry = zipReader.getZipEntry();
             while (!entry.toString().equals(filename)) {
                 entry = zipReader.getZipEntry();
