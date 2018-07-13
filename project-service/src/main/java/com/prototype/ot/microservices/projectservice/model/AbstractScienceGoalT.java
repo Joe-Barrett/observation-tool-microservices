@@ -8,6 +8,9 @@
 
 package com.prototype.ot.microservices.projectservice.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -48,6 +51,12 @@ import javax.xml.bind.annotation.XmlType;
     ObservatoryGoalT.class,
     OpticalPointingScienceGoalT.class,
     ScienceGoalT.class
+})
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = ObservatoryGoalT.class, name = "ObservatoryGoalT"),
+        @JsonSubTypes.Type(value = OpticalPointingScienceGoalT.class, name = "OpticalPointingScienceGoalT"),
+        @JsonSubTypes.Type(value = ScienceGoalT.class, name = "ScienceGoalT")
 })
 public abstract class AbstractScienceGoalT {
 

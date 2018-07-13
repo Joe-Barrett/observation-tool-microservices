@@ -8,6 +8,9 @@
 
 package com.prototype.ot.microservices.projectservice.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -53,6 +56,12 @@ import javax.xml.bind.annotation.XmlType;
     ObsProgramT.class,
     ObsReview.class,
     ObsProposal.class
+})
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = ObsProgramT.class, name = "ObsProgramT"),
+        @JsonSubTypes.Type(value = ObsReview.class, name = "ObsReview"),
+        @JsonSubTypes.Type(value = ObsProposal.class, name = "ObsProposal")
 })
 public abstract class ObsPhaseT {
 

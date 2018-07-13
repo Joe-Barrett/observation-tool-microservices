@@ -8,6 +8,9 @@
 
 package com.prototype.ot.microservices.projectservice.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -49,6 +52,11 @@ import javax.xml.bind.annotation.XmlType;
 @XmlSeeAlso({
     SBStatus.class,
     OUSStatus.class
+})
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = SBStatus.class, name = "SBStatus"),
+        @JsonSubTypes.Type(value = OUSStatus.class, name = "OUSStatus")
 })
 public abstract class ObsUnitStatusT
     extends StatusBaseT

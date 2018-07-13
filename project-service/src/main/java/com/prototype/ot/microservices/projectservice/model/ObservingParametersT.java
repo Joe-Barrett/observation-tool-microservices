@@ -8,6 +8,9 @@
 
 package com.prototype.ot.microservices.projectservice.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -57,6 +60,15 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     RadiometricPointingParametersT.class,
     ReservationParametersT.class,
     CalibratorParametersT.class
+})
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = HolographyParametersT.class, name = "HolographyParametersT"),
+        @JsonSubTypes.Type(value = ScienceParametersT.class, name = "ScienceParametersT"),
+        @JsonSubTypes.Type(value = OpticalPointingParametersT.class, name = "OpticalPointingParametersT"),
+        @JsonSubTypes.Type(value = RadiometricPointingParametersT.class, name = "RadiometricPointingParametersT"),
+        @JsonSubTypes.Type(value = ReservationParametersT.class, name = "ReservationParametersT"),
+        @JsonSubTypes.Type(value = CalibratorParametersT.class, name = "CalibratorParametersT")
 })
 public abstract class ObservingParametersT {
 

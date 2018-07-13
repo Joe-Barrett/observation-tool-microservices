@@ -8,6 +8,8 @@
 
 package com.prototype.ot.microservices.projectservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.*;
@@ -91,6 +93,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "proposalFeedback"
 })
 @XmlRootElement
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ObsProposal
     extends ObsPhaseT
 {
@@ -113,7 +116,7 @@ public class ObsProposal
     private String previousProposals;
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
-    private XMLGregorianCalendar dateReceived;
+    private String dateReceived;
     @XmlElement(required = true)
     private String cycle;
     @XmlElement(defaultValue = "false")
@@ -351,7 +354,7 @@ public class ObsProposal
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public XMLGregorianCalendar getDateReceived() {
+    public String getDateReceived() {
         return dateReceived;
     }
 
@@ -363,7 +366,7 @@ public class ObsProposal
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setDateReceived(XMLGregorianCalendar value) {
+    public void setDateReceived(String value) {
         this.dateReceived = value;
     }
 

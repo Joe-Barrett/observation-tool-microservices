@@ -8,6 +8,9 @@
 
 package com.prototype.ot.microservices.projectservice.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -54,6 +57,13 @@ import javax.xml.bind.annotation.XmlType;
     RectanglePatternT.class,
     FillPatternT.class,
     CrossPatternT.class
+})
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = PointingPatternT.class, name = "PointingPatternT"),
+        @JsonSubTypes.Type(value = RectanglePatternT.class, name = "RectanglePatternT"),
+        @JsonSubTypes.Type(value = FillPatternT.class, name = "FillPatternT"),
+        @JsonSubTypes.Type(value = CrossPatternT.class, name = "CrossPatternT")
 })
 public abstract class FieldPatternT {
 
