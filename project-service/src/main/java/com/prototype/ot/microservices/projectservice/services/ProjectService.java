@@ -70,7 +70,7 @@ public class ProjectService {
 
     public void saveProposal(ObsProposal proposal) throws JAXBException, IOException {
         // Find corresponding project
-        ObsProject project;
+        ObsProject project = null;
         List<ObsProject> projects = this.getAllProjects();
         for (ObsProject proj: projects) {
             if (proj.getObsProposalRef().getEntityId().equals(proposal.getObsProposalEntity().getEntityId())) {
@@ -84,7 +84,7 @@ public class ProjectService {
         marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         StringWriter writer = new StringWriter();
-        marshaller.marshal(proposal, writer);
+        marshaller.marshal(project, writer);
         String projectXml = writer.toString();
         context = JAXBContext.newInstance(ObsProposal.class);
         marshaller = context.createMarshaller();
