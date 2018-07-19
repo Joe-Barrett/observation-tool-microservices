@@ -5,5 +5,20 @@
 // Generated on: 2018.05.22 at 04:31:38 PM BST 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "Alma/ObsPrep/SchedBlock", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@XmlSchema(
+        elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED,
+        xmlns = {
+                @XmlNs(prefix = "ent", namespaceURI = "Alma/CommonEntity"),
+                @XmlNs(prefix = "val", namespaceURI = "Alma/ValueTypes"),
+                @XmlNs(prefix = "prp", namespaceURI = "Alma/ObsPrep/ObsProposal"),
+                @XmlNs(prefix = "orv", namespaceURI = "Alma/ObsPrep/ObsReview"),
+                @XmlNs(prefix = "ps", namespaceURI = "Alma/ObsPrep/ProjectStatus"),
+                @XmlNs(prefix = "oat", namespaceURI = "Alma/ObsPrep/ObsAttachment"),
+                @XmlNs(prefix = "prj", namespaceURI = "Alma/ObsPrep/ObsProject"),
+                @XmlNs(prefix = "sbl", namespaceURI = "Alma/ObsPrep/SchedBlock"),
+                @XmlNs(prefix = "xsi", namespaceURI = "http://www.w3.org/2001/XMLSchema-instance")
+        })
 package com.prototype.ot.microservices.projectservice.model;
+
+import javax.xml.bind.annotation.XmlNs;
+import javax.xml.bind.annotation.XmlSchema;
