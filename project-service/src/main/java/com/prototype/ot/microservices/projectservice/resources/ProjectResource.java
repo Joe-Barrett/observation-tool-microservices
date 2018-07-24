@@ -52,9 +52,9 @@ public class ProjectResource {
     }
 
     @GetMapping("/project")
-    public ResponseEntity getProject(@RequestParam(value = "projectRef") String projectRef) {
+    public ResponseEntity getProject(@RequestParam(value = "entityRef") String entityRef) {
         try {
-            ObsProject foundProject = this.projectService.getProject(projectRef);
+            ObsProject foundProject = this.projectService.getProject(entityRef);
             return ResponseEntity.ok(this.objectMapper.writeValueAsString(foundProject));
         } catch (IOException | JAXBException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
@@ -68,9 +68,9 @@ public class ProjectResource {
     }
 
     @GetMapping(path = "/proposal")
-    public ResponseEntity getProposal(@RequestParam(value = "proposalRef", required = false) String proposalRef) {
+    public ResponseEntity getProposal(@RequestParam(value = "entityRef") String entityRef) {
         try {
-            ObsProposal foundProposal = this.projectService.getProposal(proposalRef);
+            ObsProposal foundProposal = this.projectService.getProposal(entityRef);
             return ResponseEntity.ok(this.objectMapper.writeValueAsString(foundProposal));
         } catch (IOException | JAXBException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
