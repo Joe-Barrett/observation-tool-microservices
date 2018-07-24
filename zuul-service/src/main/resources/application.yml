@@ -7,7 +7,7 @@ eureka:
       defaultZone: ${eureka_url:http://eureka-service:8761/eureka/}
 
 zuul:
-  prefix: /api
+  #prefix: /
 #  Uncomment to disable services automatically registering in Zuul
 #  ignoredServices: '*'
 
