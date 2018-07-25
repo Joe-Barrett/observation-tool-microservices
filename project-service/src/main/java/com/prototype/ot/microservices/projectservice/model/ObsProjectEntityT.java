@@ -37,5 +37,9 @@ public class ObsProjectEntityT
     extends EntityT
 {
 
+    public ObsProjectEntityT() {
+        super();
+        this.setEntityTypeName("ObsProject");
+    }
 
 }

@@ -207,6 +207,18 @@ public class ObsProject {
     @XmlAttribute(name = "status")
     private String status;
 
+    public ObsProject() {
+        this.setPI("");
+        this.setProjectName("");
+        this.setVersion("0");
+        this.setManualMode(false);
+        this.setSimulationMode(false);
+        this.setIsCalibration(false);
+        this.setIsCommissioning(false);
+        this.setObsProgram(new ObsProgramT());
+        this.setObsProjectEntity(new ObsProjectEntityT());
+    }
+
     /**
      * Gets the value of the obsProjectEntity property.
      * 

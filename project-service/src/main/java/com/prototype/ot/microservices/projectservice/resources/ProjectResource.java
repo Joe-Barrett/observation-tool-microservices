@@ -4,9 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchema;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
-import com.prototype.ot.microservices.projectservice.model.ObsProject;
-import com.prototype.ot.microservices.projectservice.model.ObsProposal;
-import com.prototype.ot.microservices.projectservice.model.ProjectListItem;
+import com.prototype.ot.microservices.projectservice.model.*;
 import com.prototype.ot.microservices.projectservice.services.ProjectService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -104,6 +102,22 @@ public class ProjectResource {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             return ResponseEntity.status(404).body(e.getMessage());
+        }
+    }
+
+    @GetMapping(path = "/new")
+    public ResponseEntity newProject() {
+        try {
+            ObsProject newProject = new ObsProject();
+            newProject.setObsProjectEntity(new ObsProjectEntityT());
+            ObsProposal newProposal = new ObsProposal();
+            newProposal.setObsProposalEntity(new ObsProposalEntityT());
+//            newProject.setObsProposalRef(newProposal.getObsProposalEntity());
+
+            return ResponseEntity.ok(this.objectMapper.writeValueAsString(newProject));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(e.getMessage());
         }
     }
 
