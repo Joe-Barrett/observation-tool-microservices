@@ -12,6 +12,10 @@ services:
     image: project-service
     depends_on:
       - eureka-service
+    extra_hosts:
+      - "dockerhost:195.194.120.254"
+    volumes:
+      - 'D:\Docker\project-service:/data/'
   zuul-service:
     image: zuul-service
     depends_on:
