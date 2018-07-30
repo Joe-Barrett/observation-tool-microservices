@@ -36,5 +36,12 @@ public class ObsProjectRefT
     extends EntityRefT
 {
 
+    public static ObsProjectRefT createFromProject(ObsProject project) {
+        ObsProjectRefT toRet = new ObsProjectRefT();
+        toRet.setEntityId(project.getObsProjectEntity().getEntityId());
+        toRet.setDocumentVersion(project.getObsProjectEntity().getDocumentVersion());
+        toRet.setEntityTypeName(project.getObsProjectEntity().getEntityTypeName());
+        return toRet;
+    }
 
 }

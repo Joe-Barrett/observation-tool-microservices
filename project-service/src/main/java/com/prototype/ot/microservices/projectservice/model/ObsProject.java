@@ -219,6 +219,10 @@ public class ObsProject {
         this.setObsProjectEntity(new ObsProjectEntityT());
     }
 
+    public void setObsProposal(ObsProposal proposal) {
+        this.setObsProposalRef(ObsProposalRefT.createFromProposal(proposal));
+    }
+
     /**
      * Gets the value of the obsProjectEntity property.
      * 

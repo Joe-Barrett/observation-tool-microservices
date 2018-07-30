@@ -2,6 +2,7 @@ package com.prototype.ot.microservices.projectservice.resources;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchema;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
 import com.prototype.ot.microservices.projectservice.model.*;
@@ -27,6 +28,7 @@ public class ProjectResource {
     public ProjectResource() {
         this.projectService = new ProjectService();
         this.objectMapper = new ObjectMapper();
+        this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
     @GetMapping
@@ -108,12 +110,16 @@ public class ProjectResource {
     @GetMapping(path = "/new")
     public ResponseEntity newProject() {
         try {
+            // Create new ObsProject
             ObsProject newProject = new ObsProject();
-            newProject.setObsProjectEntity(new ObsProjectEntityT());
+            // Create ObsProgram
+            // Create ObsProposal
             ObsProposal newProposal = new ObsProposal();
-            newProposal.setObsProposalEntity(new ObsProposalEntityT());
-//            newProject.setObsProposalRef(newProposal.getObsProposalEntity());
-
+            // Set ObsProgram in project
+            // Set ObsProposal in Project
+            newProject.setObsProposal(newProposal);
+            // Set ObsProject in Proposal
+            newProposal.setObsProject(newProject);
             return ResponseEntity.ok(this.objectMapper.writeValueAsString(newProject));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
