@@ -16,8 +16,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
-@SuppressWarnings("unchecked")
 public class ProjectService {
 
     public ProjectService() {
@@ -161,14 +161,12 @@ public class ProjectService {
 
     private <T> List<T> loadResourceList(String filename, Class<T> cls) throws IOException, JAXBException {
         List<T> returnList = new ArrayList<>();
-        ClassLoader cl = this.getClass().getClassLoader();
-        ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver(cl);
-        Resource[] resources = resourcePatternResolver.getResources("classpath*:/projects/real-projects/*.aot");
+        File folder = new File("/data/projects/real-projects");
         ZipSupport.ZipReader zipReader;
         ZipSupport.ZipNtry entry;
         String xml;
-        for (Resource f : resources) {
-            zipReader = new ZipSupport.ZipReader(f.getInputStream());
+        for (File f : Objects.requireNonNull(folder.listFiles())) {
+            zipReader = new ZipSupport.ZipReader(new FileInputStream(f));
             entry = zipReader.getZipEntry();
             while (!entry.toString().equals(filename)) {
                 entry = zipReader.getZipEntry();
