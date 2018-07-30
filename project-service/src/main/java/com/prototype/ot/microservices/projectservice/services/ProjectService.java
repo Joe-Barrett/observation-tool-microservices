@@ -161,22 +161,24 @@ public class ProjectService {
 
     private <T> List<T> loadResourceList(String filename, Class<T> cls) throws IOException, JAXBException {
         List<T> returnList = new ArrayList<>();
-        File folder = new File("/data/projects/real-projects");
+        File folder = new File("/data/projects/");
         ZipSupport.ZipReader zipReader;
         ZipSupport.ZipNtry entry;
         String xml;
         for (File f : Objects.requireNonNull(folder.listFiles())) {
-            zipReader = new ZipSupport.ZipReader(new FileInputStream(f));
-            entry = zipReader.getZipEntry();
-            while (!entry.toString().equals(filename)) {
+            if(!f.isDirectory()) {
+                zipReader = new ZipSupport.ZipReader(new FileInputStream(f));
                 entry = zipReader.getZipEntry();
+                while (!entry.toString().equals(filename)) {
+                    entry = zipReader.getZipEntry();
+                }
+                xml = new String(entry.getData(), StandardCharsets.UTF_8);
+                JAXBContext jaxbContext = JAXBContext.newInstance("com.prototype.ot.microservices.projectservice.model");
+                Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+                StringReader stringReader = new StringReader(xml);
+                JAXBElement<T> element = (JAXBElement<T>) unmarshaller.unmarshal(stringReader);
+                returnList.add(cls.cast(element.getValue()));
             }
-            xml = new String(entry.getData(), StandardCharsets.UTF_8);
-            JAXBContext jaxbContext = JAXBContext.newInstance("com.prototype.ot.microservices.projectservice.model");
-            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            StringReader stringReader = new StringReader(xml);
-            JAXBElement<T> element = (JAXBElement<T>) unmarshaller.unmarshal(stringReader);
-            returnList.add(cls.cast(element.getValue()));
         }
         return returnList;
     }
