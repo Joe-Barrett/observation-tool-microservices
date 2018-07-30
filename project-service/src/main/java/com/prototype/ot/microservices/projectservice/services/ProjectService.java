@@ -192,9 +192,10 @@ public class ProjectService {
                     entry = zipReader.getZipEntry();
                 }
                 xml = new String(entry.getData(), StandardCharsets.UTF_8);
-                JAXBContext jaxbContext = JAXBContext.newInstance("com.prototype.ot.microservices.projectservice.model");
+                JAXBContext jaxbContext = JAXBContext.newInstance(cls);
                 Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
                 StringReader stringReader = new StringReader(xml);
+                System.out.println(xml);
                 JAXBElement<T> element = (JAXBElement<T>) unmarshaller.unmarshal(stringReader);
                 returnList.add(cls.cast(element.getValue()));
             }
