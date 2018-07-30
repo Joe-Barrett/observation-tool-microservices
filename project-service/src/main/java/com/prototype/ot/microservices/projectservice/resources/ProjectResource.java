@@ -7,6 +7,7 @@ import com.fasterxml.jackson.module.jsonSchema.JsonSchema;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
 import com.prototype.ot.microservices.projectservice.model.*;
 import com.prototype.ot.microservices.projectservice.services.ProjectService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,7 +56,10 @@ public class ProjectResource {
     public ResponseEntity getProject(@RequestParam(value = "entityRef") String entityRef) {
         try {
             ObsProject foundProject = this.projectService.getProject(entityRef);
-            return ResponseEntity.ok(this.objectMapper.writeValueAsString(foundProject));
+            return ResponseEntity.status(200)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(this.objectMapper.writeValueAsString(foundProject));
+//            return ResponseEntity.ok(this.objectMapper.writeValueAsString(foundProject));
         } catch (IOException | JAXBException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
         }
@@ -120,7 +124,10 @@ public class ProjectResource {
             newProject.setObsProposal(newProposal);
             // Set ObsProject in Proposal
             newProposal.setObsProject(newProject);
-            return ResponseEntity.ok(this.objectMapper.writeValueAsString(newProject));
+            return ResponseEntity
+                    .status(200)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(this.objectMapper.writeValueAsString(newProject));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body(e.getMessage());
