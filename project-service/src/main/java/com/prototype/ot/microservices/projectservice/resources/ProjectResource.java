@@ -46,7 +46,7 @@ public class ProjectResource {
     public ResponseEntity getProjectList() {
         try {
             List<ProjectListItem> projectList = this.projectService.getProjectList();
-            return ResponseEntity.ok(projectList);
+            return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(this.objectMapper.writeValueAsString(projectList));
         } catch (IOException | JAXBException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
         }
