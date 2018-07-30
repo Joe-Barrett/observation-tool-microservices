@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchema;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
-import com.prototype.ot.microservices.projectservice.model.*;
+import com.prototype.ot.microservices.projectservice.model.ObsProject;
+import com.prototype.ot.microservices.projectservice.model.ObsProposal;
+import com.prototype.ot.microservices.projectservice.model.ProjectListItem;
 import com.prototype.ot.microservices.projectservice.services.ProjectService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +16,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
+import java.util.jar.JarException;
 
 @RestController
 public class ProjectResource {
@@ -114,21 +115,11 @@ public class ProjectResource {
     @GetMapping(path = "/new")
     public ResponseEntity newProject() {
         try {
-            // Create new ObsProject
-            ObsProject newProject = new ObsProject();
-            // Create ObsProgram
-            // Create ObsProposal
-            ObsProposal newProposal = new ObsProposal();
-            // Set ObsProgram in project
-            // Set ObsProposal in Project
-            newProject.setObsProposal(newProposal);
-            // Set ObsProject in Proposal
-            newProposal.setObsProject(newProject);
             return ResponseEntity
                     .status(200)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .body(this.objectMapper.writeValueAsString(newProject));
-        } catch (JsonProcessingException e) {
+                    .body(this.objectMapper.writeValueAsString(this.projectService.createNewProject()));
+        } catch (JAXBException | IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body(e.getMessage());
         }

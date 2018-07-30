@@ -6,9 +6,6 @@ import com.prototype.ot.microservices.projectservice.model.ProjectListItem;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.core.io.support.ResourcePatternResolver;
 
 import javax.xml.bind.*;
 import java.io.*;
@@ -54,6 +51,21 @@ public class ProjectService {
         return null;
     }
 
+    public ObsProject createNewProject() throws JAXBException, IOException {
+        // Create new ObsProject
+        ObsProject newProject = new ObsProject();
+        // Create ObsProgram
+        // Create ObsProposal
+        ObsProposal newProposal = new ObsProposal();
+        // Set ObsProgram in project
+        // Set ObsProposal in Project
+        newProject.setObsProposal(newProposal);
+        // Set ObsProject in Proposal
+        newProposal.setObsProject(newProject);
+        this.saveAotFile(newProject, newProposal);
+        return newProject;
+    }
+
     public List<ObsProposal> getAllProposals() throws IOException, JAXBException {
         return this.loadResourceList("ObsProposal.xml", ObsProposal.class);
     }
@@ -72,13 +84,20 @@ public class ProjectService {
         // Find corresponding project
         ObsProject project = null;
         List<ObsProject> projects = this.getAllProjects();
-        for (ObsProject proj: projects) {
+        for (ObsProject proj : projects) {
             if (proj.getObsProposalRef().getEntityId().equals(proposal.getObsProposalEntity().getEntityId())) {
                 project = proj;
                 break;
             }
         }
-        // Convert both to xml strings
+        this.saveAotFile(project, proposal);
+    }
+
+    private void saveAotFile(ObsProject project, ObsProposal proposal) throws JAXBException, IOException {
+        this.saveAotFile(project, proposal, project.getObsProjectEntity().getEntityId());
+    }
+
+    private void saveAotFile(ObsProject project, ObsProposal proposal, String fileName) throws JAXBException, IOException {
         Marshaller marshaller;
         JAXBContext context = JAXBContext.newInstance(ObsProject.class);
         marshaller = context.createMarshaller();
@@ -96,7 +115,7 @@ public class ProjectService {
         byte[] projBytes = projectXml.getBytes(StandardCharsets.UTF_8);
         byte[] propBytes = proposalXml.getBytes(StandardCharsets.UTF_8);
         // Put into zip entry
-        OutputStream out = new FileOutputStream("/data/test.aot");
+        OutputStream out = new FileOutputStream("/data/projects/" + fileName + ".aot");
         final ZipSupport.ZipWriter zipWriter = new ZipSupport.ZipWriter(out);
         zipWriter.putZipEntry("ObsProject.xml", projBytes);
         zipWriter.putZipEntry("ObsProposal.xml", propBytes);
@@ -166,7 +185,7 @@ public class ProjectService {
         ZipSupport.ZipNtry entry;
         String xml;
         for (File f : Objects.requireNonNull(folder.listFiles())) {
-            if(!f.isDirectory()) {
+            if (!f.isDirectory()) {
                 zipReader = new ZipSupport.ZipReader(new FileInputStream(f));
                 entry = zipReader.getZipEntry();
                 while (!entry.toString().equals(filename)) {
