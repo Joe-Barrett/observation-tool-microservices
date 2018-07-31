@@ -36,5 +36,12 @@ public class ObsProposalRefT
     extends EntityRefT
 {
 
+    public static ObsProposalRefT createFromProposal(ObsProposal proposal) {
+        ObsProposalRefT toRet = new ObsProposalRefT();
+        toRet.setEntityId(proposal.getObsProposalEntity().getEntityId());
+        toRet.setDocumentVersion(proposal.getObsProposalEntity().getDocumentVersion());
+        toRet.setEntityTypeName(proposal.getObsProposalEntity().getEntityTypeName());
+        return toRet;
+    }
 
 }

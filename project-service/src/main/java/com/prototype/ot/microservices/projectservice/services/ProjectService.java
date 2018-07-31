@@ -6,11 +6,9 @@ import com.prototype.ot.microservices.projectservice.model.ProjectListItem;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.core.io.support.ResourcePatternResolver;
 
 import javax.xml.bind.*;
+import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -54,6 +52,21 @@ public class ProjectService {
         return null;
     }
 
+    public ObsProject createNewProject() throws JAXBException, IOException {
+        // Create new ObsProject
+        ObsProject newProject = new ObsProject();
+        // Create ObsProgram
+        // Create ObsProposal
+        ObsProposal newProposal = new ObsProposal();
+        // Set ObsProgram in project
+        // Set ObsProposal in Project
+        newProject.setObsProposal(newProposal);
+        // Set ObsProject in Proposal
+        newProposal.setObsProject(newProject);
+        this.saveAotFile(newProject, newProposal);
+        return newProject;
+    }
+
     public List<ObsProposal> getAllProposals() throws IOException, JAXBException {
         return this.loadResourceList("ObsProposal.xml", ObsProposal.class);
     }
@@ -72,13 +85,20 @@ public class ProjectService {
         // Find corresponding project
         ObsProject project = null;
         List<ObsProject> projects = this.getAllProjects();
-        for (ObsProject proj: projects) {
+        for (ObsProject proj : projects) {
             if (proj.getObsProposalRef().getEntityId().equals(proposal.getObsProposalEntity().getEntityId())) {
                 project = proj;
                 break;
             }
         }
-        // Convert both to xml strings
+        this.saveAotFile(project, proposal);
+    }
+
+    private void saveAotFile(ObsProject project, ObsProposal proposal) throws JAXBException, IOException {
+        this.saveAotFile(project, proposal, project.getObsProjectEntity().getEntityId());
+    }
+
+    private void saveAotFile(ObsProject project, ObsProposal proposal, String fileName) throws JAXBException, IOException {
         Marshaller marshaller;
         JAXBContext context = JAXBContext.newInstance(ObsProject.class);
         marshaller = context.createMarshaller();
@@ -96,7 +116,7 @@ public class ProjectService {
         byte[] projBytes = projectXml.getBytes(StandardCharsets.UTF_8);
         byte[] propBytes = proposalXml.getBytes(StandardCharsets.UTF_8);
         // Put into zip entry
-        OutputStream out = new FileOutputStream("/data/test.aot");
+        OutputStream out = new FileOutputStream("/data/projects/" + fileName + ".aot");
         final ZipSupport.ZipWriter zipWriter = new ZipSupport.ZipWriter(out);
         zipWriter.putZipEntry("ObsProject.xml", projBytes);
         zipWriter.putZipEntry("ObsProposal.xml", propBytes);
@@ -159,24 +179,30 @@ public class ProjectService {
         return toReturn;
     }
 
+    @SuppressWarnings("unchecked")
     private <T> List<T> loadResourceList(String filename, Class<T> cls) throws IOException, JAXBException {
         List<T> returnList = new ArrayList<>();
-        File folder = new File("/data/projects/real-projects");
+        File folder = new File("/data/projects/");
         ZipSupport.ZipReader zipReader;
         ZipSupport.ZipNtry entry;
         String xml;
+        JAXBContext jaxbContext = JAXBContext.newInstance(cls);
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
         for (File f : Objects.requireNonNull(folder.listFiles())) {
-            zipReader = new ZipSupport.ZipReader(new FileInputStream(f));
-            entry = zipReader.getZipEntry();
-            while (!entry.toString().equals(filename)) {
+            if (!f.isDirectory() && f.getName().substring(f.getName().lastIndexOf(".") + 1).equals("aot")) {
+                zipReader = new ZipSupport.ZipReader(new FileInputStream(f));
                 entry = zipReader.getZipEntry();
+                while (!entry.toString().equals(filename)) {
+                    entry = zipReader.getZipEntry();
+                }
+                xml = new String(entry.getData(), StandardCharsets.UTF_8);
+                T element = (T) unmarshaller.unmarshal(new StreamSource(new StringReader(xml)));
+                if (element instanceof JAXBElement) {
+                    returnList.add(cls.cast(((JAXBElement) element).getValue()));
+                } else {
+                    returnList.add(element);
+                }
             }
-            xml = new String(entry.getData(), StandardCharsets.UTF_8);
-            JAXBContext jaxbContext = JAXBContext.newInstance("com.prototype.ot.microservices.projectservice.model");
-            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            StringReader stringReader = new StringReader(xml);
-            JAXBElement<T> element = (JAXBElement<T>) unmarshaller.unmarshal(stringReader);
-            returnList.add(cls.cast(element.getValue()));
         }
         return returnList;
     }

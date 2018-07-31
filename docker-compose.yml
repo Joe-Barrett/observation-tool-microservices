@@ -10,12 +10,15 @@ services:
       - eureka-service
   project-service:
     image: project-service
+    command: nodemon --debug=5858
     depends_on:
       - eureka-service
     extra_hosts:
       - "dockerhost:195.194.120.254"
     volumes:
       - 'D:\Docker\project-service:/data/'
+    ports:
+      - '5858:5858'
   zuul-service:
     image: zuul-service
     depends_on:

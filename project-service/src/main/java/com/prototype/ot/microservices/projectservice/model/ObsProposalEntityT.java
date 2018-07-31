@@ -37,5 +37,9 @@ public class ObsProposalEntityT
     extends EntityT
 {
 
+    public ObsProposalEntityT() {
+        super();
+        this.setEntityTypeName("ObsProposal");
+    }
 
 }
