@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.json.XML;
 
 import javax.xml.bind.*;
+import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -178,12 +179,15 @@ public class ProjectService {
         return toReturn;
     }
 
+    @SuppressWarnings("unchecked")
     private <T> List<T> loadResourceList(String filename, Class<T> cls) throws IOException, JAXBException {
         List<T> returnList = new ArrayList<>();
         File folder = new File("/data/projects/");
         ZipSupport.ZipReader zipReader;
         ZipSupport.ZipNtry entry;
         String xml;
+        JAXBContext jaxbContext = JAXBContext.newInstance(cls);
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
         for (File f : Objects.requireNonNull(folder.listFiles())) {
             if (!f.isDirectory() && f.getName().substring(f.getName().lastIndexOf(".") + 1).equals("aot")) {
                 zipReader = new ZipSupport.ZipReader(new FileInputStream(f));
@@ -192,11 +196,12 @@ public class ProjectService {
                     entry = zipReader.getZipEntry();
                 }
                 xml = new String(entry.getData(), StandardCharsets.UTF_8);
-                JAXBContext jaxbContext = JAXBContext.newInstance(cls);
-                Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-                StringReader stringReader = new StringReader(xml);
-                JAXBElement<T> element = (JAXBElement<T>) unmarshaller.unmarshal(stringReader);
-                returnList.add(cls.cast(element.getValue()));
+                T element = (T) unmarshaller.unmarshal(new StreamSource(new StringReader(xml)));
+                if (element instanceof JAXBElement) {
+                    returnList.add(cls.cast(((JAXBElement) element).getValue()));
+                } else {
+                    returnList.add(element);
+                }
             }
         }
         return returnList;

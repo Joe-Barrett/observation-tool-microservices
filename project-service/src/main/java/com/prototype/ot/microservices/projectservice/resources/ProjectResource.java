@@ -19,7 +19,6 @@ import javax.xml.bind.Marshaller;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.List;
-import java.util.jar.JarException;
 
 @RestController
 public class ProjectResource {
@@ -47,7 +46,10 @@ public class ProjectResource {
     public ResponseEntity getProjectList() {
         try {
             List<ProjectListItem> projectList = this.projectService.getProjectList();
-            return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(this.objectMapper.writeValueAsString(projectList));
+            return ResponseEntity
+                    .status(200)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(this.objectMapper.writeValueAsString(projectList));
         } catch (IOException | JAXBException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
         }
@@ -57,10 +59,10 @@ public class ProjectResource {
     public ResponseEntity getProject(@RequestParam(value = "entityRef") String entityRef) {
         try {
             ObsProject foundProject = this.projectService.getProject(entityRef);
-            return ResponseEntity.status(200)
+            return ResponseEntity
+                    .status(200)
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(this.objectMapper.writeValueAsString(foundProject));
-//            return ResponseEntity.ok(this.objectMapper.writeValueAsString(foundProject));
         } catch (IOException | JAXBException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
         }
@@ -76,7 +78,10 @@ public class ProjectResource {
     public ResponseEntity getProposal(@RequestParam(value = "entityRef") String entityRef) {
         try {
             ObsProposal foundProposal = this.projectService.getProposal(entityRef);
-            return ResponseEntity.ok(this.objectMapper.writeValueAsString(foundProposal));
+            return ResponseEntity
+                    .status(200)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(this.objectMapper.writeValueAsString(foundProposal));
         } catch (IOException | JAXBException ex) {
             return ResponseEntity.status(404).body(ex.getMessage());
         }
@@ -93,22 +98,13 @@ public class ProjectResource {
             StringWriter writer = new StringWriter();
             marshaller.marshal(proposal, writer);
             this.projectService.saveProposal(proposal);
-            return ResponseEntity.ok(this.objectMapper.writeValueAsString(proposal));
+            return ResponseEntity
+                    .status(200)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(this.objectMapper.writeValueAsString(proposal));
         } catch (JAXBException | IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body(e.getMessage());
-        }
-    }
-
-    @GetMapping(path = "/schema")
-    public ResponseEntity makeSchema() {
-        try {
-            JsonSchemaGenerator schemaGenerator = new JsonSchemaGenerator(this.objectMapper);
-            JsonSchema schema = schemaGenerator.generateSchema(ObsProposal.class);
-            return ResponseEntity.ok(this.objectMapper.writeValueAsString(schema));
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return ResponseEntity.status(404).body(e.getMessage());
         }
     }
 
