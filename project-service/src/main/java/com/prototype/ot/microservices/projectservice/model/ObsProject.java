@@ -143,7 +143,7 @@ import javax.xml.bind.annotation.*;
     "obsProgram",
     "submissionRecord"
 })
-@XmlRootElement(name = "ObsProject")
+@XmlRootElement
 public class ObsProject {
 
     @XmlElement(name = "ObsProjectEntity", required = true)

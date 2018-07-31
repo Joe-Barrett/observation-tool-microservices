@@ -185,7 +185,7 @@ public class ProjectService {
         ZipSupport.ZipNtry entry;
         String xml;
         for (File f : Objects.requireNonNull(folder.listFiles())) {
-            if (!f.isDirectory()) {
+            if (!f.isDirectory() && f.getName().substring(f.getName().lastIndexOf(".") + 1).equals("aot")) {
                 zipReader = new ZipSupport.ZipReader(new FileInputStream(f));
                 entry = zipReader.getZipEntry();
                 while (!entry.toString().equals(filename)) {
@@ -195,7 +195,6 @@ public class ProjectService {
                 JAXBContext jaxbContext = JAXBContext.newInstance(cls);
                 Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
                 StringReader stringReader = new StringReader(xml);
-                System.out.println(xml);
                 JAXBElement<T> element = (JAXBElement<T>) unmarshaller.unmarshal(stringReader);
                 returnList.add(cls.cast(element.getValue()));
             }
