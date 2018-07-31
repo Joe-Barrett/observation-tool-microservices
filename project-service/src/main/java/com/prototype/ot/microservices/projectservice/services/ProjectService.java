@@ -3,16 +3,12 @@ package com.prototype.ot.microservices.projectservice.services;
 import com.prototype.ot.microservices.projectservice.model.ObsProject;
 import com.prototype.ot.microservices.projectservice.model.ObsProposal;
 import com.prototype.ot.microservices.projectservice.model.ProjectListItem;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.XML;
 
 import javax.xml.bind.*;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,7 +19,7 @@ public class ProjectService {
     }
 
     public List<ObsProject> getAllProjects() throws IOException, JAXBException {
-        return this.loadResourceList("ObsProject.xml", ObsProject.class);
+        return loadResourceList("ObsProject.xml", ObsProject.class);
     }
 
     public List<ProjectListItem> getProjectList() throws IOException, JAXBException {
@@ -43,13 +39,17 @@ public class ProjectService {
     }
 
     public ObsProject getProject(String projectRef) throws IOException, JAXBException {
-        List<ObsProject> projects = this.loadResourceList("ObsProject.xml", ObsProject.class);
+        List<ObsProject> projects = loadResourceList("ObsProject.xml", ObsProject.class);
         for (ObsProject project : projects) {
             if (project.getObsProjectEntity().getEntityId().equals(projectRef)) {
                 return project;
             }
         }
         return null;
+    }
+
+    public ObsProject updateProject(ObsProject project) {
+        return project;
     }
 
     public ObsProject createNewProject() throws JAXBException, IOException {
@@ -63,16 +63,12 @@ public class ProjectService {
         newProject.setObsProposal(newProposal);
         // Set ObsProject in Proposal
         newProposal.setObsProject(newProject);
-        this.saveAotFile(newProject, newProposal);
+        saveAotFile(newProject, newProposal);
         return newProject;
     }
 
-    public List<ObsProposal> getAllProposals() throws IOException, JAXBException {
-        return this.loadResourceList("ObsProposal.xml", ObsProposal.class);
-    }
-
     public ObsProposal getProposal(String proposalRef) throws IOException, JAXBException {
-        List<ObsProposal> proposals = this.loadResourceList("ObsProposal.xml", ObsProposal.class);
+        List<ObsProposal> proposals = loadResourceList("ObsProposal.xml", ObsProposal.class);
         for (ObsProposal obsProposal : proposals) {
             if (obsProposal.getObsProposalEntity().getEntityId().equals(proposalRef)) {
                 return obsProposal;
@@ -81,7 +77,7 @@ public class ProjectService {
         return null;
     }
 
-    public void saveProposal(ObsProposal proposal) throws JAXBException, IOException {
+    public void updateProposal(ObsProposal proposal) throws JAXBException, IOException {
         // Find corresponding project
         ObsProject project = null;
         List<ObsProject> projects = this.getAllProjects();
@@ -91,48 +87,7 @@ public class ProjectService {
                 break;
             }
         }
-        this.saveAotFile(project, proposal);
-    }
-
-    private void saveAotFile(ObsProject project, ObsProposal proposal) throws JAXBException, IOException {
-        this.saveAotFile(project, proposal, project.getObsProjectEntity().getEntityId());
-    }
-
-    private void saveAotFile(ObsProject project, ObsProposal proposal, String fileName) throws JAXBException, IOException {
-        Marshaller marshaller;
-        JAXBContext context = JAXBContext.newInstance(ObsProject.class);
-        marshaller = context.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        StringWriter writer = new StringWriter();
-        marshaller.marshal(project, writer);
-        String projectXml = writer.toString();
-        context = JAXBContext.newInstance(ObsProposal.class);
-        marshaller = context.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        writer = new StringWriter();
-        marshaller.marshal(proposal, writer);
-        String proposalXml = writer.toString();
-        // Convert to bytes
-        byte[] projBytes = projectXml.getBytes(StandardCharsets.UTF_8);
-        byte[] propBytes = proposalXml.getBytes(StandardCharsets.UTF_8);
-        // Put into zip entry
-        OutputStream out = new FileOutputStream("/data/projects/" + fileName + ".aot");
-        final ZipSupport.ZipWriter zipWriter = new ZipSupport.ZipWriter(out);
-        zipWriter.putZipEntry("ObsProject.xml", projBytes);
-        zipWriter.putZipEntry("ObsProposal.xml", propBytes);
-        // Close entry
-        zipWriter.close();
-    }
-
-    public void updateProposal(ObsProposal proposal) {
-        System.out.println("ProjectService, updateProposal");
-        JSONObject object = new JSONObject(proposal);
-        String xml = XML.toString(object);
-        System.out.println(xml);
-    }
-
-    public ObsProject updateProject(String projectCode, ObsProject project) {
-        return null;
+        saveAotFile(project, proposal);
     }
 
     public ObsProject createProject(ObsProject project) {
@@ -143,44 +98,8 @@ public class ProjectService {
 
     }
 
-    private String stripTags(String raw) {
-        return raw
-                .replace("prj:", "")
-                .replace("prp:", "")
-                .replace("val:", "");
-    }
-
-    private static JSONObject switchColons(JSONObject original) {
-        JSONObject toReturn = new JSONObject();
-        Iterator<String> keys = original.keys();
-        while (keys.hasNext()) {
-            String oldKey = keys.next();
-            String newKey = oldKey.replace(':', '_');
-            if (original.get(oldKey) instanceof JSONObject) {
-                toReturn.put(newKey, switchColons(original.getJSONObject(oldKey)));
-            } else if (original.get(oldKey) instanceof JSONArray) {
-                toReturn.put(newKey, switchColonsArray(original.getJSONArray(oldKey)));
-            } else {
-                toReturn.put(newKey, original.get(oldKey));
-            }
-        }
-        return toReturn;
-    }
-
-    private static JSONArray switchColonsArray(JSONArray array) {
-        JSONArray toReturn = new JSONArray();
-        for (int i = 0; i < array.length(); i++) {
-            if (array.get(i) instanceof JSONObject) {
-                toReturn.put(switchColons(array.getJSONObject(i)));
-            } else {
-                toReturn.put(array.get(i));
-            }
-        }
-        return toReturn;
-    }
-
     @SuppressWarnings("unchecked")
-    private <T> List<T> loadResourceList(String filename, Class<T> cls) throws IOException, JAXBException {
+    private static <T> List<T> loadResourceList(String filename, Class<T> cls) throws IOException, JAXBException {
         List<T> returnList = new ArrayList<>();
         File folder = new File("/data/projects/");
         ZipSupport.ZipReader zipReader;
@@ -205,6 +124,37 @@ public class ProjectService {
             }
         }
         return returnList;
+    }
+
+    private static void saveAotFile(ObsProject project, ObsProposal proposal) throws JAXBException, IOException {
+        saveAotFile(project, proposal, project.getObsProjectEntity().getEntityId());
+    }
+
+    private static void saveAotFile(ObsProject project, ObsProposal proposal, String fileName) throws JAXBException,
+            IOException {
+        Marshaller marshaller;
+        JAXBContext context = JAXBContext.newInstance(ObsProject.class);
+        marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(project, writer);
+        String projectXml = writer.toString();
+        context = JAXBContext.newInstance(ObsProposal.class);
+        marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        writer = new StringWriter();
+        marshaller.marshal(proposal, writer);
+        String proposalXml = writer.toString();
+        // Convert to bytes
+        byte[] projBytes = projectXml.getBytes(StandardCharsets.UTF_8);
+        byte[] propBytes = proposalXml.getBytes(StandardCharsets.UTF_8);
+        // Put into zip entry
+        OutputStream out = new FileOutputStream("/data/projects/" + fileName + ".aot");
+        final ZipSupport.ZipWriter zipWriter = new ZipSupport.ZipWriter(out);
+        zipWriter.putZipEntry("ObsProject.xml", projBytes);
+        zipWriter.putZipEntry("ObsProposal.xml", propBytes);
+        // Close entry
+        zipWriter.close();
     }
 
 }
