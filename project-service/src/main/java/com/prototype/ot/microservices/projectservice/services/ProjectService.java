@@ -14,16 +14,13 @@ public class ProjectService {
 
     private Map<String, ProjectListItem> projectList;
     private final static String PROJECT_DIRECTORY = "/data/projects/";
-    private final static String PROJECT_FILE = "ObsProject.xml";
-    private final static String PROPOSAL_FILE = "ObsProposal.xml";
+    private final static String PROJECT_XML = "ObsProject.xml";
+    private final static String PROPOSAL_XML = "ObsProposal.xml";
+    private final static String FILE_EXTENSION = ".aot";
 
 
     public ProjectService() {
 
-    }
-
-    public List<ObsProject> getAllProjects() throws IOException, JAXBException {
-        return loadResourceList("ObsProject.xml", ObsProject.class);
     }
 
     private void createProjectList() throws JAXBException, IOException {
@@ -33,7 +30,7 @@ public class ProjectService {
         ProjectListItem listItem;
         for (File f : Objects.requireNonNull(folder.listFiles())) {
             if (!f.isDirectory() && f.getName().substring(f.getName().lastIndexOf(".") + 1).equals("aot")) {
-                project = loadResourceFromFilepath(f.getAbsolutePath(), PROJECT_FILE, ObsProject.class);
+                project = loadResourceFromFilepath(f.getAbsolutePath(), PROJECT_XML, ObsProject.class);
                 listItem = listItemFromProject(project);
                 this.projectList.put(f.getName(), listItem);
             }
@@ -48,10 +45,12 @@ public class ProjectService {
     }
 
     public ObsProject getProject(String projectRef) throws IOException, JAXBException {
-        List<ObsProject> projects = loadResourceList("ObsProject.xml", ObsProject.class);
-        for (ObsProject project : projects) {
-            if (project.getObsProjectEntity().getEntityId().equals(projectRef)) {
-                return project;
+        if (this.projectList == null) {
+            createProjectList();
+        }
+        for (String filename:this.projectList.keySet()) {
+            if (projectRef.equals(this.projectList.get(filename).getObsProjectEntityId())) {
+                return loadResourceFromFilepath(PROJECT_DIRECTORY+filename, PROJECT_XML, ObsProject.class);
             }
         }
         return null;
@@ -81,22 +80,22 @@ public class ProjectService {
     }
 
     public ObsProposal getProposal(String proposalRef) throws IOException, JAXBException {
-        List<ObsProposal> proposals = loadResourceList("ObsProposal.xml", ObsProposal.class);
-        for (ObsProposal obsProposal : proposals) {
-            if (obsProposal.getObsProposalEntity().getEntityId().equals(proposalRef)) {
-                return obsProposal;
+        if (this.projectList == null) {
+            createProjectList();
+        }
+        for (String filename:this.projectList.keySet()) {
+            if (proposalRef.equals(this.projectList.get(filename).getObsProposalEntityId())) {
+                return loadResourceFromFilepath(PROJECT_DIRECTORY+filename, PROPOSAL_XML, ObsProposal.class);
             }
         }
         return null;
     }
 
     public ObsProposal putProposal(ObsProposal proposal) throws JAXBException, IOException {
-        // Find corresponding project
         ObsProject project = null;
-        List<ObsProject> projects = this.getAllProjects();
-        for (ObsProject proj : projects) {
-            if (proj.getObsProposalRef().getEntityId().equals(proposal.getObsProposalEntity().getEntityId())) {
-                project = proj;
+        for (String filename : this.projectList.keySet()) {
+            if (proposal.getObsProposalEntity().getEntityId().equals(this.projectList.get(filename).getObsProposalEntityId())) {
+                project = loadResourceFromFilepath(PROJECT_DIRECTORY + filename, PROJECT_XML, ObsProject.class);
                 break;
             }
         }
@@ -118,7 +117,7 @@ public class ProjectService {
         JAXBContext jaxbContext = JAXBContext.newInstance(cls);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
         for (File f : Objects.requireNonNull(folder.listFiles())) {
-            if (!f.isDirectory() && f.getName().substring(f.getName().lastIndexOf(".") + 1).equals("aot")) {
+            if (!f.isDirectory() && f.getName().substring(f.getName().lastIndexOf(".")).equals(FILE_EXTENSION)) {
                 zipReader = new ZipSupport.ZipReader(new FileInputStream(f));
                 entry = zipReader.getZipEntry();
                 while (!entry.toString().equals(filename)) {
