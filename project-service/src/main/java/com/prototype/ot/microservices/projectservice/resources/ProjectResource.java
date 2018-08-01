@@ -65,7 +65,7 @@ public class ProjectResource {
 
     @PutMapping(path = "/project")
     public ResponseEntity putProject(@RequestBody ObsProject project) {
-        ObsProject verified = this.projectService.updateProject(project);
+        ObsProject verified = this.projectService.putProject(project);
         try {
             return ResponseEntity
                     .status(200)
@@ -93,17 +93,11 @@ public class ProjectResource {
     @PutMapping(path = "/proposal")
     public ResponseEntity putProposal(@RequestBody ObsProposal proposal) {
         try {
-//            Marshaller marshaller;
-//            JAXBContext context = JAXBContext.newInstance(ObsProposal.class);
-//            marshaller = context.createMarshaller();
-//            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-//            StringWriter writer = new StringWriter();
-//            marshaller.marshal(proposal, writer);
-            this.projectService.updateProposal(proposal);
+            ObsProposal validated = this.projectService.putProposal(proposal);
             return ResponseEntity
                     .status(200)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .body(this.objectMapper.writeValueAsString(proposal));
+                    .body(this.objectMapper.writeValueAsString(validated));
         } catch (JAXBException | IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body(e.getMessage());

@@ -14,6 +14,8 @@ import java.util.Objects;
 
 public class ProjectService {
 
+    private List<ProjectListItem> projectList;
+
     public ProjectService() {
 
     }
@@ -23,17 +25,13 @@ public class ProjectService {
     }
 
     public List<ProjectListItem> getProjectList() throws IOException, JAXBException {
-        List<ObsProject> projects = this.getAllProjects();
-        List<ProjectListItem> projectList = new ArrayList<>();
-        ProjectListItem projectListItem;
-        for (ObsProject project : projects) {
-            projectListItem = new ProjectListItem(project.getProjectName(),
-                                                  project.getPI(),
-                                                  project.getCode(),
-                                                  project.getTimeOfCreation(),
-                                                  project.getObsProjectEntity().getEntityId(),
-                                                  project.getObsProposalRef().getEntityId());
-            projectList.add(projectListItem);
+        if (this.projectList == null) {
+            List<ObsProject> projects = this.getAllProjects();
+            this.projectList = new ArrayList<>();
+            ProjectListItem projectListItem;
+            for (ObsProject project : projects) {
+                projectList.add(listItemFromProject(project));
+            }
         }
         return projectList;
     }
@@ -48,7 +46,7 @@ public class ProjectService {
         return null;
     }
 
-    public ObsProject updateProject(ObsProject project) {
+    public ObsProject putProject(ObsProject project) {
         return project;
     }
 
@@ -64,6 +62,7 @@ public class ProjectService {
         // Set ObsProject in Proposal
         newProposal.setObsProject(newProject);
         saveAotFile(newProject, newProposal);
+        this.projectList.add(listItemFromProject(newProject));
         return newProject;
     }
 
@@ -77,7 +76,7 @@ public class ProjectService {
         return null;
     }
 
-    public void updateProposal(ObsProposal proposal) throws JAXBException, IOException {
+    public ObsProposal putProposal(ObsProposal proposal) throws JAXBException, IOException {
         // Find corresponding project
         ObsProject project = null;
         List<ObsProject> projects = this.getAllProjects();
@@ -88,10 +87,7 @@ public class ProjectService {
             }
         }
         saveAotFile(project, proposal);
-    }
-
-    public ObsProject createProject(ObsProject project) {
-        return project;
+        return proposal;
     }
 
     public void deleteProject(String projectCode) {
@@ -155,6 +151,15 @@ public class ProjectService {
         zipWriter.putZipEntry("ObsProposal.xml", propBytes);
         // Close entry
         zipWriter.close();
+    }
+
+    private static ProjectListItem listItemFromProject(ObsProject project) {
+        return new ProjectListItem(project.getProjectName(),
+                                   project.getPI(),
+                                   project.getCode(),
+                                   project.getTimeOfCreation(),
+                                   project.getObsProjectEntity().getEntityId(),
+                                   project.getObsProposalRef().getEntityId());
     }
 
 }
