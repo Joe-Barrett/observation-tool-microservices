@@ -23,6 +23,12 @@ public class ProjectService {
 
     }
 
+    private void checkProjectList() throws JAXBException, IOException {
+        if (this.projectList == null) {
+            createProjectList();
+        }
+    }
+
     private void createProjectList() throws JAXBException, IOException {
         this.projectList = new HashMap<>();
         File folder = new File(PROJECT_DIRECTORY);
@@ -38,25 +44,32 @@ public class ProjectService {
     }
 
     public List<ProjectListItem> getProjectList() throws IOException, JAXBException {
-        if (this.projectList == null) {
-            createProjectList();
-        }
+        checkProjectList();
         return new ArrayList<>(this.projectList.values());
     }
 
     public ObsProject getProject(String projectRef) throws IOException, JAXBException {
-        if (this.projectList == null) {
-            createProjectList();
-        }
-        for (String filename:this.projectList.keySet()) {
+        checkProjectList();
+        for (String filename : this.projectList.keySet()) {
             if (projectRef.equals(this.projectList.get(filename).getObsProjectEntityId())) {
-                return loadResourceFromFilepath(PROJECT_DIRECTORY+filename, PROJECT_XML, ObsProject.class);
+                return loadResourceFromFilepath(PROJECT_DIRECTORY + filename, PROJECT_XML, ObsProject.class);
             }
         }
         return null;
     }
 
-    public ObsProject putProject(ObsProject project) {
+    public ObsProject putProject(ObsProject project) throws JAXBException, IOException {
+        ObsProposal proposal = null;
+        String foundFilename = "";
+        checkProjectList();
+        for (String filename : this.projectList.keySet()) {
+            if (project.getObsProjectEntity().getEntityId().equals(this.projectList.get(filename).getObsProjectEntityId())) {
+                proposal = loadResourceFromFilepath(PROJECT_DIRECTORY + filename, PROPOSAL_XML, ObsProposal.class);
+                foundFilename = filename;
+                break;
+            }
+        }
+        saveAotFile(project, proposal, foundFilename.substring(0, foundFilename.lastIndexOf(".")));
         return project;
     }
 
@@ -72,20 +85,16 @@ public class ProjectService {
         // Set ObsProject in Proposal
         newProposal.setObsProject(newProject);
         saveAotFile(newProject, newProposal);
-        if (this.projectList == null) {
-            this.createProjectList();
-        }
-//        this.projectList.add(listItemFromProject(newProject));
+        checkProjectList();
+        this.projectList.put(newProject.getObsProjectEntity().getEntityId()+FILE_EXTENSION, listItemFromProject(newProject));
         return newProject;
     }
 
     public ObsProposal getProposal(String proposalRef) throws IOException, JAXBException {
-        if (this.projectList == null) {
-            createProjectList();
-        }
-        for (String filename:this.projectList.keySet()) {
+        checkProjectList();
+        for (String filename : this.projectList.keySet()) {
             if (proposalRef.equals(this.projectList.get(filename).getObsProposalEntityId())) {
-                return loadResourceFromFilepath(PROJECT_DIRECTORY+filename, PROPOSAL_XML, ObsProposal.class);
+                return loadResourceFromFilepath(PROJECT_DIRECTORY + filename, PROPOSAL_XML, ObsProposal.class);
             }
         }
         return null;
@@ -93,13 +102,16 @@ public class ProjectService {
 
     public ObsProposal putProposal(ObsProposal proposal) throws JAXBException, IOException {
         ObsProject project = null;
+        String foundFilename = "";
+        checkProjectList();
         for (String filename : this.projectList.keySet()) {
             if (proposal.getObsProposalEntity().getEntityId().equals(this.projectList.get(filename).getObsProposalEntityId())) {
                 project = loadResourceFromFilepath(PROJECT_DIRECTORY + filename, PROJECT_XML, ObsProject.class);
+                foundFilename = filename;
                 break;
             }
         }
-        saveAotFile(project, proposal);
+        saveAotFile(project, proposal, foundFilename.substring(0, foundFilename.lastIndexOf(".")));
         return proposal;
     }
 
@@ -140,7 +152,8 @@ public class ProjectService {
 //    }
 
     @SuppressWarnings("unchecked")
-    private <T> T loadResourceFromFilepath(String filepath, String fileType, Class<T> cls) throws JAXBException, IOException {
+    private static <T> T loadResourceFromFilepath(String filepath, String fileType, Class<T> cls) throws JAXBException,
+            IOException {
         File file = new File(filepath);
         ZipSupport.ZipReader zipReader;
         ZipSupport.ZipNtry entry;

@@ -68,13 +68,13 @@ public class ProjectResource {
 
     @PutMapping(path = "/project")
     public ResponseEntity putProject(@RequestBody ObsProject project) {
-        ObsProject verified = this.projectService.putProject(project);
         try {
+            ObsProject verified = this.projectService.putProject(project);
             return ResponseEntity
                     .status(200)
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(this.objectMapper.writeValueAsString(verified));
-        } catch (JsonProcessingException e) {
+        } catch (JAXBException | IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body(e.getMessage());
         }
