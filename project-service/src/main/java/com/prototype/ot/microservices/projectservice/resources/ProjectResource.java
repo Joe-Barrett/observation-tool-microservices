@@ -27,16 +27,6 @@ public class ProjectResource {
         this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
-    @GetMapping
-    public ResponseEntity getAllProjects() {
-        try {
-            List<ObsProject> projects = this.projectService.getAllProjects();
-            return ResponseEntity.ok(projects);
-        } catch (IOException | JAXBException ex) {
-            return ResponseEntity.status(404).body(ex.getMessage());
-        }
-    }
-
     @GetMapping(path = "/list")
     public ResponseEntity getProjectList() {
         try {
