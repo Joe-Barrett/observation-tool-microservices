@@ -154,6 +154,14 @@ public class ObsProposal
     @XmlAttribute(name = "almatype", required = true)
     private String almatype;
 
+    public ObsProposal() {
+        this.setObsProposalEntity(new ObsProposalEntityT());
+    }
+
+    public void setObsProject(ObsProject project) {
+        this.setObsProjectRef(ObsProjectRefT.createFromProject(project));
+    }
+
     /**
      * Gets the value of the obsProposalEntity property.
      * 

@@ -13,6 +13,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+import java.util.UUID;
 
 
 /**
@@ -66,6 +71,17 @@ public class EntityT {
     private String timestamp;
     @XmlAttribute(name = "datamodelVersion")
     private String datamodelVersion;
+
+    public EntityT() {
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+        df.setTimeZone(tz);
+        this.setTimestamp(df.format(new Date()));
+        this.setDocumentVersion("0");
+        this.setEntityId(UUID.randomUUID().toString());
+        this.setSchemaVersion("13");
+        this.setEntityIdEncrypted("-- id encryption not implemented --");
+    }
 
     /**
      * Gets the value of the entityId property.
