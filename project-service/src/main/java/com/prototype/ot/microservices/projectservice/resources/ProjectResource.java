@@ -63,6 +63,19 @@ public class ProjectResource {
         }
     }
 
+    @PostMapping
+    public ResponseEntity newProject() {
+        try {
+            return ResponseEntity
+                    .status(200)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(this.objectMapper.writeValueAsString(this.projectService.createNewProject()));
+        } catch (JAXBException | IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
     @PutMapping(path = "/project")
     public ResponseEntity putProject(@RequestBody ObsProject project) {
         ObsProject verified = this.projectService.putProject(project);
@@ -98,19 +111,6 @@ public class ProjectResource {
                     .status(200)
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(this.objectMapper.writeValueAsString(validated));
-        } catch (JAXBException | IOException e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500).body(e.getMessage());
-        }
-    }
-
-    @GetMapping(path = "/new")
-    public ResponseEntity newProject() {
-        try {
-            return ResponseEntity
-                    .status(200)
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .body(this.objectMapper.writeValueAsString(this.projectService.createNewProject()));
         } catch (JAXBException | IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body(e.getMessage());

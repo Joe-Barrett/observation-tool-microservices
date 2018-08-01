@@ -62,6 +62,9 @@ public class ProjectService {
         // Set ObsProject in Proposal
         newProposal.setObsProject(newProject);
         saveAotFile(newProject, newProposal);
+        if (this.projectList == null) {
+            this.getProjectList();
+        }
         this.projectList.add(listItemFromProject(newProject));
         return newProject;
     }
