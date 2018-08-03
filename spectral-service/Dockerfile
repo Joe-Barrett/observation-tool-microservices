@@ -1,7 +1,7 @@
 FROM maven:3.5-jdk-8-slim AS MAVEN
 
 COPY pom.xml /tmp/
-COPY src /tmp/src/
+COPY /src /tmp/src/
 WORKDIR /tmp/
 RUN mvn clean package
 
