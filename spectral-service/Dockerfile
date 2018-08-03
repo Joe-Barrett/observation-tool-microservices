@@ -1,8 +1,8 @@
 FROM maven:3.5-jdk-8-slim AS MAVEN
 
-COPY pom.xml /tmp/
+COPY spectral-service/pom.xml /tmp/
 RUN ls -l
-COPY /src /tmp/
+COPY spectral-service/src /tmp/
 WORKDIR /tmp/
 RUN mvn clean package
 
