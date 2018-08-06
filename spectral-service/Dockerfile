@@ -1,5 +1,5 @@
 FROM maven:3.5-jdk-8-alpine AS MAVEN
-COPY specrtal-service/src /usr/
+COPY spectral-service/src /usr/
 COPY spectral-service/pom.xml /usr/
 COPY spectral-service/Dockerfile /usr
 RUN mvn -f /usr/pom.xml clean install
