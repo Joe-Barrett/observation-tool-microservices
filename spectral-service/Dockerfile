@@ -1,8 +1,9 @@
 FROM maven:3.5-jdk-8-alpine AS MAVEN
-COPY spectral-service/src /usr/
-COPY spectral-service/pom.xml /usr/
-COPY spectral-service/Dockerfile /usr
-RUN mvn -f /usr/pom.xml clean install
+WORKDIR spectral-service
+COPY /src /usr/src
+COPY /pom.xml /usr/
+COPY /Dockerfile /usr
+RUN mvn -f /usr/pom.xml package
 
 FROM openjdk:8-jre-alpine
 COPY --from=MAVEN /usr/target/spectral-service-0.0.1.jar //
