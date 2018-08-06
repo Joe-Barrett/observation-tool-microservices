@@ -17,6 +17,6 @@ WORKDIR /tmp/
 RUN mvn clean package
 
 
-FROM java:8
+#FROM java:8
 COPY --from=MAVEN /tmp/target/spectral-service-0.0.1.jar //
 ENTRYPOINT ["java", "-jar", "/spectral-service-0.0.1.jar", "-Xdebug -Xrunjdwp:server=y,transport=dt_socket,suspend=n"]
