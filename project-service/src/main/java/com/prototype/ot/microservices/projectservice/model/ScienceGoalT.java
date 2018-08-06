@@ -114,6 +114,10 @@ public class ScienceGoalT
     @XmlAttribute(name = "mode")
     private String mode;
 
+    public ScienceGoalT() {
+        this.setName("New Science Goal");
+    }
+
     /**
      * Gets the value of the estimatedTotalTime property.
      * 

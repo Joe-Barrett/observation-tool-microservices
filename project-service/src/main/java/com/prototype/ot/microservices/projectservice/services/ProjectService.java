@@ -117,8 +117,10 @@ public class ProjectService {
         return proposal;
     }
 
-    public void deleteProject(String projectCode) {
-
+    public ObsProposal addScienceGoal(String proposalRef) throws IOException, JAXBException {
+        ObsProposal proposal = this.getProposal(proposalRef);
+        proposal.addScienceGoal();
+        return proposal;
     }
 
     @SuppressWarnings("unchecked")

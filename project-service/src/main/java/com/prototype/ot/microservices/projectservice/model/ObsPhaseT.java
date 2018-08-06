@@ -74,6 +74,10 @@ public abstract class ObsPhaseT {
     @XmlElement(name = "ObsPlan", required = true)
     private ObsUnitSetT obsPlan;
 
+    public void addScienceGoal() {
+        this.scienceGoals.add(new ScienceGoalT());
+    }
+
     /**
      * Gets the value of the scienceGoals property.
      * 
