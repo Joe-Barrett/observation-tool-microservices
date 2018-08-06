@@ -13,8 +13,6 @@ services:
     command: nodemon --debug=5858
     depends_on:
       - eureka-service
-    extra_hosts:
-      - "dockerhost:195.194.120.254"
     volumes:
       - 'D:\Docker\project-service:/data/'
     ports:
