@@ -1,4 +1,4 @@
-FROM maven:3.5-jdk-8-slim AS MAVEN
+FROM maven:3.5-jdk-8 AS MAVEN
 
 COPY spectral-service/pom.xml /tmp/
 COPY spectral-service/src /tmp/
