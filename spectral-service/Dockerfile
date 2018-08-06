@@ -14,9 +14,9 @@ ENTRYPOINT ["/usr/bin/mvn"]
 COPY spectral-service/pom.xml /tmp/
 COPY spectral-service/src /tmp/
 WORKDIR /tmp/
-RUN mvn clean package
+RUN mvn -T 1C install package
 
 
-#FROM java:8
+FROM java:8
 COPY --from=MAVEN /tmp/target/spectral-service-0.0.1.jar //
 ENTRYPOINT ["java", "-jar", "/spectral-service-0.0.1.jar", "-Xdebug -Xrunjdwp:server=y,transport=dt_socket,suspend=n"]
