@@ -3,7 +3,7 @@ FROM maven:3.5-jdk-8 AS MAVEN
 COPY spectral-service/pom.xml /tmp/
 COPY spectral-service/src /tmp/
 WORKDIR /tmp/
-RUN mvn clean package
+RUN mvn clean build
 
 
 FROM java:8

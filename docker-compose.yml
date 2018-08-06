@@ -5,7 +5,7 @@ services:
     ports:
       - '8761:8761'
   spectral-service:
-    image: joebarrettukatc/spectral-service:latest
+    image: spectral-service
     depends_on:
       - eureka-service
   project-service:
