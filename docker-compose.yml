@@ -1,25 +1,35 @@
 version: '3'
 services:
   eureka-service:
+    build:
+      context: eureka-service/
+      dockerfile: Dockerfile
     image: eureka-service
     ports:
       - '8761:8761'
   spectral-service:
+    build:
+      context: spectral-service/
+      dockerfile: Dockerfile
     image: spectral-service
     depends_on:
       - eureka-service
   project-service:
+    build:
+      context: project-service/
+      dockerfile: Dockerfile
     image: project-service
     command: nodemon --debug=5858
     depends_on:
       - eureka-service
-    extra_hosts:
-      - "dockerhost:195.194.120.254"
     volumes:
       - 'D:\Docker\project-service:/data/'
     ports:
       - '5858:5858'
   zuul-service:
+    build:
+      context: zuul-service/
+      dockerfile: Dockerfile
     image: zuul-service
     depends_on:
       - eureka-service
