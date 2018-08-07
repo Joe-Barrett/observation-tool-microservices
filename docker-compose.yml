@@ -45,6 +45,13 @@ services:
       - 'D:\Docker\project-service:/data/'
     ports:
       - '5858:5858'
+  generation-service:
+    build:
+      context: generation-service/
+      dockerfile: Dockerfile
+    image: generation-service
+    depends_on:
+      - eureka-service
   zuul-service:
     build:
       context: zuul-service/

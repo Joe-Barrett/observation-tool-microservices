@@ -17,33 +17,12 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 
-server:
-  port: ${server_port:8080}
+FROM maven:3.5-jdk-8-alpine AS MAVEN
+COPY /src /usr/src
+COPY /pom.xml /usr/
+COPY /Dockerfile /usr
+RUN mvn -f /usr/pom.xml package
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${eureka_url:http://eureka-service:8761/eureka/}
-
-zuul:
-  #prefix: /
-#  Uncomment to disable services automatically registering in Zuul
-#  ignoredServices: '*'
-
-  routes:
-    spectral-service:
-      path: /spectral/**
-      url: http://spectral-service:8081
-    project-service:
-      path: /project/**
-      url: http://project-service:8082
-    generation-service:
-      path: /generation/**
-      url: http://generation-service:8083
-spring:
-  application:
-    name: zuul-service
-
-management:
-  security:
-    enabled: false
+FROM openjdk:8-jre-alpine
+COPY --from=MAVEN /usr/target/generation-service-0.0.1.jar //
+ENTRYPOINT ["java", "-jar", "/generation-service-0.0.1.jar", "-Xdebug -Xrunjdwp:server=y,transport=dt_socket,suspend=n"]

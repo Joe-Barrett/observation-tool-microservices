@@ -35,6 +35,7 @@
         <module>zuul-service</module>
         <module>project-service</module>
         <module>spectral-service</module>
+        <module>generation-service</module>
     </modules>
 
 
