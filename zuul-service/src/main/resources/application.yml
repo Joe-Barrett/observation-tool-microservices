@@ -37,6 +37,9 @@ zuul:
     project-service:
       path: /project/**
       url: http://project-service:8082
+    generation-service:
+      path: /generation/**
+      url: http://generation-service:8083
 spring:
   application:
     name: zuul-service
