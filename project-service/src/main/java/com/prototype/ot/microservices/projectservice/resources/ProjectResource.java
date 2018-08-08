@@ -27,22 +27,26 @@ import com.prototype.ot.microservices.projectservice.model.ObsProject;
 import com.prototype.ot.microservices.projectservice.model.ObsProposal;
 import com.prototype.ot.microservices.projectservice.model.ProjectListItem;
 import com.prototype.ot.microservices.projectservice.services.ProjectService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.List;
 
 @RestController
+@Resource
 public class ProjectResource {
 
     private ProjectService projectService;
     private ObjectMapper objectMapper;
 
-    public ProjectResource() {
-        this.projectService = new ProjectService();
+    @Autowired
+    public ProjectResource(ProjectService projectService) {
+        this.projectService = projectService;
         this.objectMapper = new ObjectMapper();
         this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
     }

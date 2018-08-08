@@ -35,6 +35,8 @@ eureka:
 spring:
   application:
     name: project-service
+  rabbitmq:
+    host: ${RABBIT_HOST:localhost}
   devtools:
     remote:
       secret: mysecret

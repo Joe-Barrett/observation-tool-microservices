@@ -24,6 +24,8 @@ package com.prototype.ot.microservices.projectservice.services;
 import com.prototype.ot.microservices.projectservice.model.ObsProject;
 import com.prototype.ot.microservices.projectservice.model.ObsProposal;
 import com.prototype.ot.microservices.projectservice.model.ProjectListItem;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.xml.bind.*;
 import javax.xml.transform.stream.StreamSource;
@@ -31,6 +33,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+@Service
 public class ProjectService {
 
     private Map<String, ProjectListItem> projectList;
@@ -39,9 +42,11 @@ public class ProjectService {
     private final static String PROPOSAL_XML = "ObsProposal.xml";
     private final static String FILE_EXTENSION = ".aot";
 
+    private MessageService messageService;
 
-    public ProjectService() {
-
+    @Autowired
+    public ProjectService(MessageService messageService) {
+        this.messageService = messageService;
     }
 
     private void checkProjectList() throws JAXBException, IOException {
@@ -92,6 +97,7 @@ public class ProjectService {
         }
         saveAotFile(project, proposal, foundFilename.substring(0, foundFilename.lastIndexOf(".")));
         this.projectList.put(foundFilename, listItemFromProject(project));
+        this.messageService.sendMessage("project-update-queue", project.getObsProjectEntity().getEntityId());
         return project;
     }
 
