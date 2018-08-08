@@ -48,7 +48,7 @@ services:
       - rabbitmq
       - eureka-service
     volumes:
-      - 'D:\Docker\project-service:/data/' # Edit this line with your desired location
+      - 'D:\Docker\project-service:/data/projects' # Edit this line with your desired location
     ports:
       - '5858:5858'
     environment:
@@ -72,3 +72,7 @@ services:
       - eureka-service
     ports:
       - '8080:8080'
+  observation-tool:
+    image: joebarrettukatc/observation-tool-client:latest
+    ports:
+    - '4200:80'
