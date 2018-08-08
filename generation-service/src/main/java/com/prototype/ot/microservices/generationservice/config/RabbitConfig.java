@@ -19,30 +19,32 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-package com.prototype.ot.microservices.generationservice;
+package com.prototype.ot.microservices.generationservice.config;
 
-import org.springframework.amqp.rabbit.annotation.EnableRabbit;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@EnableWebMvc
-@SpringBootApplication
-@RestController
-@EnableDiscoveryClient
-@EnableRabbit
-public class Application {
+@Configuration
+public class RabbitConfig {
 
-    @GetMapping(path = "/ping")
-    public String ping() {
-        return "Hello from Generation service";
+    @Bean
+    Queue projectUpdateQueue() {
+        return new Queue("project-update-queue", false);
     }
 
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+    @Bean
+    TopicExchange exchange() {
+        return new TopicExchange("observation-tool-exchange");
+    }
+
+    @Bean
+    Binding projectUpdateBinding(@Qualifier("projectUpdateQueue") Queue queue, TopicExchange exchange) {
+        return BindingBuilder.bind(queue).to(exchange).with("project.update");
     }
 
 }

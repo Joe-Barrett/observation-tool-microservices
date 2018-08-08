@@ -19,30 +19,17 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-package com.prototype.ot.microservices.generationservice;
+package com.prototype.ot.microservices.generationservice.receivers;
 
-import org.springframework.amqp.rabbit.annotation.EnableRabbit;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.stereotype.Component;
 
-@EnableWebMvc
-@SpringBootApplication
-@RestController
-@EnableDiscoveryClient
-@EnableRabbit
-public class Application {
+@Component
+public class ProjectUpdateReceiver {
 
-    @GetMapping(path = "/ping")
-    public String ping() {
-        return "Hello from Generation service";
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+    @RabbitListener(queues = "project-update-queue")
+    public void receiveProjectUpdate(String message) {
+        System.out.println("Project updated " + message);
     }
 
 }
