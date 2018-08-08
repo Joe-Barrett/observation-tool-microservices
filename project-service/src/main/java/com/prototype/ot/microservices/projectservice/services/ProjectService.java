@@ -24,24 +24,19 @@ package com.prototype.ot.microservices.projectservice.services;
 import com.prototype.ot.microservices.projectservice.model.ObsProject;
 import com.prototype.ot.microservices.projectservice.model.ObsProposal;
 import com.prototype.ot.microservices.projectservice.model.ProjectListItem;
+import com.prototype.ot.microservices.projectservice.utilities.FileUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.xml.bind.*;
-import javax.xml.transform.stream.StreamSource;
-import java.io.*;
-import java.nio.charset.StandardCharsets;
+import javax.xml.bind.JAXBException;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 @Service
 public class ProjectService {
 
     private Map<String, ProjectListItem> projectList;
-    private final static String PROJECT_DIRECTORY = "/data/projects/";
-    private final static String PROJECT_XML = "ObsProject.xml";
-    private final static String PROPOSAL_XML = "ObsProposal.xml";
-    private final static String FILE_EXTENSION = ".aot";
-
     private MessageService messageService;
 
     @Autowired
@@ -57,12 +52,14 @@ public class ProjectService {
 
     private void createProjectList() throws JAXBException, IOException {
         this.projectList = new HashMap<>();
-        File folder = new File(PROJECT_DIRECTORY);
+        File folder = new File(FileUtilities.PROJECT_DIRECTORY);
         ObsProject project;
         ProjectListItem listItem;
         for (File f : Objects.requireNonNull(folder.listFiles())) {
             if (!f.isDirectory() && f.getName().substring(f.getName().lastIndexOf(".") + 1).equals("aot")) {
-                project = loadResourceFromFilepath(f.getAbsolutePath(), PROJECT_XML, ObsProject.class);
+                project = FileUtilities.loadResourceFromFilepath(f.getAbsolutePath(),
+                                                                 FileUtilities.PROJECT_XML,
+                                                                 ObsProject.class);
                 listItem = listItemFromProject(project);
                 this.projectList.put(f.getName(), listItem);
             }
@@ -78,7 +75,9 @@ public class ProjectService {
         checkProjectList();
         for (String filename : this.projectList.keySet()) {
             if (projectRef.equals(this.projectList.get(filename).getObsProjectEntityId())) {
-                return loadResourceFromFilepath(PROJECT_DIRECTORY + filename, PROJECT_XML, ObsProject.class);
+                return FileUtilities.loadResourceFromFilepath(FileUtilities.PROJECT_DIRECTORY + filename,
+                                                              FileUtilities.PROJECT_XML,
+                                                              ObsProject.class);
             }
         }
         return null;
@@ -90,12 +89,14 @@ public class ProjectService {
         String foundFilename = "";
         for (String filename : this.projectList.keySet()) {
             if (project.getObsProjectEntity().getEntityId().equals(this.projectList.get(filename).getObsProjectEntityId())) {
-                proposal = loadResourceFromFilepath(PROJECT_DIRECTORY + filename, PROPOSAL_XML, ObsProposal.class);
+                proposal = FileUtilities.loadResourceFromFilepath(FileUtilities.PROJECT_DIRECTORY + filename,
+                                                                  FileUtilities.PROPOSAL_XML,
+                                                                  ObsProposal.class);
                 foundFilename = filename;
                 break;
             }
         }
-        saveAotFile(project, proposal, foundFilename.substring(0, foundFilename.lastIndexOf(".")));
+        FileUtilities.saveAotFile(project, proposal, foundFilename.substring(0, foundFilename.lastIndexOf(".")));
         this.projectList.put(foundFilename, listItemFromProject(project));
         this.messageService.sendMessage("project-update-queue", project.getObsProjectEntity().getEntityId());
         return project;
@@ -113,8 +114,9 @@ public class ProjectService {
         newProject.setObsProposal(newProposal);
         // Set ObsProject in Proposal
         newProposal.setObsProject(newProject);
-        saveAotFile(newProject, newProposal);
-        this.projectList.put(newProject.getObsProjectEntity().getEntityId()+FILE_EXTENSION, listItemFromProject(newProject));
+        FileUtilities.saveAotFile(newProject, newProposal);
+        this.projectList.put(newProject.getObsProjectEntity().getEntityId() + FileUtilities.FILE_EXTENSION,
+                             listItemFromProject(newProject));
         return newProject;
     }
 
@@ -122,7 +124,9 @@ public class ProjectService {
         checkProjectList();
         for (String filename : this.projectList.keySet()) {
             if (proposalRef.equals(this.projectList.get(filename).getObsProposalEntityId())) {
-                return loadResourceFromFilepath(PROJECT_DIRECTORY + filename, PROPOSAL_XML, ObsProposal.class);
+                return FileUtilities.loadResourceFromFilepath(FileUtilities.PROJECT_DIRECTORY + filename,
+                                                              FileUtilities.PROPOSAL_XML,
+                                                              ObsProposal.class);
             }
         }
         return null;
@@ -134,12 +138,14 @@ public class ProjectService {
         String foundFilename = "";
         for (String filename : this.projectList.keySet()) {
             if (proposal.getObsProposalEntity().getEntityId().equals(this.projectList.get(filename).getObsProposalEntityId())) {
-                project = loadResourceFromFilepath(PROJECT_DIRECTORY + filename, PROJECT_XML, ObsProject.class);
+                project = FileUtilities.loadResourceFromFilepath(FileUtilities.PROJECT_DIRECTORY + filename,
+                                                                 FileUtilities.PROJECT_XML,
+                                                                 ObsProject.class);
                 foundFilename = filename;
                 break;
             }
         }
-        saveAotFile(project, proposal, foundFilename.substring(0, foundFilename.lastIndexOf(".")));
+        FileUtilities.saveAotFile(project, proposal, foundFilename.substring(0, foundFilename.lastIndexOf(".")));
         this.projectList.put(foundFilename, listItemFromProject(project));
         return proposal;
     }
@@ -148,88 +154,6 @@ public class ProjectService {
         ObsProposal proposal = this.getProposal(proposalRef);
         proposal.addScienceGoal();
         return proposal;
-    }
-
-    @SuppressWarnings("unchecked")
-    private static <T> List<T> loadResourceList(String filename, Class<T> cls) throws IOException, JAXBException {
-        List<T> returnList = new ArrayList<>();
-        File folder = new File(PROJECT_DIRECTORY);
-        ZipSupport.ZipReader zipReader;
-        ZipSupport.ZipNtry entry;
-        String xml;
-        JAXBContext jaxbContext = JAXBContext.newInstance(cls);
-        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-        for (File f : Objects.requireNonNull(folder.listFiles())) {
-            if (!f.isDirectory() && f.getName().substring(f.getName().lastIndexOf(".")).equals(FILE_EXTENSION)) {
-                zipReader = new ZipSupport.ZipReader(new FileInputStream(f));
-                entry = zipReader.getZipEntry();
-                while (!entry.toString().equals(filename)) {
-                    entry = zipReader.getZipEntry();
-                }
-                xml = new String(entry.getData(), StandardCharsets.UTF_8);
-                T element = (T) unmarshaller.unmarshal(new StreamSource(new StringReader(xml)));
-                if (element instanceof JAXBElement) {
-                    returnList.add(cls.cast(((JAXBElement) element).getValue()));
-                } else {
-                    returnList.add(element);
-                }
-            }
-        }
-        return returnList;
-    }
-
-    @SuppressWarnings("unchecked")
-    private static <T> T loadResourceFromFilepath(String filepath, String fileType, Class<T> cls) throws JAXBException,
-            IOException {
-        File file = new File(filepath);
-        ZipSupport.ZipReader zipReader;
-        ZipSupport.ZipNtry entry;
-        String xml;
-        JAXBContext jaxbContext = JAXBContext.newInstance(cls);
-        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-        zipReader = new ZipSupport.ZipReader(new FileInputStream(file));
-        entry = zipReader.getZipEntry();
-        while (!entry.toString().equals(fileType)) {
-            entry = zipReader.getZipEntry();
-        }
-        xml = new String(entry.getData(), StandardCharsets.UTF_8);
-        T element = (T) unmarshaller.unmarshal(new StreamSource(new StringReader(xml)));
-        if (element instanceof JAXBElement) {
-            return cls.cast(((JAXBElement) element).getValue());
-        } else {
-            return element;
-        }
-    }
-
-    private static void saveAotFile(ObsProject project, ObsProposal proposal) throws JAXBException, IOException {
-        saveAotFile(project, proposal, project.getObsProjectEntity().getEntityId());
-    }
-
-    private static void saveAotFile(ObsProject project, ObsProposal proposal, String fileName) throws JAXBException,
-            IOException {
-        Marshaller marshaller;
-        JAXBContext context = JAXBContext.newInstance(ObsProject.class);
-        marshaller = context.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        StringWriter writer = new StringWriter();
-        marshaller.marshal(project, writer);
-        String projectXml = writer.toString();
-        context = JAXBContext.newInstance(ObsProposal.class);
-        marshaller = context.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        writer = new StringWriter();
-        marshaller.marshal(proposal, writer);
-        String proposalXml = writer.toString();
-        // Convert to bytes
-        byte[] projBytes = projectXml.getBytes(StandardCharsets.UTF_8);
-        byte[] propBytes = proposalXml.getBytes(StandardCharsets.UTF_8);
-        // Put into zip entry
-        OutputStream out = new FileOutputStream("/data/projects/" + fileName + ".aot");
-        final ZipSupport.ZipWriter zipWriter = new ZipSupport.ZipWriter(out);
-        zipWriter.putZipEntry("ObsProject.xml", projBytes);
-        zipWriter.putZipEntry("ObsProposal.xml", propBytes);
-        // Close entry
-        zipWriter.close();
     }
 
     private static ProjectListItem listItemFromProject(ObsProject project) {

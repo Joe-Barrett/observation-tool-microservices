@@ -21,7 +21,7 @@
 /*
  * Created on Aug 10, 2010 by mschilli
  */
-package com.prototype.ot.microservices.projectservice.services;
+package com.prototype.ot.microservices.projectservice.utilities;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -38,7 +38,7 @@ import java.util.zip.ZipOutputStream;
  * 
  * @author M.Schilling, ESO
  */
-public class ZipSupport {
+class ZipSupport {
 
 	/*
 	 * msc 2010-08: The code below used to live as static methods in FileUtilities, opposed
@@ -57,7 +57,7 @@ public class ZipSupport {
 		private ByteArrayOutputStream buffer;
 		private byte[] minibuf;
 
-		public ZipReader(InputStream in) {
+		ZipReader(InputStream in) {
 			zin = new ZipInputStream(in);
 
 			buffer = new Buffer(256 * 1024); // 256K
@@ -70,7 +70,7 @@ public class ZipSupport {
 			minibuf = null;
 		}
 
-		public ZipNtry getZipEntry () throws IOException {
+		ZipNtry getZipEntry() throws IOException {
 			buffer.reset();
 
 			// Note: when dealing with ZipInputStreams, method
@@ -113,11 +113,11 @@ public class ZipSupport {
 	/**
 	 * Utility for reading zip contents to a stream.
 	 */
-	public static class ZipWriter {
+	static class ZipWriter {
 
 		private ZipOutputStream zout;
 
-		public ZipWriter(OutputStream out) {
+		ZipWriter(OutputStream out) {
 			zout = new ZipOutputStream(out);
 		}
 
@@ -128,14 +128,14 @@ public class ZipSupport {
 		 * @param data - the content of the entry
 		 * @throws IOException If something went wrong while reading the file.
 		 */
-		public void putZipEntry (String path, byte[] data) throws IOException {
+		void putZipEntry(String path, byte[] data) throws IOException {
 			ZipEntry entry = new ZipEntry(path);
 			entry.setSize(data.length);
 			zout.putNextEntry(entry);
 			zout.write(data, 0, data.length);
 		}
 
-		public void close () throws IOException {
+		void close() throws IOException {
 			zout.close();
 		}
 	}
@@ -149,7 +149,7 @@ public class ZipSupport {
 
 		byte data[];
 
-		public ZipNtry(ZipEntry e, byte data[]) {
+		ZipNtry(ZipEntry e, byte data[]) {
 			super(e);
 			this.data = data;
 		}
