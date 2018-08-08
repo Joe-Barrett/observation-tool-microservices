@@ -7,7 +7,7 @@ been used to apply modularity, improving stability, scalability, and ease of dev
  Spring Boot, managed with Eureka discovery and Zuul gateway, and messaging is using Spring's implementation of 
  RabbitMQ.
 ## Architecture
-![Architecture Diagram](architecture-structure.png)
+![Architecture Diagram](./architecture-structure.png)
 ## Routes
 Route                              | Destination
 :----------------------------------|:-----------------------------------------------
