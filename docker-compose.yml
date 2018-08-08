@@ -19,6 +19,11 @@
 
 version: '3'
 services:
+  rabbitmq:
+    image: rabbitmq:management-alpine
+    ports:
+      - '5672:5672'
+      - '15672:15672'
   eureka-service:
     build:
       context: eureka-service/
@@ -40,18 +45,24 @@ services:
     image: project-service
     command: nodemon --debug=5858
     depends_on:
+      - rabbitmq
       - eureka-service
     volumes:
       - 'D:\Docker\project-service:/data/'
     ports:
       - '5858:5858'
+    environment:
+      RABBIT_HOST: rabbitmq
   generation-service:
     build:
       context: generation-service/
       dockerfile: Dockerfile
     image: generation-service
     depends_on:
+      - rabbitmq
       - eureka-service
+    environment:
+      RABBIT_HOST: rabbitmq
   zuul-service:
     build:
       context: zuul-service/

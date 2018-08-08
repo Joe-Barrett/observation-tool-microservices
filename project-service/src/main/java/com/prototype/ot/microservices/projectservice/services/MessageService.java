@@ -19,30 +19,23 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-package com.prototype.ot.microservices.generationservice;
+package com.prototype.ot.microservices.projectservice.services;
 
-import org.springframework.amqp.rabbit.annotation.EnableRabbit;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-@EnableWebMvc
-@SpringBootApplication
-@RestController
-@EnableDiscoveryClient
-@EnableRabbit
-public class Application {
+@Service
+public class MessageService {
 
-    @GetMapping(path = "/ping")
-    public String ping() {
-        return "Hello from Generation service";
+    private RabbitTemplate rabbitTemplate;
+
+    @Autowired
+    public MessageService(RabbitTemplate rabbitTemplate) {
+        this.rabbitTemplate = rabbitTemplate;
     }
 
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+    public void sendMessage(String queueName, String message) {
+        rabbitTemplate.convertAndSend(queueName, message);
     }
-
 }
