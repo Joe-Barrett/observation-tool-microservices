@@ -145,4 +145,19 @@ public class ProjectResource {
         }
     }
 
+    @DeleteMapping(path = "/science-goal/{index}")
+    public ResponseEntity deleteScienceGoal(@PathVariable int index, @RequestParam String entityRef) {
+        try {
+            System.out.println(index + " " + entityRef);
+            ObsProposal removedGoal = this.projectService.removeScienceGoal(entityRef, index);
+            return ResponseEntity
+                    .status(200)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(this.objectMapper.writeValueAsString(removedGoal));
+        } catch (JAXBException | IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
 }

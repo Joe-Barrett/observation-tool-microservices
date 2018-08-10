@@ -102,6 +102,10 @@ public abstract class ObsPhaseT {
         this.scienceGoals.add(new ScienceGoalT());
     }
 
+    public void removeScienceGoal(int index) {
+        this.scienceGoals.remove(index);
+    }
+
     /**
      * Gets the value of the scienceGoals property.
      * 

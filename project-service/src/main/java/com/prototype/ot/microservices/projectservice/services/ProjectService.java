@@ -156,6 +156,12 @@ public class ProjectService {
         return proposal;
     }
 
+    public ObsProposal removeScienceGoal(String proposalRef, int index) throws IOException, JAXBException {
+        ObsProposal proposal = this.getProposal(proposalRef);
+        proposal.removeScienceGoal(index);
+        return proposal;
+    }
+
     private static ProjectListItem listItemFromProject(ObsProject project) {
         return new ProjectListItem(project.getProjectName(),
                                    project.getPI(),
