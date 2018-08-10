@@ -21,7 +21,6 @@
 
 package com.prototype.ot.microservices.projectservice.resources;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.prototype.ot.microservices.projectservice.model.ObsProject;
@@ -29,6 +28,7 @@ import com.prototype.ot.microservices.projectservice.model.ObsProposal;
 import com.prototype.ot.microservices.projectservice.model.ProjectListItem;
 import com.prototype.ot.microservices.projectservice.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -80,7 +80,7 @@ public class ProjectResource {
     }
 
     @GetMapping("/project")
-    public ResponseEntity getProject(@RequestParam(value = "entityRef") String entityRef) {
+    public ResponseEntity getProject(@RequestParam String entityRef) {
         try {
             ObsProject foundProject = this.projectService.getProject(entityRef);
             return ResponseEntity
@@ -106,8 +106,21 @@ public class ProjectResource {
         }
     }
 
+    @DeleteMapping(path = "/project")
+    public ResponseEntity deleteProject(@RequestParam String entityRef) {
+        try {
+            this.projectService.deleteProject(entityRef);
+            return ResponseEntity
+                    .status(HttpStatus.NO_CONTENT)
+                    .build();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
     @GetMapping(path = "/proposal")
-    public ResponseEntity getProposal(@RequestParam(value = "entityRef") String entityRef) {
+    public ResponseEntity getProposal(@RequestParam String entityRef) {
         try {
             ObsProposal foundProposal = this.projectService.getProposal(entityRef);
             return ResponseEntity

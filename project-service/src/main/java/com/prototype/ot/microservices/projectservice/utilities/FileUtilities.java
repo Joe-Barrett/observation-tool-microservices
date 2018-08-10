@@ -29,6 +29,8 @@ import javax.xml.bind.*;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 @Component
 public class FileUtilities {
@@ -83,11 +85,15 @@ public class FileUtilities {
         byte[] projBytes = projectXml.getBytes(StandardCharsets.UTF_8);
         byte[] propBytes = proposalXml.getBytes(StandardCharsets.UTF_8);
         // Put into zip entry
-        OutputStream out = new FileOutputStream("/data/projects/" + fileName + ".aot");
+        OutputStream out = new FileOutputStream(PROJECT_DIRECTORY + fileName + ".aot");
         final ZipSupport.ZipWriter zipWriter = new ZipSupport.ZipWriter(out);
         zipWriter.putZipEntry("ObsProject.xml", projBytes);
         zipWriter.putZipEntry("ObsProposal.xml", propBytes);
         // Close entry
         zipWriter.close();
+    }
+
+    public static void deleteFile(String filename) throws IOException {
+        Files.deleteIfExists(Paths.get(PROJECT_DIRECTORY + filename));
     }
 }

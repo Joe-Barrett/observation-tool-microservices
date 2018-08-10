@@ -31,6 +31,7 @@ import org.springframework.stereotype.Service;
 
 import javax.xml.bind.JAXBException;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
@@ -152,6 +153,20 @@ public class ProjectService {
         this.persistChanges(project);
         this.messageService.sendMessage("project-update-queue", project.getObsProjectEntity().getEntityId());
         return project;
+    }
+
+    public void deleteProject(String projectRef) throws IOException {
+        String matchFilename = "";
+        for (String filename : projectList.keySet()) {
+            if (projectRef.equals(projectList.get(filename).getObsProjectEntityId())) {
+                matchFilename = filename;
+                break;
+            }
+        }
+        if (matchFilename.equals("")) {
+            throw new FileNotFoundException("Could not find matching project file");
+        }
+        FileUtilities.deleteFile(matchFilename);
     }
 
     /**
