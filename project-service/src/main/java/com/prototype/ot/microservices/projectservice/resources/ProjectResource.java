@@ -148,7 +148,7 @@ public class ProjectResource {
     }
 
     @DeleteMapping(path = "/science-goal/{index}")
-    public ResponseEntity deleteScienceGoal(@PathVariable int index, @RequestParam String entityRef) {
+    public ResponseEntity deleteScienceGoal(@RequestParam String entityRef, @PathVariable int index) {
         try {
             ObsProposal removedGoal = this.projectService.removeScienceGoal(entityRef, index);
             return ResponseEntity
@@ -169,6 +169,22 @@ public class ProjectResource {
                     .status(200)
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(objectMapper.writeValueAsString(addedSource));
+        } catch (JAXBException | IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping(path = "/science-goal/{goalIndex}/source/{sourceIndex}")
+    public ResponseEntity deleteSource(@RequestParam String entityRef,
+                                       @PathVariable int goalIndex,
+                                       @PathVariable int sourceIndex) {
+        try {
+            ObsProposal removedSource = this.projectService.removeSource(entityRef, goalIndex, sourceIndex);
+            return ResponseEntity
+                    .status(200)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(objectMapper.writeValueAsString(removedSource));
         } catch (JAXBException | IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body(e.getMessage());
