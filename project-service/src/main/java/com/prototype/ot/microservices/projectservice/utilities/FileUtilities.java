@@ -29,9 +29,6 @@ import javax.xml.bind.*;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 @Component
 public class FileUtilities {
@@ -39,34 +36,6 @@ public class FileUtilities {
     public final static String PROJECT_XML = "ObsProject.xml";
     public final static String PROPOSAL_XML = "ObsProposal.xml";
     public final static String FILE_EXTENSION = ".aot";
-
-    @SuppressWarnings("unchecked")
-    private static <T> List<T> loadResourceList(String filename, Class<T> cls) throws IOException, JAXBException {
-        List<T> returnList = new ArrayList<>();
-        File folder = new File(PROJECT_DIRECTORY);
-        ZipSupport.ZipReader zipReader;
-        ZipSupport.ZipNtry entry;
-        String xml;
-        JAXBContext jaxbContext = JAXBContext.newInstance(cls);
-        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-        for (File f : Objects.requireNonNull(folder.listFiles())) {
-            if (!f.isDirectory() && f.getName().substring(f.getName().lastIndexOf(".")).equals(FILE_EXTENSION)) {
-                zipReader = new ZipSupport.ZipReader(new FileInputStream(f));
-                entry = zipReader.getZipEntry();
-                while (!entry.toString().equals(filename)) {
-                    entry = zipReader.getZipEntry();
-                }
-                xml = new String(entry.getData(), StandardCharsets.UTF_8);
-                T element = (T) unmarshaller.unmarshal(new StreamSource(new StringReader(xml)));
-                if (element instanceof JAXBElement) {
-                    returnList.add(cls.cast(((JAXBElement) element).getValue()));
-                } else {
-                    returnList.add(element);
-                }
-            }
-        }
-        return returnList;
-    }
 
     @SuppressWarnings("unchecked")
     public static <T> T loadResourceFromFilepath(String filepath, String fileType, Class<T> cls) throws JAXBException,

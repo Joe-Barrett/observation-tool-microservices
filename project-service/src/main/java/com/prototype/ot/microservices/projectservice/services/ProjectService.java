@@ -72,6 +72,16 @@ public class ProjectService {
         return new ArrayList<>(this.projectList.values());
     }
 
+    public ObsProject createNewProject() throws JAXBException, IOException {
+        checkProjectList();
+        ObsProject newProject = new ObsProject();
+        ObsProposal newProposal = new ObsProposal();
+        newProject.setObsProposal(newProposal);
+        newProposal.setObsProject(newProject);
+        persistChanges(newProject, newProposal);
+        return newProject;
+    }
+
     public ObsProject getProject(String projectRef) throws IOException, JAXBException {
         checkProjectList();
         for (String filename : this.projectList.keySet()) {
@@ -86,39 +96,10 @@ public class ProjectService {
 
     public ObsProject putProject(ObsProject project) throws JAXBException, IOException {
         checkProjectList();
-        ObsProposal proposal = null;
-        String foundFilename = "";
-        for (String filename : this.projectList.keySet()) {
-            if (project.getObsProjectEntity().getEntityId().equals(this.projectList.get(filename).getObsProjectEntityId())) {
-                proposal = FileUtilities.loadResourceFromFilepath(FileUtilities.PROJECT_DIRECTORY + filename,
-                                                                  FileUtilities.PROPOSAL_XML,
-                                                                  ObsProposal.class);
-                foundFilename = filename;
-                break;
-            }
-        }
-        FileUtilities.saveAotFile(project, proposal, foundFilename.substring(0, foundFilename.lastIndexOf(".")));
-        this.projectList.put(foundFilename, listItemFromProject(project));
+        this.persistChanges(project);
+        this.projectList.put(getFilename(project), listItemFromProject(project));
         this.messageService.sendMessage("project-update-queue", project.getObsProjectEntity().getEntityId());
         return project;
-    }
-
-    public ObsProject createNewProject() throws JAXBException, IOException {
-        checkProjectList();
-        // Create new ObsProject
-        ObsProject newProject = new ObsProject();
-        // Create ObsProgram
-        // Create ObsProposal
-        ObsProposal newProposal = new ObsProposal();
-        // Set ObsProgram in project
-        // Set ObsProposal in Project
-        newProject.setObsProposal(newProposal);
-        // Set ObsProject in Proposal
-        newProposal.setObsProject(newProject);
-        FileUtilities.saveAotFile(newProject, newProposal);
-        this.projectList.put(newProject.getObsProjectEntity().getEntityId() + FileUtilities.FILE_EXTENSION,
-                             listItemFromProject(newProject));
-        return newProject;
     }
 
     public ObsProposal getProposal(String proposalRef) throws IOException, JAXBException {
@@ -135,28 +116,21 @@ public class ProjectService {
 
     public ObsProposal putProposal(ObsProposal proposal) throws JAXBException, IOException {
         checkProjectList();
-        ObsProject project = this.getMatchingProject(proposal);
-        String foundFilename = this.getFilename(project);
-        FileUtilities.saveAotFile(project, proposal, foundFilename.substring(0, foundFilename.lastIndexOf(".")));
-        this.projectList.put(foundFilename, listItemFromProject(project));
+        persistChanges(proposal);
         return proposal;
     }
 
     public ObsProposal addScienceGoal(String proposalRef) throws IOException, JAXBException {
         ObsProposal proposal = this.getProposal(proposalRef);
         proposal.addScienceGoal();
-        ObsProject project = this.getMatchingProject(proposal);
-        String foundFilename = this.getFilename(project);
-        FileUtilities.saveAotFile(project, proposal, foundFilename.substring(0, foundFilename.lastIndexOf(".")));
+        persistChanges(proposal);
         return proposal;
     }
 
     public ObsProposal removeScienceGoal(String proposalRef, int index) throws IOException, JAXBException {
         ObsProposal proposal = this.getProposal(proposalRef);
         proposal.removeScienceGoal(index);
-        ObsProject project = this.getMatchingProject(proposal);
-        String foundFilename = this.getFilename(project);
-        FileUtilities.saveAotFile(project, proposal, foundFilename.substring(0, foundFilename.lastIndexOf(".")));
+        persistChanges(proposal);
         return proposal;
     }
 
@@ -195,11 +169,55 @@ public class ProjectService {
     }
 
     private String getFilename(ObsProject project) {
-        for (String filename: this.projectList.keySet()) {
+        for (String filename : this.projectList.keySet()) {
             if (project.getObsProjectEntity().getEntityId().equals(this.projectList.get(filename).getObsProjectEntityId()))
                 return filename;
         }
         throw new NullPointerException("Could not find matching file");
     }
+
+    private void persistChanges(ObsProject project) throws JAXBException, IOException {
+        ObsProposal proposal = this.getMatchingProposal(project);
+        this.persistChanges(project, proposal);
+    }
+
+    private void persistChanges(ObsProposal proposal) throws JAXBException, IOException {
+        ObsProject project = this.getMatchingProject(proposal);
+        this.persistChanges(project, proposal);
+    }
+
+    private void persistChanges(ObsProject project, ObsProposal proposal) throws JAXBException, IOException {
+        // Find filename
+        String matchingFilename = "";
+        for (String filename : this.projectList.keySet()) {
+            if (project.getObsProjectEntity().getEntityId().equals(this.projectList.get(filename).getObsProjectEntityId()) &&
+                    proposal.getObsProposalEntity().getEntityId().equals(this.projectList.get(filename).getObsProposalEntityId())) {
+                matchingFilename = filename;
+                break;
+            }
+        }
+        if (!matchingFilename.equals("")) {
+            this.persistChanges(project, proposal, matchingFilename.substring(0, matchingFilename.lastIndexOf(".")));
+        } else {
+            FileUtilities.saveAotFile(project, proposal);
+            this.projectList.put(project.getObsProjectEntity().getEntityId() + FileUtilities.FILE_EXTENSION,
+                                 listItemFromProject(project));
+        }
+
+    }
+
+    /**
+     * The master method when all 3 are present
+     *
+     * @param project
+     * @param proposal
+     * @param filename
+     * @throws JAXBException
+     * @throws IOException
+     */
+    private void persistChanges(ObsProject project, ObsProposal proposal, String filename) throws JAXBException, IOException {
+        FileUtilities.saveAotFile(project, proposal, filename);
+    }
+
 
 }
