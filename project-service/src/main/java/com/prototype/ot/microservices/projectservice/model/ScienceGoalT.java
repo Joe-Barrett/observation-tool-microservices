@@ -139,6 +139,17 @@ public class ScienceGoalT
         this.setName("New Science Goal");
     }
 
+    public void addSource() {
+        if (this.targetParameters == null) {
+            this.targetParameters = new ArrayList<>();
+        }
+        this.targetParameters.add(new TargetParametersT());
+    }
+
+    public void removeSource(int index) {
+        this.targetParameters.remove(index);
+    }
+
     /**
      * Gets the value of the estimatedTotalTime property.
      * 

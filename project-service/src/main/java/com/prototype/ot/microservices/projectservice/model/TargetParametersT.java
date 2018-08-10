@@ -29,23 +29,18 @@
 
 package com.prototype.ot.microservices.projectservice.model;
 
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * Specialises the basic target setup by defining the type of mapping.
- * 
+ *
  * <p>Java class for TargetParametersT complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="TargetParametersT">
  *   &lt;complexContent>
@@ -72,38 +67,37 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TargetParametersT", namespace = "Alma/ObsPrep/ObsProject", propOrder = {
-    "isMosaic",
+        "isMosaic",
         "fields"
 })
 public class TargetParametersT
-    extends AbstractTargetParametersT
-{
+        extends AbstractTargetParametersT {
 
     @XmlElement(defaultValue = "false")
     private Boolean isMosaic;
     @XmlElements({
-        @XmlElement(name = "Circle", type = CircleT.class),
-        @XmlElement(name = "Ellipse", type = EllipseT.class),
-        @XmlElement(name = "Polygon", type = PolygonT.class),
-        @XmlElement(name = "Rectangle", type = RectangleT.class),
-        @XmlElement(name = "SinglePoint", type = SinglePointT.class)
+            @XmlElement(name = "Circle", type = CircleT.class),
+            @XmlElement(name = "Ellipse", type = EllipseT.class),
+            @XmlElement(name = "Polygon", type = PolygonT.class),
+            @XmlElement(name = "Rectangle", type = RectangleT.class),
+            @XmlElement(name = "SinglePoint", type = SinglePointT.class)
     })
     private List<FieldT> fields;
     @XmlAttribute(name = "type")
     private String type;
 
+    public TargetParametersT() {
+        this.setSourceName("New Source");
+    }
+
     /**
      * Gets the value of the isMosaic property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     * {@link Boolean }
      */
     public Boolean isIsMosaic() {
         return isMosaic;
@@ -111,11 +105,9 @@ public class TargetParametersT
 
     /**
      * Sets the value of the isMosaic property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
      */
     public void setIsMosaic(Boolean value) {
         this.isMosaic = value;
@@ -123,20 +115,20 @@ public class TargetParametersT
 
     /**
      * Gets the value of the fields property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the fields property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getFields().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link CircleT }
@@ -144,8 +136,6 @@ public class TargetParametersT
      * {@link PolygonT }
      * {@link RectangleT }
      * {@link SinglePointT }
-     * 
-     * 
      */
     public List<FieldT> getFields() {
         if (fields == null) {
@@ -156,11 +146,9 @@ public class TargetParametersT
 
     /**
      * Gets the value of the type property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getType() {
         return type;
@@ -168,11 +156,9 @@ public class TargetParametersT
 
     /**
      * Sets the value of the type property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setType(String value) {
         this.type = value;

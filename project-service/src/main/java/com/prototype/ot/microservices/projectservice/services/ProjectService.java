@@ -21,9 +21,7 @@
 
 package com.prototype.ot.microservices.projectservice.services;
 
-import com.prototype.ot.microservices.projectservice.model.ObsProject;
-import com.prototype.ot.microservices.projectservice.model.ObsProposal;
-import com.prototype.ot.microservices.projectservice.model.ProjectListItem;
+import com.prototype.ot.microservices.projectservice.model.*;
 import com.prototype.ot.microservices.projectservice.utilities.FileUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -203,6 +201,13 @@ public class ProjectService {
     public ObsProposal removeScienceGoal(String proposalRef, int index) throws IOException, JAXBException {
         ObsProposal proposal = this.getProposal(proposalRef);
         proposal.removeScienceGoal(index);
+        persistChanges(proposal);
+        return proposal;
+    }
+
+    public ObsProposal addSource(String proposalRef, int goalIndex) throws IOException, JAXBException {
+        ObsProposal proposal = this.getProposal(proposalRef);
+        ((ScienceGoalT) proposal.getScienceGoals().get(goalIndex)).addSource();
         persistChanges(proposal);
         return proposal;
     }
