@@ -40,8 +40,9 @@ public class ProjectService {
     private MessageService messageService;
 
     @Autowired
-    public ProjectService(MessageService messageService) {
+    public ProjectService(MessageService messageService) throws JAXBException, IOException {
         this.messageService = messageService;
+        this.createProjectList();
     }
 
     private void checkProjectList() throws JAXBException, IOException {
@@ -134,17 +135,8 @@ public class ProjectService {
 
     public ObsProposal putProposal(ObsProposal proposal) throws JAXBException, IOException {
         checkProjectList();
-        ObsProject project = null;
-        String foundFilename = "";
-        for (String filename : this.projectList.keySet()) {
-            if (proposal.getObsProposalEntity().getEntityId().equals(this.projectList.get(filename).getObsProposalEntityId())) {
-                project = FileUtilities.loadResourceFromFilepath(FileUtilities.PROJECT_DIRECTORY + filename,
-                                                                 FileUtilities.PROJECT_XML,
-                                                                 ObsProject.class);
-                foundFilename = filename;
-                break;
-            }
-        }
+        ObsProject project = this.getMatchingProject(proposal);
+        String foundFilename = this.getFilename(project);
         FileUtilities.saveAotFile(project, proposal, foundFilename.substring(0, foundFilename.lastIndexOf(".")));
         this.projectList.put(foundFilename, listItemFromProject(project));
         return proposal;
@@ -153,12 +145,18 @@ public class ProjectService {
     public ObsProposal addScienceGoal(String proposalRef) throws IOException, JAXBException {
         ObsProposal proposal = this.getProposal(proposalRef);
         proposal.addScienceGoal();
+        ObsProject project = this.getMatchingProject(proposal);
+        String foundFilename = this.getFilename(project);
+        FileUtilities.saveAotFile(project, proposal, foundFilename.substring(0, foundFilename.lastIndexOf(".")));
         return proposal;
     }
 
     public ObsProposal removeScienceGoal(String proposalRef, int index) throws IOException, JAXBException {
         ObsProposal proposal = this.getProposal(proposalRef);
         proposal.removeScienceGoal(index);
+        ObsProject project = this.getMatchingProject(proposal);
+        String foundFilename = this.getFilename(project);
+        FileUtilities.saveAotFile(project, proposal, foundFilename.substring(0, foundFilename.lastIndexOf(".")));
         return proposal;
     }
 
@@ -169,6 +167,39 @@ public class ProjectService {
                                    project.getTimeOfCreation(),
                                    project.getObsProjectEntity().getEntityId(),
                                    project.getObsProposalRef().getEntityId());
+    }
+
+    private ObsProject getMatchingProject(ObsProposal proposal) throws JAXBException, IOException {
+        ObsProject project = null;
+        for (String filename : this.projectList.keySet()) {
+            if (proposal.getObsProposalEntity().getEntityId().equals(this.projectList.get(filename).getObsProposalEntityId())) {
+                project = FileUtilities.loadResourceFromFilepath(FileUtilities.PROJECT_DIRECTORY + filename,
+                                                                 FileUtilities.PROJECT_XML,
+                                                                 ObsProject.class);
+                break;
+            }
+        }
+        return project;
+    }
+
+    private ObsProposal getMatchingProposal(ObsProject project) throws JAXBException, IOException {
+        ObsProposal proposal = null;
+        for (String filename : this.projectList.keySet()) {
+            if (project.getObsProjectEntity().getEntityId().equals(this.projectList.get(filename).getObsProjectEntityId())) {
+                proposal = FileUtilities.loadResourceFromFilepath(FileUtilities.PROJECT_DIRECTORY + filename,
+                                                                  FileUtilities.PROPOSAL_XML,
+                                                                  ObsProposal.class);
+            }
+        }
+        return proposal;
+    }
+
+    private String getFilename(ObsProject project) {
+        for (String filename: this.projectList.keySet()) {
+            if (project.getObsProjectEntity().getEntityId().equals(this.projectList.get(filename).getObsProjectEntityId()))
+                return filename;
+        }
+        throw new NullPointerException("Could not find matching file");
     }
 
 }
