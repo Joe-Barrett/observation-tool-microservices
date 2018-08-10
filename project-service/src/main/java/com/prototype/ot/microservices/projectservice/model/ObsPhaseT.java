@@ -96,6 +96,9 @@ public abstract class ObsPhaseT {
     private ObsUnitSetT obsPlan;
 
     public void addScienceGoal() {
+        if (this.scienceGoals == null) {
+            this.scienceGoals = new ArrayList<>();
+        }
         this.scienceGoals.add(new ScienceGoalT());
     }
 
