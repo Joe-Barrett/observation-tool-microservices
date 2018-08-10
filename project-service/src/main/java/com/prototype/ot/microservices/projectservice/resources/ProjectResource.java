@@ -21,6 +21,7 @@
 
 package com.prototype.ot.microservices.projectservice.resources;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.prototype.ot.microservices.projectservice.model.ObsProject;
@@ -37,6 +38,7 @@ import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.List;
 
+@SuppressWarnings("unused")
 @RestController
 @Resource
 public class ProjectResource {
@@ -146,14 +148,43 @@ public class ProjectResource {
     }
 
     @DeleteMapping(path = "/science-goal/{index}")
-    public ResponseEntity deleteScienceGoal(@PathVariable int index, @RequestParam String entityRef) {
+    public ResponseEntity deleteScienceGoal(@RequestParam String entityRef, @PathVariable int index) {
         try {
-            System.out.println(index + " " + entityRef);
             ObsProposal removedGoal = this.projectService.removeScienceGoal(entityRef, index);
             return ResponseEntity
                     .status(200)
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(this.objectMapper.writeValueAsString(removedGoal));
+        } catch (JAXBException | IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @PutMapping(path = "/science-goal/{goalIndex}/source")
+    public ResponseEntity putSource(@RequestParam String entityRef, @PathVariable int goalIndex) {
+        try {
+            ObsProposal addedSource = this.projectService.addSource(entityRef, goalIndex);
+            return ResponseEntity
+                    .status(200)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(objectMapper.writeValueAsString(addedSource));
+        } catch (JAXBException | IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping(path = "/science-goal/{goalIndex}/source/{sourceIndex}")
+    public ResponseEntity deleteSource(@RequestParam String entityRef,
+                                       @PathVariable int goalIndex,
+                                       @PathVariable int sourceIndex) {
+        try {
+            ObsProposal removedSource = this.projectService.removeSource(entityRef, goalIndex, sourceIndex);
+            return ResponseEntity
+                    .status(200)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(objectMapper.writeValueAsString(removedSource));
         } catch (JAXBException | IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body(e.getMessage());

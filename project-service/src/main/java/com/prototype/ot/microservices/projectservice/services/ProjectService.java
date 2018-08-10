@@ -24,6 +24,7 @@ package com.prototype.ot.microservices.projectservice.services;
 import com.prototype.ot.microservices.projectservice.model.ObsProject;
 import com.prototype.ot.microservices.projectservice.model.ObsProposal;
 import com.prototype.ot.microservices.projectservice.model.ProjectListItem;
+import com.prototype.ot.microservices.projectservice.model.ScienceGoalT;
 import com.prototype.ot.microservices.projectservice.utilities.FileUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,9 +45,10 @@ public class ProjectService {
 
     /**
      * Constructor
+     *
      * @param messageService Injected service for handling inter-service messages
      * @throws JAXBException From createProjectList, issue with marshaling
-     * @throws IOException From createProjectList, file reading
+     * @throws IOException   From createProjectList, file reading
      */
     @Autowired
     public ProjectService(MessageService messageService) throws JAXBException, IOException {
@@ -56,8 +58,9 @@ public class ProjectService {
 
     /**
      * Checks if the project list is present and creates if not
+     *
      * @throws JAXBException From marshalling
-     * @throws IOException From file reading
+     * @throws IOException   From file reading
      */
     private void checkProjectList() throws JAXBException, IOException {
         if (this.projectList == null) {
@@ -67,8 +70,9 @@ public class ProjectService {
 
     /**
      * Creates a list of all projects available and stores locally
+     *
      * @throws JAXBException From marshalling
-     * @throws IOException From file reading
+     * @throws IOException   From file reading
      */
     private void createProjectList() throws JAXBException, IOException {
         this.projectList = new HashMap<>();
@@ -88,9 +92,10 @@ public class ProjectService {
 
     /**
      * Returns the list of values from projectList
+     *
      * @return List of project list items
      * @throws JAXBException From marshalling
-     * @throws IOException From file reading
+     * @throws IOException   From file reading
      */
     public List<ProjectListItem> getProjectList() throws JAXBException, IOException {
         checkProjectList();
@@ -99,9 +104,10 @@ public class ProjectService {
 
     /**
      * Creates a new project with proposal and saves to an AOT file
+     *
      * @return the newly created project
      * @throws JAXBException From marshalling
-     * @throws IOException From file reading
+     * @throws IOException   From file reading
      */
     public ObsProject createNewProject() throws JAXBException, IOException {
         checkProjectList();
@@ -115,10 +121,11 @@ public class ProjectService {
 
     /**
      * Gets a stored project from the server
+     *
      * @param projectRef The entity id of the project to retrieve
      * @return The found project
      * @throws JAXBException From marshalling
-     * @throws IOException From file reading
+     * @throws IOException   From file reading
      */
     public ObsProject getProject(String projectRef) throws IOException, JAXBException {
         checkProjectList();
@@ -134,10 +141,11 @@ public class ProjectService {
 
     /**
      * Puts a project onto the server, used when a project is updated
+     *
      * @param project The project to store
      * @return The same project following validation and checks
      * @throws JAXBException From marshalling
-     * @throws IOException From file reading
+     * @throws IOException   From file reading
      */
     public ObsProject putProject(ObsProject project) throws JAXBException, IOException {
         checkProjectList();
@@ -148,10 +156,11 @@ public class ProjectService {
 
     /**
      * Gets a stored proposal from the server
+     *
      * @param proposalRef The entity id of the proposal to retrieve
      * @return The found proposal
      * @throws JAXBException From marshalling
-     * @throws IOException From file reading
+     * @throws IOException   From file reading
      */
     public ObsProposal getProposal(String proposalRef) throws IOException, JAXBException {
         checkProjectList();
@@ -167,10 +176,11 @@ public class ProjectService {
 
     /**
      * Puts a proposal onto the server, used when a proposal is updated
+     *
      * @param proposal The proposal to store
      * @return The same proposal following validation and checks
      * @throws JAXBException From marshalling
-     * @throws IOException From file reading
+     * @throws IOException   From file reading
      */
     public ObsProposal putProposal(ObsProposal proposal) throws JAXBException, IOException {
         checkProjectList();
@@ -180,10 +190,11 @@ public class ProjectService {
 
     /**
      * Adds a new science goal to the identified proposal
+     *
      * @param proposalRef The entity id of the proposal to add a science goal to
      * @return The proposal with science goal added
      * @throws JAXBException From marshalling
-     * @throws IOException From file reading
+     * @throws IOException   From file reading
      */
     public ObsProposal addScienceGoal(String proposalRef) throws IOException, JAXBException {
         ObsProposal proposal = this.getProposal(proposalRef);
@@ -194,11 +205,12 @@ public class ProjectService {
 
     /**
      * Removes a science goal from the identified proposal at the given index
+     *
      * @param proposalRef The entity id of the proposal to remove the science goal from
-     * @param index The index of the science goal to remove
+     * @param index       The index of the science goal to remove
      * @return The proposal with science goal removed
      * @throws JAXBException From marshalling
-     * @throws IOException From file reading
+     * @throws IOException   From file reading
      */
     public ObsProposal removeScienceGoal(String proposalRef, int index) throws IOException, JAXBException {
         ObsProposal proposal = this.getProposal(proposalRef);
@@ -208,7 +220,42 @@ public class ProjectService {
     }
 
     /**
+     * Adds a new source to the given proposal and science goal
+     *
+     * @param proposalRef The entity id of the proposal to work with
+     * @param goalIndex   The index of the science goal to add a source to
+     * @return The proposal with source added
+     * @throws IOException   From file reading
+     * @throws JAXBException From marshalling
+     */
+    public ObsProposal addSource(String proposalRef, int goalIndex) throws IOException, JAXBException {
+        ObsProposal proposal = this.getProposal(proposalRef);
+        ((ScienceGoalT) proposal.getScienceGoals().get(goalIndex)).addSource();
+        persistChanges(proposal);
+        return proposal;
+    }
+
+    /**
+     * Removes a source at the given index from the given proposal and science goal
+     * 
+     * @param proposalRef The entity id of the proposal to work with
+     * @param goalIndex The index of the science goal to remove the source from
+     * @param sourceIndex The index of the source to remove
+     * @return The proposal with source removed
+     * @throws IOException From file reading
+     * @throws JAXBException From marshalling
+     */
+    public ObsProposal removeSource(String proposalRef, int goalIndex, int sourceIndex) throws IOException,
+            JAXBException {
+        ObsProposal proposal = this.getProposal(proposalRef);
+        ((ScienceGoalT) proposal.getScienceGoals().get(goalIndex)).removeSource(sourceIndex);
+        persistChanges(proposal);
+        return proposal;
+    }
+
+    /**
      * Creates a project list item from a project
+     *
      * @param project The project to create the list item from
      * @return The new list item
      */
@@ -223,10 +270,11 @@ public class ProjectService {
 
     /**
      * Finds the matching project to a given proposal
+     *
      * @param proposal The proposal to match with
      * @return The matching project
      * @throws JAXBException From marshalling
-     * @throws IOException From file reading
+     * @throws IOException   From file reading
      */
     private ObsProject getMatchingProject(ObsProposal proposal) throws JAXBException, IOException {
         ObsProject project = null;
@@ -243,10 +291,11 @@ public class ProjectService {
 
     /**
      * Finds a matching proposal from a given project
+     *
      * @param project The project to match with
      * @return The found proposal
      * @throws JAXBException From marshalling
-     * @throws IOException From file reading
+     * @throws IOException   From file reading
      */
     private ObsProposal getMatchingProposal(ObsProject project) throws JAXBException, IOException {
         ObsProposal proposal = null;
@@ -262,9 +311,10 @@ public class ProjectService {
 
     /**
      * Persists changes made to a project, this finds the matching proposal and saves to an AOT
+     *
      * @param project The project to persist
      * @throws JAXBException From marshalling
-     * @throws IOException From file reading
+     * @throws IOException   From file reading
      */
     private void persistChanges(ObsProject project) throws JAXBException, IOException {
         ObsProposal proposal = this.getMatchingProposal(project);
@@ -273,9 +323,10 @@ public class ProjectService {
 
     /**
      * Persists changes made to a proposal, this finds the matching project and saves to an AOT
+     *
      * @param proposal The proposal to persist
      * @throws JAXBException From marshalling
-     * @throws IOException From file reading
+     * @throws IOException   From file reading
      */
     private void persistChanges(ObsProposal proposal) throws JAXBException, IOException {
         ObsProject project = this.getMatchingProject(proposal);
@@ -284,10 +335,11 @@ public class ProjectService {
 
     /**
      * Persists a project and proposal without having to find either
-     * @param project The project to persist
+     *
+     * @param project  The project to persist
      * @param proposal The proposal to persist
      * @throws JAXBException From marshalling
-     * @throws IOException From file reading
+     * @throws IOException   From file reading
      */
     private void persistChanges(ObsProject project, ObsProposal proposal) throws JAXBException, IOException {
         // Find filename
@@ -311,11 +363,12 @@ public class ProjectService {
 
     /**
      * Persists a project and proposal under the given filename
-     * @param project The project to persist
+     *
+     * @param project  The project to persist
      * @param proposal The proposal to persist
      * @param filename The filename to save them under (excluding extension)
      * @throws JAXBException From marshalling
-     * @throws IOException From file reading
+     * @throws IOException   From file reading
      */
     private void persistChanges(ObsProject project, ObsProposal proposal, String filename) throws JAXBException, IOException {
         FileUtilities.saveAotFile(project, proposal, filename);
