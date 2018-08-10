@@ -205,6 +205,14 @@ public class ProjectService {
         return proposal;
     }
 
+    /**
+     * Adds a new source to the given proposal and science goal
+     * @param proposalRef The entity id of the proposal to work with
+     * @param goalIndex The index of the science goal to add a source to
+     * @return The proposal with source added
+     * @throws IOException From file reading
+     * @throws JAXBException From marshalling
+     */
     public ObsProposal addSource(String proposalRef, int goalIndex) throws IOException, JAXBException {
         ObsProposal proposal = this.getProposal(proposalRef);
         ((ScienceGoalT) proposal.getScienceGoals().get(goalIndex)).addSource();
