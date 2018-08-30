@@ -61,6 +61,8 @@ services:
     depends_on:
       - rabbitmq
       - eureka-service
+    volumes:
+      - 'D:\Docker\project-service:/data/projects' # Edit this line with your desired location
     environment:
       RABBIT_HOST: rabbitmq
   zuul-service:

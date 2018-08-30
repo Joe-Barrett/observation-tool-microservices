@@ -26,81 +26,31 @@ import com.prototype.ot.microservices.projectservice.model.ObsProposal;
 import com.prototype.ot.microservices.projectservice.model.ProjectListItem;
 import com.prototype.ot.microservices.projectservice.model.ScienceGoalT;
 import com.prototype.ot.microservices.projectservice.utilities.FileUtilities;
+import com.prototype.ot.microservices.projectservice.utilities.ProjectList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.xml.bind.JAXBException;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
 
 /**
- *
+ * Methods to support the project API defined in ProjectResource.
  */
 @Service
 public class ProjectService {
 
-    private Map<String, ProjectListItem> projectList;
+    private ProjectList projectList = new ProjectList();
     private MessageService messageService;
 
     /**
      * Constructor
      *
      * @param messageService Injected service for handling inter-service messages
-     * @throws JAXBException From createProjectList, issue with marshaling
-     * @throws IOException   From createProjectList, file reading
      */
     @Autowired
-    public ProjectService(MessageService messageService) throws JAXBException, IOException {
+    public ProjectService(MessageService messageService) {
         this.messageService = messageService;
-        this.createProjectList();
-    }
-
-    /**
-     * Checks if the project list is present and creates if not
-     *
-     * @throws JAXBException From marshalling
-     * @throws IOException   From file reading
-     */
-    private void checkProjectList() throws JAXBException, IOException {
-        if (this.projectList == null) {
-            createProjectList();
-        }
-    }
-
-    /**
-     * Creates a list of all projects available and stores locally
-     *
-     * @throws JAXBException From marshalling
-     * @throws IOException   From file reading
-     */
-    private void createProjectList() throws JAXBException, IOException {
-        this.projectList = new HashMap<>();
-        File folder = new File(FileUtilities.PROJECT_DIRECTORY);
-        ObsProject project;
-        ProjectListItem listItem;
-        for (File f : Objects.requireNonNull(folder.listFiles())) {
-            if (!f.isDirectory() && f.getName().substring(f.getName().lastIndexOf(".") + 1).equals("aot")) {
-                project = FileUtilities.loadResourceFromFilepath(f.getAbsolutePath(),
-                                                                 FileUtilities.PROJECT_XML,
-                                                                 ObsProject.class);
-                listItem = listItemFromProject(project);
-                this.projectList.put(f.getName(), listItem);
-            }
-        }
-    }
-
-    /**
-     * Returns the list of values from projectList
-     *
-     * @return List of project list items
-     * @throws JAXBException From marshalling
-     * @throws IOException   From file reading
-     */
-    public List<ProjectListItem> getProjectList() throws JAXBException, IOException {
-        checkProjectList();
-        return new ArrayList<>(this.projectList.values());
     }
 
     /**
@@ -111,7 +61,7 @@ public class ProjectService {
      * @throws IOException   From file reading
      */
     public ObsProject createNewProject() throws JAXBException, IOException {
-        checkProjectList();
+        this.projectList.checkProjectList();
         ObsProject newProject = new ObsProject();
         ObsProposal newProposal = new ObsProposal();
         newProject.setObsProposal(newProposal);
@@ -128,16 +78,11 @@ public class ProjectService {
      * @throws JAXBException From marshalling
      * @throws IOException   From file reading
      */
-    public ObsProject getProject(String projectRef) throws IOException, JAXBException {
-        checkProjectList();
-        for (String filename : this.projectList.keySet()) {
-            if (projectRef.equals(this.projectList.get(filename).getObsProjectEntityId())) {
-                return FileUtilities.loadResourceFromFilepath(FileUtilities.PROJECT_DIRECTORY + filename,
+    public ObsProject getProject(String projectRef) throws JAXBException, IOException{
+       String filename =  this.projectList.getFilenameFromProjectID(projectRef);
+       return FileUtilities.loadResourceFromFilepath(FileUtilities.PROJECT_DIRECTORY + filename,
                                                               FileUtilities.PROJECT_XML,
                                                               ObsProject.class);
-            }
-        }
-        return null;
     }
 
     /**
@@ -149,23 +94,29 @@ public class ProjectService {
      * @throws IOException   From file reading
      */
     public ObsProject putProject(ObsProject project) throws JAXBException, IOException {
-        checkProjectList();
+        projectList.checkProjectList();
         this.persistChanges(project);
-        this.messageService.sendMessage("project-update-queue", project.getObsProjectEntity().getEntityId());
+        generateSBsProject(project.getObsProjectEntity().getEntityId());
         return project;
     }
 
+    /**
+     * Generate the Scheduling Blocks for a saved project
+     *
+     * @param projectRef The ID of project for which the SBs are being generated
+     * @return The same project following validation and checks
+     * @throws JAXBException From marshalling
+     * @throws IOException   From file reading
+     */
+    public ProjectListItem generateSBsProject(String projectRef) throws JAXBException, IOException {
+        projectList.checkProjectList();
+        String fileToUpdate = projectList.getFilenameFromProjectID(projectRef);
+        this.messageService.sendMessage("project-update-queue", fileToUpdate);
+        return projectList.get(fileToUpdate);
+    }
+
     public void deleteProject(String projectRef) throws IOException {
-        String matchFilename = "";
-        for (String filename : projectList.keySet()) {
-            if (projectRef.equals(projectList.get(filename).getObsProjectEntityId())) {
-                matchFilename = filename;
-                break;
-            }
-        }
-        if (matchFilename.equals("")) {
-            throw new FileNotFoundException("Could not find matching project file");
-        }
+        String matchFilename =  projectList.getFilenameFromProjectID(projectRef);
         FileUtilities.deleteFile(matchFilename);
     }
 
@@ -178,15 +129,10 @@ public class ProjectService {
      * @throws IOException   From file reading
      */
     public ObsProposal getProposal(String proposalRef) throws IOException, JAXBException {
-        checkProjectList();
-        for (String filename : this.projectList.keySet()) {
-            if (proposalRef.equals(this.projectList.get(filename).getObsProposalEntityId())) {
-                return FileUtilities.loadResourceFromFilepath(FileUtilities.PROJECT_DIRECTORY + filename,
-                                                              FileUtilities.PROPOSAL_XML,
-                                                              ObsProposal.class);
-            }
-        }
-        return null;
+        String filename = projectList.getFilenameFromProposalID(proposalRef);
+        return FileUtilities.loadResourceFromFilepath(FileUtilities.PROJECT_DIRECTORY + filename,
+                                                          FileUtilities.PROPOSAL_XML,
+                                                          ObsProposal.class);
     }
 
     /**
@@ -198,7 +144,7 @@ public class ProjectService {
      * @throws IOException   From file reading
      */
     public ObsProposal putProposal(ObsProposal proposal) throws JAXBException, IOException {
-        checkProjectList();
+        projectList.checkProjectList();
         persistChanges(proposal);
         return proposal;
     }
@@ -258,7 +204,6 @@ public class ProjectService {
      * @param sourceIndex The index of the source to remove
      * @return The proposal with source removed
      * @throws IOException From file reading
-     * @throws JAXBException From marshalling
      */
     public ObsProposal removeSource(String proposalRef, int goalIndex, int sourceIndex) throws IOException,
             JAXBException {
@@ -266,21 +211,6 @@ public class ProjectService {
         ((ScienceGoalT) proposal.getScienceGoals().get(goalIndex)).removeSource(sourceIndex);
         persistChanges(proposal);
         return proposal;
-    }
-
-    /**
-     * Creates a project list item from a project
-     *
-     * @param project The project to create the list item from
-     * @return The new list item
-     */
-    private static ProjectListItem listItemFromProject(ObsProject project) {
-        return new ProjectListItem(project.getProjectName(),
-                                   project.getPI(),
-                                   project.getCode(),
-                                   project.getTimeOfCreation(),
-                                   project.getObsProjectEntity().getEntityId(),
-                                   project.getObsProposalRef().getEntityId());
     }
 
     /**
@@ -292,16 +222,11 @@ public class ProjectService {
      * @throws IOException   From file reading
      */
     private ObsProject getMatchingProject(ObsProposal proposal) throws JAXBException, IOException {
-        ObsProject project = null;
-        for (String filename : this.projectList.keySet()) {
-            if (proposal.getObsProposalEntity().getEntityId().equals(this.projectList.get(filename).getObsProposalEntityId())) {
-                project = FileUtilities.loadResourceFromFilepath(FileUtilities.PROJECT_DIRECTORY + filename,
+        String proposalRef  = proposal.getObsProposalEntity().getEntityId();
+        String filename = this.projectList.getFilenameFromProposalID(proposalRef);
+        return  FileUtilities.loadResourceFromFilepath(FileUtilities.PROJECT_DIRECTORY + filename,
                                                                  FileUtilities.PROJECT_XML,
                                                                  ObsProject.class);
-                break;
-            }
-        }
-        return project;
     }
 
     /**
@@ -314,14 +239,11 @@ public class ProjectService {
      */
     private ObsProposal getMatchingProposal(ObsProject project) throws JAXBException, IOException {
         ObsProposal proposal = null;
-        for (String filename : this.projectList.keySet()) {
-            if (project.getObsProjectEntity().getEntityId().equals(this.projectList.get(filename).getObsProjectEntityId())) {
-                proposal = FileUtilities.loadResourceFromFilepath(FileUtilities.PROJECT_DIRECTORY + filename,
-                                                                  FileUtilities.PROPOSAL_XML,
-                                                                  ObsProposal.class);
-            }
-        }
-        return proposal;
+        String projectRef  = project.getObsProjectEntity().getEntityId();
+        String filename = this.projectList.getFilenameFromProjectID(projectRef);
+        return FileUtilities.loadResourceFromFilepath(FileUtilities.PROJECT_DIRECTORY + filename,
+                    FileUtilities.PROPOSAL_XML,
+                    ObsProposal.class);
     }
 
     /**
@@ -357,23 +279,20 @@ public class ProjectService {
      * @throws IOException   From file reading
      */
     private void persistChanges(ObsProject project, ObsProposal proposal) throws JAXBException, IOException {
+
+        String projectRef = project.getObsProjectEntity().getEntityId();
+        String proposalRef = proposal.getObsProposalEntity().getEntityId();
+
         // Find filename
-        String matchingFilename = "";
-        for (String filename : this.projectList.keySet()) {
-            if (project.getObsProjectEntity().getEntityId().equals(this.projectList.get(filename).getObsProjectEntityId()) &&
-                    proposal.getObsProposalEntity().getEntityId().equals(this.projectList.get(filename).getObsProposalEntityId())) {
-                matchingFilename = filename;
-                break;
-            }
-        }
+        String matchingFilename = this.projectList.getMatchingFilename(proposalRef, projectRef);
+
+
         if (!matchingFilename.equals("")) {
             this.persistChanges(project, proposal, matchingFilename.substring(0, matchingFilename.lastIndexOf(".")));
         } else {
             FileUtilities.saveAotFile(project, proposal);
-            this.projectList.put(project.getObsProjectEntity().getEntityId() + FileUtilities.FILE_EXTENSION,
-                                 listItemFromProject(project));
+            this.projectList.addProjectToList(project);
         }
-
     }
 
     /**
@@ -389,5 +308,13 @@ public class ProjectService {
         FileUtilities.saveAotFile(project, proposal, filename);
     }
 
-
+    /**
+     * Returns a list of all the available projects
+     *
+     * @throws JAXBException From marshalling
+     * @throws IOException   From file reading
+     */
+    public ArrayList<ProjectListItem> getProjectList() throws IOException, JAXBException{
+        return this.projectList.getProjectList();
+    }
 }

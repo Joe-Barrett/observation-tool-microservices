@@ -38,7 +38,13 @@ import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.List;
 
+
 @SuppressWarnings("unused")
+/**
+ * REST mappings for the Project Service
+ * @see ProjectService
+ *
+ */
 @RestController
 @Resource
 public class ProjectResource {
@@ -54,11 +60,12 @@ public class ProjectResource {
     }
 
     @GetMapping(path = "/list")
-    public ResponseEntity getProjectList() {
+    public ResponseEntity getProjectList(){
         try {
-            List<ProjectListItem> projectList = this.projectService.getProjectList();
+            List<ProjectListItem> projectList;
+            projectList = this.projectService.getProjectList();
             return ResponseEntity
-                    .status(200)
+                    .status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(this.objectMapper.writeValueAsString(projectList));
         } catch (IOException | JAXBException ex) {
@@ -70,7 +77,7 @@ public class ProjectResource {
     public ResponseEntity newProject() {
         try {
             return ResponseEntity
-                    .status(200)
+                    .status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(this.objectMapper.writeValueAsString(this.projectService.createNewProject()));
         } catch (JAXBException | IOException e) {
@@ -84,7 +91,7 @@ public class ProjectResource {
         try {
             ObsProject foundProject = this.projectService.getProject(entityRef);
             return ResponseEntity
-                    .status(200)
+                    .status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(this.objectMapper.writeValueAsString(foundProject));
         } catch (IOException | JAXBException ex) {
@@ -97,7 +104,21 @@ public class ProjectResource {
         try {
             ObsProject verified = this.projectService.putProject(project);
             return ResponseEntity
-                    .status(200)
+                    .status(HttpStatus.OK)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(this.objectMapper.writeValueAsString(verified));
+        } catch (JAXBException | IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @GetMapping(path = "/regenerateSBs")
+    public ResponseEntity putProject(@RequestParam String entityRef) {
+        try {
+            ProjectListItem verified = this.projectService.generateSBsProject(entityRef);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(this.objectMapper.writeValueAsString(verified));
         } catch (JAXBException | IOException e) {
@@ -113,7 +134,7 @@ public class ProjectResource {
             return ResponseEntity
                     .status(HttpStatus.NO_CONTENT)
                     .build();
-        } catch (IOException e) {
+        } catch (IOException  e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }

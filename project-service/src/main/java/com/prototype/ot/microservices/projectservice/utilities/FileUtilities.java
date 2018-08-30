@@ -62,11 +62,11 @@ public class FileUtilities {
         }
     }
 
-    public static void saveAotFile(ObsProject project, ObsProposal proposal) throws JAXBException, IOException {
-        saveAotFile(project, proposal, project.getObsProjectEntity().getEntityId());
+    public static String saveAotFile(ObsProject project, ObsProposal proposal) throws JAXBException, IOException {
+        return saveAotFile(project, proposal, project.getObsProjectEntity().getEntityId());
     }
 
-    public static void saveAotFile(ObsProject project, ObsProposal proposal, String fileName) throws JAXBException,
+    public static String saveAotFile(ObsProject project, ObsProposal proposal, String fileName) throws JAXBException,
             IOException {
         Marshaller marshaller;
         JAXBContext context = JAXBContext.newInstance(ObsProject.class);
@@ -85,12 +85,14 @@ public class FileUtilities {
         byte[] projBytes = projectXml.getBytes(StandardCharsets.UTF_8);
         byte[] propBytes = proposalXml.getBytes(StandardCharsets.UTF_8);
         // Put into zip entry
-        OutputStream out = new FileOutputStream(PROJECT_DIRECTORY + fileName + ".aot");
+        String fileWithExtension = fileName + FILE_EXTENSION;
+        OutputStream out = new FileOutputStream(PROJECT_DIRECTORY + fileWithExtension);
         final ZipSupport.ZipWriter zipWriter = new ZipSupport.ZipWriter(out);
         zipWriter.putZipEntry("ObsProject.xml", projBytes);
         zipWriter.putZipEntry("ObsProposal.xml", propBytes);
         // Close entry
         zipWriter.close();
+        return fileWithExtension;
     }
 
     public static void deleteFile(String filename) throws IOException {
