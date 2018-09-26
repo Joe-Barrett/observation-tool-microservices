@@ -10,37 +10,23 @@ branches:
 before_script:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 
-jobs:
+matrix:
   include:
-  - stage: zuul
+  - name: "Zuul"
     env:
       - SERVICE_DIRECTORY=zuul-service
-      - IMAGE_NAME="$DOCKER_USERNAME"/"$SERVICE_DIRECTORY"
-    script: docker build -t "$IMAGE_NAME" ./"$SERVICE_DIRECTORY"/
-    deploy:
-      - provider: script
-        edge: false
-        script: docker tag "$IMAGE_NAME" "$IMAGE_NAME":latest && docker push "$IMAGE_NAME":latest
-        on:
-          branch: master
-      - provider: script
-        edge: true
-        script: docker tag "$IMAGE_NAME" "$IMAGE_NAME":edge && docker push "$IMAGE_NAME":edge
-        on:
-          branch: development
-  - stage: eureka
+  - name: "Eureka"
     env:
       - SERVICE_DIRECTORY=eureka-service
-      - IMAGE_NAME="$DOCKER_USERNAME"/"$SERVICE_DIRECTORY"
-    script: docker build -t "$IMAGE_NAME" ./"$SERVICE_DIRECTORY"/
-    deploy:
-    - provider: script
-      edge: false
-      script: docker tag "$IMAGE_NAME" "$IMAGE_NAME":latest && docker push "$IMAGE_NAME":latest
-      on:
-        branch: master
-    - provider: script
-      edge: true
-      script: docker tag "$IMAGE_NAME" "$IMAGE_NAME":edge && docker push "$IMAGE_NAME":edge
-      on:
-        branch: development
+script: docker build -t "$IMAGE_NAME" ./"$SERVICE_DIRECTORY"/
+deploy:
+  - provider: script
+    edge: false
+    script: docker tag "$IMAGE_NAME" "$IMAGE_NAME":latest && docker push "$IMAGE_NAME":latest
+    on:
+      branch: master
+  - provider: script
+    edge: true
+    script: docker tag "$IMAGE_NAME" "$IMAGE_NAME":edge && docker push "$IMAGE_NAME":edge
+    on:
+      branch: development
