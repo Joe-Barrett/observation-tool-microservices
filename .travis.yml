@@ -15,9 +15,11 @@ matrix:
   - name: "Zuul"
     env:
       - SERVICE_DIRECTORY=zuul-service
+      - IMAGE_NAME="$DOCKER_USERNAME"/"$SERVICE_DIRECTORY"
   - name: "Eureka"
     env:
       - SERVICE_DIRECTORY=eureka-service
+      - IMAGE_NAME="$DOCKER_USERNAME"/"$SERVICE_DIRECTORY"
 script: docker build -t "$IMAGE_NAME" ./"$SERVICE_DIRECTORY"/
 deploy:
   - provider: script
