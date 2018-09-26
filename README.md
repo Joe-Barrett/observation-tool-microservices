@@ -70,7 +70,7 @@ docker-compose up -d --build
 ```
 **4b.** Alternatively to include the web client (http://localhost:4200)
 ```docker
-docker-compose up -d --build -f docker-compose.prod.yml
+docker-compose -f docker-compose.prod.yml up -d --build
 ```
 The services should be accessible after a short while
 
