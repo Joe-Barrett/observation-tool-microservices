@@ -48,7 +48,7 @@ services:
       - rabbitmq
       - eureka-service
     volumes:
-      - 'D:\alma\aotfiles:/data/' # Edit this line with your desired location
+      - 'D:\docker\project-service\:/data/' # Edit this line with your desired location
     ports:
       - '5858:5858'
 
@@ -65,7 +65,7 @@ services:
     environment:
       RABBIT_HOST: rabbitmq
     volumes:
-    - 'D:\alma\aotfiles:/data/' # Edit this line with your desired location
+    - 'D:\docker\project-service\:/data/' # Edit this line with your desired location
 
   zuul-service:
     build:
