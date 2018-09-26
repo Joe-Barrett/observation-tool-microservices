@@ -30,8 +30,8 @@ jobs:
           branch: development
   - stage: eureka
     env:
-    - SERVICE_DIRECTORY=eureka-service
-    - IMAGE_NAME="$DOCKER_USERNAME"/"$SERVICE_DIRECTORY"
+      - SERVICE_DIRECTORY=eureka-service
+      - IMAGE_NAME="$DOCKER_USERNAME"/"$SERVICE_DIRECTORY"
     script: docker build -t "$IMAGE_NAME" ./"$SERVICE_DIRECTORY"/
     deploy:
     - provider: script
