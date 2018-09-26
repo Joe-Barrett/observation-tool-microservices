@@ -10,17 +10,29 @@ branches:
 before_script:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 
-env:
-  - IMAGE_NAME="$DOCKER_USERNAME"/"$SERVICE_DIRECTORY"
-
 matrix:
   include:
   - name: "Zuul"
     env:
       - SERVICE_DIRECTORY=zuul-service
+      - IMAGE_NAME="$DOCKER_USERNAME"/"$SERVICE_DIRECTORY"
   - name: "Eureka"
     env:
       - SERVICE_DIRECTORY=eureka-service
+      - IMAGE_NAME="$DOCKER_USERNAME"/"$SERVICE_DIRECTORY"
+  - name: "Project"
+    env:
+      - SERVICE_DIRECTORY=project-service
+      - IMAGE_NAME="$DOCKER_USERNAME"/"$SERVICE_DIRECTORY"
+  - name: "Spectral"
+    env:
+      - SERVICE_DIRECTORY=spectral-service
+      - IMAGE_NAME="$DOCKER_USERNAME"/"$SERVICE_DIRECTORY"
+  - name: "Generation"
+    env:
+      - SERVICE_DIRECTORY=generation-service
+      - IMAGE_NAME="$DOCKER_USERNAME"/"$SERVICE_DIRECTORY"
+
 
 script: docker build -t "$IMAGE_NAME" ./"$SERVICE_DIRECTORY"/
 deploy:
