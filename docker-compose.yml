@@ -48,10 +48,9 @@ services:
       - rabbitmq
       - eureka-service
     volumes:
-      - 'D:\docker\project-service\:/data/' # Edit this line with your desired location
+      - 'D:\docker\project-service\projects:/data/projects' # Edit this line with your desired location
     ports:
       - '5858:5858'
-
     environment:
       RABBIT_HOST: rabbitmq
   generation-service:
@@ -59,14 +58,16 @@ services:
       context: generation-service/
       dockerfile: Dockerfile
     image: generation-service
+    command: nodemon --debug=5859
     depends_on:
       - rabbitmq
       - eureka-service
     environment:
       RABBIT_HOST: rabbitmq
     volumes:
-    - 'D:\docker\project-service\:/data/' # Edit this line with your desired location
-
+      - 'D:\docker\project-service\projects:/data/projects' # Edit this line with your desired location
+    ports:
+      - '5859:5859'
   zuul-service:
     build:
       context: zuul-service/
