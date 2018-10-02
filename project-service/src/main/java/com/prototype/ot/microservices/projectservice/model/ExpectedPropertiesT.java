@@ -112,6 +112,15 @@ public class ExpectedPropertiesT {
     @XmlAttribute(name = "solarActivityLevel")
     private String solarActivityLevel;
 
+
+    public ExpectedPropertiesT() {
+        this.expectedPeakFluxDensity = new FluxT();
+        this.desiredPolarizationPercentage = 0.0;
+        this.expectedLineWidth = new UserFrequencyT();
+        this.referenceFrequency = new FrequencyT();
+        this.expectedPeakLineFluxDensity = new FluxT();
+    }
+
     /**
      * Gets the value of the expectedPeakFluxDensity property.
      * 
