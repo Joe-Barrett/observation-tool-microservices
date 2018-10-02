@@ -88,6 +88,12 @@ public class VelocityT {
     @XmlAttribute(name = "dopplerCalcType")
     private String dopplerCalcType;
 
+    public VelocityT() {
+        this.centerVelocity = new SpeedT();
+        this.referenceSystem = "bar";
+        this.dopplerCalcType = "RADIO";
+    }
+
     /**
      * Gets the value of the centerVelocity property.
      * 

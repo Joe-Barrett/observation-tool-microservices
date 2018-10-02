@@ -96,6 +96,14 @@ public class SkyCoordinatesT {
     @XmlAttribute(name = "type")
     private String type;
 
+    public SkyCoordinatesT() {
+        this.longitude = new LongitudeT();
+        this.latitude = new LatitudeT();
+        this.fieldName = "New Field";
+        this.system = "J2000";
+        this.type = "ABSOLUTE";
+    }
+
     /**
      * Gets the value of the longitude property.
      * 

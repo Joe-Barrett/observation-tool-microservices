@@ -83,6 +83,10 @@ public class DoubleWithUnitT {
     @XmlAttribute(name = "unit", required = true)
     private String unit;
 
+    public DoubleWithUnitT() {
+        this.content = 0.0;
+    }
+
     /**
      * Gets the value of the value property.
      * 

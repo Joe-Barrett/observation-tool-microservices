@@ -87,9 +87,10 @@ public class TargetParametersT
     })
     private List<FieldT> fields;
     @XmlAttribute(name = "type")
-    private String type;
+    private String type = "F_MultiplePoints";
 
     public TargetParametersT() {
+        super();
         this.setSourceName("New Source");
     }
 

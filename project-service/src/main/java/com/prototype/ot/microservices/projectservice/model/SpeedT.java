@@ -65,5 +65,10 @@ public class SpeedT
     extends DoubleWithUnitT
 {
 
+    public SpeedT() {
+        super();
+        this.setUnit("m/s");
+    }
+
 
 }
