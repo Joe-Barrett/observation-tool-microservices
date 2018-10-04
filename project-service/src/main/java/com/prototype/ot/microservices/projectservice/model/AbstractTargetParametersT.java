@@ -161,6 +161,7 @@ public abstract class AbstractTargetParametersT {
         this.pmRA = new AngularVelocityT();
         this.sourceCoordinates = new SkyCoordinatesT();
         this.sourceVelocity = new VelocityT();
+        this.solarSystemObject = "Unspecified";
     }
 
     /**
