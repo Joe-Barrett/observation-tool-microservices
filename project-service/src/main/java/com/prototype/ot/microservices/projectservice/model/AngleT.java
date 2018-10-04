@@ -71,5 +71,9 @@ public class AngleT
     extends DoubleWithUnitT
 {
 
+    public AngleT(){
+        super();
+        this.setUnit("deg");
+    }
 
 }
