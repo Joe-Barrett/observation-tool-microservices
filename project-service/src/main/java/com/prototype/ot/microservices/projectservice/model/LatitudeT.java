@@ -67,5 +67,9 @@ public class LatitudeT
     extends DoubleWithUnitT
 {
 
+    public LatitudeT() {
+        super();
+        this.setUnit("deg");
+    }
 
 }

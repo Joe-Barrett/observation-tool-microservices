@@ -153,6 +153,17 @@ public abstract class AbstractTargetParametersT {
     @XmlAttribute(name = "solarSystemObject")
     private String solarSystemObject;
 
+    public AbstractTargetParametersT() {
+        this.expectedProperties = new ExpectedPropertiesT();
+        this.parallax = new AngleT();
+        this.parallax.setUnit("mas");
+        this.pmDec = new AngularVelocityT();
+        this.pmRA = new AngularVelocityT();
+        this.sourceCoordinates = new SkyCoordinatesT();
+        this.sourceVelocity = new VelocityT();
+        this.solarSystemObject = "Unspecified";
+    }
+
     /**
      * Gets the value of the sourceName property.
      * 

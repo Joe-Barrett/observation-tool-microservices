@@ -66,5 +66,9 @@ public class AngularVelocityT
     extends DoubleWithUnitT
 {
 
+    public AngularVelocityT() {
+        super();
+        this.setUnit("deg/s");
+    }
 
 }
