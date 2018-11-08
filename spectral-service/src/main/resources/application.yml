@@ -17,28 +17,14 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 
-server:
-  port: ${server_port:8081}
-
-eureka:
-  instance:
-    leaseRenewalIntervalInSeconds: 1
-    leaseExpirationDurationInSeconds: 2
-  client:
-    serviceUrl:
-      defaultZone: ${eureka_url:http://eureka-service:8761/eureka/}
-    healthcheck:
-      enabled: true
-    lease:
-      duration: 5
-
 spring:
   application:
     name: spectral-service
-  devtools:
-    remote:
-      secret: mysecret
 
-management:
-  security:
-    enabled: false
+server:
+  port: ${server_port:0}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${eureka_url:http://eureka-service:8761/eureka/}

@@ -1,10 +1,6 @@
 version: '3'
 services:
-  rabbitmq:
-    image: 'rabbitmq:management-alpine'
-    ports:
-      - '5672:5672'
-      - '15672:15672'
+
   eureka-service:
     build:
       context: eureka-service/
@@ -12,49 +8,53 @@ services:
     image: eureka-service
     ports:
       - '8761:8761'
-  spectral-service:
-    build:
-      context: spectral-service/
-      dockerfile: Dockerfile
-    image: spectral-service
-    depends_on:
-      - eureka-service
-  project-service:
-    build:
-      context: project-service/
-      dockerfile: Dockerfile
-    image: project-service
-    command: nodemon --debug=5858
-    depends_on:
-      - rabbitmq
-      - eureka-service
-    volumes:
-      - 'D:\docker\project-service\projects:/data/projects'
-    ports:
-      - '5858:5858'
-    environment:
-      RABBIT_HOST: rabbitmq
-  generation-service:
-    build:
-      context: generation-service/
-      dockerfile: Dockerfile
-    image: generation-service
-    command: nodemon --debug=5859
-    depends_on:
-      - rabbitmq
-      - eureka-service
-    environment:
-      RABBIT_HOST: rabbitmq
-    volumes:
-      - 'D:\docker\project-service\projects:/data/projects'
-    ports:
-      - '5859:5859'
+
   zuul-service:
     build:
       context: zuul-service/
       dockerfile: Dockerfile
     image: zuul-service
-    depends_on:
+    links:
       - eureka-service
     ports:
       - '8080:8080'
+
+  rabbitmq:
+    image: 'rabbitmq:management-alpine'
+    ports:
+    - '5672:5672'
+    - '15672:15672'
+
+  spectral-service:
+    build:
+      context: spectral-service/
+      dockerfile: Dockerfile
+    image: spectral-service
+    links:
+      - eureka-service
+
+  project-service:
+    build:
+      context: project-service/
+      dockerfile: Dockerfile
+    image: project-service
+    links:
+      - rabbitmq
+      - eureka-service
+    environment:
+      RABBIT_HOST: rabbitmq
+    volumes:
+    - 'D:\docker\project-service\projects:/data/projects'
+
+  generation-service:
+    build:
+      context: generation-service/
+      dockerfile: Dockerfile
+    image: generation-service
+    links:
+      - rabbitmq
+      - eureka-service
+    environment:
+      RABBIT_HOST: rabbitmq
+    volumes:
+      - 'D:\docker\project-service\projects:/data/projects'
