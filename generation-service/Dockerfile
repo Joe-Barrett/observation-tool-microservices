@@ -27,4 +27,4 @@ RUN mvn -f /usr/pom.xml package
 
 FROM openjdk:8-jre-alpine
 COPY --from=MAVEN /usr/target/generation-service-0.0.1.jar //
-ENTRYPOINT ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5859", "-jar", "/generation-service-0.0.1.jar"]
+ENTRYPOINT ["java", "-jar", "/generation-service-0.0.1.jar", "-Xdebug -Xrunjdwp:server=y,transport=dt_socket,suspend=n"]
