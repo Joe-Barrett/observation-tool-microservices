@@ -44,7 +44,7 @@ services:
     environment:
       RABBIT_HOST: rabbitmq
     volumes:
-    - 'D:\docker\project-service\projects:/data/projects'
+    - '/d/docker/project-service/projects:/data/projects'
 
   generation-service:
     build:
@@ -57,4 +57,4 @@ services:
     environment:
       RABBIT_HOST: rabbitmq
     volumes:
-      - 'D:\docker\project-service\projects:/data/projects'
+      - '/d/docker/project-service/projects:/data/projects'
