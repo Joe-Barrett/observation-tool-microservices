@@ -20,8 +20,6 @@
 spring:
   application:
     name: project-service
-  rabbitmq:
-    host: ${RABBIT_HOST:localhost}
 
 server:
   port: ${server_port:0}
