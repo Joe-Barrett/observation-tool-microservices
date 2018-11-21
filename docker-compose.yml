@@ -19,12 +19,6 @@ services:
     ports:
       - '8080:8080'
 
-  rabbitmq:
-    image: 'rabbitmq:management-alpine'
-    ports:
-    - '5672:5672'
-    - '15672:15672'
-
   spectral-service:
     build:
       context: spectral-service/
@@ -39,22 +33,6 @@ services:
       dockerfile: Dockerfile
     image: project-service
     links:
-      - rabbitmq
       - eureka-service
-    environment:
-      RABBIT_HOST: rabbitmq
     volumes:
     - '/d/docker/project-service/projects:/data/projects'
-
-  generation-service:
-    build:
-      context: generation-service/
-      dockerfile: Dockerfile
-    image: generation-service
-    links:
-      - rabbitmq
-      - eureka-service
-    environment:
-      RABBIT_HOST: rabbitmq
-    volumes:
-      - '/d/docker/project-service/projects:/data/projects'

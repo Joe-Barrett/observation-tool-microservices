@@ -41,17 +41,6 @@ import java.util.ArrayList;
 public class ProjectService {
 
     private ProjectList projectList = new ProjectList();
-    private MessageService messageService;
-
-    /**
-     * Constructor
-     *
-     * @param messageService Injected service for handling inter-service messages
-     */
-    @Autowired
-    public ProjectService(MessageService messageService) {
-        this.messageService = messageService;
-    }
 
     /**
      * Creates a new project with proposal and saves to an AOT file
@@ -96,7 +85,6 @@ public class ProjectService {
     public ObsProject putProject(ObsProject project) throws JAXBException, IOException {
         projectList.checkProjectList();
         this.persistChanges(project);
-        generateSBsProject(project.getObsProjectEntity().getEntityId());
         return project;
     }
 
@@ -111,7 +99,6 @@ public class ProjectService {
     public ProjectListItem generateSBsProject(String projectRef) throws JAXBException, IOException {
         projectList.checkProjectList();
         String fileToUpdate = projectList.getFilenameFromProjectID(projectRef);
-        this.messageService.sendMessage("project-update-queue", fileToUpdate);
         return projectList.get(fileToUpdate);
     }
 
